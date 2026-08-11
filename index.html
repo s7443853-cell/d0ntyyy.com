@@ -1,0 +1,1033 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d0ntyyy — Discord Server</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #08090d;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Верхняя панель */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(8, 9, 13, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: auto;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #5865f2;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 7px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a,
+        .partner-btn {
+            color: #bbb;
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            transition: 0.25s;
+            background: transparent;
+            border: none;
+            font-family: inherit;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .partner-btn:hover {
+            color: #fff;
+            background: rgba(88,101,242,0.15);
+        }
+
+        /* Главный экран */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+            background:
+                radial-gradient(circle at 50% 40%, rgba(88,101,242,0.22), transparent 35%),
+                #08090d;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 82px);
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #5865f2;
+        }
+
+        .hero p {
+            color: #999;
+            font-size: 20px;
+            margin-bottom: 35px;
+        }
+
+        .discord-btn,
+        .buy-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 12px;
+            background: #5865f2;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.25s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .discord-btn:hover,
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            background: #4752c4;
+            box-shadow: 0 10px 30px rgba(88,101,242,0.25);
+        }
+
+        /* Секции */
+        section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 100px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            color: #5865f2;
+        }
+
+        /* Правила */
+        .rules {
+            display: grid;
+            gap: 20px;
+        }
+
+        .rule-card {
+            background: #101218;
+            border: 1px solid #1c1f29;
+            border-radius: 16px;
+            padding: 25px;
+            transition: 0.25s;
+        }
+
+        .rule-card:hover {
+            border-color: rgba(88,101,242,0.5);
+            transform: translateY(-2px);
+        }
+
+        .rule-card h3 {
+            color: #5865f2;
+            margin-bottom: 15px;
+            font-size: 23px;
+        }
+
+        .rule-card p {
+            color: #c3c3c3;
+            margin: 8px 0;
+        }
+
+        .punishment {
+            color: #ff7070 !important;
+        }
+
+        /* Привилегии */
+        .privileges {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .privilege {
+            background: #101218;
+            border: 1px solid #1c1f29;
+            border-radius: 18px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .privilege:hover {
+            transform: translateY(-7px);
+            border-color: #5865f2;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .privilege-number {
+            color: #5865f2;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .privilege h3 {
+            font-size: 21px;
+            margin-bottom: 25px;
+        }
+
+        .buy-btn {
+            padding: 11px 24px;
+            font-size: 14px;
+        }
+
+        /* Разделитель */
+        .divider {
+            height: 1px;
+            max-width: 1000px;
+            margin: auto;
+            background: #1b1e27;
+        }
+
+        /* Окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            background: #101218;
+            border: 1px solid #292d3a;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 70px rgba(0,0,0,0.5);
+            animation: modalOpen 0.25s ease;
+        }
+
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-content h2 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .modal-content h2 span {
+            color: #5865f2;
+        }
+
+        .partner-card {
+            background: #181a22;
+            border: 1px solid #252936;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .partner-card p {
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .partner-link {
+            color: #5865f2;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .partner-link:hover {
+            text-decoration: underline;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 12px;
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            background: #1b1e27;
+            color: #aaa;
+            font-size: 22px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #5865f2;
+            color: white;
+        }
+
+        .partner-buy {
+            display: block;
+            text-align: center;
+            padding: 13px 20px;
+            border-radius: 11px;
+            background: #5865f2;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .partner-buy:hover {
+            background: #4752c4;
+            transform: translateY(-2px);
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            border-top: 1px solid #15171e;
+        }
+
+        footer strong {
+            color: #5865f2;
+        }
+
+        /* Адаптив */
+        @media (max-width: 900px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+                padding: 12px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .nav-links a,
+            .partner-btn {
+                font-size: 13px;
+                padding: 7px 9px;
+            }
+
+            .hero {
+                padding-top: 170px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+
+        <div class="logo">d0nt<span>yyy</span></div>
+
+        <ul class="nav-links">
+
+            <!-- Discord -->
+            <li>
+                <a href="#discord">discrod</a>
+            </li>
+
+            <!-- Правила -->
+            <li>
+                <a href="#rules">Правила сервера</a>
+            </li>
+
+            <!-- Привилегии -->
+            <li>
+                <a href="#privileges">Привилегии</a>
+            </li>
+
+            <!-- FunPay -->
+            <li>
+                <a
+                    href="https://funpay.com/users/11798642/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    FunPay
+                </a>
+            </li>
+
+            <!-- Telegram -->
+            <li>
+                <a
+                    href="https://t.me/d0ntyyyy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Telegram
+                </a>
+            </li>
+
+            <!-- Партнёры -->
+            <li>
+                <button class="partner-btn" onclick="openPartners()">
+                    Партнёры
+                </button>
+            </li>
+
+            <!-- Жалобы -->
+            <li>
+                <button class="partner-btn" onclick="openComplaints()">
+                    Жалобы
+                </button>
+            </li>
+
+        </ul>
+
+    </nav>
+</header>
+
+
+<!-- Главное -->
+<main>
+
+    <section class="hero" id="discord">
+
+        <div class="hero-content">
+
+            <h1>
+                Добро пожаловать<br>
+                на сайт <span>d0ntyyy</span>
+            </h1>
+
+            <p>
+                Официальный сайт Discord-сервера d0ntyyy.
+                Присоединяйся к нашему сообществу!
+            </p>
+
+            <a
+                class="discord-btn"
+                href="https://discord.gg/J6bAjaFdqs"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                💬 Присоединиться в Discord
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- Правила -->
+    <section id="rules">
+
+        <h2 class="section-title">
+            Правила <span>сервера</span>
+        </h2>
+
+        <div class="rules">
+
+            <div class="rule-card">
+
+                <h3>1. Общие положения</h3>
+
+                <p>
+                    <b>1.1.</b>
+                    Все участники сервера имеют равные права независимо
+                    от их времени нахождения на сервере и занимаемой роли.
+                </p>
+
+                <p>
+                    <b>1.2.</b>
+                    Строго запрещены нарушения правил сервера.
+                </p>
+
+                <p><b>1.3.</b> Флуд.</p>
+
+                <p>
+                    <b>1.4.</b>
+                    Мат, троллинг в сообщениях.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b> Мут / кик
+                </p>
+
+                <p>
+                    <b>Длительность:</b> 1 час
+                </p>
+
+                <p>
+                    <b>1.5.</b>
+                    Использование шок-контента и порнографии.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b> Пред / мут / бан
+                </p>
+
+                <p>
+                    <b>Длительность:</b> 1 час / 14 дней
+                </p>
+
+                <p>
+                    <b>1.6.</b>
+                    Оскорбление других пользователей.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b> Пред / мут / бан
+                </p>
+
+                <p>
+                    <b>Длительность:</b> 1 час / 14 дней
+                </p>
+
+                <p>
+                    <b>1.7.</b>
+                    Злоупотребление CAPS LOCK.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b> Мут
+                </p>
+
+                <p>
+                    <b>Длительность:</b> 30 мин. / 1 час
+                </p>
+
+            </div>
+
+
+            <div class="rule-card">
+
+                <h3>2. Ники и аватарки</h3>
+
+                <p>
+                    <b>2.1.</b>
+                    Запрещены ники с матом, оскорблениями
+                    (в том числе завуалированными), рекламой
+                    или случайным набором символов.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b>
+                    просьба сменить → перм. бан
+                </p>
+
+                <p>
+                    <b>2.2.</b>
+                    В качестве аватара запрещено использовать
+                    религиозную, политическую, экстремистскую
+                    и иную запрещённую символику.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b>
+                    просьба сменить → перм. бан
+                </p>
+
+                <p>
+                    <b>2.3.</b>
+                    Модераторы могут потребовать изменить ник
+                    или аватар, если считают их оскорбительными
+                    или нарушающими правила сервера.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b> перм. бан
+                </p>
+
+            </div>
+
+
+            <div class="rule-card">
+
+                <h3>3. Голосовой чат</h3>
+
+                <p>
+                    <b>3.1.</b>
+                    Запрещено включать музыку в микрофон.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b> Мут ГС
+                </p>
+
+                <p>
+                    <b>Длительность:</b> 5 мин. / 1 час
+                </p>
+
+                <p>
+                    <b>3.2.</b>
+                    Запрещено издавать громкие звуки в микрофон.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b> Мут ГС
+                </p>
+
+                <p>
+                    <b>Длительность:</b> 5 мин. / 1 час
+                </p>
+
+                <p>
+                    <b>3.3.</b>
+                    Недопустимо использовать сторонние программы
+                    (Soundpad и прочее).
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b> Мут ГС
+                </p>
+
+                <p>
+                    <b>Длительность:</b> 5 мин. / 1 час
+                </p>
+
+                <p>
+                    <b>3.4.</b>
+                    Запрещено использовать звуки мута и звуки
+                    предупреждения не модератором.
+                </p>
+
+                <p class="punishment">
+                    <b>Наказание:</b> Мут ГС
+                </p>
+
+                <p>
+                    <b>Длительность:</b> 5 мин. / 1 час
+                </p>
+
+            </div>
+
+
+            <div class="rule-card">
+
+                <h3>4. Реклама</h3>
+
+                <p>
+                    Запрещено размещение ссылок в качестве рекламы
+                    на свой ТГК, YouTube-канал и т. д.
+                    без согласия старшего состава.
+                </p>
+
+            </div>
+
+
+            <div class="rule-card">
+
+                <h3>5. Ответственность</h3>
+
+                <p>
+                    <b>5.1.</b>
+                    За нарушение правил сервера к участникам
+                    применяются меры от предупреждения
+                    до ограничения доступа.
+                </p>
+
+                <p>
+                    <b>5.2. Наказания действуют следующим образом:</b>
+                </p>
+
+                <p>• Предупреждение</p>
+                <p>• 3 устных предупреждения с удалением нарушения</p>
+                <p>• Мут на 30 минут</p>
+                <p>• Мут на 1 час</p>
+                <p>• Мут на 5 минут</p>
+                <p>• Кик</p>
+                <p>• Бан на 14 дней</p>
+                <p>• Перманентный бан</p>
+
+                <p>
+                    <b>5.4.</b>
+                    Если ситуация не описана в правилах,
+                    администрация может самостоятельно
+                    определить соответствующее наказание.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- Привилегии -->
+    <section id="privileges">
+
+        <h2 class="section-title">
+            Привилегии в <span>Discord</span>
+        </h2>
+
+        <div class="privileges">
+
+            <div class="privilege">
+                <div class="privilege-number">01</div>
+                <h3>𝘽 𝘼 𝙎 𝙀</h3>
+
+                <a
+                    class="buy-btn"
+                    href="https://t.me/d0ntyYyYy"
+                    target="_blank"
+                >
+                    Купить!
+                </a>
+            </div>
+
+
+            <div class="privilege">
+                <div class="privilege-number">02</div>
+                <h3>𝙎 𝙐 𝙋 𝙀 𝙍 𝘽 𝘼 𝙎 𝙀</h3>
+
+                <a
+                    class="buy-btn"
+                    href="https://t.me/d0ntyYyYy"
+                    target="_blank"
+                >
+                    Купить!
+                </a>
+            </div>
+
+
+            <div class="privilege">
+                <div class="privilege-number">03</div>
+                <h3>.V.I.P</h3>
+
+                <a
+                    class="buy-btn"
+                    href="https://t.me/d0ntyYyYy"
+                    target="_blank"
+                >
+                    Купить!
+                </a>
+            </div>
+
+
+            <div class="privilege">
+                <div class="privilege-number">04</div>
+                <h3>Premium</h3>
+
+                <a
+                    class="buy-btn"
+                    href="https://t.me/d0ntyYyYy"
+                    target="_blank"
+                >
+                    Купить!
+                </a>
+            </div>
+
+
+            <div class="privilege">
+                <div class="privilege-number">05</div>
+                <h3>𝑴 𝑶 𝑫 𝑬 𝑹 𝑨 𝑻 𝑶 𝑹</h3>
+
+                <a
+                    class="buy-btn"
+                    href="https://t.me/d0ntyYyYy"
+                    target="_blank"
+                >
+                    Купить!
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Окно партнёров -->
+<div
+    class="modal"
+    id="partnersModal"
+    onclick="closePartnersOutside(event)"
+>
+
+    <div
+        class="modal-content"
+        onclick="event.stopPropagation()"
+    >
+
+        <button
+            class="close-btn"
+            onclick="closePartners()"
+        >
+            ×
+        </button>
+
+        <h2>
+            Наши <span>партнёры</span>
+        </h2>
+
+        <div class="partner-card">
+
+            <p>
+                <b>Партнёр 1:</b>
+            </p>
+
+            <a
+                class="partner-link"
+                href="https://t.me/Platon_98tm"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                t.me/Platon_98tm
+            </a>
+
+        </div>
+
+        <a
+            class="partner-buy"
+            href="https://t.me/d0ntyyyy"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Хочешь сюда же? Пиши мне!
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Окно жалоб -->
+<div
+    class="modal"
+    id="complaintsModal"
+    onclick="closeComplaintsOutside(event)"
+>
+
+    <div
+        class="modal-content"
+        onclick="event.stopPropagation()"
+    >
+
+        <button
+            class="close-btn"
+            onclick="closeComplaints()"
+        >
+            ×
+        </button>
+
+        <h2>
+            Подать <span>жалобу</span>
+        </h2>
+
+
+        <!-- Жалоба на staff -->
+        <div class="partner-card">
+
+            <p>
+                <b>Жалоба на staff Discord-сервера</b>
+            </p>
+
+            <a
+                class="partner-buy"
+                href="https://docs.google.com/forms/d/1c5KeSn-FZWWevwouL-m0ZISkVci9eDK92oSEwq28VUQ/edit"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Подать жалобу
+            </a>
+
+        </div>
+
+
+        <!-- Жалоба на участника -->
+        <div class="partner-card">
+
+            <p>
+                <b>Жалоба на участника Discord сервера</b>
+            </p>
+
+            <a
+                class="partner-buy"
+                href="https://docs.google.com/forms/d/1gOuiZRRoa-rZOYjMx4wZua-7dyqW7DOlsJwlQJEUgG0/edit"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Подать жалобу
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 <strong>d0ntyyy</strong>.
+        Все права защищены.
+    </p>
+
+</footer>
+
+
+<script>
+
+    /* Партнёры */
+
+    function openPartners() {
+        document
+            .getElementById("partnersModal")
+            .classList.add("active");
+
+        document.body.style.overflow = "hidden";
+    }
+
+
+    function closePartners() {
+        document
+            .getElementById("partnersModal")
+            .classList.remove("active");
+
+        document.body.style.overflow = "";
+    }
+
+
+    function closePartnersOutside(event) {
+
+        if (event.target.id === "partnersModal") {
+            closePartners();
+        }
+
+    }
+
+
+    /* Жалобы */
+
+    function openComplaints() {
+        document
+            .getElementById("complaintsModal")
+            .classList.add("active");
+
+        document.body.style.overflow = "hidden";
+    }
+
+
+    function closeComplaints() {
+        document
+            .getElementById("complaintsModal")
+            .classList.remove("active");
+
+        document.body.style.overflow = "";
+    }
+
+
+    function closeComplaintsOutside(event) {
+
+        if (event.target.id === "complaintsModal") {
+            closeComplaints();
+        }
+
+    }
+
+
+    /* Закрытие окон клавишей Escape */
+
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape") {
+            closePartners();
+            closeComplaints();
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+```
