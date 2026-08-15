@@ -3,626 +3,673 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>d0ntyyy — Заявки</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#08090d;
-    color:#fff;
-    min-height:100vh;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #08090d;
+    color: #fff;
+    min-height: 100vh;
 }
 
 button,
 input,
-textarea{
-    font-family:inherit;
+textarea {
+    font-family: inherit;
 }
 
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:70px;
-    z-index:1000;
-    background:rgba(8,9,13,.92);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid rgba(255,255,255,.08);
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 1000;
+    background: rgba(8,9,13,.95);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-nav{
-    max-width:1250px;
-    height:70px;
-    margin:auto;
-    padding:0 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
+nav {
+    max-width: 1250px;
+    height: 70px;
+    margin: auto;
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.logo{
-    font-size:25px;
-    font-weight:900;
-    white-space:nowrap;
+.logo {
+    font-size: 25px;
+    font-weight: 900;
 }
 
-.logo span{
-    color:#5865f2;
+.logo span {
+    color: #5865f2;
 }
 
-.nav-right{
-    display:flex;
-    align-items:center;
-    justify-content:flex-end;
-    gap:7px;
-    flex-wrap:wrap;
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.nav-btn{
-    border:0;
-    background:transparent;
-    color:#aaa;
-    padding:10px 13px;
-    border-radius:10px;
-    cursor:pointer;
-    transition:.2s;
+.nav-btn {
+    border: 0;
+    background: transparent;
+    color: #aaa;
+    padding: 10px 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.nav-btn:hover{
-    color:#fff;
-    background:rgba(88,101,242,.15);
+.nav-btn:hover {
+    color: white;
+    background: rgba(88,101,242,.15);
 }
 
-.nav-btn.primary{
-    background:#5865f2;
-    color:#fff;
+.nav-btn.primary {
+    background: #5865f2;
+    color: white;
 }
 
-.nav-btn.primary:hover{
-    background:#4752c4;
+.nav-btn.primary:hover {
+    background: #4752c4;
 }
 
-.admin-btn{
-    background:#7c3aed !important;
-    color:#fff !important;
+.admin-btn {
+    background: #7c3aed !important;
+    color: white !important;
 }
 
-.admin-btn:hover{
-    background:#6d28d9 !important;
+.admin-btn:hover {
+    background: #6d28d9 !important;
 }
 
-.user-email{
-    color:#aaa;
-    font-size:13px;
-    max-width:180px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+.user-email {
+    color: #999;
+    font-size: 13px;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.hero{
-    min-height:100vh;
-    padding:120px 20px 70px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+.hero {
+    min-height: 100vh;
+    padding: 120px 20px 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
     background:
-    radial-gradient(
-        circle at 50% 35%,
-        rgba(88,101,242,.23),
-        transparent 40%
-    ),
-    #08090d;
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(88,101,242,.23),
+            transparent 40%
+        ),
+        #08090d;
 }
 
-.container{
-    width:100%;
-    max-width:1150px;
-    margin:auto;
+.container {
+    width: 100%;
+    max-width: 1150px;
+    margin: auto;
 }
 
-.hero h1{
-    font-size:clamp(42px,7vw,78px);
-    line-height:1.05;
-    margin-bottom:20px;
-    font-weight:900;
+.hero h1 {
+    font-size: clamp(42px,7vw,78px);
+    line-height: 1.05;
+    margin-bottom: 20px;
+    font-weight: 900;
 }
 
-.hero h1 span{
-    color:#5865f2;
+.hero h1 span {
+    color: #5865f2;
 }
 
-.hero p{
-    color:#999;
-    font-size:19px;
-    margin-bottom:45px;
+.hero p {
+    color: #999;
+    font-size: 19px;
+    margin-bottom: 45px;
 }
 
-.vacancies{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
+.vacancies {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
 }
 
-.vacancy{
-    background:#101218;
-    border:1px solid #1d2029;
-    border-radius:18px;
-    padding:30px 18px;
-    cursor:pointer;
-    transition:.25s;
+.vacancy {
+    background: #101218;
+    border: 1px solid #1d2029;
+    border-radius: 18px;
+    padding: 30px 18px;
+    cursor: pointer;
+    transition: .25s;
 }
 
-.vacancy:hover{
-    transform:translateY(-7px);
-    border-color:#5865f2;
-    box-shadow:0 15px 45px rgba(0,0,0,.35);
+.vacancy:hover {
+    transform: translateY(-7px);
+    border-color: #5865f2;
+    box-shadow: 0 15px 45px rgba(0,0,0,.35);
 }
 
-.icon{
-    font-size:45px;
-    margin-bottom:15px;
+.icon {
+    font-size: 45px;
+    margin-bottom: 15px;
 }
 
-.vacancy h2{
-    font-size:21px;
-    margin-bottom:12px;
+.vacancy h2 {
+    font-size: 21px;
+    margin-bottom: 12px;
 }
 
-.vacancy p{
-    color:#888;
-    font-size:14px;
-    line-height:1.5;
+.vacancy p {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-.apply{
-    display:inline-block;
-    margin-top:20px;
-    padding:11px 18px;
-    background:#5865f2;
-    border-radius:10px;
-    font-weight:700;
-    font-size:14px;
+.apply {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 11px 18px;
+    background: #5865f2;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
 }
 
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:3000;
-    background:rgba(0,0,0,.8);
-    backdrop-filter:blur(8px);
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+.modal {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 3000;
+
+    background: rgba(0,0,0,.8);
+    backdrop-filter: blur(8px);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
 }
 
-.modal.active{
-    display:flex;
+.modal.active {
+    display: flex;
 }
 
-.modal-content{
-    position:relative;
-    width:100%;
-    max-width:700px;
-    max-height:90vh;
-    overflow-y:auto;
-    background:#101218;
-    border:1px solid #292d3a;
-    border-radius:20px;
-    padding:35px;
-    box-shadow:0 25px 80px rgba(0,0,0,.6);
+.modal-content {
+    position: relative;
+
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #101218;
+
+    border: 1px solid #292d3a;
+    border-radius: 20px;
+
+    padding: 35px;
+
+    box-shadow: 0 25px 80px rgba(0,0,0,.6);
 }
 
-.modal-content.large{
-    max-width:1000px;
+.modal-content.large {
+    max-width: 1000px;
 }
 
-.close{
-    position:absolute;
-    top:12px;
-    right:15px;
-    width:36px;
-    height:36px;
-    border:0;
-    border-radius:50%;
-    background:#1b1e27;
-    color:#aaa;
-    font-size:23px;
-    cursor:pointer;
-    z-index:5;
+.close {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    width: 36px;
+    height: 36px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #1b1e27;
+    color: #aaa;
+
+    font-size: 23px;
+
+    cursor: pointer;
 }
 
-.close:hover{
-    background:#5865f2;
-    color:#fff;
+.close:hover {
+    background: #5865f2;
+    color: white;
 }
 
-.title{
-    text-align:center;
-    font-size:30px;
-    margin-bottom:8px;
+.title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 8px;
 }
 
-.title span{
-    color:#5865f2;
+.title span {
+    color: #5865f2;
 }
 
-.subtitle{
-    text-align:center;
-    color:#777;
-    margin-bottom:25px;
+.subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 25px;
 }
 
-.tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:25px;
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 25px;
 }
 
-.tab{
-    flex:1;
-    padding:12px;
-    border:0;
-    border-radius:10px;
-    background:#181a22;
-    color:#888;
-    cursor:pointer;
+.tab {
+    flex: 1;
+
+    padding: 12px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #181a22;
+    color: #888;
+
+    cursor: pointer;
 }
 
-.tab.active{
-    background:#5865f2;
-    color:#fff;
+.tab.active {
+    background: #5865f2;
+    color: white;
 }
 
-.field{
-    margin-bottom:18px;
+.field {
+    margin-bottom: 18px;
 }
 
-.field label{
-    display:block;
-    margin-bottom:8px;
-    font-size:14px;
-    font-weight:700;
-    line-height:1.4;
+.field label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    font-weight: 700;
 }
 
-.required{
-    color:#ff6262;
+.required {
+    color: #ff6262;
 }
 
 input,
-textarea{
-    width:100%;
-    padding:13px 14px;
-    border-radius:11px;
-    border:1px solid #292d3a;
-    background:#181a22;
-    color:#fff;
-    outline:none;
-    font-size:15px;
+textarea {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border-radius: 11px;
+
+    border: 1px solid #292d3a;
+
+    background: #181a22;
+    color: white;
+
+    outline: none;
+
+    font-size: 15px;
 }
 
-textarea{
-    min-height:110px;
-    resize:vertical;
+textarea {
+    min-height: 110px;
+    resize: vertical;
 }
 
 input:focus,
-textarea:focus{
-    border-color:#5865f2;
-    box-shadow:0 0 0 3px rgba(88,101,242,.1);
+textarea:focus {
+    border-color: #5865f2;
 }
 
-.submit{
-    width:100%;
-    padding:15px;
-    border:0;
-    border-radius:12px;
-    background:#5865f2;
-    color:#fff;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
+.submit {
+    width: 100%;
+
+    padding: 15px;
+
+    border: 0;
+    border-radius: 12px;
+
+    background: #5865f2;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
 }
 
-.submit:hover{
-    background:#4752c4;
+.submit:hover {
+    background: #4752c4;
 }
 
-.submit:disabled{
-    opacity:.6;
-    cursor:not-allowed;
+.submit:disabled {
+    opacity: .6;
+    cursor: not-allowed;
 }
 
-.message{
-    display:none;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:18px;
-    font-size:14px;
+.message {
+    display: none;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    margin-bottom: 18px;
+
+    font-size: 14px;
 }
 
-.message.show{
-    display:block;
+.message.show {
+    display: block;
 }
 
-.message.error{
-    color:#ff7777;
-    background:rgba(255,70,70,.1);
+.message.error {
+    color: #ff7777;
+    background: rgba(255,70,70,.1);
 }
 
-.message.success{
-    color:#43d17b;
-    background:rgba(40,200,100,.1);
+.message.success {
+    color: #43d17b;
+    background: rgba(40,200,100,.1);
 }
 
-.success{
-    text-align:center;
-    padding:30px 10px;
+.success {
+    text-align: center;
+    padding: 30px 10px;
 }
 
-.success-icon{
-    font-size:60px;
-    margin-bottom:15px;
+.success-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
 }
 
-.application{
-    background:#181a22;
-    border:1px solid #292d3a;
-    border-radius:14px;
-    padding:18px;
-    margin-bottom:12px;
+.application {
+    background: #181a22;
+
+    border: 1px solid #292d3a;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    margin-bottom: 12px;
 }
 
-.application h3{
-    margin-bottom:10px;
+.application h3 {
+    margin-bottom: 10px;
 }
 
-.application p{
-    color:#aaa;
-    margin:6px 0;
-    line-height:1.5;
+.application p {
+    color: #aaa;
+    margin: 6px 0;
 }
 
-.answer{
-    margin-top:12px;
-    padding:12px;
-    background:#101218;
-    border-radius:10px;
+.status {
+    display: inline-block;
+
+    margin-top: 10px;
+
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
 }
 
-.answer b{
-    display:block;
-    color:#fff;
-    margin-bottom:5px;
+.new {
+    color: #ffc107;
+    background: rgba(255,193,7,.12);
 }
 
-.answer span{
-    color:#aaa;
-    white-space:pre-wrap;
-    word-break:break-word;
+.approved {
+    color: #43d17b;
+    background: rgba(40,200,100,.12);
 }
 
-.status{
-    display:inline-block;
-    margin-top:10px;
-    padding:6px 10px;
-    border-radius:8px;
-    font-size:12px;
-    font-weight:700;
+.rejected {
+    color: #ff6666;
+    background: rgba(255,70,70,.12);
 }
 
-.new{
-    color:#ffc107;
-    background:rgba(255,193,7,.12);
+.answer {
+    margin-top: 12px;
+
+    padding: 12px;
+
+    background: #101218;
+
+    border-radius: 10px;
 }
 
-.approved{
-    color:#43d17b;
-    background:rgba(40,200,100,.12);
+.answer b {
+    display: block;
+    margin-bottom: 5px;
 }
 
-.rejected{
-    color:#ff6666;
-    background:rgba(255,70,70,.12);
+.answer span {
+    color: #aaa;
+
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
-.admin-card{
-    background:#181a22;
-    border:1px solid #292d3a;
-    border-radius:16px;
-    padding:20px;
-    margin-bottom:15px;
+.admin-card {
+    background: #181a22;
+
+    border: 1px solid #292d3a;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    margin-bottom: 15px;
 }
 
-.admin-card:hover{
-    border-color:#3a3f50;
+.admin-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
 }
 
-.admin-top{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:15px;
+.admin-user {
+    color: #888;
+
+    font-size: 12px;
+
+    margin-top: 5px;
 }
 
-.admin-top h3{
-    font-size:19px;
+.admin-date {
+    color: #666;
+
+    font-size: 12px;
 }
 
-.admin-date{
-    color:#666;
-    font-size:12px;
-    white-space:nowrap;
-}
+.admin-actions {
+    display: flex;
 
-.admin-user{
-    color:#aaa;
-    font-size:13px;
-    margin-top:5px;
-}
+    gap: 10px;
 
-.admin-actions{
-    display:flex;
-    gap:10px;
-    margin-top:18px;
+    margin-top: 18px;
 }
 
 .approve-btn,
-.reject-btn{
-    flex:1;
-    border:0;
-    padding:12px;
-    border-radius:10px;
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
-    transition:.2s;
+.reject-btn {
+    flex: 1;
+
+    border: 0;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
 }
 
-.approve-btn{
-    background:#16804a;
+.approve-btn {
+    background: #16804a;
 }
 
-.approve-btn:hover{
-    background:#1aa35e;
+.approve-btn:hover {
+    background: #1aa35e;
 }
 
-.reject-btn{
-    background:#a93232;
+.reject-btn {
+    background: #a93232;
 }
 
-.reject-btn:hover{
-    background:#c43d3d;
+.reject-btn:hover {
+    background: #c43d3d;
 }
 
 .approve-btn:disabled,
-.reject-btn:disabled{
-    opacity:.5;
-    cursor:not-allowed;
+.reject-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
 }
 
-.empty{
-    text-align:center;
-    color:#777;
-    padding:35px 15px;
+.empty,
+.loading {
+    text-align: center;
+
+    color: #777;
+
+    padding: 35px;
 }
 
-.loading{
-    text-align:center;
-    color:#777;
-    padding:35px;
+.notification {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 5000;
+
+    width: min(380px,calc(100% - 40px));
+
+    background: #151820;
+
+    border: 1px solid #2a2e3b;
+
+    border-radius: 14px;
+
+    padding: 16px 20px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+
+    display: none;
 }
 
-.notification{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:5000;
-    width:min(380px,calc(100% - 40px));
-    background:#151820;
-    border:1px solid #2a2e3b;
-    border-radius:14px;
-    padding:16px 20px;
-    box-shadow:0 15px 40px rgba(0,0,0,.4);
-    display:none;
+.notification.show {
+    display: block;
 }
 
-.notification.show{
-    display:block;
+.notification b {
+    display: block;
+    margin-bottom: 5px;
 }
 
-.notification b{
-    display:block;
-    margin-bottom:5px;
+.notification span {
+    color: #aaa;
+    font-size: 14px;
 }
 
-.notification span{
-    color:#aaa;
-    font-size:14px;
-    line-height:1.4;
+footer {
+    text-align: center;
+
+    padding: 35px 20px;
+
+    color: #555;
+
+    border-top: 1px solid #15171e;
 }
 
-.admin-badge{
-    display:inline-block;
-    margin-left:7px;
-    padding:3px 7px;
-    border-radius:6px;
-    background:rgba(124,58,237,.18);
-    color:#a78bfa;
-    font-size:11px;
+footer strong {
+    color: #5865f2;
 }
 
-footer{
-    text-align:center;
-    padding:35px 20px;
-    color:#555;
-    border-top:1px solid #15171e;
-}
+@media(max-width:950px) {
 
-footer strong{
-    color:#5865f2;
-}
-
-@media(max-width:950px){
-    .vacancies{
-        grid-template-columns:repeat(2,1fr);
+    .vacancies {
+        grid-template-columns: repeat(2,1fr);
     }
 }
 
-@media(max-width:700px){
-    nav{
-        padding:0 10px;
+@media(max-width:700px) {
+
+    .user-email {
+        display: none;
     }
 
-    .user-email{
-        display:none;
+    .nav-btn {
+        padding: 8px 9px;
+        font-size: 12px;
     }
 
-    .nav-btn{
-        padding:8px 9px;
-        font-size:12px;
+    .vacancies {
+        grid-template-columns: 1fr;
     }
 
-    .vacancies{
-        grid-template-columns:1fr;
+    .modal-content {
+        padding: 30px 20px;
     }
 
-    .modal-content{
-        padding:30px 20px;
+    .admin-top {
+        flex-direction: column;
     }
 
-    .admin-top{
-        flex-direction:column;
-    }
-
-    .admin-date{
-        white-space:normal;
-    }
-
-    .admin-actions{
-        flex-direction:column;
+    .admin-actions {
+        flex-direction: column;
     }
 }
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -636,33 +683,39 @@ d0nt<span>yyy</span>
 
 <span
 class="user-email"
-id="userEmail"
-></span>
+id="userEmail">
+</span>
+
 
 <button
 class="nav-btn admin-btn"
 id="adminBtn"
 onclick="openAdminPanel()"
-style="display:none"
->
+style="display:none">
+
 👑 Админ-панель
+
 </button>
+
 
 <button
 class="nav-btn"
 id="myApplicationsBtn"
 onclick="openMyApplications()"
-style="display:none"
->
+style="display:none">
+
 📋 Мои заявки
+
 </button>
+
 
 <button
 class="nav-btn primary"
 id="authBtn"
-onclick="openAuth()"
->
+onclick="openAuth()">
+
 Войти
+
 </button>
 
 </div>
@@ -672,6 +725,7 @@ onclick="openAuth()"
 </header>
 
 
+
 <main>
 
 <section class="hero">
@@ -679,14 +733,20 @@ onclick="openAuth()"
 <div class="container">
 
 <h1>
-Вступай в команду<br>
+
+Заявки в команду<br>
+
 <span>d0ntyyy</span>
+
 </h1>
 
+
 <p>
-Выберите вакансию, ответьте на вопросы
-и отправьте заявку.
+
+Выберите вакансию и отправьте заявку.
+
 </p>
+
 
 
 <div class="vacancies">
@@ -694,8 +754,7 @@ onclick="openAuth()"
 
 <div
 class="vacancy"
-onclick="openApplication('Модератор')"
->
+onclick="openApplication('Модератор')">
 
 <div class="icon">🛡️</div>
 
@@ -703,8 +762,7 @@ onclick="openApplication('Модератор')"
 
 <p>
 Следить за порядком,
-помогать участникам
-и поддерживать правила.
+правилами и участниками сервера.
 </p>
 
 <div class="apply">
@@ -714,10 +772,10 @@ onclick="openApplication('Модератор')"
 </div>
 
 
+
 <div
 class="vacancy"
-onclick="openApplication('Медиа')"
->
+onclick="openApplication('Медиа')">
 
 <div class="icon">🎬</div>
 
@@ -725,8 +783,7 @@ onclick="openApplication('Медиа')"
 
 <p>
 Создание TikTok,
-YouTube и другого
-контента проекта.
+YouTube и другого контента.
 </p>
 
 <div class="apply">
@@ -736,19 +793,18 @@ YouTube и другого
 </div>
 
 
+
 <div
 class="vacancy"
-onclick="openApplication('Хелпер')"
->
+onclick="openApplication('Хелпер')">
 
 <div class="icon">🆘</div>
 
 <h2>Хелпер</h2>
 
 <p>
-Помогать новым игрокам
-и отвечать на вопросы
-участников.
+Помогать пользователям
+и отвечать на вопросы.
 </p>
 
 <div class="apply">
@@ -758,10 +814,10 @@ onclick="openApplication('Хелпер')"
 </div>
 
 
+
 <div
 class="vacancy"
-onclick="openApplication('Администратор')"
->
+onclick="openApplication('Администратор')">
 
 <div class="icon">👑</div>
 
@@ -769,8 +825,7 @@ onclick="openApplication('Администратор')"
 
 <p>
 Управление сервером,
-персоналом и развитием
-проекта.
+персоналом и проектом.
 </p>
 
 <div class="apply">
@@ -789,24 +844,23 @@ onclick="openApplication('Администратор')"
 </main>
 
 
-<!-- AUTH -->
+
+<!-- =========================
+     АВТОРИЗАЦИЯ
+========================= -->
 
 <div
 class="modal"
-id="authModal"
-onclick="outsideClose(event,'authModal',closeAuth)"
->
+id="authModal">
 
-<div
-class="modal-content"
-onclick="event.stopPropagation()"
->
+<div class="modal-content">
 
 <button
 class="close"
-onclick="closeAuth()"
->
+onclick="closeAuth()">
+
 ×
+
 </button>
 
 
@@ -815,17 +869,20 @@ onclick="closeAuth()"
 <button
 class="tab active"
 id="loginTab"
-onclick="showLogin()"
->
+onclick="showLogin()">
+
 Вход
+
 </button>
+
 
 <button
 class="tab"
 id="registerTab"
-onclick="showRegister()"
->
+onclick="showRegister()">
+
 Регистрация
+
 </button>
 
 </div>
@@ -833,8 +890,9 @@ onclick="showRegister()"
 
 <div
 class="message"
-id="authMessage"
-></div>
+id="authMessage">
+</div>
+
 
 
 <div id="loginBox">
@@ -847,20 +905,21 @@ id="authMessage"
 Войдите, чтобы подать заявку.
 </p>
 
+
 <form id="loginForm">
+
 
 <div class="field">
 
 <label>
-Email <span class="required">*</span>
+Email
 </label>
 
 <input
 id="loginEmail"
 type="email"
-placeholder="example@mail.com"
 required
->
+placeholder="example@mail.com">
 
 </div>
 
@@ -868,24 +927,24 @@ required
 <div class="field">
 
 <label>
-Пароль <span class="required">*</span>
+Пароль
 </label>
 
 <input
 id="loginPassword"
 type="password"
-placeholder="Введите пароль"
 required
->
+placeholder="Введите пароль">
 
 </div>
 
 
 <button
 class="submit"
-type="submit"
->
+type="submit">
+
 Войти
+
 </button>
 
 </form>
@@ -893,33 +952,34 @@ type="submit"
 </div>
 
 
+
 <div
 id="registerBox"
-style="display:none"
->
+style="display:none">
 
 <h2 class="title">
 <span>Регистрация</span>
 </h2>
 
 <p class="subtitle">
-Создайте аккаунт для подачи заявок.
+Создайте аккаунт.
 </p>
 
+
 <form id="registerForm">
+
 
 <div class="field">
 
 <label>
-Email <span class="required">*</span>
+Email
 </label>
 
 <input
 id="registerEmail"
 type="email"
-placeholder="example@mail.com"
 required
->
+placeholder="example@mail.com">
 
 </div>
 
@@ -927,16 +987,15 @@ required
 <div class="field">
 
 <label>
-Пароль <span class="required">*</span>
+Пароль
 </label>
 
 <input
 id="registerPassword"
 type="password"
 minlength="6"
-placeholder="Минимум 6 символов"
 required
->
+placeholder="Минимум 6 символов">
 
 </div>
 
@@ -944,25 +1003,25 @@ required
 <div class="field">
 
 <label>
-Повторите пароль <span class="required">*</span>
+Повторите пароль
 </label>
 
 <input
 id="registerPassword2"
 type="password"
 minlength="6"
-placeholder="Повторите пароль"
 required
->
+placeholder="Повторите пароль">
 
 </div>
 
 
 <button
 class="submit"
-type="submit"
->
+type="submit">
+
 Зарегистрироваться
+
 </button>
 
 </form>
@@ -974,24 +1033,23 @@ type="submit"
 </div>
 
 
-<!-- APPLICATION -->
+
+<!-- =========================
+     ЗАЯВКА
+========================= -->
 
 <div
 class="modal"
-id="applicationModal"
-onclick="outsideClose(event,'applicationModal',closeApplication)"
->
+id="applicationModal">
 
-<div
-class="modal-content"
-onclick="event.stopPropagation()"
->
+<div class="modal-content">
 
 <button
 class="close"
-onclick="closeApplication()"
->
+onclick="closeApplication()">
+
 ×
+
 </button>
 
 
@@ -999,30 +1057,36 @@ onclick="closeApplication()"
 
 <h2
 class="title"
-id="applicationTitle"
->
+id="applicationTitle">
+
 Заявка
+
 </h2>
 
+
 <p class="subtitle">
-Ответьте на все вопросы.
+Ответьте на вопросы.
 </p>
+
 
 <div
 class="message"
-id="applicationMessage"
-></div>
+id="applicationMessage">
+</div>
+
 
 <form id="applicationForm">
 
 <div id="questions"></div>
 
+
 <button
 class="submit"
 id="sendApplication"
-type="submit"
->
+type="submit">
+
 Отправить заявку
+
 </button>
 
 </form>
@@ -1030,11 +1094,11 @@ type="submit"
 </div>
 
 
+
 <div
 id="applicationSuccess"
 class="success"
-style="display:none"
->
+style="display:none">
 
 <div class="success-icon">
 ✅
@@ -1045,9 +1109,9 @@ style="display:none"
 </h2>
 
 <p style="color:#888;margin-top:10px">
-Заявка отправлена на рассмотрение.
-<br>
-Следить за статусом можно в «Мои заявки».
+
+Ожидайте решения администратора.
+
 </p>
 
 </div>
@@ -1057,79 +1121,98 @@ style="display:none"
 </div>
 
 
-<!-- MY APPLICATIONS -->
+
+<!-- =========================
+     МОИ ЗАЯВКИ
+========================= -->
 
 <div
 class="modal"
-id="myApplicationsModal"
-onclick="outsideClose(event,'myApplicationsModal',closeMyApplications)"
->
+id="myApplicationsModal">
 
-<div
-class="modal-content"
-onclick="event.stopPropagation()"
->
+<div class="modal-content">
 
 <button
 class="close"
-onclick="closeMyApplications()"
->
+onclick="closeMyApplications()">
+
 ×
+
 </button>
 
+
 <h2 class="title">
+
 Мои <span>заявки</span>
+
 </h2>
 
+
 <p class="subtitle">
-Здесь отображается статус ваших заявок.
+
+Статус ваших заявок.
+
 </p>
 
-<div id="applicationsList"></div>
+
+<div id="applicationsList">
+
+<div class="loading">
+Загрузка...
+</div>
+
+</div>
 
 </div>
 
 </div>
 
 
-<!-- ADMIN PANEL -->
+
+<!-- =========================
+     АДМИН-ПАНЕЛЬ
+========================= -->
 
 <div
 class="modal"
-id="adminModal"
-onclick="outsideClose(event,'adminModal',closeAdminPanel)"
->
+id="adminModal">
 
-<div
-class="modal-content large"
-onclick="event.stopPropagation()"
->
+<div class="modal-content large">
 
 <button
 class="close"
-onclick="closeAdminPanel()"
->
+onclick="closeAdminPanel()">
+
 ×
+
 </button>
 
+
 <h2 class="title">
+
 👑 <span>Админ-панель</span>
+
 </h2>
 
+
 <p class="subtitle">
+
 Управление заявками пользователей.
+
 </p>
+
 
 <div
 class="message"
-id="adminMessage"
-></div>
+id="adminMessage">
+</div>
+
 
 <div id="adminApplications">
 
 <div class="loading">
+
 Загрузка заявок...
-</div>
 
 </div>
 
@@ -1137,21 +1220,27 @@ id="adminMessage"
 
 </div>
 
+</div>
 
-<!-- NOTIFICATION -->
+
+
+<!-- =========================
+     УВЕДОМЛЕНИЕ
+========================= -->
 
 <div
 class="notification"
-id="notification"
->
+id="notification">
 
 <b id="notificationTitle">
 Уведомление
 </b>
 
-<span id="notificationText"></span>
+<span id="notificationText">
+</span>
 
 </div>
+
 
 
 <footer>
@@ -1163,13 +1252,15 @@ id="notification"
 </footer>
 
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
-/* ==========================================
+/* =========================================
    SUPABASE
-========================================== */
+========================================= */
 
 const SUPABASE_URL =
 "https://yivimzkrxqlegnkekdke.supabase.co";
@@ -1177,1422 +1268,1356 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_SU1vTlmv8gjqX2jNN6D8cw_Cuvxio7W";
 
+
 const supabaseClient =
 window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
 
 
-/*
-   ВАЖНО:
-   Здесь укажи email СВОЕГО основного аккаунта.
 
-   Пока оставлено пустым.
-   После входа обычного пользователя
-   админская кнопка не показывается.
-
-   Впиши сюда email своего аккаунта:
-*/
+/* =========================================
+   АДМИН
+========================================= */
 
 const ADMIN_EMAIL =
-"";
+"s7443853@gmail.com";
 
 
-let currentUser=null;
-let selectedVacancy="";
+
+/* =========================================
+   ВАКАНСИИ И ВОПРОСЫ
+========================================= */
+
+const vacancyQuestions = {
+
+    "Модератор": [
+
+        "Сколько вам лет?",
+
+        "Сколько времени вы можете уделять d0ntyyy?",
+
+        "Сколько времени вы находитесь на нашем сервере?",
+
+        "Был ли у вас опыт работы модератором?",
+
+        "Почему именно вы должны стать модератором?",
+
+        "Как вы поступите, если участник нарушит правила?",
+
+        "Ваш Discord/Telegram для связи"
+
+    ],
 
 
-/* ==========================================
-   ВОПРОСЫ
-========================================== */
+    "Медиа": [
 
-const vacancyQuestions={
+        "Сколько вам лет?",
 
-"Модератор":[
+        "Ваша ссылка на TikTok?",
 
-[
-"age",
-"Сколько вам лет?",
-"number",
-"Введите ваш возраст"
-],
+        "Ваша ссылка на YouTube или другие социальные сети?",
 
-[
-"time",
-"Сколько времени вы можете уделять d0ntyyy?",
-"text",
-"Например: 3-4 часа в день"
-],
+        "Есть ли у вас опыт создания контента?",
 
-[
-"experience",
-"Есть ли у вас опыт работы модератором?",
-"textarea",
-"Расскажите о своём опыте"
-],
+        "Какой контент вы готовы создавать для d0ntyyy?",
 
-[
-"reason",
-"Почему вы хотите стать модератором?",
-"textarea",
-"Напишите ваш ответ"
-],
+        "Сколько времени вы можете уделять проекту?",
 
-[
-"contact",
-"Ваш Discord/Telegram для связи?",
-"text",
-"@username"
-]
+        "Ваш Discord/Telegram для связи"
 
-],
+    ],
 
 
-"Медиа":[
+    "Хелпер": [
 
-[
-"age",
-"Сколько вам лет?",
-"number",
-"Введите ваш возраст"
-],
+        "Сколько вам лет?",
 
-[
-"tiktok",
-"Ваша ссылка на TikTok?",
-"url",
-"https://www.tiktok.com/@username"
-],
+        "Сколько времени вы можете уделять d0ntyyy?",
 
-[
-"youtube",
-"Ваша ссылка на YouTube?",
-"url",
-"Если нет — напишите «нет»"
-],
+        "Почему вы хотите стать хелпером?",
 
-[
-"followers",
-"Сколько у вас подписчиков?",
-"text",
-"Например: 5000"
-],
+        "Есть ли у вас опыт помощи пользователям?",
 
-[
-"content",
-"Какой контент вы создаёте?",
-"textarea",
-"Расскажите о вашем контенте"
-],
+        "Что вы будете делать, если пользователь задаёт вопрос, ответа на который вы не знаете?",
 
-[
-"time",
-"Сколько времени вы можете уделять d0ntyyy?",
-"text",
-"Например: 2-3 часа в день"
-],
+        "Почему именно вы подходите на эту должность?",
 
-[
-"contact",
-"Ваш Discord/Telegram для связи?",
-"text",
-"@username"
-]
+        "Ваш Discord/Telegram для связи"
 
-],
+    ],
 
 
-"Хелпер":[
+    "Администратор": [
 
-[
-"age",
-"Сколько вам лет?",
-"number",
-"Введите ваш возраст"
-],
+        "Сколько вам лет?",
 
-[
-"time",
-"Сколько времени вы можете уделять d0ntyyy?",
-"text",
-"Например: 2-3 часа в день"
-],
+        "Сколько времени вы можете уделять d0ntyyy?",
 
-[
-"reason",
-"Почему вы хотите стать хелпером?",
-"textarea",
-"Напишите ваш ответ"
-],
+        "Сколько времени вы находитесь на нашем сервере?",
 
-[
-"experience",
-"Есть ли у вас опыт помощи на Discord-серверах?",
-"textarea",
-"Расскажите о своём опыте"
-],
+        "Был ли у вас опыт работы администратором?",
 
-[
-"contact",
-"Ваш Discord/Telegram для связи?",
-"text",
-"@username"
-]
+        "Почему именно вы должны стать администратором?",
 
-],
+        "Как вы будете решать конфликт между сотрудниками?",
 
+        "Как вы будете действовать при серьёзном нарушении правил?",
 
-"Администратор":[
+        "Ваш Discord/Telegram для связи"
 
-[
-"age",
-"Сколько вам лет?",
-"number",
-"Введите ваш возраст"
-],
-
-[
-"time",
-"Сколько времени вы можете уделять d0ntyyy?",
-"text",
-"Например: 3-4 часа в день"
-],
-
-[
-"experience",
-"Есть ли у вас опыт работы модератором?",
-"textarea",
-"Расскажите о своём опыте"
-],
-
-[
-"reason",
-"Почему вы хотите стать администратором?",
-"textarea",
-"Напишите ваш ответ"
-],
-
-[
-"contact",
-"Ваш Discord/Telegram для связи?",
-"text",
-"@username"
-]
-
-]
+    ]
 
 };
 
 
-/* ==========================================
+
+let currentVacancy = null;
+let currentUser = null;
+
+
+
+/* =========================================
+   УВЕДОМЛЕНИЯ
+========================================= */
+
+function notify(title, text) {
+
+    document.getElementById("notificationTitle").textContent =
+        title;
+
+    document.getElementById("notificationText").textContent =
+        text;
+
+    const box =
+        document.getElementById("notification");
+
+    box.classList.add("show");
+
+    setTimeout(() => {
+
+        box.classList.remove("show");
+
+    }, 5000);
+}
+
+
+
+/* =========================================
    AUTH
-========================================== */
+========================================= */
 
-async function checkAuth(){
+function openAuth() {
 
-const result=
-await supabaseClient.auth.getUser();
-
-currentUser=
-result.data.user || null;
-
-updateHeader();
+    document
+        .getElementById("authModal")
+        .classList.add("active");
 
 }
 
 
-function isAdmin(){
+function closeAuth() {
 
-if(!currentUser){
-return false;
-}
-
-return (
-ADMIN_EMAIL &&
-currentUser.email &&
-currentUser.email.toLowerCase()===
-ADMIN_EMAIL.toLowerCase()
-);
+    document
+        .getElementById("authModal")
+        .classList.remove("active");
 
 }
 
 
-function updateHeader(){
+function showLogin() {
 
-const authBtn=
-document.getElementById("authBtn");
+    document.getElementById("loginBox")
+        .style.display = "block";
 
-const myBtn=
-document.getElementById("myApplicationsBtn");
+    document.getElementById("registerBox")
+        .style.display = "none";
 
-const adminBtn=
-document.getElementById("adminBtn");
+    document.getElementById("loginTab")
+        .classList.add("active");
 
-const email=
-document.getElementById("userEmail");
+    document.getElementById("registerTab")
+        .classList.remove("active");
 
-
-if(currentUser){
-
-authBtn.textContent="Выйти";
-
-authBtn.onclick=logout;
-
-myBtn.style.display="block";
-
-email.textContent=
-currentUser.email || "";
-
-
-if(isAdmin()){
-
-adminBtn.style.display="block";
-
-}else{
-
-adminBtn.style.display="none";
-
-}
-
-}else{
-
-authBtn.textContent="Войти";
-
-authBtn.onclick=openAuth;
-
-myBtn.style.display="none";
-
-adminBtn.style.display="none";
-
-email.textContent="";
-
-}
-
+    clearAuthMessage();
 }
 
 
-/* ==========================================
-   AUTH WINDOW
-========================================== */
+function showRegister() {
 
-function openAuth(){
+    document.getElementById("loginBox")
+        .style.display = "none";
 
-document
-.getElementById("authModal")
-.classList.add("active");
+    document.getElementById("registerBox")
+        .style.display = "block";
 
+    document.getElementById("loginTab")
+        .classList.remove("active");
+
+    document.getElementById("registerTab")
+        .classList.add("active");
+
+    clearAuthMessage();
 }
 
 
-function closeAuth(){
+function showAuthMessage(text, type = "error") {
 
-document
-.getElementById("authModal")
-.classList.remove("active");
+    const box =
+        document.getElementById("authMessage");
 
-clearAuthMessage();
+    box.textContent = text;
 
+    box.className =
+        "message show " + type;
 }
 
 
-function showLogin(){
+function clearAuthMessage() {
 
-document.getElementById("loginBox")
-.style.display="block";
+    const box =
+        document.getElementById("authMessage");
 
-document.getElementById("registerBox")
-.style.display="none";
+    box.textContent = "";
 
-document.getElementById("loginTab")
-.classList.add("active");
-
-document.getElementById("registerTab")
-.classList.remove("active");
-
-clearAuthMessage();
-
+    box.className = "message";
 }
 
 
-function showRegister(){
 
-document.getElementById("loginBox")
-.style.display="none";
-
-document.getElementById("registerBox")
-.style.display="block";
-
-document.getElementById("loginTab")
-.classList.remove("active");
-
-document.getElementById("registerTab")
-.classList.add("active");
-
-clearAuthMessage();
-
-}
-
-
-function authMessage(text,type){
-
-const box=
-document.getElementById("authMessage");
-
-box.textContent=text;
-
-box.className=
-"message show "+type;
-
-}
-
-
-function clearAuthMessage(){
-
-const box=
-document.getElementById("authMessage");
-
-box.textContent="";
-
-box.className="message";
-
-}
-
-
-/* ==========================================
-   REGISTER
-========================================== */
+/* =========================================
+   РЕГИСТРАЦИЯ
+========================================= */
 
 document
 .getElementById("registerForm")
-.addEventListener(
-"submit",
-async(e)=>{
+.addEventListener("submit", async function(event) {
 
-e.preventDefault();
+    event.preventDefault();
 
-const email=
-document
-.getElementById("registerEmail")
-.value
-.trim();
+    const email =
+        document.getElementById("registerEmail")
+        .value
+        .trim();
 
-const password=
-document
-.getElementById("registerPassword")
-.value;
+    const password =
+        document.getElementById("registerPassword")
+        .value;
 
-const password2=
-document
-.getElementById("registerPassword2")
-.value;
+    const password2 =
+        document.getElementById("registerPassword2")
+        .value;
 
 
-if(password.length<6){
+    if (password !== password2) {
 
-authMessage(
-"Пароль должен содержать минимум 6 символов.",
-"error"
-);
+        showAuthMessage(
+            "Пароли не совпадают."
+        );
 
-return;
-
-}
+        return;
+    }
 
 
-if(password!==password2){
+    if (password.length < 6) {
 
-authMessage(
-"Пароли не совпадают.",
-"error"
-);
+        showAuthMessage(
+            "Пароль должен содержать минимум 6 символов."
+        );
 
-return;
-
-}
+        return;
+    }
 
 
-const {data,error}=
-await supabaseClient.auth.signUp({
+    const button =
+        event.target.querySelector("button");
 
-email,
-password
+    button.disabled = true;
+
+    button.textContent =
+        "Регистрация...";
+
+
+    const { data, error } =
+        await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+    button.disabled = false;
+
+    button.textContent =
+        "Зарегистрироваться";
+
+
+    if (error) {
+
+        showAuthMessage(
+            error.message
+        );
+
+        return;
+    }
+
+
+    showAuthMessage(
+        "Регистрация выполнена. Проверьте почту, если Supabase требует подтверждение email.",
+        "success"
+    );
 
 });
 
 
-if(error){
 
-authMessage(
-error.message,
-"error"
-);
-
-return;
-
-}
-
-
-if(data.session){
-
-currentUser=data.user;
-
-updateHeader();
-
-closeAuth();
-
-showNotification(
-"Регистрация завершена",
-"Аккаунт успешно создан."
-);
-
-}else{
-
-authMessage(
-"Аккаунт создан. Проверьте почту для подтверждения регистрации.",
-"success"
-);
-
-}
-
-}
-);
-
-
-/* ==========================================
-   LOGIN
-========================================== */
+/* =========================================
+   ВХОД
+========================================= */
 
 document
 .getElementById("loginForm")
-.addEventListener(
-"submit",
-async(e)=>{
+.addEventListener("submit", async function(event) {
 
-e.preventDefault();
-
-const email=
-document
-.getElementById("loginEmail")
-.value
-.trim();
-
-const password=
-document
-.getElementById("loginPassword")
-.value;
+    event.preventDefault();
 
 
-const {data,error}=
-await supabaseClient.auth.signInWithPassword({
+    const email =
+        document.getElementById("loginEmail")
+        .value
+        .trim();
 
-email,
-password
+
+    const password =
+        document.getElementById("loginPassword")
+        .value;
+
+
+    const button =
+        event.target.querySelector("button");
+
+    button.disabled = true;
+
+    button.textContent =
+        "Вход...";
+
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+    button.disabled = false;
+
+    button.textContent =
+        "Войти";
+
+
+    if (error) {
+
+        showAuthMessage(
+            "Неверный email или пароль."
+        );
+
+        return;
+    }
+
+
+    closeAuth();
+
+    await updateInterface();
+
+    notify(
+        "Добро пожаловать!",
+        "Вы успешно вошли в аккаунт."
+    );
 
 });
 
 
-if(error){
 
-authMessage(
-error.message,
-"error"
-);
+/* =========================================
+   ПРОВЕРКА АВТОРИЗАЦИИ
+========================================= */
 
-return;
+async function updateInterface() {
 
-}
-
-
-currentUser=data.user;
-
-updateHeader();
-
-closeAuth();
-
-showNotification(
-"Вы вошли",
-"Добро пожаловать!"
-);
-
-}
-);
+    const {
+        data: {
+            user
+        }
+    } = await supabaseClient.auth.getUser();
 
 
-/* ==========================================
-   LOGOUT
-========================================== */
-
-async function logout(){
-
-await supabaseClient.auth.signOut();
-
-currentUser=null;
-
-updateHeader();
-
-showNotification(
-"Вы вышли",
-"Вы вышли из аккаунта."
-);
-
-}
+    currentUser = user;
 
 
-/* ==========================================
-   APPLICATION WINDOW
-========================================== */
+    const authBtn =
+        document.getElementById("authBtn");
 
-function openApplication(vacancy){
+    const adminBtn =
+        document.getElementById("adminBtn");
 
-if(!currentUser){
+    const myBtn =
+        document.getElementById("myApplicationsBtn");
 
-openAuth();
-
-authMessage(
-"Сначала войдите или зарегистрируйтесь.",
-"error"
-);
-
-return;
-
-}
+    const userEmail =
+        document.getElementById("userEmail");
 
 
-selectedVacancy=vacancy;
+    if (!user) {
+
+        authBtn.textContent =
+            "Войти";
+
+        authBtn.onclick =
+            openAuth;
+
+        adminBtn.style.display =
+            "none";
+
+        myBtn.style.display =
+            "none";
+
+        userEmail.textContent =
+            "";
+
+        return;
+    }
 
 
-document
-.getElementById("applicationModal")
-.classList.add("active");
+    userEmail.textContent =
+        user.email;
 
 
-document
-.getElementById("applicationFormBox")
-.style.display="block";
+    authBtn.textContent =
+        "Выйти";
+
+    authBtn.onclick =
+        logout;
 
 
-document
-.getElementById("applicationSuccess")
-.style.display="none";
+    myBtn.style.display =
+        "block";
 
 
-document
-.getElementById("applicationTitle")
-.innerHTML=
-`Заявка на <span>${escapeHTML(vacancy)}</span>`;
+    /*
+       ВОТ ЗДЕСЬ ПРОВЕРЯЕТСЯ
+       EMAIL АДМИНИСТРАТОРА
+    */
 
+    if (
+        user.email &&
+        user.email.toLowerCase() ===
+        ADMIN_EMAIL.toLowerCase()
+    ) {
 
-const questions=
-document.getElementById("questions");
+        adminBtn.style.display =
+            "block";
 
-questions.innerHTML="";
+    } else {
 
+        adminBtn.style.display =
+            "none";
 
-vacancyQuestions[vacancy].forEach(
-(q,index)=>{
-
-const field=
-document.createElement("div");
-
-field.className="field";
-
-
-const label=
-document.createElement("label");
-
-label.innerHTML=
-`${index+1}. ${escapeHTML(q[1])}
-<span class="required">*</span>`;
-
-
-field.appendChild(label);
-
-
-let input;
-
-
-if(q[2]==="textarea"){
-
-input=
-document.createElement("textarea");
-
-}else{
-
-input=
-document.createElement("input");
-
-input.type=q[2];
+    }
 
 }
 
 
-input.name=q[0];
 
-input.placeholder=q[3];
+async function logout() {
 
-input.required=true;
+    await supabaseClient.auth.signOut();
 
+    currentUser = null;
 
-field.appendChild(input);
+    await updateInterface();
 
-questions.appendChild(field);
-
-}
-
-);
-
-}
-
-
-function closeApplication(){
-
-document
-.getElementById("applicationModal")
-.classList.remove("active");
+    notify(
+        "Выход",
+        "Вы вышли из аккаунта."
+    );
 
 }
 
 
-/* ==========================================
-   SEND APPLICATION
-========================================== */
+
+/* =========================================
+   ОТКРЫТИЕ ЗАЯВКИ
+========================================= */
+
+async function openApplication(vacancy) {
+
+    const {
+        data: {
+            user
+        }
+    } = await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        openAuth();
+
+        showAuthMessage(
+            "Сначала войдите или зарегистрируйтесь."
+        );
+
+        return;
+    }
+
+
+    currentVacancy =
+        vacancy;
+
+
+    document.getElementById("applicationTitle")
+        .innerHTML =
+        "Заявка: <span>" +
+        vacancy +
+        "</span>";
+
+
+    const questions =
+        document.getElementById("questions");
+
+
+    questions.innerHTML = "";
+
+
+    vacancyQuestions[vacancy]
+        .forEach((question, index) => {
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "field";
+
+
+            div.innerHTML = `
+
+                <label>
+                    ${index + 1}. ${escapeHtml(question)}
+                    <span class="required">*</span>
+                </label>
+
+                <textarea
+                    required
+                    name="answer${index}"
+                    placeholder="Введите ответ..."
+                ></textarea>
+
+            `;
+
+
+            questions.appendChild(div);
+
+        });
+
+
+    document.getElementById("applicationFormBox")
+        .style.display =
+        "block";
+
+
+    document.getElementById("applicationSuccess")
+        .style.display =
+        "none";
+
+
+    document.getElementById("applicationMessage")
+        .className =
+        "message";
+
+
+    document.getElementById("applicationModal")
+        .classList.add("active");
+
+}
+
+
+
+/* =========================================
+   ОТПРАВКА ЗАЯВКИ
+========================================= */
 
 document
 .getElementById("applicationForm")
-.addEventListener(
-"submit",
-async(e)=>{
+.addEventListener("submit", async function(event) {
 
-e.preventDefault();
+    event.preventDefault();
 
 
-if(!currentUser){
-
-return;
-
-}
-
-
-const button=
-document.getElementById("sendApplication");
-
-button.disabled=true;
-
-button.textContent="Отправка...";
+    const {
+        data: {
+            user
+        }
+    } = await supabaseClient.auth.getUser();
 
 
-const formData=
-new FormData(e.target);
+    if (!user) {
 
-const answers={};
+        closeApplication();
 
+        openAuth();
 
-formData.forEach(
-(value,key)=>{
-answers[key]=value;
-}
-);
+        return;
+    }
 
 
-const {error}=
-await supabaseClient
-.from("applications")
-.insert({
+    const answers = {};
 
-user_id:currentUser.id,
 
-vacancy:selectedVacancy,
+    const fields =
+        event.target.querySelectorAll("textarea");
 
-answers:answers,
 
-status:"new"
+    fields.forEach((field, index) => {
+
+        answers[
+            vacancyQuestions[currentVacancy][index]
+        ] =
+            field.value.trim();
+
+    });
+
+
+    const button =
+        document.getElementById("sendApplication");
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Отправка...";
+
+
+    const { error } =
+        await supabaseClient
+        .from("applications")
+        .insert({
+
+            user_id: user.id,
+
+            email: user.email,
+
+            vacancy: currentVacancy,
+
+            answers: answers,
+
+            status: "new"
+
+        });
+
+
+    button.disabled = false;
+
+    button.textContent =
+        "Отправить заявку";
+
+
+    if (error) {
+
+        console.error(error);
+
+        showApplicationMessage(
+            "Не удалось отправить заявку. Проверьте таблицу applications и RLS в Supabase."
+        );
+
+        return;
+    }
+
+
+    document.getElementById("applicationFormBox")
+        .style.display =
+        "none";
+
+
+    document.getElementById("applicationSuccess")
+        .style.display =
+        "block";
+
+
+    notify(
+        "Заявка отправлена",
+        "Ваша заявка успешно отправлена."
+    );
 
 });
 
 
-if(error){
 
-console.error(error);
+function showApplicationMessage(text) {
 
-showApplicationError(
-"Не удалось отправить заявку: "+
-error.message
-);
+    const box =
+        document.getElementById("applicationMessage");
 
-button.disabled=false;
+    box.textContent =
+        text;
 
-button.textContent="Отправить заявку";
-
-return;
+    box.className =
+        "message show error";
 
 }
 
 
-document
-.getElementById("applicationFormBox")
-.style.display="none";
+function closeApplication() {
 
-
-document
-.getElementById("applicationSuccess")
-.style.display="block";
-
-
-e.target.reset();
-
-
-button.disabled=false;
-
-button.textContent="Отправить заявку";
-
-
-showNotification(
-"Заявка отправлена",
-"Заявка передана на рассмотрение."
-);
-
-}
-);
-
-
-function showApplicationError(text){
-
-const box=
-document.getElementById("applicationMessage");
-
-box.textContent=text;
-
-box.className=
-"message show error";
+    document.getElementById("applicationModal")
+        .classList.remove("active");
 
 }
 
 
-/* ==========================================
-   MY APPLICATIONS
-========================================== */
 
-async function openMyApplications(){
+/* =========================================
+   МОИ ЗАЯВКИ
+========================================= */
 
-if(!currentUser){
+async function openMyApplications() {
 
-openAuth();
+    document.getElementById("myApplicationsModal")
+        .classList.add("active");
 
-return;
+
+    const list =
+        document.getElementById("applicationsList");
+
+
+    list.innerHTML =
+        '<div class="loading">Загрузка...</div>';
+
+
+    const {
+        data: {
+            user
+        }
+    } = await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        list.innerHTML =
+            '<div class="empty">Вы не авторизованы.</div>';
+
+        return;
+    }
+
+
+    const { data, error } =
+        await supabaseClient
+        .from("applications")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", {
+            ascending: false
+        });
+
+
+    if (error) {
+
+        console.error(error);
+
+        list.innerHTML =
+            '<div class="empty">Ошибка загрузки заявок.</div>';
+
+        return;
+    }
+
+
+    if (!data || data.length === 0) {
+
+        list.innerHTML =
+            '<div class="empty">У вас пока нет заявок.</div>';
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    data.forEach(application => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "application";
+
+
+        let statusText =
+            "На рассмотрении";
+
+        let statusClass =
+            "new";
+
+
+        if (application.status === "approved") {
+
+            statusText =
+                "Заявка одобрена";
+
+            statusClass =
+                "approved";
+
+        }
+
+
+        if (application.status === "rejected") {
+
+            statusText =
+                "Заявка отклонена";
+
+            statusClass =
+                "rejected";
+
+        }
+
+
+        let answersHTML = "";
+
+
+        if (application.answers) {
+
+            Object.entries(application.answers)
+            .forEach(([question, answer]) => {
+
+                answersHTML += `
+
+                    <div class="answer">
+
+                        <b>${escapeHtml(question)}</b>
+
+                        <span>
+                            ${escapeHtml(answer)}
+                        </span>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        card.innerHTML = `
+
+            <h3>
+                ${escapeHtml(application.vacancy)}
+            </h3>
+
+            <p>
+                <b>Статус:</b>
+            </p>
+
+            <span class="status ${statusClass}">
+                ${statusText}
+            </span>
+
+            ${answersHTML}
+
+        `;
+
+
+        list.appendChild(card);
+
+    });
 
 }
 
 
-document
-.getElementById("myApplicationsModal")
-.classList.add("active");
+function closeMyApplications() {
 
-
-const list=
-document.getElementById("applicationsList");
-
-list.innerHTML=
-'<div class="loading">Загрузка заявок...</div>';
-
-
-const {data,error}=
-await supabaseClient
-.from("applications")
-.select("*")
-.eq("user_id",currentUser.id)
-.order(
-"created_at",
-{ascending:false}
-);
-
-
-if(error){
-
-console.error(error);
-
-list.innerHTML=
-'<div class="empty">Не удалось загрузить заявки.</div>';
-
-return;
+    document.getElementById("myApplicationsModal")
+        .classList.remove("active");
 
 }
 
 
-if(!data || data.length===0){
 
-list.innerHTML=
-'<div class="empty">У вас пока нет заявок.</div>';
+/* =========================================
+   АДМИН-ПАНЕЛЬ
+========================================= */
 
-return;
+async function openAdminPanel() {
 
-}
-
-
-list.innerHTML="";
-
-
-data.forEach(app=>{
-
-const div=
-document.createElement("div");
-
-div.className="application";
+    const {
+        data: {
+            user
+        }
+    } = await supabaseClient.auth.getUser();
 
 
-let statusText=
-"На рассмотрении";
+    if (!user) {
 
-let statusClass=
-"new";
+        openAuth();
 
-let message="";
-
-
-if(app.status==="approved"){
-
-statusText="Одобрена";
-
-statusClass="approved";
-
-message=
-"✅ Администратор одобрил вашу заявку.";
-
-}
+        return;
+    }
 
 
-if(app.status==="rejected"){
+    /*
+       Дополнительная проверка email.
+    */
 
-statusText="Отклонена";
+    if (
+        user.email.toLowerCase() !==
+        ADMIN_EMAIL.toLowerCase()
+    ) {
 
-statusClass="rejected";
+        notify(
+            "Доступ запрещён",
+            "У вас нет прав администратора."
+        );
 
-message=
-"❌ Администратор отклонил вашу заявку.";
+        return;
+    }
+
+
+    document.getElementById("adminModal")
+        .classList.add("active");
+
+
+    loadAdminApplications();
 
 }
 
 
-div.innerHTML=`
+function closeAdminPanel() {
 
-<h3>
-${escapeHTML(app.vacancy)}
-</h3>
-
-<span class="status ${statusClass}">
-${statusText}
-</span>
-
-<p style="margin-top:12px">
-${message}
-</p>
-
-`;
-
-list.appendChild(div);
-
-});
+    document.getElementById("adminModal")
+        .classList.remove("active");
 
 }
 
 
-function closeMyApplications(){
 
-document
-.getElementById("myApplicationsModal")
-.classList.remove("active");
+/* =========================================
+   ЗАГРУЗКА ЗАЯВОК ДЛЯ АДМИНА
+========================================= */
+
+async function loadAdminApplications() {
+
+    const container =
+        document.getElementById("adminApplications");
+
+
+    container.innerHTML =
+        '<div class="loading">Загрузка заявок...</div>';
+
+
+    const { data, error } =
+        await supabaseClient
+        .from("applications")
+        .select("*")
+        .order("created_at", {
+            ascending: false
+        });
+
+
+    if (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                Не удалось загрузить заявки.
+
+                <br><br>
+
+                Проверьте RLS-политики таблицы
+                <b>applications</b> в Supabase.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    if (!data || data.length === 0) {
+
+        container.innerHTML =
+            '<div class="empty">Заявок пока нет.</div>';
+
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    data.forEach(application => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "admin-card";
+
+
+        let statusText =
+            "На рассмотрении";
+
+        let statusClass =
+            "new";
+
+
+        if (application.status === "approved") {
+
+            statusText =
+                "Одобрена";
+
+            statusClass =
+                "approved";
+
+        }
+
+
+        if (application.status === "rejected") {
+
+            statusText =
+                "Отклонена";
+
+            statusClass =
+                "rejected";
+
+        }
+
+
+        let answersHTML = "";
+
+
+        if (application.answers) {
+
+            Object.entries(application.answers)
+            .forEach(([question, answer]) => {
+
+                answersHTML += `
+
+                    <div class="answer">
+
+                        <b>
+                            ${escapeHtml(question)}
+                        </b>
+
+                        <span>
+                            ${escapeHtml(answer)}
+                        </span>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        const date =
+            application.created_at
+            ? new Date(
+                application.created_at
+              ).toLocaleString("ru-RU")
+            : "";
+
+
+        card.innerHTML = `
+
+            <div class="admin-top">
+
+                <div>
+
+                    <h3>
+                        ${escapeHtml(application.vacancy)}
+                    </h3>
+
+                    <div class="admin-user">
+
+                        ${escapeHtml(
+                            application.email || ""
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-date">
+
+                    ${date}
+
+                </div>
+
+            </div>
+
+
+            <span class="status ${statusClass}">
+
+                ${statusText}
+
+            </span>
+
+
+            ${answersHTML}
+
+
+            ${
+                application.status === "new"
+                ? `
+
+                    <div class="admin-actions">
+
+                        <button
+                            class="approve-btn"
+                            onclick="changeApplicationStatus(
+                                '${application.id}',
+                                'approved'
+                            )">
+
+                            ✅ Одобрить
+
+                        </button>
+
+
+                        <button
+                            class="reject-btn"
+                            onclick="changeApplicationStatus(
+                                '${application.id}',
+                                'rejected'
+                            )">
+
+                            ❌ Отклонить
+
+                        </button>
+
+                    </div>
+
+                `
+                : ""
+            }
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
 
 }
 
 
-/* ==========================================
-   ADMIN PANEL
-========================================== */
 
-async function openAdminPanel(){
-
-if(!currentUser){
-
-openAuth();
-
-return;
-
-}
-
-
-if(!isAdmin()){
-
-showNotification(
-"Нет доступа",
-"Этот раздел доступен только администратору."
-);
-
-return;
-
-}
-
-
-document
-.getElementById("adminModal")
-.classList.add("active");
-
-
-loadAdminApplications();
-
-}
-
-
-function closeAdminPanel(){
-
-document
-.getElementById("adminModal")
-.classList.remove("active");
-
-}
-
-
-/* ==========================================
-   LOAD ALL APPLICATIONS
-========================================== */
-
-async function loadAdminApplications(){
-
-const container=
-document.getElementById("adminApplications");
-
-container.innerHTML=
-'<div class="loading">Загрузка заявок...</div>';
-
-
-const {data,error}=
-await supabaseClient
-.from("applications")
-.select("*")
-.order(
-"created_at",
-{ascending:false}
-);
-
-
-if(error){
-
-console.error(error);
-
-container.innerHTML=`
-
-<div class="empty">
-
-Не удалось загрузить заявки.
-
-<br><br>
-
-<small>
-${escapeHTML(error.message)}
-</small>
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-if(!data || data.length===0){
-
-container.innerHTML=
-'<div class="empty">Заявок пока нет.</div>';
-
-return;
-
-}
-
-
-container.innerHTML="";
-
-
-data.forEach(app=>{
-
-const card=
-document.createElement("div");
-
-card.className="admin-card";
-
-
-let statusText=
-"На рассмотрении";
-
-let statusClass=
-"new";
-
-
-if(app.status==="approved"){
-
-statusText="Одобрена";
-
-statusClass="approved";
-
-}
-
-
-if(app.status==="rejected"){
-
-statusText="Отклонена";
-
-statusClass="rejected";
-
-}
-
-
-let answersHTML="";
-
-
-if(
-app.answers &&
-typeof app.answers==="object"
-){
-
-Object.entries(app.answers)
-.forEach(
-([key,value])=>{
-
-const labels={
-
-age:"Возраст",
-
-time:"Время на проект",
-
-experience:"Опыт",
-
-reason:"Причина",
-
-contact:"Discord/Telegram",
-
-tiktok:"TikTok",
-
-youtube:"YouTube",
-
-followers:"Подписчики",
-
-content:"Контент"
-
-};
-
-const label=
-labels[key] || key;
-
-
-answersHTML+=`
-
-<div class="answer">
-
-<b>
-${escapeHTML(label)}
-</b>
-
-<span>
-${escapeHTML(String(value))}
-</span>
-
-</div>
-
-`;
-
-}
-
-);
-
-}
-
-
-const date=
-app.created_at
-?
-new Date(app.created_at)
-.toLocaleString("ru-RU")
-:
-"Дата неизвестна";
-
-
-card.innerHTML=`
-
-<div class="admin-top">
-
-<div>
-
-<h3>
-${escapeHTML(app.vacancy)}
-</h3>
-
-<div class="admin-user">
-ID пользователя: ${escapeHTML(app.user_id)}
-</div>
-
-</div>
-
-<div class="admin-date">
-${escapeHTML(date)}
-</div>
-
-</div>
-
-<span class="status ${statusClass}">
-${statusText}
-</span>
-
-<div>
-${answersHTML}
-</div>
-
-<div class="admin-actions">
-
-<button
-class="approve-btn"
-onclick="changeApplicationStatus('${escapeHTML(app.id)}','approved')"
-${app.status==="approved" ? "disabled" : ""}
->
-✅ Одобрить
-</button>
-
-<button
-class="reject-btn"
-onclick="changeApplicationStatus('${escapeHTML(app.id)}','rejected')"
-${app.status==="rejected" ? "disabled" : ""}
->
-❌ Отклонить
-</button>
-
-</div>
-
-`;
-
-container.appendChild(card);
-
-});
-
-}
-
-
-/* ==========================================
-   CHANGE STATUS
-========================================== */
+/* =========================================
+   ОДОБРЕНИЕ / ОТКЛОНЕНИЕ
+========================================= */
 
 async function changeApplicationStatus(
-applicationId,
-newStatus
-){
+    id,
+    status
+) {
 
-if(!currentUser || !isAdmin()){
-
-showNotification(
-"Нет доступа",
-"Вы не являетесь администратором."
-);
-
-return;
-
-}
+    const {
+        data: {
+            user
+        }
+    } = await supabaseClient.auth.getUser();
 
 
-const answer=
-newStatus==="approved"
-?
-"одобрить"
-:
-"отклонить";
+    if (!user) {
+
+        notify(
+            "Ошибка",
+            "Вы не авторизованы."
+        );
+
+        return;
+    }
 
 
-if(
-!confirm(
-`Вы уверены, что хотите ${answer} эту заявку?`
-)
-){
+    if (
+        user.email.toLowerCase() !==
+        ADMIN_EMAIL.toLowerCase()
+    ) {
 
-return;
+        notify(
+            "Доступ запрещён",
+            "Только администратор может изменять заявки."
+        );
 
-}
-
-
-const {error}=
-await supabaseClient
-.from("applications")
-.update({
-status:newStatus
-})
-.eq("id",applicationId);
+        return;
+    }
 
 
-if(error){
+    const { error } =
+        await supabaseClient
+        .from("applications")
+        .update({
 
-console.error(error);
+            status: status
 
-showAdminMessage(
-"Ошибка: "+error.message,
-"error"
-);
-
-return;
-
-}
+        })
+        .eq("id", id);
 
 
-showNotification(
-newStatus==="approved"
-?
-"Заявка одобрена"
-:
-"Заявка отклонена",
-newStatus==="approved"
-?
-"Пользователь увидит одобрение в «Мои заявки»."
-:
-"Пользователь увидит отклонение в «Мои заявки»."
-);
+    if (error) {
+
+        console.error(error);
+
+        notify(
+            "Ошибка",
+            "Не удалось изменить статус заявки."
+        );
+
+        return;
+    }
 
 
-await loadAdminApplications();
+    if (status === "approved") {
 
-}
+        notify(
+            "Заявка одобрена",
+            "Статус заявки изменён на «Одобрена»."
+        );
 
+    } else {
 
-/* ==========================================
-   ADMIN MESSAGE
-========================================== */
+        notify(
+            "Заявка отклонена",
+            "Пользователь увидит статус «Заявка отклонена» в разделе «Мои заявки»."
+        );
 
-function showAdminMessage(
-text,
-type
-){
-
-const box=
-document.getElementById("adminMessage");
-
-box.textContent=text;
-
-box.className=
-"message show "+type;
+    }
 
 
-setTimeout(
-()=>{
-box.className="message";
-},
-5000
-);
+    await loadAdminApplications();
 
 }
 
 
-/* ==========================================
-   NOTIFICATION
-========================================== */
 
-function showNotification(
-title,
-text
-){
+/* =========================================
+   ESCAPE
+========================================= */
 
-const box=
-document.getElementById("notification");
+function escapeHtml(value) {
 
-document.getElementById(
-"notificationTitle"
-).textContent=title;
+    if (value === null ||
+        value === undefined) {
 
-document.getElementById(
-"notificationText"
-).textContent=text;
+        return "";
 
-box.classList.add("show");
+    }
 
 
-setTimeout(
-()=>{
-box.classList.remove("show");
-},
-5000
-);
+    return String(value)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
 
 }
 
 
-/* ==========================================
-   UTILS
-========================================== */
 
-function escapeHTML(text){
-
-const div=
-document.createElement("div");
-
-div.textContent=
-text ?? "";
-
-return div.innerHTML;
-
-}
-
-
-function outsideClose(
-event,
-id,
-fn
-){
-
-if(event.target.id===id){
-
-fn();
-
-}
-
-}
-
-
-/* ==========================================
-   ESC
-========================================== */
+/* =========================================
+   ESC — ЗАКРЫТИЕ ОКОН
+========================================= */
 
 document.addEventListener(
-"keydown",
-(e)=>{
+    "keydown",
+    function(event) {
 
-if(e.key==="Escape"){
+        if (event.key !== "Escape") {
+            return;
+        }
 
-closeAuth();
 
-closeApplication();
+        document
+            .querySelectorAll(".modal.active")
+            .forEach(modal => {
 
-closeMyApplications();
+                modal.classList.remove("active");
 
-closeAdminPanel();
+            });
 
-}
+    }
+);
+
+
+
+/* =========================================
+   КЛИК ПО ФОНУ
+========================================= */
+
+document
+.querySelectorAll(".modal")
+.forEach(modal => {
+
+    modal.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === modal
+            ) {
+
+                modal.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
 
 });
 
 
-/* ==========================================
-   AUTH STATE
-========================================== */
+
+/* =========================================
+   АВТОМАТИЧЕСКАЯ ПРОВЕРКА ВХОДА
+========================================= */
 
 supabaseClient.auth.onAuthStateChange(
-(_event,session)=>{
+    async function(event, session) {
 
-currentUser=
-session?.user || null;
+        currentUser =
+            session?.user || null;
 
-updateHeader();
+        await updateInterface();
 
-}
+    }
 );
 
 
-/* ==========================================
-   START
-========================================== */
 
-checkAuth();
+/* =========================================
+   ПЕРВЫЙ ЗАПУСК
+========================================= */
+
+updateInterface();
 
 </script>
 
