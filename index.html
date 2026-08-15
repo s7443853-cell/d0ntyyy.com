@@ -33,6 +33,7 @@
             top: 0;
             left: 0;
             width: 100%;
+            height: 70px;
             z-index: 1000;
 
             background: rgba(8, 9, 13, 0.88);
@@ -43,9 +44,8 @@
 
         nav {
             max-width: 1200px;
+            height: 70px;
             margin: auto;
-
-            min-height: 70px;
             padding: 0 25px;
 
             display: flex;
@@ -54,7 +54,7 @@
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 900;
             letter-spacing: 1px;
         }
@@ -63,28 +63,17 @@
             color: #5865f2;
         }
 
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-btn {
-            border: none;
-            background: transparent;
-
+        .discord-link {
             color: #aaa;
+            text-decoration: none;
 
             padding: 10px 15px;
             border-radius: 10px;
 
-            cursor: pointer;
-
-            font-size: 15px;
-
             transition: 0.2s;
         }
 
-        .nav-btn:hover {
+        .discord-link:hover {
             color: #fff;
             background: rgba(88,101,242,0.15);
         }
@@ -97,7 +86,7 @@
         .hero {
             min-height: 100vh;
 
-            padding: 130px 20px 70px;
+            padding: 120px 20px 70px;
 
             display: flex;
             align-items: center;
@@ -109,36 +98,34 @@
                 radial-gradient(
                     circle at 50% 35%,
                     rgba(88,101,242,0.22),
-                    transparent 38%
+                    transparent 40%
                 ),
                 #08090d;
         }
 
-        .hero-content {
+        .container {
             width: 100%;
-            max-width: 950px;
+            max-width: 1050px;
         }
 
         .hero h1 {
             font-size: clamp(42px, 7vw, 75px);
-
+            line-height: 1.05;
             font-weight: 900;
 
-            line-height: 1.05;
-
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .hero h1 span {
             color: #5865f2;
         }
 
-        .hero p {
+        .description {
             color: #999;
-
             font-size: 19px;
+            line-height: 1.6;
 
-            margin-bottom: 45px;
+            margin-bottom: 50px;
         }
 
 
@@ -158,11 +145,11 @@
         .vacancy {
             background: #101218;
 
-            border: 1px solid #1e222d;
+            border: 1px solid #1d2029;
 
             border-radius: 18px;
 
-            padding: 28px 18px;
+            padding: 30px 18px;
 
             cursor: pointer;
 
@@ -179,20 +166,33 @@
         }
 
         .vacancy-icon {
-            font-size: 40px;
-
+            font-size: 45px;
             margin-bottom: 15px;
         }
 
         .vacancy h2 {
             font-size: 21px;
-
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .vacancy p {
             color: #888;
+            font-size: 14px;
+            line-height: 1.5;
+        }
 
+        .apply-button {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 11px 18px;
+
+            background: #5865f2;
+
+            border-radius: 10px;
+
+            font-weight: 700;
             font-size: 14px;
         }
 
@@ -205,12 +205,11 @@
             display: none;
 
             position: fixed;
+            inset: 0;
 
             z-index: 2000;
 
-            inset: 0;
-
-            background: rgba(0,0,0,0.78);
+            background: rgba(0,0,0,0.8);
 
             backdrop-filter: blur(8px);
 
@@ -228,8 +227,7 @@
             position: relative;
 
             width: 100%;
-
-            max-width: 620px;
+            max-width: 650px;
 
             max-height: 90vh;
 
@@ -253,32 +251,26 @@
 
             from {
                 opacity: 0;
-
-                transform:
-                    translateY(20px)
-                    scale(0.97);
+                transform: translateY(20px) scale(0.97);
             }
 
             to {
                 opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
+                transform: translateY(0) scale(1);
             }
+
         }
 
-        .close {
+        .close-button {
             position: absolute;
 
-            right: 15px;
             top: 12px;
+            right: 15px;
 
             width: 36px;
             height: 36px;
 
             border: none;
-
             border-radius: 50%;
 
             background: #1b1e27;
@@ -288,17 +280,18 @@
             font-size: 23px;
 
             cursor: pointer;
+
+            transition: 0.2s;
         }
 
-        .close:hover {
+        .close-button:hover {
             background: #5865f2;
-
-            color: white;
+            color: #fff;
         }
 
 
         /* =========================
-           ЗАГОЛОВОК ФОРМЫ
+           ФОРМА
         ========================= */
 
         .modal-title {
@@ -313,18 +306,13 @@
             color: #5865f2;
         }
 
-        .modal-subtitle {
+        .modal-description {
             text-align: center;
 
             color: #777;
 
             margin-bottom: 30px;
         }
-
-
-        /* =========================
-           FORM
-        ========================= */
 
         .form-group {
             margin-bottom: 20px;
@@ -333,9 +321,10 @@
         .form-group label {
             display: block;
 
+            font-size: 15px;
             font-weight: 700;
 
-            font-size: 15px;
+            line-height: 1.4;
 
             margin-bottom: 8px;
         }
@@ -348,20 +337,19 @@
         textarea {
             width: 100%;
 
-            background: #181a22;
-
-            border: 1px solid #292d3a;
-
-            color: white;
+            padding: 13px 14px;
 
             border-radius: 11px;
 
-            padding: 13px 14px;
+            border: 1px solid #292d3a;
+
+            background: #181a22;
+
+            color: #fff;
 
             outline: none;
 
             font-family: inherit;
-
             font-size: 15px;
 
             transition: 0.2s;
@@ -369,7 +357,6 @@
 
         textarea {
             min-height: 110px;
-
             resize: vertical;
         }
 
@@ -387,45 +374,40 @@
             color: #666;
         }
 
-        .submit-btn {
+        .submit-button {
             width: 100%;
-
-            border: none;
-
-            border-radius: 12px;
 
             padding: 15px;
 
+            border: none;
+            border-radius: 12px;
+
             background: #5865f2;
 
-            color: white;
-
-            font-weight: 700;
+            color: #fff;
 
             font-size: 16px;
+            font-weight: 700;
 
             cursor: pointer;
 
-            transition: 0.25s;
+            transition: 0.2s;
         }
 
-        .submit-btn:hover {
+        .submit-button:hover {
             background: #4752c4;
-
             transform: translateY(-2px);
         }
 
-        .submit-btn:disabled {
+        .submit-button:disabled {
             opacity: 0.6;
-
             cursor: not-allowed;
-
             transform: none;
         }
 
 
         /* =========================
-           SUCCESS
+           УСПЕШНАЯ ОТПРАВКА
         ========================= */
 
         .success {
@@ -433,7 +415,7 @@
 
             text-align: center;
 
-            padding: 30px 10px;
+            padding: 40px 10px;
         }
 
         .success.active {
@@ -447,11 +429,12 @@
         }
 
         .success h2 {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .success p {
             color: #999;
+            line-height: 1.6;
         }
 
 
@@ -466,8 +449,7 @@
 
             color: #555;
 
-            border-top:
-                1px solid #15171e;
+            border-top: 1px solid #15171e;
         }
 
         footer strong {
@@ -479,25 +461,16 @@
            АДАПТИВ
         ========================= */
 
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
 
             .vacancies {
                 grid-template-columns:
                     repeat(2, 1fr);
             }
 
-            nav {
-                padding: 0 15px;
-            }
-
         }
 
-
         @media (max-width: 600px) {
-
-            .nav-buttons {
-                display: none;
-            }
 
             .hero {
                 padding-top: 100px;
@@ -505,6 +478,10 @@
 
             .vacancies {
                 grid-template-columns: 1fr;
+            }
+
+            .discord-link {
+                display: none;
             }
 
             .modal-content {
@@ -536,26 +513,14 @@
             d0nt<span>yyy</span>
         </div>
 
-        <div class="nav-buttons">
-
-            <button
-                class="nav-btn"
-                onclick="scrollToVacancies()"
-            >
-                Вакансии
-            </button>
-
-            <button
-                class="nav-btn"
-                onclick="window.open(
-                    'https://discord.gg/J6bAjaFdqs',
-                    '_blank'
-                )"
-            >
-                Discord
-            </button>
-
-        </div>
+        <a
+            class="discord-link"
+            href="https://discord.gg/J6bAjaFdqs"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            💬 Discord
+        </a>
 
     </nav>
 
@@ -571,36 +536,29 @@
 
     <section class="hero">
 
-        <div class="hero-content">
+        <div class="container">
 
             <h1>
-                Подай заявку<br>
-                в <span>d0ntyyy</span>
+                Вступай в команду<br>
+                <span>d0ntyyy</span>
             </h1>
 
-            <p>
+            <p class="description">
                 Выбери вакансию, ответь на вопросы
-                и отправь свою заявку.
+                и отправь заявку.
             </p>
 
 
-            <!-- =========================
-                 ВАКАНСИИ
-            ========================= -->
-
-            <div
-                class="vacancies"
-                id="vacancies"
-            >
+            <div class="vacancies">
 
 
-                <!-- МОДЕРАТОР -->
+                <!-- =====================
+                     МОДЕРАТОР
+                ====================== -->
 
                 <div
                     class="vacancy"
-                    onclick="
-                        openApplication('Модератор')
-                    "
+                    onclick="openApplication('Модератор')"
                 >
 
                     <div class="vacancy-icon">
@@ -613,20 +571,26 @@
 
                     <p>
                         Следить за порядком
-                        на сервере
+                        и поддерживать
+                        комфортную атмосферу
+                        на сервере.
                     </p>
+
+                    <div class="apply-button">
+                        Подать заявку
+                    </div>
 
                 </div>
 
 
 
-                <!-- МЕДИА -->
+                <!-- =====================
+                     МЕДИА
+                ====================== -->
 
                 <div
                     class="vacancy"
-                    onclick="
-                        openApplication('Медиа')
-                    "
+                    onclick="openApplication('Медиа')"
                 >
 
                     <div class="vacancy-icon">
@@ -638,21 +602,26 @@
                     </h2>
 
                     <p>
-                        Создание контента
-                        и продвижение сервера
+                        Создание контента,
+                        TikTok и продвижение
+                        сервера.
                     </p>
+
+                    <div class="apply-button">
+                        Подать заявку
+                    </div>
 
                 </div>
 
 
 
-                <!-- ХЕЛПЕР -->
+                <!-- =====================
+                     ХЕЛПЕР
+                ====================== -->
 
                 <div
                     class="vacancy"
-                    onclick="
-                        openApplication('Хелпер')
-                    "
+                    onclick="openApplication('Хелпер')"
                 >
 
                     <div class="vacancy-icon">
@@ -665,20 +634,25 @@
 
                     <p>
                         Помощь участникам
-                        сервера
+                        и ответы
+                        на вопросы.
                     </p>
+
+                    <div class="apply-button">
+                        Подать заявку
+                    </div>
 
                 </div>
 
 
 
-                <!-- АДМИНИСТРАТОР -->
+                <!-- =====================
+                     АДМИНИСТРАТОР
+                ====================== -->
 
                 <div
                     class="vacancy"
-                    onclick="
-                        openApplication('Администратор')
-                    "
+                    onclick="openApplication('Администратор')"
                 >
 
                     <div class="vacancy-icon">
@@ -690,9 +664,14 @@
                     </h2>
 
                     <p>
-                        Управление сервером
-                        и персоналом
+                        Управление сервером,
+                        персоналом и
+                        внутренними процессами.
                     </p>
+
+                    <div class="apply-button">
+                        Подать заявку
+                    </div>
 
                 </div>
 
@@ -722,7 +701,7 @@
     >
 
         <button
-            class="close"
+            class="close-button"
             onclick="closeApplication()"
         >
             ×
@@ -731,9 +710,7 @@
 
         <!-- ФОРМА -->
 
-        <div
-            id="applicationFormContainer"
-        >
+        <div id="formContainer">
 
             <h2
                 class="modal-title"
@@ -742,21 +719,19 @@
                 Заявка
             </h2>
 
-            <p class="modal-subtitle">
-                Заполни все поля
+            <p class="modal-description">
+                Ответьте на все вопросы.
             </p>
 
 
             <form id="applicationForm">
 
-                <div
-                    id="questionsContainer"
-                ></div>
+                <div id="questionsContainer"></div>
 
 
                 <button
                     type="submit"
-                    class="submit-btn"
+                    class="submit-button"
                     id="submitButton"
                 >
                     Отправить заявку
@@ -765,7 +740,6 @@
             </form>
 
         </div>
-
 
 
         <!-- УСПЕШНАЯ ОТПРАВКА -->
@@ -784,10 +758,9 @@
             </h2>
 
             <p>
-                Спасибо!
-                Администрация рассмотрит
-                вашу заявку и свяжется
-                с вами.
+                Спасибо за заявку!<br>
+                Администрация рассмотрит её
+                и свяжется с вами.
             </p>
 
         </div>
@@ -804,11 +777,9 @@
 
 <footer>
 
-    <p>
-        © 2026
-        <strong>d0ntyyy</strong>.
-        Все права защищены.
-    </p>
+    © 2026
+    <strong>d0ntyyy</strong>.
+    Все права защищены.
 
 </footer>
 
@@ -830,17 +801,14 @@
     const SUPABASE_URL =
         "https://yivimzkrxqlegnkekdke.supabase.co";
 
-
     const SUPABASE_KEY =
         "sb_publishable_SU1vTlmv8gjqX2jNN6D8cw_Cuvxio7W";
-
 
     const supabaseClient =
         window.supabase.createClient(
             SUPABASE_URL,
             SUPABASE_KEY
         );
-
 
 
     /* =====================================
@@ -869,22 +837,10 @@
             },
 
             {
-                name: "name",
-
-                label:
-                    "Как вас зовут?",
-
-                type: "text",
-
-                placeholder:
-                    "Ваше имя"
-            },
-
-            {
                 name: "time",
 
                 label:
-                    "Сколько времени вы можете уделять серверу?",
+                    "Сколько времени вы можете уделять d0ntyyy?",
 
                 type: "text",
 
@@ -896,7 +852,7 @@
                 name: "experience",
 
                 label:
-                    "Был ли у вас опыт работы модератором?",
+                    "Есть ли у вас опыт работы модератором?",
 
                 type: "textarea",
 
@@ -913,7 +869,7 @@
                 type: "textarea",
 
                 placeholder:
-                    "Напишите причину"
+                    "Напишите ваш ответ"
             },
 
             {
@@ -925,7 +881,7 @@
                 type: "text",
 
                 placeholder:
-                    "Например: @username"
+                    "@username"
             }
 
         ],
@@ -951,18 +907,6 @@
             },
 
             {
-                name: "name",
-
-                label:
-                    "Как вас зовут?",
-
-                type: "text",
-
-                placeholder:
-                    "Ваше имя"
-            },
-
-            {
                 name: "tiktok",
 
                 label:
@@ -971,26 +915,26 @@
                 type: "url",
 
                 placeholder:
-                    "https://tiktok.com/@..."
+                    "https://www.tiktok.com/@username"
             },
 
             {
                 name: "youtube",
 
                 label:
-                    "Ссылка на YouTube, если есть?",
+                    "Ваша ссылка на YouTube?",
 
                 type: "url",
 
                 placeholder:
-                    "https://youtube.com/..."
+                    "Если нет — напишите «нет»"
             },
 
             {
                 name: "followers",
 
                 label:
-                    "Сколько у вас подписчиков в TikTok?",
+                    "Сколько у вас подписчиков?",
 
                 type: "text",
 
@@ -1014,7 +958,7 @@
                 name: "time",
 
                 label:
-                    "Сколько времени готовы уделять серверу?",
+                    "Сколько времени вы можете уделять d0ntyyy?",
 
                 type: "text",
 
@@ -1031,7 +975,7 @@
                 type: "text",
 
                 placeholder:
-                    "Например: @username"
+                    "@username"
             }
 
         ],
@@ -1057,22 +1001,10 @@
             },
 
             {
-                name: "name",
-
-                label:
-                    "Как вас зовут?",
-
-                type: "text",
-
-                placeholder:
-                    "Ваше имя"
-            },
-
-            {
                 name: "time",
 
                 label:
-                    "Сколько времени вы можете уделять серверу?",
+                    "Сколько времени вы можете уделять d0ntyyy?",
 
                 type: "text",
 
@@ -1089,19 +1021,19 @@
                 type: "textarea",
 
                 placeholder:
-                    "Напишите причину"
+                    "Напишите ваш ответ"
             },
 
             {
                 name: "experience",
 
                 label:
-                    "Был ли опыт помощи или модерации на других серверах?",
+                    "Есть ли у вас опыт помощи на Discord-серверах?",
 
                 type: "textarea",
 
                 placeholder:
-                    "Расскажите о вашем опыте"
+                    "Расскажите о своём опыте"
             },
 
             {
@@ -1113,7 +1045,7 @@
                 type: "text",
 
                 placeholder:
-                    "Например: @username"
+                    "@username"
             }
 
         ],
@@ -1122,6 +1054,7 @@
 
         /* =========================
            АДМИНИСТРАТОР
+           ВОПРОСЫ КАК У МОДЕРАТОРА
         ========================= */
 
         "Администратор": [
@@ -1139,58 +1072,34 @@
             },
 
             {
-                name: "name",
-
-                label:
-                    "Как вас зовут?",
-
-                type: "text",
-
-                placeholder:
-                    "Ваше имя"
-            },
-
-            {
                 name: "time",
 
                 label:
-                    "Сколько времени вы можете уделять серверу?",
+                    "Сколько времени вы можете уделять d0ntyyy?",
 
                 type: "text",
 
                 placeholder:
-                    "Например: 4-5 часов в день"
+                    "Например: 3-4 часа в день"
             },
 
             {
                 name: "experience",
 
                 label:
-                    "Был ли у вас опыт работы администратором?",
+                    "Есть ли у вас опыт работы модератором?",
 
                 type: "textarea",
 
                 placeholder:
-                    "Расскажите о вашем опыте"
+                    "Расскажите о своём опыте"
             },
 
             {
                 name: "reason",
 
                 label:
-                    "Почему вы хотите стать администратором?",
-
-                type: "textarea",
-
-                placeholder:
-                    "Напишите причину"
-            },
-
-            {
-                name: "duties",
-
-                label:
-                    "Какие обязанности администратора вы считаете главными?",
+                    "Почему вы хотите стать модератором?",
 
                 type: "textarea",
 
@@ -1207,13 +1116,12 @@
                 type: "text",
 
                 placeholder:
-                    "Например: @username"
+                    "@username"
             }
 
         ]
 
     };
-
 
 
     /* =====================================
@@ -1223,9 +1131,8 @@
     let selectedVacancy = "";
 
 
-
     /* =====================================
-       ОТКРЫТЬ ЗАЯВКУ
+       ОТКРЫТИЕ ЗАЯВКИ
     ===================================== */
 
     function openApplication(vacancy) {
@@ -1336,9 +1243,8 @@
     }
 
 
-
     /* =====================================
-       ЗАКРЫТЬ ЗАЯВКУ
+       ЗАКРЫТИЕ
     ===================================== */
 
     function closeApplication() {
@@ -1357,11 +1263,6 @@
     }
 
 
-
-    /* =====================================
-       ЗАКРЫТИЕ ПО КЛИКУ ВНЕ ОКНА
-    ===================================== */
-
     function closeOutside(event) {
 
         if (
@@ -1376,9 +1277,8 @@
     }
 
 
-
     /* =====================================
-       ОТПРАВКА ЗАЯВКИ
+       ОТПРАВКА ЗАЯВКИ В SUPABASE
     ===================================== */
 
     document
@@ -1437,7 +1337,10 @@
                                         selectedVacancy,
 
                                     answers:
-                                        answers
+                                        answers,
+
+                                    status:
+                                        "new"
                                 }
 
                             ]);
@@ -1446,13 +1349,12 @@
                     if (error) {
 
                         console.error(
-                            "Supabase error:",
                             error
                         );
 
 
                         alert(
-                            "Не удалось отправить заявку.\n\n" +
+                            "Ошибка при отправке заявки:\n\n" +
                             error.message
                         );
 
@@ -1472,7 +1374,7 @@
 
                     document
                         .getElementById(
-                            "applicationFormContainer"
+                            "formContainer"
                         )
                         .style
                         .display =
@@ -1490,7 +1392,6 @@
                     this.reset();
 
                 }
-
 
                 catch (error) {
 
@@ -1517,7 +1418,6 @@
         );
 
 
-
     /* =====================================
        ESC
     ===================================== */
@@ -1537,27 +1437,6 @@
 
         }
     );
-
-
-
-    /* =====================================
-       ПРОКРУТКА К ВАКАНСИЯМ
-    ===================================== */
-
-    function scrollToVacancies() {
-
-        document
-            .getElementById(
-                "vacancies"
-            )
-            .scrollIntoView({
-
-                behavior:
-                    "smooth"
-
-            });
-
-    }
 
 </script>
 
