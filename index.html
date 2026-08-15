@@ -6,7 +6,15 @@
 <title>d0ntyyy — Заявки</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     font-family:Arial,Helvetica,sans-serif;
@@ -15,7 +23,11 @@ body{
     min-height:100vh;
 }
 
-button,input,textarea{font-family:inherit}
+button,
+input,
+textarea{
+    font-family:inherit;
+}
 
 header{
     position:fixed;
@@ -24,39 +36,45 @@ header{
     width:100%;
     height:70px;
     z-index:1000;
-    background:rgba(8,9,13,.9);
+    background:rgba(8,9,13,.92);
     backdrop-filter:blur(15px);
     border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 nav{
-    max-width:1200px;
+    max-width:1250px;
     height:70px;
     margin:auto;
-    padding:0 25px;
+    padding:0 20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:15px;
 }
 
 .logo{
     font-size:25px;
     font-weight:900;
+    white-space:nowrap;
 }
 
-.logo span{color:#5865f2}
+.logo span{
+    color:#5865f2;
+}
 
 .nav-right{
     display:flex;
     align-items:center;
-    gap:8px;
+    justify-content:flex-end;
+    gap:7px;
+    flex-wrap:wrap;
 }
 
 .nav-btn{
     border:0;
     background:transparent;
     color:#aaa;
-    padding:10px 14px;
+    padding:10px 13px;
     border-radius:10px;
     cursor:pointer;
     transition:.2s;
@@ -72,7 +90,18 @@ nav{
     color:#fff;
 }
 
-.nav-btn.primary:hover{background:#4752c4}
+.nav-btn.primary:hover{
+    background:#4752c4;
+}
+
+.admin-btn{
+    background:#7c3aed !important;
+    color:#fff !important;
+}
+
+.admin-btn:hover{
+    background:#6d28d9 !important;
+}
 
 .user-email{
     color:#aaa;
@@ -80,6 +109,7 @@ nav{
     max-width:180px;
     overflow:hidden;
     text-overflow:ellipsis;
+    white-space:nowrap;
 }
 
 .hero{
@@ -90,13 +120,17 @@ nav{
     justify-content:center;
     text-align:center;
     background:
-    radial-gradient(circle at 50% 35%,rgba(88,101,242,.22),transparent 40%),
+    radial-gradient(
+        circle at 50% 35%,
+        rgba(88,101,242,.23),
+        transparent 40%
+    ),
     #08090d;
 }
 
 .container{
     width:100%;
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
 }
 
@@ -107,7 +141,9 @@ nav{
     font-weight:900;
 }
 
-.hero h1 span{color:#5865f2}
+.hero h1 span{
+    color:#5865f2;
+}
 
 .hero p{
     color:#999;
@@ -174,12 +210,14 @@ nav{
     padding:20px;
 }
 
-.modal.active{display:flex}
+.modal.active{
+    display:flex;
+}
 
 .modal-content{
     position:relative;
     width:100%;
-    max-width:650px;
+    max-width:700px;
     max-height:90vh;
     overflow-y:auto;
     background:#101218;
@@ -187,6 +225,10 @@ nav{
     border-radius:20px;
     padding:35px;
     box-shadow:0 25px 80px rgba(0,0,0,.6);
+}
+
+.modal-content.large{
+    max-width:1000px;
 }
 
 .close{
@@ -201,6 +243,7 @@ nav{
     color:#aaa;
     font-size:23px;
     cursor:pointer;
+    z-index:5;
 }
 
 .close:hover{
@@ -214,7 +257,9 @@ nav{
     margin-bottom:8px;
 }
 
-.title span{color:#5865f2}
+.title span{
+    color:#5865f2;
+}
 
 .subtitle{
     text-align:center;
@@ -255,9 +300,12 @@ nav{
     line-height:1.4;
 }
 
-.required{color:#ff6262}
+.required{
+    color:#ff6262;
+}
 
-input,textarea{
+input,
+textarea{
     width:100%;
     padding:13px 14px;
     border-radius:11px;
@@ -273,7 +321,8 @@ textarea{
     resize:vertical;
 }
 
-input:focus,textarea:focus{
+input:focus,
+textarea:focus{
     border-color:#5865f2;
     box-shadow:0 0 0 3px rgba(88,101,242,.1);
 }
@@ -290,7 +339,9 @@ input:focus,textarea:focus{
     cursor:pointer;
 }
 
-.submit:hover{background:#4752c4}
+.submit:hover{
+    background:#4752c4;
+}
 
 .submit:disabled{
     opacity:.6;
@@ -305,7 +356,9 @@ input:focus,textarea:focus{
     font-size:14px;
 }
 
-.message.show{display:block}
+.message.show{
+    display:block;
+}
 
 .message.error{
     color:#ff7777;
@@ -335,11 +388,33 @@ input:focus,textarea:focus{
     margin-bottom:12px;
 }
 
-.application h3{margin-bottom:10px}
+.application h3{
+    margin-bottom:10px;
+}
 
 .application p{
     color:#aaa;
-    margin:5px 0;
+    margin:6px 0;
+    line-height:1.5;
+}
+
+.answer{
+    margin-top:12px;
+    padding:12px;
+    background:#101218;
+    border-radius:10px;
+}
+
+.answer b{
+    display:block;
+    color:#fff;
+    margin-bottom:5px;
+}
+
+.answer span{
+    color:#aaa;
+    white-space:pre-wrap;
+    word-break:break-word;
 }
 
 .status{
@@ -366,10 +441,92 @@ input:focus,textarea:focus{
     background:rgba(255,70,70,.12);
 }
 
+.admin-card{
+    background:#181a22;
+    border:1px solid #292d3a;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:15px;
+}
+
+.admin-card:hover{
+    border-color:#3a3f50;
+}
+
+.admin-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.admin-top h3{
+    font-size:19px;
+}
+
+.admin-date{
+    color:#666;
+    font-size:12px;
+    white-space:nowrap;
+}
+
+.admin-user{
+    color:#aaa;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.admin-actions{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+}
+
+.approve-btn,
+.reject-btn{
+    flex:1;
+    border:0;
+    padding:12px;
+    border-radius:10px;
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.approve-btn{
+    background:#16804a;
+}
+
+.approve-btn:hover{
+    background:#1aa35e;
+}
+
+.reject-btn{
+    background:#a93232;
+}
+
+.reject-btn:hover{
+    background:#c43d3d;
+}
+
+.approve-btn:disabled,
+.reject-btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
 .empty{
     text-align:center;
     color:#777;
-    padding:30px;
+    padding:35px 15px;
+}
+
+.loading{
+    text-align:center;
+    color:#777;
+    padding:35px;
 }
 
 .notification{
@@ -377,7 +534,7 @@ input:focus,textarea:focus{
     right:20px;
     bottom:20px;
     z-index:5000;
-    max-width:350px;
+    width:min(380px,calc(100% - 40px));
     background:#151820;
     border:1px solid #2a2e3b;
     border-radius:14px;
@@ -386,7 +543,9 @@ input:focus,textarea:focus{
     display:none;
 }
 
-.notification.show{display:block}
+.notification.show{
+    display:block;
+}
 
 .notification b{
     display:block;
@@ -396,6 +555,17 @@ input:focus,textarea:focus{
 .notification span{
     color:#aaa;
     font-size:14px;
+    line-height:1.4;
+}
+
+.admin-badge{
+    display:inline-block;
+    margin-left:7px;
+    padding:3px 7px;
+    border-radius:6px;
+    background:rgba(124,58,237,.18);
+    color:#a78bfa;
+    font-size:11px;
 }
 
 footer{
@@ -405,26 +575,48 @@ footer{
     border-top:1px solid #15171e;
 }
 
-footer strong{color:#5865f2}
-
-@media(max-width:950px){
-    .vacancies{grid-template-columns:repeat(2,1fr)}
+footer strong{
+    color:#5865f2;
 }
 
-@media(max-width:600px){
-    nav{padding:0 12px}
+@media(max-width:950px){
+    .vacancies{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
 
-    .user-email{display:none}
+@media(max-width:700px){
+    nav{
+        padding:0 10px;
+    }
+
+    .user-email{
+        display:none;
+    }
 
     .nav-btn{
         padding:8px 9px;
         font-size:12px;
     }
 
-    .vacancies{grid-template-columns:1fr}
+    .vacancies{
+        grid-template-columns:1fr;
+    }
 
     .modal-content{
         padding:30px 20px;
+    }
+
+    .admin-top{
+        flex-direction:column;
+    }
+
+    .admin-date{
+        white-space:normal;
+    }
+
+    .admin-actions{
+        flex-direction:column;
     }
 }
 </style>
@@ -433,6 +625,7 @@ footer strong{color:#5865f2}
 <body>
 
 <header>
+
 <nav>
 
 <div class="logo">
@@ -445,6 +638,15 @@ d0nt<span>yyy</span>
 class="user-email"
 id="userEmail"
 ></span>
+
+<button
+class="nav-btn admin-btn"
+id="adminBtn"
+onclick="openAdminPanel()"
+style="display:none"
+>
+👑 Админ-панель
+</button>
 
 <button
 class="nav-btn"
@@ -466,6 +668,7 @@ onclick="openAuth()"
 </div>
 
 </nav>
+
 </header>
 
 
@@ -499,9 +702,9 @@ onclick="openApplication('Модератор')"
 <h2>Модератор</h2>
 
 <p>
-Следить за порядком
-и поддерживать атмосферу
-на сервере.
+Следить за порядком,
+помогать участникам
+и поддерживать правила.
 </p>
 
 <div class="apply">
@@ -521,9 +724,9 @@ onclick="openApplication('Медиа')"
 <h2>Медиа</h2>
 
 <p>
-Создание контента,
-TikTok и продвижение
-сервера.
+Создание TikTok,
+YouTube и другого
+контента проекта.
 </p>
 
 <div class="apply">
@@ -543,8 +746,9 @@ onclick="openApplication('Хелпер')"
 <h2>Хелпер</h2>
 
 <p>
-Помощь участникам
-и ответы на вопросы.
+Помогать новым игрокам
+и отвечать на вопросы
+участников.
 </p>
 
 <div class="apply">
@@ -565,7 +769,8 @@ onclick="openApplication('Администратор')"
 
 <p>
 Управление сервером,
-персоналом и проектом.
+персоналом и развитием
+проекта.
 </p>
 
 <div class="apply">
@@ -584,7 +789,7 @@ onclick="openApplication('Администратор')"
 </main>
 
 
-<!-- АВТОРИЗАЦИЯ -->
+<!-- AUTH -->
 
 <div
 class="modal"
@@ -597,7 +802,12 @@ class="modal-content"
 onclick="event.stopPropagation()"
 >
 
-<button class="close" onclick="closeAuth()">×</button>
+<button
+class="close"
+onclick="closeAuth()"
+>
+×
+</button>
 
 
 <div class="tabs">
@@ -671,7 +881,10 @@ required
 </div>
 
 
-<button class="submit">
+<button
+class="submit"
+type="submit"
+>
 Войти
 </button>
 
@@ -745,7 +958,10 @@ required
 </div>
 
 
-<button class="submit">
+<button
+class="submit"
+type="submit"
+>
 Зарегистрироваться
 </button>
 
@@ -758,7 +974,7 @@ required
 </div>
 
 
-<!-- ЗАЯВКА -->
+<!-- APPLICATION -->
 
 <div
 class="modal"
@@ -771,7 +987,12 @@ class="modal-content"
 onclick="event.stopPropagation()"
 >
 
-<button class="close" onclick="closeApplication()">×</button>
+<button
+class="close"
+onclick="closeApplication()"
+>
+×
+</button>
 
 
 <div id="applicationFormBox">
@@ -787,6 +1008,10 @@ id="applicationTitle"
 Ответьте на все вопросы.
 </p>
 
+<div
+class="message"
+id="applicationMessage"
+></div>
 
 <form id="applicationForm">
 
@@ -795,6 +1020,7 @@ id="applicationTitle"
 <button
 class="submit"
 id="sendApplication"
+type="submit"
 >
 Отправить заявку
 </button>
@@ -821,7 +1047,7 @@ style="display:none"
 <p style="color:#888;margin-top:10px">
 Заявка отправлена на рассмотрение.
 <br>
-Статус можно посмотреть в «Мои заявки».
+Следить за статусом можно в «Мои заявки».
 </p>
 
 </div>
@@ -831,7 +1057,7 @@ style="display:none"
 </div>
 
 
-<!-- МОИ ЗАЯВКИ -->
+<!-- MY APPLICATIONS -->
 
 <div
 class="modal"
@@ -866,7 +1092,53 @@ onclick="closeMyApplications()"
 </div>
 
 
-<!-- УВЕДОМЛЕНИЕ -->
+<!-- ADMIN PANEL -->
+
+<div
+class="modal"
+id="adminModal"
+onclick="outsideClose(event,'adminModal',closeAdminPanel)"
+>
+
+<div
+class="modal-content large"
+onclick="event.stopPropagation()"
+>
+
+<button
+class="close"
+onclick="closeAdminPanel()"
+>
+×
+</button>
+
+<h2 class="title">
+👑 <span>Админ-панель</span>
+</h2>
+
+<p class="subtitle">
+Управление заявками пользователей.
+</p>
+
+<div
+class="message"
+id="adminMessage"
+></div>
+
+<div id="adminApplications">
+
+<div class="loading">
+Загрузка заявок...
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NOTIFICATION -->
 
 <div
 class="notification"
@@ -895,9 +1167,9 @@ id="notification"
 
 <script>
 
-/* =========================================
+/* ==========================================
    SUPABASE
-========================================= */
+========================================== */
 
 const SUPABASE_URL =
 "https://yivimzkrxqlegnkekdke.supabase.co";
@@ -912,96 +1184,217 @@ SUPABASE_KEY
 );
 
 
-/* =========================================
-   ПЕРЕМЕННЫЕ
-========================================= */
+/*
+   ВАЖНО:
+   Здесь укажи email СВОЕГО основного аккаунта.
 
-let currentUser = null;
-let selectedVacancy = "";
+   Пока оставлено пустым.
+   После входа обычного пользователя
+   админская кнопка не показывается.
+
+   Впиши сюда email своего аккаунта:
+*/
+
+const ADMIN_EMAIL =
+"";
 
 
-/* =========================================
+let currentUser=null;
+let selectedVacancy="";
+
+
+/* ==========================================
    ВОПРОСЫ
-========================================= */
+========================================== */
 
-const vacancyQuestions = {
+const vacancyQuestions={
 
 "Модератор":[
 
-["age","Сколько вам лет?","number","Введите ваш возраст"],
+[
+"age",
+"Сколько вам лет?",
+"number",
+"Введите ваш возраст"
+],
 
-["time","Сколько времени вы можете уделять d0ntyyy?","text","Например: 3-4 часа в день"],
+[
+"time",
+"Сколько времени вы можете уделять d0ntyyy?",
+"text",
+"Например: 3-4 часа в день"
+],
 
-["experience","Есть ли у вас опыт работы модератором?","textarea","Расскажите о своём опыте"],
+[
+"experience",
+"Есть ли у вас опыт работы модератором?",
+"textarea",
+"Расскажите о своём опыте"
+],
 
-["reason","Почему вы хотите стать модератором?","textarea","Напишите ваш ответ"],
+[
+"reason",
+"Почему вы хотите стать модератором?",
+"textarea",
+"Напишите ваш ответ"
+],
 
-["contact","Ваш Discord/Telegram для связи?","text","@username"]
+[
+"contact",
+"Ваш Discord/Telegram для связи?",
+"text",
+"@username"
+]
 
 ],
 
 
 "Медиа":[
 
-["age","Сколько вам лет?","number","Введите ваш возраст"],
+[
+"age",
+"Сколько вам лет?",
+"number",
+"Введите ваш возраст"
+],
 
-["tiktok","Ваша ссылка на TikTok?","url","https://www.tiktok.com/@username"],
+[
+"tiktok",
+"Ваша ссылка на TikTok?",
+"url",
+"https://www.tiktok.com/@username"
+],
 
-["youtube","Ваша ссылка на YouTube?","url","Если нет — напишите «нет»"],
+[
+"youtube",
+"Ваша ссылка на YouTube?",
+"url",
+"Если нет — напишите «нет»"
+],
 
-["followers","Сколько у вас подписчиков?","text","Например: 5000"],
+[
+"followers",
+"Сколько у вас подписчиков?",
+"text",
+"Например: 5000"
+],
 
-["content","Какой контент вы создаёте?","textarea","Расскажите о вашем контенте"],
+[
+"content",
+"Какой контент вы создаёте?",
+"textarea",
+"Расскажите о вашем контенте"
+],
 
-["time","Сколько времени вы можете уделять d0ntyyy?","text","Например: 2-3 часа в день"],
+[
+"time",
+"Сколько времени вы можете уделять d0ntyyy?",
+"text",
+"Например: 2-3 часа в день"
+],
 
-["contact","Ваш Discord/Telegram для связи?","text","@username"]
+[
+"contact",
+"Ваш Discord/Telegram для связи?",
+"text",
+"@username"
+]
 
 ],
 
 
 "Хелпер":[
 
-["age","Сколько вам лет?","number","Введите ваш возраст"],
+[
+"age",
+"Сколько вам лет?",
+"number",
+"Введите ваш возраст"
+],
 
-["time","Сколько времени вы можете уделять d0ntyyy?","text","Например: 2-3 часа в день"],
+[
+"time",
+"Сколько времени вы можете уделять d0ntyyy?",
+"text",
+"Например: 2-3 часа в день"
+],
 
-["reason","Почему вы хотите стать хелпером?","textarea","Напишите ваш ответ"],
+[
+"reason",
+"Почему вы хотите стать хелпером?",
+"textarea",
+"Напишите ваш ответ"
+],
 
-["experience","Есть ли у вас опыт помощи на Discord-серверах?","textarea","Расскажите о своём опыте"],
+[
+"experience",
+"Есть ли у вас опыт помощи на Discord-серверах?",
+"textarea",
+"Расскажите о своём опыте"
+],
 
-["contact","Ваш Discord/Telegram для связи?","text","@username"]
+[
+"contact",
+"Ваш Discord/Telegram для связи?",
+"text",
+"@username"
+]
 
 ],
 
 
 "Администратор":[
 
-["age","Сколько вам лет?","number","Введите ваш возраст"],
+[
+"age",
+"Сколько вам лет?",
+"number",
+"Введите ваш возраст"
+],
 
-["time","Сколько времени вы можете уделять d0ntyyy?","text","Например: 3-4 часа в день"],
+[
+"time",
+"Сколько времени вы можете уделять d0ntyyy?",
+"text",
+"Например: 3-4 часа в день"
+],
 
-["experience","Есть ли у вас опыт работы модератором?","textarea","Расскажите о своём опыте"],
+[
+"experience",
+"Есть ли у вас опыт работы модератором?",
+"textarea",
+"Расскажите о своём опыте"
+],
 
-["reason","Почему вы хотите стать администратором?","textarea","Напишите ваш ответ"],
+[
+"reason",
+"Почему вы хотите стать администратором?",
+"textarea",
+"Напишите ваш ответ"
+],
 
-["contact","Ваш Discord/Telegram для связи?","text","@username"]
+[
+"contact",
+"Ваш Discord/Telegram для связи?",
+"text",
+"@username"
+]
 
 ]
 
 };
 
 
-/* =========================================
+/* ==========================================
    AUTH
-========================================= */
+========================================== */
 
 async function checkAuth(){
 
-const result =
+const result=
 await supabaseClient.auth.getUser();
 
-currentUser =
+currentUser=
 result.data.user || null;
 
 updateHeader();
@@ -1009,15 +1402,34 @@ updateHeader();
 }
 
 
+function isAdmin(){
+
+if(!currentUser){
+return false;
+}
+
+return (
+ADMIN_EMAIL &&
+currentUser.email &&
+currentUser.email.toLowerCase()===
+ADMIN_EMAIL.toLowerCase()
+);
+
+}
+
+
 function updateHeader(){
 
-const authBtn =
+const authBtn=
 document.getElementById("authBtn");
 
-const myBtn =
+const myBtn=
 document.getElementById("myApplicationsBtn");
 
-const email =
+const adminBtn=
+document.getElementById("adminBtn");
+
+const email=
 document.getElementById("userEmail");
 
 
@@ -1032,6 +1444,17 @@ myBtn.style.display="block";
 email.textContent=
 currentUser.email || "";
 
+
+if(isAdmin()){
+
+adminBtn.style.display="block";
+
+}else{
+
+adminBtn.style.display="none";
+
+}
+
 }else{
 
 authBtn.textContent="Войти";
@@ -1040,6 +1463,8 @@ authBtn.onclick=openAuth;
 
 myBtn.style.display="none";
 
+adminBtn.style.display="none";
+
 email.textContent="";
 
 }
@@ -1047,9 +1472,9 @@ email.textContent="";
 }
 
 
-/* =========================================
+/* ==========================================
    AUTH WINDOW
-========================================= */
+========================================== */
 
 function openAuth(){
 
@@ -1058,6 +1483,7 @@ document
 .classList.add("active");
 
 }
+
 
 function closeAuth(){
 
@@ -1069,48 +1495,61 @@ clearAuthMessage();
 
 }
 
+
 function showLogin(){
 
-document.getElementById("loginBox").style.display="block";
+document.getElementById("loginBox")
+.style.display="block";
 
-document.getElementById("registerBox").style.display="none";
+document.getElementById("registerBox")
+.style.display="none";
 
-document.getElementById("loginTab").classList.add("active");
+document.getElementById("loginTab")
+.classList.add("active");
 
-document.getElementById("registerTab").classList.remove("active");
+document.getElementById("registerTab")
+.classList.remove("active");
 
 clearAuthMessage();
 
 }
+
 
 function showRegister(){
 
-document.getElementById("loginBox").style.display="none";
+document.getElementById("loginBox")
+.style.display="none";
 
-document.getElementById("registerBox").style.display="block";
+document.getElementById("registerBox")
+.style.display="block";
 
-document.getElementById("loginTab").classList.remove("active");
+document.getElementById("loginTab")
+.classList.remove("active");
 
-document.getElementById("registerTab").classList.add("active");
+document.getElementById("registerTab")
+.classList.add("active");
 
 clearAuthMessage();
 
 }
 
+
 function authMessage(text,type){
 
-const box =
+const box=
 document.getElementById("authMessage");
 
 box.textContent=text;
 
-box.className="message show "+type;
+box.className=
+"message show "+type;
 
 }
 
+
 function clearAuthMessage(){
 
-const box =
+const box=
 document.getElementById("authMessage");
 
 box.textContent="";
@@ -1120,24 +1559,33 @@ box.className="message";
 }
 
 
-/* =========================================
-   REGISTRATION
-========================================= */
+/* ==========================================
+   REGISTER
+========================================== */
 
 document
 .getElementById("registerForm")
-.addEventListener("submit",async(e)=>{
+.addEventListener(
+"submit",
+async(e)=>{
 
 e.preventDefault();
 
-const email =
-document.getElementById("registerEmail").value.trim();
+const email=
+document
+.getElementById("registerEmail")
+.value
+.trim();
 
-const password =
-document.getElementById("registerPassword").value;
+const password=
+document
+.getElementById("registerPassword")
+.value;
 
-const password2 =
-document.getElementById("registerPassword2").value;
+const password2=
+document
+.getElementById("registerPassword2")
+.value;
 
 
 if(password.length<6){
@@ -1164,11 +1612,11 @@ return;
 }
 
 
-const {data,error} =
+const {data,error}=
 await supabaseClient.auth.signUp({
 
-email:email,
-password:password
+email,
+password
 
 });
 
@@ -1207,31 +1655,39 @@ authMessage(
 
 }
 
-});
+}
+);
 
 
-/* =========================================
+/* ==========================================
    LOGIN
-========================================= */
+========================================== */
 
 document
 .getElementById("loginForm")
-.addEventListener("submit",async(e)=>{
+.addEventListener(
+"submit",
+async(e)=>{
 
 e.preventDefault();
 
-const email =
-document.getElementById("loginEmail").value.trim();
+const email=
+document
+.getElementById("loginEmail")
+.value
+.trim();
 
-const password =
-document.getElementById("loginPassword").value;
+const password=
+document
+.getElementById("loginPassword")
+.value;
 
 
-const {data,error} =
+const {data,error}=
 await supabaseClient.auth.signInWithPassword({
 
-email:email,
-password:password
+email,
+password
 
 });
 
@@ -1256,15 +1712,16 @@ closeAuth();
 
 showNotification(
 "Вы вошли",
-"Добро пожаловать на сайт d0ntyyy!"
+"Добро пожаловать!"
 );
 
-});
+}
+);
 
 
-/* =========================================
+/* ==========================================
    LOGOUT
-========================================= */
+========================================== */
 
 async function logout(){
 
@@ -1276,15 +1733,15 @@ updateHeader();
 
 showNotification(
 "Вы вышли",
-"Вы успешно вышли из аккаунта."
+"Вы вышли из аккаунта."
 );
 
 }
 
 
-/* =========================================
-   APPLICATION
-========================================= */
+/* ==========================================
+   APPLICATION WINDOW
+========================================== */
 
 function openApplication(vacancy){
 
@@ -1323,29 +1780,29 @@ document
 document
 .getElementById("applicationTitle")
 .innerHTML=
-`Заявка на <span>${vacancy}</span>`;
+`Заявка на <span>${escapeHTML(vacancy)}</span>`;
 
 
-const container =
+const questions=
 document.getElementById("questions");
 
-container.innerHTML="";
+questions.innerHTML="";
 
 
 vacancyQuestions[vacancy].forEach(
 (q,index)=>{
 
-const field =
+const field=
 document.createElement("div");
 
 field.className="field";
 
 
-const label =
+const label=
 document.createElement("label");
 
 label.innerHTML=
-`${index+1}. ${q[1]}
+`${index+1}. ${escapeHTML(q[1])}
 <span class="required">*</span>`;
 
 
@@ -1357,11 +1814,13 @@ let input;
 
 if(q[2]==="textarea"){
 
-input=document.createElement("textarea");
+input=
+document.createElement("textarea");
 
 }else{
 
-input=document.createElement("input");
+input=
+document.createElement("input");
 
 input.type=q[2];
 
@@ -1377,7 +1836,7 @@ input.required=true;
 
 field.appendChild(input);
 
-container.appendChild(field);
+questions.appendChild(field);
 
 }
 
@@ -1395,13 +1854,15 @@ document
 }
 
 
-/* =========================================
+/* ==========================================
    SEND APPLICATION
-========================================= */
+========================================== */
 
 document
 .getElementById("applicationForm")
-.addEventListener("submit",async(e)=>{
+.addEventListener(
+"submit",
+async(e)=>{
 
 e.preventDefault();
 
@@ -1413,7 +1874,7 @@ return;
 }
 
 
-const button =
+const button=
 document.getElementById("sendApplication");
 
 button.disabled=true;
@@ -1421,7 +1882,7 @@ button.disabled=true;
 button.textContent="Отправка...";
 
 
-const formData =
+const formData=
 new FormData(e.target);
 
 const answers={};
@@ -1434,7 +1895,7 @@ answers[key]=value;
 );
 
 
-const {error} =
+const {error}=
 await supabaseClient
 .from("applications")
 .insert({
@@ -1454,8 +1915,8 @@ if(error){
 
 console.error(error);
 
-alert(
-"Ошибка отправки заявки:\n"+
+showApplicationError(
+"Не удалось отправить заявку: "+
 error.message
 );
 
@@ -1488,15 +1949,29 @@ button.textContent="Отправить заявку";
 
 showNotification(
 "Заявка отправлена",
-"Ваша заявка передана на рассмотрение."
+"Заявка передана на рассмотрение."
 );
 
-});
+}
+);
 
 
-/* =========================================
+function showApplicationError(text){
+
+const box=
+document.getElementById("applicationMessage");
+
+box.textContent=text;
+
+box.className=
+"message show error";
+
+}
+
+
+/* ==========================================
    MY APPLICATIONS
-========================================= */
+========================================== */
 
 async function openMyApplications(){
 
@@ -1514,27 +1989,30 @@ document
 .classList.add("active");
 
 
-const list =
+const list=
 document.getElementById("applicationsList");
 
 list.innerHTML=
-'<div class="empty">Загрузка...</div>';
+'<div class="loading">Загрузка заявок...</div>';
 
 
-const {data,error} =
+const {data,error}=
 await supabaseClient
 .from("applications")
 .select("*")
 .eq("user_id",currentUser.id)
-.order("created_at",{ascending:false});
+.order(
+"created_at",
+{ascending:false}
+);
 
 
 if(error){
 
-list.innerHTML=
-'<div class="empty">Ошибка загрузки заявок.</div>';
-
 console.error(error);
+
+list.innerHTML=
+'<div class="empty">Не удалось загрузить заявки.</div>';
 
 return;
 
@@ -1556,47 +2034,58 @@ list.innerHTML="";
 
 data.forEach(app=>{
 
-let text="На рассмотрении";
-let cls="new";
-let extra="";
+const div=
+document.createElement("div");
+
+div.className="application";
+
+
+let statusText=
+"На рассмотрении";
+
+let statusClass=
+"new";
+
+let message="";
 
 
 if(app.status==="approved"){
 
-text="Одобрена";
-cls="approved";
+statusText="Одобрена";
 
-extra=
-'<p style="color:#43d17b">✅ Администратор одобрил вашу заявку.</p>';
+statusClass="approved";
+
+message=
+"✅ Администратор одобрил вашу заявку.";
 
 }
 
 
 if(app.status==="rejected"){
 
-text="Отклонена";
-cls="rejected";
+statusText="Отклонена";
 
-extra=
-'<p style="color:#ff6666">❌ Администратор отклонил вашу заявку.</p>';
+statusClass="rejected";
+
+message=
+"❌ Администратор отклонил вашу заявку.";
 
 }
 
 
-const div =
-document.createElement("div");
-
-div.className="application";
-
 div.innerHTML=`
 
-<h3>${escapeHTML(app.vacancy)}</h3>
+<h3>
+${escapeHTML(app.vacancy)}
+</h3>
 
-<span class="status ${cls}">
-${text}
+<span class="status ${statusClass}">
+${statusText}
 </span>
 
-${extra}
+<p style="margin-top:12px">
+${message}
+</p>
 
 `;
 
@@ -1616,13 +2105,395 @@ document
 }
 
 
-/* =========================================
+/* ==========================================
+   ADMIN PANEL
+========================================== */
+
+async function openAdminPanel(){
+
+if(!currentUser){
+
+openAuth();
+
+return;
+
+}
+
+
+if(!isAdmin()){
+
+showNotification(
+"Нет доступа",
+"Этот раздел доступен только администратору."
+);
+
+return;
+
+}
+
+
+document
+.getElementById("adminModal")
+.classList.add("active");
+
+
+loadAdminApplications();
+
+}
+
+
+function closeAdminPanel(){
+
+document
+.getElementById("adminModal")
+.classList.remove("active");
+
+}
+
+
+/* ==========================================
+   LOAD ALL APPLICATIONS
+========================================== */
+
+async function loadAdminApplications(){
+
+const container=
+document.getElementById("adminApplications");
+
+container.innerHTML=
+'<div class="loading">Загрузка заявок...</div>';
+
+
+const {data,error}=
+await supabaseClient
+.from("applications")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+
+if(error){
+
+console.error(error);
+
+container.innerHTML=`
+
+<div class="empty">
+
+Не удалось загрузить заявки.
+
+<br><br>
+
+<small>
+${escapeHTML(error.message)}
+</small>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+if(!data || data.length===0){
+
+container.innerHTML=
+'<div class="empty">Заявок пока нет.</div>';
+
+return;
+
+}
+
+
+container.innerHTML="";
+
+
+data.forEach(app=>{
+
+const card=
+document.createElement("div");
+
+card.className="admin-card";
+
+
+let statusText=
+"На рассмотрении";
+
+let statusClass=
+"new";
+
+
+if(app.status==="approved"){
+
+statusText="Одобрена";
+
+statusClass="approved";
+
+}
+
+
+if(app.status==="rejected"){
+
+statusText="Отклонена";
+
+statusClass="rejected";
+
+}
+
+
+let answersHTML="";
+
+
+if(
+app.answers &&
+typeof app.answers==="object"
+){
+
+Object.entries(app.answers)
+.forEach(
+([key,value])=>{
+
+const labels={
+
+age:"Возраст",
+
+time:"Время на проект",
+
+experience:"Опыт",
+
+reason:"Причина",
+
+contact:"Discord/Telegram",
+
+tiktok:"TikTok",
+
+youtube:"YouTube",
+
+followers:"Подписчики",
+
+content:"Контент"
+
+};
+
+const label=
+labels[key] || key;
+
+
+answersHTML+=`
+
+<div class="answer">
+
+<b>
+${escapeHTML(label)}
+</b>
+
+<span>
+${escapeHTML(String(value))}
+</span>
+
+</div>
+
+`;
+
+}
+
+);
+
+}
+
+
+const date=
+app.created_at
+?
+new Date(app.created_at)
+.toLocaleString("ru-RU")
+:
+"Дата неизвестна";
+
+
+card.innerHTML=`
+
+<div class="admin-top">
+
+<div>
+
+<h3>
+${escapeHTML(app.vacancy)}
+</h3>
+
+<div class="admin-user">
+ID пользователя: ${escapeHTML(app.user_id)}
+</div>
+
+</div>
+
+<div class="admin-date">
+${escapeHTML(date)}
+</div>
+
+</div>
+
+<span class="status ${statusClass}">
+${statusText}
+</span>
+
+<div>
+${answersHTML}
+</div>
+
+<div class="admin-actions">
+
+<button
+class="approve-btn"
+onclick="changeApplicationStatus('${escapeHTML(app.id)}','approved')"
+${app.status==="approved" ? "disabled" : ""}
+>
+✅ Одобрить
+</button>
+
+<button
+class="reject-btn"
+onclick="changeApplicationStatus('${escapeHTML(app.id)}','rejected')"
+${app.status==="rejected" ? "disabled" : ""}
+>
+❌ Отклонить
+</button>
+
+</div>
+
+`;
+
+container.appendChild(card);
+
+});
+
+}
+
+
+/* ==========================================
+   CHANGE STATUS
+========================================== */
+
+async function changeApplicationStatus(
+applicationId,
+newStatus
+){
+
+if(!currentUser || !isAdmin()){
+
+showNotification(
+"Нет доступа",
+"Вы не являетесь администратором."
+);
+
+return;
+
+}
+
+
+const answer=
+newStatus==="approved"
+?
+"одобрить"
+:
+"отклонить";
+
+
+if(
+!confirm(
+`Вы уверены, что хотите ${answer} эту заявку?`
+)
+){
+
+return;
+
+}
+
+
+const {error}=
+await supabaseClient
+.from("applications")
+.update({
+status:newStatus
+})
+.eq("id",applicationId);
+
+
+if(error){
+
+console.error(error);
+
+showAdminMessage(
+"Ошибка: "+error.message,
+"error"
+);
+
+return;
+
+}
+
+
+showNotification(
+newStatus==="approved"
+?
+"Заявка одобрена"
+:
+"Заявка отклонена",
+newStatus==="approved"
+?
+"Пользователь увидит одобрение в «Мои заявки»."
+:
+"Пользователь увидит отклонение в «Мои заявки»."
+);
+
+
+await loadAdminApplications();
+
+}
+
+
+/* ==========================================
+   ADMIN MESSAGE
+========================================== */
+
+function showAdminMessage(
+text,
+type
+){
+
+const box=
+document.getElementById("adminMessage");
+
+box.textContent=text;
+
+box.className=
+"message show "+type;
+
+
+setTimeout(
+()=>{
+box.className="message";
+},
+5000
+);
+
+}
+
+
+/* ==========================================
    NOTIFICATION
-========================================= */
+========================================== */
 
-function showNotification(title,text){
+function showNotification(
+title,
+text
+){
 
-const box =
+const box=
 document.getElementById("notification");
 
 document.getElementById(
@@ -1636,20 +2507,38 @@ document.getElementById(
 box.classList.add("show");
 
 
-setTimeout(()=>{
-
+setTimeout(
+()=>{
 box.classList.remove("show");
-
-},5000);
+},
+5000
+);
 
 }
 
 
-/* =========================================
+/* ==========================================
    UTILS
-========================================= */
+========================================== */
 
-function outsideClose(event,id,fn){
+function escapeHTML(text){
+
+const div=
+document.createElement("div");
+
+div.textContent=
+text ?? "";
+
+return div.innerHTML;
+
+}
+
+
+function outsideClose(
+event,
+id,
+fn
+){
 
 if(event.target.id===id){
 
@@ -1660,20 +2549,9 @@ fn();
 }
 
 
-function escapeHTML(text){
-
-const div=document.createElement("div");
-
-div.textContent=text || "";
-
-return div.innerHTML;
-
-}
-
-
-/* =========================================
+/* ==========================================
    ESC
-========================================= */
+========================================== */
 
 document.addEventListener(
 "keydown",
@@ -1687,14 +2565,16 @@ closeApplication();
 
 closeMyApplications();
 
+closeAdminPanel();
+
 }
 
 });
 
 
-/* =========================================
-   SUPABASE AUTH LISTENER
-========================================= */
+/* ==========================================
+   AUTH STATE
+========================================== */
 
 supabaseClient.auth.onAuthStateChange(
 (_event,session)=>{
@@ -1704,12 +2584,13 @@ session?.user || null;
 
 updateHeader();
 
-});
+}
+);
 
 
-/* =========================================
+/* ==========================================
    START
-========================================= */
+========================================== */
 
 checkAuth();
 
