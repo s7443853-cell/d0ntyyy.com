@@ -2,3161 +2,1774 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>d0ntyyy License Plates</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#050b16;
+ color:#fff;
+ font-family:Arial,Helvetica,sans-serif;
 }
+button,input{font:inherit}
+button{cursor:pointer}
 
-html,
-body {
-    margin: 0;
-    min-height: 100%;
-    background:
-        radial-gradient(circle at top left, rgba(255,255,255,.05), transparent 35%),
-        #070707;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-}
+.hidden{display:none!important}
 
-button,
-input {
-    font-family: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-.hidden {
-    display: none !important;
+body:before{
+ content:"";
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ background:
+ radial-gradient(circle at 20% 10%,#073b7c33,transparent 30%),
+ radial-gradient(circle at 80% 90%,#0066ff22,transparent 30%);
 }
 
 /* AUTH */
 
-#authPage {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+.auth{
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:20px;
 }
 
-.auth-box {
-    width: 100%;
-    max-width: 420px;
-    padding: 30px;
-    background: rgba(18,18,18,.88);
-    border: 1px solid #292929;
-    border-radius: 20px;
-    box-shadow: 0 20px 80px rgba(0,0,0,.5);
-    backdrop-filter: blur(15px);
+.auth-box{
+ width:420px;
+ padding:35px;
+ background:linear-gradient(145deg,#0c1728ee,#07101fee);
+ border:1px solid #17447a;
+ border-radius:20px;
+ box-shadow:0 0 50px #001b3d;
 }
 
-.logo {
-    font-size: 25px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
+.logo{
+ text-align:center;
+ font-size:30px;
+ font-weight:900;
+ color:#fff;
+ margin-bottom:7px;
 }
 
-.subtitle {
-    color: #777;
-    margin-bottom: 25px;
+.logo span{color:#258cff}
+
+.desc{
+ text-align:center;
+ color:#71829b;
+ margin-bottom:25px;
 }
 
-.input {
-    width: 100%;
-    height: 48px;
-    margin-bottom: 12px;
-    padding: 0 14px;
-    color: #fff;
-    background: #0d0d0d;
-    border: 1px solid #2d2d2d;
-    border-radius: 10px;
-    outline: none;
+.tabs{
+ display:flex;
+ gap:8px;
+ margin-bottom:18px;
 }
 
-.input:focus {
-    border-color: #666;
+.tabs button{
+ flex:1;
+ padding:12px;
+ border:1px solid #1b3556;
+ border-radius:10px;
+ background:#0a1423;
+ color:#7e91aa;
 }
 
-.btn {
-    width: 100%;
-    min-height: 46px;
-    border: 0;
-    border-radius: 10px;
-    background: #fff;
-    color: #000;
-    font-weight: 800;
-    margin-top: 8px;
+.tabs .active{
+ color:#fff;
+ background:#12345c;
+ border-color:#278cff;
 }
 
-.btn.dark {
-    background: #151515;
-    color: #fff;
-    border: 1px solid #303030;
+.input{
+ margin-bottom:12px;
 }
 
-.message {
-    min-height: 20px;
-    margin-top: 15px;
-    color: #aaa;
-    font-size: 14px;
+.input label{
+ display:block;
+ color:#8092aa;
+ font-size:13px;
+ margin-bottom:6px;
 }
 
-/* APP */
-
-#app {
-    display: none;
-    min-height: 100vh;
+.input input{
+ width:100%;
+ padding:13px;
+ color:#fff;
+ background:#050c17;
+ border:1px solid #193657;
+ border-radius:10px;
+ outline:none;
 }
 
-.header {
-    height: 70px;
-    padding: 0 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(10,10,10,.9);
-    border-bottom: 1px solid #242424;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    backdrop-filter: blur(14px);
+.input input:focus{
+ border-color:#278cff;
+ box-shadow:0 0 12px #278cff22;
 }
 
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.main-btn{
+ width:100%;
+ padding:13px;
+ border:1px solid #318fff;
+ border-radius:10px;
+ color:#fff;
+ font-weight:800;
+ background:linear-gradient(135deg,#1769b7,#123b70);
+ box-shadow:0 0 20px #167cff25;
 }
 
-.header-logo {
-    font-size: 20px;
-    font-weight: 900;
+.error{
+ color:#ff6565;
+ text-align:center;
+ margin-top:10px;
+ font-size:13px;
 }
 
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* HEADER */
+
+.header{
+ height:68px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 28px;
+ border-bottom:1px solid #142b47;
+ background:#060e1bee;
+ backdrop-filter:blur(15px);
+ position:sticky;
+ top:0;
+ z-index:10;
 }
 
-.nickname {
-    color: #aaa;
+.brand{
+ font-size:21px;
+ font-weight:900;
 }
 
-.balance {
-    padding: 9px 13px;
-    background: #151515;
-    border: 1px solid #303030;
-    border-radius: 9px;
-    font-weight: 800;
+.brand span{color:#268cff}
+
+.header-right{
+ display:flex;
+ align-items:center;
+ gap:10px;
 }
 
-.container {
-    width: min(1150px, calc(100% - 30px));
-    margin: 25px auto 60px;
+.money{
+ padding:9px 14px;
+ border-radius:10px;
+ border:1px solid #1b3a61;
+ background:#091525;
+ color:#63d5ff;
+ font-weight:900;
 }
 
-/* NAV */
-
-.nav {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+.logout{
+ padding:9px 13px;
+ border:1px solid #1b3a61;
+ background:#0b1727;
+ color:#fff;
+ border-radius:10px;
 }
 
-.nav-btn {
-    padding: 11px 16px;
-    background: #111;
-    color: #999;
-    border: 1px solid #292929;
-    border-radius: 9px;
+/* LAYOUT */
+
+.layout{
+ max-width:1400px;
+ margin:auto;
+ padding:22px;
+ display:grid;
+ grid-template-columns:210px 1fr;
+ gap:20px;
 }
 
-.nav-btn:hover,
-.nav-btn.active {
-    color: #fff;
-    border-color: #555;
-    background: #181818;
+.sidebar{
+ height:max-content;
+ padding:10px;
+ background:#081323e8;
+ border:1px solid #163457;
+ border-radius:16px;
 }
 
-/* PANELS */
-
-.panel {
-    background: rgba(17,17,17,.88);
-    border: 1px solid #292929;
-    border-radius: 17px;
-    padding: 24px;
-    margin-bottom: 20px;
-    backdrop-filter: blur(12px);
+.nav{
+ width:100%;
+ padding:13px;
+ margin-bottom:5px;
+ text-align:left;
+ border:0;
+ border-radius:9px;
+ color:#73859c;
+ background:transparent;
 }
 
-.panel h2 {
-    margin-top: 0;
+.nav:hover,
+.nav.active{
+ color:#fff;
+ background:linear-gradient(90deg,#0c3159,#10223a);
+ box-shadow:inset 2px 0 #238dff;
 }
 
-/* SPIN */
+/* PAGES */
 
-.wheels {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+.page{display:none}
+.page.active{display:block}
+
+.title{
+ font-size:29px;
+ font-weight:900;
+ margin-bottom:5px;
 }
 
-.wheel {
-    background: #0d0d0d;
-    border: 1px solid #292929;
-    border-radius: 15px;
-    padding: 22px 15px;
-    text-align: center;
+.subtitle{
+ color:#647891;
+ margin-bottom:20px;
 }
 
-.wheel-title {
-    color: #888;
-    font-size: 14px;
+/* SPINNER */
+
+.spinner{
+ padding:30px;
+ border:1px solid #16375d;
+ border-radius:20px;
+ background:linear-gradient(145deg,#091728dd,#07101ddd);
+ box-shadow:0 20px 60px #0005;
 }
 
-.wheel-value {
-    margin: 18px 0;
-    font-size: 42px;
-    line-height: 1;
-    font-weight: 900;
-    letter-spacing: 2px;
+.plate-area{
+ display:flex;
+ justify-content:center;
+ margin:15px 0 30px;
 }
 
-.wheel-button {
-    width: 100%;
-    min-height: 44px;
-    border: 1px solid #333;
-    border-radius: 9px;
-    background: #151515;
-    color: #fff;
-    font-weight: 700;
+.plate{
+ position:relative;
+ width:min(600px,100%);
+ height:130px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ border:5px solid #111;
+ border-radius:13px;
+ background:linear-gradient(#fff,#d9d9d9);
+ color:#111;
+ font-size:clamp(38px,7vw,70px);
+ font-weight:900;
+ letter-spacing:5px;
+ box-shadow:
+  0 15px 50px #0008,
+  0 0 35px #187eff22;
+ transition:.15s;
 }
 
-.wheel-button:hover {
-    background: #222;
+.region{
+ position:absolute;
+ right:10px;
+ bottom:9px;
+ font-size:16px;
+ letter-spacing:0;
 }
 
-.plate-preview {
-    text-align: center;
-    margin: 30px 0 20px;
+.rus{
+ position:absolute;
+ right:11px;
+ bottom:29px;
+ font-size:9px;
+ letter-spacing:0;
 }
 
-.plate {
-    display: inline-block;
-    min-width: 250px;
-    padding: 14px 22px;
-    border-radius: 8px;
-    background: linear-gradient(#fff,#dcdcdc);
-    color: #111;
-    font-size: 30px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    border: 3px solid #111;
-    box-shadow: 0 8px 30px rgba(0,0,0,.3);
+.rarity{
+ text-align:center;
+ margin-top:12px;
+ font-weight:900;
 }
 
-.rarity {
-    margin-top: 12px;
-    color: #999;
-    font-weight: 700;
+.common{color:#a9b2c0}
+.rare{color:#37a7ff;text-shadow:0 0 12px #168cff}
+.epic{color:#a86cff;text-shadow:0 0 15px #934cff}
+.legendary{color:#ffd447;text-shadow:0 0 20px #ffb300}
+
+.spin{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
 }
 
-.action-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+.spin button{
+ height:62px;
+ border:1px solid #1a426d;
+ border-radius:12px;
+ color:#fff;
+ background:linear-gradient(145deg,#0d233c,#091522);
+ font-weight:900;
+ transition:.15s;
 }
 
-.action {
-    flex: 1;
-    min-width: 180px;
-    padding: 13px;
-    background: #151515;
-    border: 1px solid #333;
-    border-radius: 9px;
-    color: #fff;
-    font-weight: 800;
+.spin button:hover{
+ transform:translateY(-2px);
+ border-color:#2995ff;
+ box-shadow:0 0 20px #168cff22;
 }
 
-.action.primary {
-    background: #fff;
-    color: #000;
+.buy{
+ display:flex;
+ gap:12px;
+ margin-top:15px;
 }
 
-/* LISTS */
-
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
+.price{
+ flex:1;
+ padding:14px;
+ border:1px solid #16375d;
+ border-radius:10px;
+ background:#07111e;
+ color:#71839a;
 }
 
-.list-item {
-    min-height: 64px;
-    padding: 14px 16px;
-    background: #0e0e0e;
-    border: 1px solid #292929;
-    border-radius: 11px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
+.price b{color:#fff}
+
+/* CARDS */
+
+.cards{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+ gap:14px;
 }
 
-.list-main {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.card{
+ padding:17px;
+ border:1px solid #163457;
+ border-radius:15px;
+ background:linear-gradient(145deg,#0b1929e8,#07111ee8);
 }
 
-.list-title {
-    font-weight: 900;
+.card-title{
+ font-weight:900;
+ margin-bottom:7px;
 }
 
-.list-sub {
-    color: #777;
-    font-size: 13px;
+.muted{
+ color:#71839a;
+ font-size:13px;
 }
 
-.price {
-    font-weight: 900;
-    white-space: nowrap;
+.shop-plate{
+ padding:12px;
+ margin-bottom:12px;
+ text-align:center;
+ border:3px solid #111;
+ border-radius:8px;
+ background:linear-gradient(#fff,#d5d5d5);
+ color:#111;
+ font-size:25px;
+ font-weight:900;
 }
 
-.buy-btn {
-    padding: 10px 14px;
-    background: #fff;
-    color: #000;
-    border: 0;
-    border-radius: 8px;
-    font-weight: 900;
+.card-btn{
+ width:100%;
+ margin-top:12px;
+ padding:11px;
+ border:1px solid #205488;
+ border-radius:9px;
+ background:#0c2c4e;
+ color:#fff;
+ font-weight:800;
+}
+
+.card-btn:hover{
+ background:#124878;
 }
 
 /* TOP */
 
-.top-item {
-    position: relative;
+.top{
+ display:flex;
+ flex-direction:column;
+ gap:8px;
 }
 
-.top-place {
-    width: 38px;
-    height: 38px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 9px;
-    background: #191919;
-    font-weight: 900;
+.top-row{
+ display:grid;
+ grid-template-columns:60px 1fr 160px;
+ align-items:center;
+ padding:15px 18px;
+ border:1px solid #163457;
+ border-radius:13px;
+ background:#091523e8;
 }
 
-.top-item.first {
-    background: linear-gradient(90deg,#191400,#4d3b00,#191400);
+.top-row:nth-child(1){
+ background:linear-gradient(90deg,#80681744,#091523);
+ border-color:#b99732;
+}
+.top-row:nth-child(2){
+ background:linear-gradient(90deg,#777b8340,#091523);
+ border-color:#858991;
+}
+.top-row:nth-child(3){
+ background:linear-gradient(90deg,#75451f40,#091523);
+ border-color:#9b5e2b;
 }
 
-.top-item.second {
-    background: linear-gradient(90deg,#171717,#4a4a4a,#171717);
+.place{
+ font-size:21px;
+ font-weight:900;
 }
 
-.top-item.third {
-    background: linear-gradient(90deg,#24150d,#58321c,#24150d);
-}
-
-.top-item.first .top-place {
-    background: linear-gradient(135deg,#ffe27a,#a97900);
-    color: #111;
-}
-
-.top-item.second .top-place {
-    background: linear-gradient(135deg,#fff,#777);
-    color: #111;
-}
-
-.top-item.third .top-place {
-    background: linear-gradient(135deg,#d9965b,#70401f);
-    color: #111;
-}
-
-.top-user {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.tag {
-    display: inline-block;
-    padding: 4px 7px;
-    border-radius: 5px;
-    font-size: 11px;
-    font-weight: 800;
-    margin-left: 5px;
+.top-money{
+ text-align:right;
+ color:#55d7ff;
+ font-weight:900;
 }
 
 /* ADMIN */
 
-.admin-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 15px;
+.admin{
+ display:grid;
+ grid-template-columns:220px 1fr;
+ gap:15px;
 }
 
-.admin-card {
-    padding: 18px;
-    background: #0d0d0d;
-    border: 1px solid #292929;
-    border-radius: 12px;
+.admin-menu{
+ padding:10px;
+ border:1px solid #163457;
+ border-radius:15px;
+ background:#081423;
 }
 
-.admin-card h3 {
-    margin-top: 0;
+.admin-tab{
+ width:100%;
+ padding:12px;
+ border:0;
+ background:transparent;
+ color:#71839a;
+ text-align:left;
+ border-radius:9px;
 }
 
-.admin-btn {
-    width: 100%;
-    padding: 11px;
-    margin-top: 5px;
-    border: 1px solid #333;
-    border-radius: 8px;
-    background: #fff;
-    color: #000;
-    font-weight: 800;
+.admin-tab:hover,
+.admin-tab.active{
+ background:#103154;
+ color:#fff;
 }
 
-.empty {
-    padding: 30px;
-    text-align: center;
-    color: #666;
+.admin-content{
+ padding:20px;
+ border:1px solid #163457;
+ border-radius:15px;
+ background:#081423e8;
 }
 
-.status {
-    margin-top: 10px;
-    color: #aaa;
-    font-size: 14px;
+.admin-row{
+ display:flex;
+ gap:8px;
+ margin-bottom:10px;
+}
+
+.admin-row input,
+.admin-row select{
+ flex:1;
+ padding:11px;
+ color:#fff;
+ background:#050d18;
+ border:1px solid #1a3c61;
+ border-radius:9px;
+}
+
+.small{
+ padding:11px 15px;
+ border:1px solid #267fd0;
+ border-radius:9px;
+ color:#fff;
+ background:#0d3155;
+ font-weight:800;
+}
+
+/* TOAST */
+
+.toast{
+ position:fixed;
+ right:20px;
+ bottom:20px;
+ padding:14px 18px;
+ border:1px solid #20578c;
+ border-radius:11px;
+ background:#0a192b;
+ box-shadow:0 10px 40px #0008;
+ transform:translateY(100px);
+ opacity:0;
+ transition:.2s;
+ z-index:50;
+}
+
+.toast.show{
+ transform:translateY(0);
+ opacity:1;
 }
 
 /* MOBILE */
 
-@media(max-width:750px) {
+@media(max-width:800px){
 
-    .header {
-        height: auto;
-        padding: 15px;
-        gap: 12px;
-        flex-direction: column;
-        align-items: stretch;
-    }
+ .header{
+  padding:0 13px;
+ }
 
-    .header-left,
-    .user-info {
-        justify-content: space-between;
-    }
+ .brand{
+  font-size:16px;
+ }
 
-    .container {
-        width: calc(100% - 20px);
-        margin-top: 15px;
-    }
+ .money{
+  display:none;
+ }
 
-    .panel {
-        padding: 17px;
-    }
+ .layout{
+  display:block;
+  padding:12px;
+ }
 
-    .wheels {
-        grid-template-columns: 1fr;
-    }
+ .sidebar{
+  display:flex;
+  overflow-x:auto;
+  gap:5px;
+  margin-bottom:12px;
+ }
 
-    .admin-grid {
-        grid-template-columns: 1fr;
-    }
+ .nav{
+  min-width:max-content;
+  margin:0;
+  text-align:center;
+ }
 
-    .list-item {
-        align-items: flex-start;
-        flex-direction: column;
-    }
+ .spinner{
+  padding:17px;
+ }
 
-    .buy-btn {
-        width: 100%;
-    }
+ .spin{
+  grid-template-columns:1fr;
+ }
 
-    .plate {
-        min-width: 0;
-        width: 100%;
-        font-size: 24px;
-    }
+ .buy{
+  flex-direction:column;
+ }
+
+ .admin{
+  grid-template-columns:1fr;
+ }
+
+ .top-row{
+  grid-template-columns:45px 1fr;
+ }
+
+ .top-money{
+  grid-column:2;
+  text-align:left;
+  margin-top:4px;
+ }
+
+ .plate{
+  height:100px;
+  letter-spacing:2px;
+ }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     AUTH
-========================= -->
+<!-- AUTH -->
 
-<div id="authPage">
+<div id="auth" class="auth">
 
-    <div class="auth-box">
+<div class="auth-box">
 
-        <div class="logo">d0ntyyy LICENSE PLATES</div>
-        <div class="subtitle">
-            Крутка автомобильных номеров
-        </div>
+<div class="logo">
+d0ntyyy <span>LICENSE PLATES</span>
+</div>
 
-        <!-- LOGIN -->
+<div class="desc">
+Коллекционируй редкие номера
+</div>
 
-        <div id="loginForm">
+<div class="tabs">
+<button id="loginTab" class="active" onclick="authMode('login')">Войти</button>
+<button id="regTab" onclick="authMode('register')">Регистрация</button>
+</div>
 
-            <input
-                id="loginEmail"
-                class="input"
-                type="email"
-                placeholder="Email"
-                autocomplete="email"
-            >
+<div id="nickBlock" class="input hidden">
+<label>Никнейм</label>
+<input id="nickname" placeholder="Ваш никнейм">
+</div>
 
-            <input
-                id="loginPassword"
-                class="input"
-                type="password"
-                placeholder="Пароль"
-                autocomplete="current-password"
-            >
+<div class="input">
+<label>Email</label>
+<input id="email" type="email" placeholder="Email">
+</div>
 
-            <button
-                class="btn"
-                onclick="login()"
-            >
-                Войти
-            </button>
+<div class="input">
+<label>Пароль</label>
+<input id="password" type="password" placeholder="Пароль">
+</div>
 
-            <button
-                class="btn dark"
-                onclick="showRegister()"
-            >
-                Регистрация
-            </button>
+<button class="main-btn" onclick="submitAuth()">
+<span id="authText">Войти</span>
+</button>
 
-        </div>
+<div id="authError" class="error"></div>
 
-        <!-- REGISTER -->
+</div>
+</div>
 
-        <div id="registerForm" class="hidden">
 
-            <input
-                id="registerNickname"
-                class="input"
-                type="text"
-                placeholder="Игровой ник"
-                maxlength="24"
-            >
+<!-- APP -->
 
-            <input
-                id="registerEmail"
-                class="input"
-                type="email"
-                placeholder="Email"
-                autocomplete="email"
-            >
+<div id="app" class="hidden">
 
-            <input
-                id="registerPassword"
-                class="input"
-                type="password"
-                placeholder="Пароль"
-                autocomplete="new-password"
-            >
+<header class="header">
 
-            <button
-                class="btn"
-                onclick="register()"
-            >
-                Создать аккаунт
-            </button>
+<div class="brand">
+d0ntyyy <span>LICENSE PLATES</span>
+</div>
 
-            <button
-                class="btn dark"
-                onclick="showLogin()"
-            >
-                Назад
-            </button>
+<div class="header-right">
 
-        </div>
+<div class="money">
+₽ <span id="balance">0</span>
+</div>
 
-        <div
-            id="authMessage"
-            class="message"
-        ></div>
+<button class="logout" onclick="logout()">Выйти</button>
 
-    </div>
+</div>
+</header>
+
+
+<div class="layout">
+
+<aside class="sidebar">
+
+<button class="nav active" data-page="home">Главная</button>
+<button class="nav" data-page="shop">Магазин</button>
+<button class="nav" data-page="inventory">Мои номера</button>
+<button class="nav" data-page="top">ТОП-15</button>
+<button id="adminNav" class="nav hidden" data-page="admin">Админка</button>
+
+</aside>
+
+
+<main>
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="title">Крутилка номеров</div>
+<div class="subtitle">Собери свой уникальный номер</div>
+
+<div class="spinner">
+
+<div class="plate-area">
+
+<div>
+
+<div id="plate" class="plate">
+А000АА
+<span class="rus">RUS</span>
+<span class="region">000</span>
+</div>
+
+<div id="rarity" class="rarity common">
+Обычный номер
+</div>
+
+</div>
+</div>
+
+
+<div class="spin">
+
+<button onclick="spinLetters()">БУКВЫ</button>
+<button onclick="spinNumbers()">ЦИФРЫ</button>
+<button onclick="spinRegion()">РЕГИОН</button>
 
 </div>
 
 
-<!-- =========================
-     APP
-========================= -->
-
-<div id="app">
-
-    <header class="header">
-
-        <div class="header-left">
-
-            <div class="header-logo">
-                d0ntyyy
-            </div>
-
-        </div>
-
-        <div class="user-info">
-
-            <span
-                id="headerNickname"
-                class="nickname"
-            ></span>
-
-            <div class="balance">
-                ₽ <span id="headerBalance">0</span>
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <main class="container">
-
-        <!-- NAV -->
-
-        <nav class="nav">
-
-            <button
-                class="nav-btn active"
-                data-page="spinPage"
-                onclick="openPage('spinPage', this)"
-            >
-                Крутка
-            </button>
-
-            <button
-                class="nav-btn"
-                data-page="shopPage"
-                onclick="openPage('shopPage', this)"
-            >
-                Магазин
-            </button>
-
-            <button
-                class="nav-btn"
-                data-page="inventoryPage"
-                onclick="openPage('inventoryPage', this)"
-            >
-                Мои номера
-            </button>
-
-            <button
-                class="nav-btn"
-                data-page="topPage"
-                onclick="openPage('topPage', this)"
-            >
-                ТОП
-            </button>
-
-            <button
-                id="adminNav"
-                class="nav-btn hidden"
-                data-page="adminPage"
-                onclick="openPage('adminPage', this)"
-            >
-                Админка
-            </button>
-
-            <button
-                class="nav-btn"
-                onclick="logout()"
-            >
-                Выйти
-            </button>
-
-        </nav>
-
-
-        <!-- =========================
-             SPIN
-        ========================= -->
-
-        <section
-            id="spinPage"
-            class="page panel"
-        >
-
-            <h2>Крутка номера</h2>
-
-            <p class="subtitle">
-                Крути буквы, цифры и регион отдельно.
-            </p>
-
-            <div class="wheels">
-
-                <div class="wheel">
-
-                    <div class="wheel-title">
-                        БУКВЫ
-                    </div>
-
-                    <div
-                        id="lettersValue"
-                        class="wheel-value"
-                    >
-                        ААА
-                    </div>
-
-                    <button
-                        class="wheel-button"
-                        onclick="spinLetters()"
-                    >
-                        Крутить буквы
-                    </button>
-
-                </div>
-
-
-                <div class="wheel">
-
-                    <div class="wheel-title">
-                        ЦИФРЫ
-                    </div>
-
-                    <div
-                        id="numbersValue"
-                        class="wheel-value"
-                    >
-                        777
-                    </div>
-
-                    <button
-                        class="wheel-button"
-                        onclick="spinNumbers()"
-                    >
-                        Крутить цифры
-                    </button>
-
-                </div>
-
-
-                <div class="wheel">
-
-                    <div class="wheel-title">
-                        РЕГИОН
-                    </div>
-
-                    <div
-                        id="regionValue"
-                        class="wheel-value"
-                    >
-                        000
-                    </div>
-
-                    <button
-                        class="wheel-button"
-                        onclick="spinRegion()"
-                    >
-                        Крутить регион
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="plate-preview">
-
-                <div
-                    id="platePreview"
-                    class="plate"
-                >
-                    ААА 777 | 000
-                </div>
-
-                <div
-                    id="rarityText"
-                    class="rarity"
-                >
-                    Обычный
-                </div>
-
-            </div>
-
-
-            <div class="action-row">
-
-                <button
-                    class="action primary"
-                    onclick="buyCurrentPlate()"
-                >
-                    Купить этот номер
-                </button>
-
-                <button
-                    class="action"
-                    onclick="putCurrentInShop()"
-                >
-                    Добавить в магазин
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             SHOP
-        ========================= -->
-
-        <section
-            id="shopPage"
-            class="page panel hidden"
-        >
-
-            <h2>Магазин номеров</h2>
-
-            <div
-                id="shopList"
-                class="list"
-            >
-                <div class="empty">
-                    Загрузка...
-                </div>
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             INVENTORY
-        ========================= -->
-
-        <section
-            id="inventoryPage"
-            class="page panel hidden"
-        >
-
-            <h2>Мои номера</h2>
-
-            <div
-                id="inventoryList"
-                class="list"
-            >
-                <div class="empty">
-                    Загрузка...
-                </div>
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             TOP
-        ========================= -->
-
-        <section
-            id="topPage"
-            class="page panel hidden"
-        >
-
-            <h2>ТОП-15</h2>
-
-            <div
-                id="topList"
-                class="list"
-            >
-                <div class="empty">
-                    Загрузка...
-                </div>
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             ADMIN
-        ========================= -->
-
-        <section
-            id="adminPage"
-            class="page panel hidden"
-        >
-
-            <h2>Админ-панель</h2>
-
-            <div class="admin-grid">
-
-                <!-- BALANCE -->
-
-                <div class="admin-card">
-
-                    <h3>Выдать баланс</h3>
-
-                    <input
-                        id="balanceNick"
-                        class="input"
-                        placeholder="Ник пользователя"
-                    >
-
-                    <input
-                        id="balanceAmount"
-                        class="input"
-                        type="number"
-                        placeholder="Сумма"
-                    >
-
-                    <button
-                        class="admin-btn"
-                        onclick="adminGiveBalance()"
-                    >
-                        Выдать баланс
-                    </button>
-
-                </div>
-
-
-                <!-- TAG -->
-
-                <div class="admin-card">
-
-                    <h3>Выдать тег</h3>
-
-                    <input
-                        id="tagNick"
-                        class="input"
-                        placeholder="Ник пользователя"
-                    >
-
-                    <input
-                        id="tagName"
-                        class="input"
-                        placeholder="Название тега"
-                    >
-
-                    <input
-                        id="tagColor"
-                        class="input"
-                        value="#ff3030"
-                        placeholder="#ff3030"
-                    >
-
-                    <button
-                        class="admin-btn"
-                        onclick="adminGiveTag()"
-                    >
-                        Выдать тег
-                    </button>
-
-                </div>
-
-
-                <!-- PLATE -->
-
-                <div class="admin-card">
-
-                    <h3>Выдать номер</h3>
-
-                    <input
-                        id="givePlateNick"
-                        class="input"
-                        placeholder="Ник пользователя"
-                    >
-
-                    <input
-                        id="givePlateValue"
-                        class="input"
-                        placeholder="А777АА | 000"
-                    >
-
-                    <button
-                        class="admin-btn"
-                        onclick="adminGivePlate()"
-                    >
-                        Выдать номер
-                    </button>
-
-                </div>
-
-
-                <!-- ADD SHOP -->
-
-                <div class="admin-card">
-
-                    <h3>Добавить номер в магазин</h3>
-
-                    <input
-                        id="shopPlateValue"
-                        class="input"
-                        placeholder="А777АА | 000"
-                    >
-
-                    <input
-                        id="shopPlatePrice"
-                        class="input"
-                        type="number"
-                        placeholder="Цена"
-                    >
-
-                    <button
-                        class="admin-btn"
-                        onclick="adminAddShopPlate()"
-                    >
-                        Добавить
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div
-                id="adminStatus"
-                class="status"
-            ></div>
-
-        </section>
-
-    </main>
+<div class="buy">
+
+<div class="price">
+Цена: <b id="price">1 000 ₽</b>
+</div>
+
+<button class="main-btn" onclick="buyCurrent()">
+Купить номер
+</button>
 
 </div>
+
+</div>
+
+</section>
+
+
+<!-- SHOP -->
+
+<section id="shop" class="page">
+
+<div class="title">Магазин</div>
+<div class="subtitle">Номера, выставленные на продажу</div>
+
+<div id="shopList" class="cards"></div>
+
+</section>
+
+
+<!-- INVENTORY -->
+
+<section id="inventory" class="page">
+
+<div class="title">Мои номера</div>
+<div class="subtitle">Твои приобретённые номера</div>
+
+<div id="inventoryList" class="cards"></div>
+
+</section>
+
+
+<!-- TOP -->
+
+<section id="top" class="page">
+
+<div class="title">ТОП-15</div>
+<div class="subtitle">Игроки с самым большим балансом</div>
+
+<div id="topList" class="top"></div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="admin" class="page">
+
+<div class="title">Админ-панель</div>
+<div class="subtitle">Управление d0ntyyy License Plates</div>
+
+<div class="admin">
+
+<div class="admin-menu">
+
+<button class="admin-tab active" onclick="adminPage('users',this)">
+Пользователи
+</button>
+
+<button class="admin-tab" onclick="adminPage('balance',this)">
+Выдать баланс
+</button>
+
+<button class="admin-tab" onclick="adminPage('plate',this)">
+Выдать номер
+</button>
+
+<button class="admin-tab" onclick="adminPage('tag',this)">
+Выдать тег
+</button>
+
+<button class="admin-tab" onclick="adminPage('shop',this)">
+Добавить номер
+</button>
+
+</div>
+
+<div id="adminContent" class="admin-content"></div>
+
+</div>
+
+</section>
+
+</main>
+</div>
+</div>
+
+
+<div id="toast" class="toast"></div>
 
 
 <script>
 
-/* =========================================================
-   SUPABASE
-========================================================= */
+/* SUPABASE */
 
 const SUPABASE_URL =
-    "https://fytsvzwyjhwdcaaogexv.supabase.co";
-
-/*
-===========================================================
-ВСТАВЬ СЮДА СВОЙ PUBLISHABLE / ANON KEY
-===========================================================
-*/
+"https://fytsvzwyjhwdcaaogexv.supabase.co";
 
 const SUPABASE_KEY =
-    "ВСТАВЬ_СЮДА_СВОЙ_PUBLISHABLE_ИЛИ_ANON_KEY";
+"sb_publishable_dWv_AWctiMp7RgJ2AvNROA_cP2yGJy-";
+
+const db =
+window.supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_KEY
+);
 
 
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+/* STATE */
 
+let user=null;
+let profile=null;
+let mode="login";
 
-/* =========================================================
-   STATE
-========================================================= */
-
-let currentUser = null;
-
-let currentProfile = null;
-
-let currentPlate = {
-    letters: "ААА",
-    numbers: "777",
-    region: "000"
+let current={
+ l1:"А",
+ num:"000",
+ l2:"АА",
+ region:"000"
 };
 
-
-/* =========================================================
-   CONSTANTS
-========================================================= */
-
-const LETTERS = [
-    "А",
-    "В",
-    "Е",
-    "К",
-    "М",
-    "Н",
-    "О",
-    "Р",
-    "С",
-    "Т",
-    "У",
-    "Х"
+const letters=[
+"А","В","Е","К","М","Н",
+"О","Р","С","Т","У","Х"
 ];
 
-
-const RARITY_PRICES = {
-    "Обычный": 1000,
-    "Редкий": 5000,
-    "Эпический": 25000,
-    "Легендарный": 100000
-};
-
-
-/* =========================================================
-   AUTH UI
-========================================================= */
-
-function showRegister() {
-
-    document
-        .getElementById("loginForm")
-        .classList.add("hidden");
-
-    document
-        .getElementById("registerForm")
-        .classList.remove("hidden");
-
-    setAuthMessage("");
-
-}
-
-
-function showLogin() {
-
-    document
-        .getElementById("registerForm")
-        .classList.add("hidden");
-
-    document
-        .getElementById("loginForm")
-        .classList.remove("hidden");
-
-    setAuthMessage("");
-
-}
-
-
-function setAuthMessage(text) {
-
-    document
-        .getElementById("authMessage")
-        .textContent = text || "";
-
-}
-
-
-/* =========================================================
-   REGISTER
-========================================================= */
-
-async function register() {
-
-    const nickname =
-        document
-            .getElementById("registerNickname")
-            .value
-            .trim();
-
-    const email =
-        document
-            .getElementById("registerEmail")
-            .value
-            .trim();
-
-    const password =
-        document
-            .getElementById("registerPassword")
-            .value;
-
-
-    if (!nickname || !email || !password) {
-
-        setAuthMessage(
-            "Заполни все поля."
-        );
-
-        return;
-    }
-
-
-    if (password.length < 6) {
-
-        setAuthMessage(
-            "Пароль должен быть минимум 6 символов."
-        );
-
-        return;
-    }
-
-
-    const {
-        data: nicknameExists,
-        error: nicknameError
-    } =
-        await supabaseClient
-            .from("license_users")
-            .select("id")
-            .eq("nickname", nickname)
-            .maybeSingle();
-
-
-    if (nicknameError) {
-
-        setAuthMessage(
-            nicknameError.message
-        );
-
-        return;
-    }
-
-
-    if (nicknameExists) {
-
-        setAuthMessage(
-            "Этот ник уже занят."
-        );
-
-        return;
-    }
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth.signUp({
-            email,
-            password
-        });
-
-
-    if (error) {
-
-        setAuthMessage(
-            error.message
-        );
-
-        return;
-    }
-
-
-    if (!data.user) {
-
-        setAuthMessage(
-            "Не удалось создать аккаунт."
-        );
-
-        return;
-    }
-
-
-    /*
-      Создаём профиль в нашей таблице.
-    */
-
-    const {
-        error: profileError
-    } =
-        await supabaseClient
-            .from("license_users")
-            .insert({
-                id: data.user.id,
-                nickname: nickname,
-                email: email,
-                balance: 100000
-            });
-
-
-    if (profileError) {
-
-        setAuthMessage(
-            profileError.message
-        );
-
-        return;
-    }
-
-
-    if (!data.session) {
-
-        setAuthMessage(
-            "Аккаунт создан. Подтверди email, затем войди."
-        );
-
-        showLogin();
-
-        return;
-    }
-
-
-    currentUser = data.user;
-
-    await loadProfile();
-
-    enterApp();
-
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-async function login() {
-
-    const email =
-        document
-            .getElementById("loginEmail")
-            .value
-            .trim();
-
-    const password =
-        document
-            .getElementById("loginPassword")
-            .value;
-
-
-    if (!email || !password) {
-
-        setAuthMessage(
-            "Введи email и пароль."
-        );
-
-        return;
-    }
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-        });
-
-
-    if (error) {
-
-        setAuthMessage(
-            error.message
-        );
-
-        return;
-    }
-
-
-    currentUser = data.user;
-
-    await loadProfile();
-
-    if (!currentProfile) {
-
-        setAuthMessage(
-            "Профиль пользователя не найден."
-        );
-
-        return;
-    }
-
-
-    if (currentProfile.is_banned) {
-
-        setAuthMessage(
-            "Ваш аккаунт заблокирован."
-        );
-
-        await supabaseClient.auth.signOut();
-
-        return;
-    }
-
-
-    enterApp();
-
-}
-
-
-/* =========================================================
-   LOAD PROFILE
-========================================================= */
-
-async function loadProfile() {
-
-    if (!currentUser) {
-        return;
-    }
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("license_users")
-            .select("*")
-            .eq("id", currentUser.id)
-            .maybeSingle();
-
-
-    if (error) {
-
-        console.error(error);
-
-        currentProfile = null;
-
-        return;
-    }
-
-
-    currentProfile = data;
-
-}
-
-
-/* =========================================================
-   ENTER APP
-========================================================= */
-
-async function enterApp() {
-
-    document
-        .getElementById("authPage")
-        .style.display = "none";
-
-    document
-        .getElementById("app")
-        .style.display = "block";
-
-
-    document
-        .getElementById("headerNickname")
-        .textContent =
-        currentProfile.nickname;
-
-
-    updateBalance();
-
-
-    if (
-        currentProfile.nickname.toLowerCase() ===
-        "d0ntyyy"
-    ) {
-
-        document
-            .getElementById("adminNav")
-            .classList.remove("hidden");
-
-    }
-
-
-    updatePlate();
-
-
-    await Promise.all([
-        loadShop(),
-        loadInventory(),
-        loadTop()
-    ]);
-
-}
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-async function logout() {
-
-    await supabaseClient.auth.signOut();
-
-    currentUser = null;
-    currentProfile = null;
-
-    location.reload();
-
-}
-
-
-/* =========================================================
-   BALANCE
-========================================================= */
-
-function updateBalance() {
-
-    if (!currentProfile) {
-        return;
-    }
-
-
-    document
-        .getElementById("headerBalance")
-        .textContent =
-        Number(
-            currentProfile.balance || 0
-        ).toLocaleString("ru-RU");
-
-}
-
-
-async function refreshProfile() {
-
-    await loadProfile();
-
-    updateBalance();
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function openPage(pageId, button) {
-
-    document
-        .querySelectorAll(".page")
-        .forEach(page => {
-            page.classList.add("hidden");
-        });
-
-
-    const page =
-        document.getElementById(pageId);
-
-    if (page) {
-        page.classList.remove("hidden");
-    }
-
-
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(btn => {
-            btn.classList.remove("active");
-        });
-
-
-    if (button) {
-        button.classList.add("active");
-    }
-
-
-    if (pageId === "shopPage") {
-        loadShop();
-    }
-
-    if (pageId === "inventoryPage") {
-        loadInventory();
-    }
-
-    if (pageId === "topPage") {
-        loadTop();
-    }
-
-}
-
-
-/* =========================================================
-   SPIN
-========================================================= */
-
-function randomLetter() {
-
-    return LETTERS[
-        Math.floor(
-            Math.random() * LETTERS.length
-        )
-    ];
-
-}
-
-
-function randomLetters() {
-
-    return (
-        randomLetter() +
-        randomLetter() +
-        randomLetter()
-    );
-
-}
-
-
-function randomNumbers() {
-
-    return String(
-        Math.floor(
-            Math.random() * 1000
-        )
-    ).padStart(3, "0");
-
-}
-
-
-function randomRegion() {
-
-    return String(
-        Math.floor(
-            Math.random() * 1000
-        )
-    ).padStart(3, "0");
-
-}
-
-
-function spinLetters() {
-
-    currentPlate.letters =
-        randomLetters();
-
-    updatePlate();
-
-}
-
-
-function spinNumbers() {
-
-    currentPlate.numbers =
-        randomNumbers();
-
-    updatePlate();
-
-}
-
-
-function spinRegion() {
-
-    currentPlate.region =
-        randomRegion();
-
-    updatePlate();
-
-}
-
-
-/* =========================================================
-   PLATE
-========================================================= */
-
-function getPlateString() {
-
-    return (
-        currentPlate.letters +
-        " " +
-        currentPlate.numbers +
-        " | " +
-        currentPlate.region
-    );
-
-}
-
-
-function getRarity(plate) {
-
-    const n = plate.numbers;
-
-
-    if (
-        n === "777" ||
-        n === "666" ||
-        n === "555" ||
-        n === "111" ||
-        n === "999"
-    ) {
-
-        return "Легендарный";
-
-    }
-
-
-    if (
-        n[0] === n[1] &&
-        n[1] === n[2]
-    ) {
-
-        return "Редкий";
-
-    }
-
-
-    if (
-        n === "123" ||
-        n === "321" ||
-        n === "007"
-    ) {
-
-        return "Эпический";
-
-    }
-
-
-    return "Обычный";
-
-}
-
-
-function updatePlate() {
-
-    document
-        .getElementById("lettersValue")
-        .textContent =
-        currentPlate.letters;
-
-
-    document
-        .getElementById("numbersValue")
-        .textContent =
-        currentPlate.numbers;
-
-
-    document
-        .getElementById("regionValue")
-        .textContent =
-        currentPlate.region;
-
-
-    document
-        .getElementById("platePreview")
-        .textContent =
-        getPlateString();
-
-
-    document
-        .getElementById("rarityText")
-        .textContent =
-        getRarity(currentPlate);
-
-}
-
-
-/* =========================================================
-   BUY GENERATED PLATE
-========================================================= */
-
-async function buyCurrentPlate() {
-
-    await refreshProfile();
-
-
-    const plate =
-        getPlateString();
-
-    const rarity =
-        getRarity(currentPlate);
-
-    const price =
-        RARITY_PRICES[rarity];
-
-
-    if (
-        Number(currentProfile.balance) <
-        price
-    ) {
-
-        alert("Недостаточно средств.");
-
-        return;
-    }
-
-
-    /*
-      Проверяем, существует ли номер.
-    */
-
-    const {
-        data: existing,
-        error: findError
-    } =
-        await supabaseClient
-            .from("license_plates")
-            .select("*")
-            .eq("plate", plate)
-            .maybeSingle();
-
-
-    if (findError) {
-
-        alert(findError.message);
-
-        return;
-    }
-
-
-    if (
-        existing &&
-        existing.owner_id
-    ) {
-
-        alert(
-            "Этот номер уже принадлежит другому пользователю."
-        );
-
-        return;
-    }
-
-
-    let plateId;
-
-
-    if (existing) {
-
-        plateId =
-            existing.id;
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-                .from("license_plates")
-                .update({
-                    owner_id: currentUser.id,
-                    status: "sold",
-                    rarity: rarity,
-                    price: price
-                })
-                .eq("id", plateId);
-
-
-        if (error) {
-
-            alert(error.message);
-
-            return;
-        }
-
-
-    } else {
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("license_plates")
-                .insert({
-                    plate: plate,
-                    owner_id: currentUser.id,
-                    price: price,
-                    rarity: rarity,
-                    status: "sold"
-                })
-                .select()
-                .single();
-
-
-        if (error) {
-
-            alert(error.message);
-
-            return;
-        }
-
-
-        plateId =
-            data.id;
-
-    }
-
-
-    /*
-      Добавляем в инвентарь.
-    */
-
-    const {
-        error: inventoryError
-    } =
-        await supabaseClient
-            .from("license_inventory")
-            .insert({
-                user_id: currentUser.id,
-                plate_id: plateId
-            });
-
-
-    if (inventoryError) {
-
-        console.error(
-            inventoryError
-        );
-
-    }
-
-
-    /*
-      Снимаем баланс.
-    */
-
-    const newBalance =
-        Number(currentProfile.balance) -
-        price;
-
-
-    const {
-        error: balanceError
-    } =
-        await supabaseClient
-            .from("license_users")
-            .update({
-                balance: newBalance
-            })
-            .eq("id", currentUser.id);
-
-
-    if (balanceError) {
-
-        alert(balanceError.message);
-
-        return;
-    }
-
-
-    await supabaseClient
-        .from("license_transactions")
-        .insert({
-            user_id: currentUser.id,
-            type: "purchase",
-            amount: -price,
-            description:
-                "Покупка номера " + plate
-        });
-
-
-    await refreshProfile();
-
-    await loadInventory();
-
-    await loadShop();
-
-
-    alert(
-        "Номер куплен: " +
-        plate
-    );
-
-}
-
-
-/* =========================================================
-   ADD GENERATED PLATE TO SHOP
-========================================================= */
-
-async function putCurrentInShop() {
-
-    const plate =
-        getPlateString();
-
-    const rarity =
-        getRarity(currentPlate);
-
-    const price =
-        RARITY_PRICES[rarity];
-
-
-    const {
-        data: existing
-    } =
-        await supabaseClient
-            .from("license_plates")
-            .select("id,owner_id")
-            .eq("plate", plate)
-            .maybeSingle();
-
-
-    if (
-        existing &&
-        existing.owner_id
-    ) {
-
-        alert(
-            "Этот номер уже кому-то принадлежит."
-        );
-
-        return;
-    }
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("license_plates")
-            .upsert(
-                {
-                    plate: plate,
-                    price: price,
-                    rarity: rarity,
-                    status: "available",
-                    owner_id: null
-                },
-                {
-                    onConflict: "plate"
-                }
-            );
-
-
-    if (error) {
-
-        alert(error.message);
-
-        return;
-    }
-
-
-    alert(
-        "Номер добавлен в общий магазин."
-    );
-
-
-    await loadShop();
-
-}
-
-
-/* =========================================================
-   SHOP
-========================================================= */
-
-async function loadShop() {
-
-    const box =
-        document.getElementById(
-            "shopList"
-        );
-
-
-    box.innerHTML =
-        '<div class="empty">Загрузка...</div>';
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("license_plates")
-            .select("*")
-            .eq("status", "available")
-            .is("owner_id", null)
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-    if (error) {
-
-        box.innerHTML =
-            `<div class="empty">${escapeHtml(error.message)}</div>`;
-
-        return;
-    }
-
-
-    if (!data || !data.length) {
-
-        box.innerHTML =
-            '<div class="empty">В магазине пока нет номеров.</div>';
-
-        return;
-    }
-
-
-    box.innerHTML =
-        data.map(plate => {
-
-            return `
-                <div class="list-item">
-
-                    <div class="list-main">
-
-                        <div class="list-title">
-                            ${escapeHtml(plate.plate)}
-                        </div>
-
-                        <div class="list-sub">
-                            ${escapeHtml(plate.rarity)}
-                        </div>
-
-                    </div>
-
-                    <div>
-                        <div class="price">
-                            ${Number(plate.price).toLocaleString("ru-RU")} ₽
-                        </div>
-
-                        <button
-                            class="buy-btn"
-                            onclick="buyShopPlate('${plate.id}')"
-                        >
-                            Купить
-                        </button>
-                    </div>
-
-                </div>
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================================================
-   BUY SHOP PLATE
-========================================================= */
-
-async function buyShopPlate(id) {
-
-    await refreshProfile();
-
-
-    const {
-        data: plate,
-        error
-    } =
-        await supabaseClient
-            .from("license_plates")
-            .select("*")
-            .eq("id", id)
-            .single();
-
-
-    if (error || !plate) {
-
-        alert(
-            "Номер больше недоступен."
-        );
-
-        await loadShop();
-
-        return;
-    }
-
-
-    if (
-        plate.owner_id ||
-        plate.status !== "available"
-    ) {
-
-        alert(
-            "Этот номер уже купили."
-        );
-
-        await loadShop();
-
-        return;
-    }
-
-
-    if (
-        Number(currentProfile.balance) <
-        Number(plate.price)
-    ) {
-
-        alert(
-            "Недостаточно средств."
-        );
-
-        return;
-    }
-
-
-    const {
-        error: updateError
-    } =
-        await supabaseClient
-            .from("license_plates")
-            .update({
-                owner_id: currentUser.id,
-                status: "sold"
-            })
-            .eq("id", id)
-            .is("owner_id", null);
-
-
-    if (updateError) {
-
-        alert(
-            updateError.message
-        );
-
-        return;
-    }
-
-
-    const {
-        error: inventoryError
-    } =
-        await supabaseClient
-            .from("license_inventory")
-            .insert({
-                user_id: currentUser.id,
-                plate_id: id
-            });
-
-
-    if (
-        inventoryError &&
-        !inventoryError.message.includes(
-            "duplicate"
-        )
-    ) {
-
-        console.error(
-            inventoryError
-        );
-
-    }
-
-
-    const newBalance =
-        Number(currentProfile.balance) -
-        Number(plate.price);
-
-
-    await supabaseClient
-        .from("license_users")
-        .update({
-            balance: newBalance
-        })
-        .eq("id", currentUser.id);
-
-
-    await supabaseClient
-        .from("license_transactions")
-        .insert({
-            user_id: currentUser.id,
-            type: "purchase",
-            amount: -Number(plate.price),
-            description:
-                "Покупка номера " +
-                plate.plate
-        });
-
-
-    await refreshProfile();
-
-    await loadShop();
-
-    await loadInventory();
-
-
-    alert(
-        "Номер успешно куплен."
-    );
-
-}
-
-
-/* =========================================================
-   INVENTORY
-========================================================= */
-
-async function loadInventory() {
-
-    const box =
-        document.getElementById(
-            "inventoryList"
-        );
-
-
-    box.innerHTML =
-        '<div class="empty">Загрузка...</div>';
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("license_inventory")
-            .select(`
-                id,
-                bought_at,
-                plate_id,
-                license_plates (
-                    plate,
-                    rarity,
-                    price
-                )
-            `)
-            .eq(
-                "user_id",
-                currentUser.id
-            )
-            .order(
-                "bought_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-    if (error) {
-
-        box.innerHTML =
-            `<div class="empty">${escapeHtml(error.message)}</div>`;
-
-        return;
-    }
-
-
-    if (!data || !data.length) {
-
-        box.innerHTML =
-            '<div class="empty">У тебя пока нет номеров.</div>';
-
-        return;
-    }
-
-
-    box.innerHTML =
-        data.map(item => {
-
-            const plate =
-                item.license_plates;
-
-
-            return `
-                <div class="list-item">
-
-                    <div class="list-main">
-
-                        <div class="list-title">
-                            ${escapeHtml(plate.plate)}
-                        </div>
-
-                        <div class="list-sub">
-                            ${escapeHtml(plate.rarity)}
-                        </div>
-
-                    </div>
-
-                    <div class="price">
-                        ${Number(plate.price).toLocaleString("ru-RU")} ₽
-                    </div>
-
-                </div>
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================================================
-   TOP 15
-========================================================= */
-
-async function loadTop() {
-
-    const box =
-        document.getElementById(
-            "topList"
-        );
-
-
-    box.innerHTML =
-        '<div class="empty">Загрузка...</div>';
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("license_users")
-            .select(`
-                id,
-                nickname,
-                balance,
-                license_tags (
-                    tag,
-                    color
-                )
-            `)
-            .order(
-                "balance",
-                {
-                    ascending: false
-                }
-            )
-            .limit(15);
-
-
-    if (error) {
-
-        box.innerHTML =
-            `<div class="empty">${escapeHtml(error.message)}</div>`;
-
-        return;
-    }
-
-
-    if (!data || !data.length) {
-
-        box.innerHTML =
-            '<div class="empty">ТОП пока пуст.</div>';
-
-        return;
-    }
-
-
-    box.innerHTML =
-        data.map((user,index) => {
-
-            const position =
-                index + 1;
-
-
-            let className =
-                "list-item top-item";
-
-
-            if (position === 1) {
-                className += " first";
-            }
-
-            if (position === 2) {
-                className += " second";
-            }
-
-            if (position === 3) {
-                className += " third";
-            }
-
-
-            const tags =
-                (user.license_tags || [])
-                    .map(tag => {
-
-                        const safeColor =
-                            escapeAttribute(
-                                tag.color
-                            );
-
-
-                        return `
-                            <span
-                                class="tag"
-                                style="color:${safeColor};border:1px solid ${safeColor}"
-                            >
-                                ${escapeHtml(tag.tag)}
-                            </span>
-                        `;
-
-                    })
-                    .join("");
-
-
-            return `
-                <div class="${className}">
-
-                    <div class="top-user">
-
-                        <div class="top-place">
-                            ${position}
-                        </div>
-
-                        <div class="list-main">
-
-                            <div class="list-title">
-                                ${escapeHtml(user.nickname)}
-                                ${tags}
-                            </div>
-
-                            <div class="list-sub">
-                                Баланс
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="price">
-                        ${Number(user.balance).toLocaleString("ru-RU")} ₽
-                    </div>
-
-                </div>
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================================================
-   ADMIN CHECK
-========================================================= */
-
-function isAdmin() {
-
-    return (
-        currentProfile &&
-        currentProfile.nickname &&
-        currentProfile.nickname.toLowerCase() ===
-        "d0ntyyy"
-    );
-
-}
-
-
-/* =========================================================
-   ADMIN MESSAGE
-========================================================= */
-
-function adminMessage(text) {
-
-    document
-        .getElementById("adminStatus")
-        .textContent = text;
-
-}
-
-
-/* =========================================================
-   FIND USER
-========================================================= */
-
-async function findUserByNickname(nickname) {
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("license_users")
-            .select("*")
-            .eq("nickname", nickname)
-            .maybeSingle();
-
-
-    if (error) {
-
-        console.error(error);
-
-        return null;
-    }
-
-
-    return data;
-
-}
-
-
-/* =========================================================
-   ADMIN BALANCE
-========================================================= */
-
-async function adminGiveBalance() {
-
-    if (!isAdmin()) {
-
-        return;
-    }
-
-
-    const nickname =
-        document
-            .getElementById("balanceNick")
-            .value
-            .trim();
-
-
-    const amount =
-        Number(
-            document
-                .getElementById("balanceAmount")
-                .value
-        );
-
-
-    if (!nickname || !amount) {
-
-        adminMessage(
-            "Заполни ник и сумму."
-        );
-
-        return;
-    }
-
-
-    const user =
-        await findUserByNickname(
-            nickname
-        );
-
-
-    if (!user) {
-
-        adminMessage(
-            "Пользователь не найден."
-        );
-
-        return;
-    }
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("license_users")
-            .update({
-                balance:
-                    Number(user.balance) +
-                    amount
-            })
-            .eq(
-                "id",
-                user.id
-            );
-
-
-    if (error) {
-
-        adminMessage(
-            error.message
-        );
-
-        return;
-    }
-
-
-    adminMessage(
-        "Баланс успешно выдан."
-    );
-
-}
-
-
-/* =========================================================
-   ADMIN TAG
-========================================================= */
-
-async function adminGiveTag() {
-
-    if (!isAdmin()) {
-        return;
-    }
-
-
-    const nickname =
-        document
-            .getElementById("tagNick")
-            .value
-            .trim();
-
-
-    const tag =
-        document
-            .getElementById("tagName")
-            .value
-            .trim();
-
-
-    const color =
-        document
-            .getElementById("tagColor")
-            .value
-            .trim();
-
-
-    if (!nickname || !tag) {
-
-        adminMessage(
-            "Заполни ник и название тега."
-        );
-
-        return;
-    }
-
-
-    const user =
-        await findUserByNickname(
-            nickname
-        );
-
-
-    if (!user) {
-
-        adminMessage(
-            "Пользователь не найден."
-        );
-
-        return;
-    }
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("license_tags")
-            .insert({
-                user_id: user.id,
-                tag: tag,
-                color: color || "#ff3030"
-            });
-
-
-    if (error) {
-
-        adminMessage(
-            error.message
-        );
-
-        return;
-    }
-
-
-    adminMessage(
-        "Тег выдан."
-    );
-
-
-    await loadTop();
-
-}
-
-
-/* =========================================================
-   ADMIN GIVE PLATE
-========================================================= */
-
-async function adminGivePlate() {
-
-    if (!isAdmin()) {
-        return;
-    }
-
-
-    const nickname =
-        document
-            .getElementById("givePlateNick")
-            .value
-            .trim();
-
-
-    const plate =
-        document
-            .getElementById("givePlateValue")
-            .value
-            .trim();
-
-
-    if (!nickname || !plate) {
-
-        adminMessage(
-            "Заполни ник и номер."
-        );
-
-        return;
-    }
-
-
-    const user =
-        await findUserByNickname(
-            nickname
-        );
-
-
-    if (!user) {
-
-        adminMessage(
-            "Пользователь не найден."
-        );
-
-        return;
-    }
-
-
-    const rarity =
-        getRarityFromPlateString(
-            plate
-        );
-
-
-    const {
-        data: existing
-    } =
-        await supabaseClient
-            .from("license_plates")
-            .select("*")
-            .eq("plate", plate)
-            .maybeSingle();
-
-
-    let plateId;
-
-
-    if (existing) {
-
-        if (
-            existing.owner_id &&
-            existing.owner_id !== user.id
-        ) {
-
-            adminMessage(
-                "Этот номер уже принадлежит другому пользователю."
-            );
-
-            return;
-        }
-
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("license_plates")
-                .update({
-                    owner_id: user.id,
-                    status: "sold",
-                    rarity: rarity,
-                    price: 0
-                })
-                .eq("id", existing.id)
-                .select()
-                .single();
-
-
-        if (error) {
-
-            adminMessage(
-                error.message
-            );
-
-            return;
-        }
-
-
-        plateId =
-            data.id;
-
-    } else {
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("license_plates")
-                .insert({
-                    plate: plate,
-                    owner_id: user.id,
-                    price: 0,
-                    rarity: rarity,
-                    status: "sold"
-                })
-                .select()
-                .single();
-
-
-        if (error) {
-
-            adminMessage(
-                error.message
-            );
-
-            return;
-        }
-
-
-        plateId =
-            data.id;
-
-    }
-
-
-    await supabaseClient
-        .from("license_inventory")
-        .upsert(
-            {
-                user_id: user.id,
-                plate_id: plateId
-            },
-            {
-                onConflict:
-                    "user_id,plate_id"
-            }
-        );
-
-
-    adminMessage(
-        "Номер выдан пользователю."
-    );
-
-
-}
-
-
-/* =========================================================
-   ADMIN ADD SHOP PLATE
-========================================================= */
-
-async function adminAddShopPlate() {
-
-    if (!isAdmin()) {
-        return;
-    }
-
-
-    const plate =
-        document
-            .getElementById("shopPlateValue")
-            .value
-            .trim();
-
-
-    const price =
-        Number(
-            document
-                .getElementById("shopPlatePrice")
-                .value
-        );
-
-
-    if (!plate || !price) {
-
-        adminMessage(
-            "Заполни номер и цену."
-        );
-
-        return;
-    }
-
-
-    const rarity =
-        getRarityFromPlateString(
-            plate
-        );
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .from("license_plates")
-            .upsert(
-                {
-                    plate: plate,
-                    owner_id: null,
-                    price: price,
-                    rarity: rarity,
-                    status: "available"
-                },
-                {
-                    onConflict: "plate"
-                }
-            );
-
-
-    if (error) {
-
-        adminMessage(
-            error.message
-        );
-
-        return;
-    }
-
-
-    adminMessage(
-        "Номер добавлен в магазин."
-    );
-
-
-    await loadShop();
-
-}
-
-
-/* =========================================================
-   RARITY FROM STRING
-========================================================= */
-
-function getRarityFromPlateString(plate) {
-
-    const match =
-        plate.match(
-            /\s(\d{3})\s*\|/
-        );
-
-
-    if (!match) {
-        return "Обычный";
-    }
-
-
-    const numbers =
-        match[1];
-
-
-    if (
-        numbers === "777" ||
-        numbers === "666" ||
-        numbers === "555" ||
-        numbers === "111" ||
-        numbers === "999"
-    ) {
-
-        return "Легендарный";
-
-    }
-
-
-    if (
-        numbers[0] === numbers[1] &&
-        numbers[1] === numbers[2]
-    ) {
-
-        return "Редкий";
-
-    }
-
-
-    if (
-        numbers === "123" ||
-        numbers === "321" ||
-        numbers === "007"
-    ) {
-
-        return "Эпический";
-
-    }
-
-
-    return "Обычный";
-
-}
-
-
-/* =========================================================
-   HTML SAFETY
-========================================================= */
-
-function escapeHtml(value) {
-
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-}
-
-
-function escapeAttribute(value) {
-
-    return String(value)
-        .replaceAll('"', "")
-        .replaceAll("'", "")
-        .replaceAll("<", "")
-        .replaceAll(">", "");
-
-}
-
-
-/* =========================================================
-   AUTH SESSION
-========================================================= */
-
-async function checkSession() {
-
-    const {
-        data
-    } =
-        await supabaseClient.auth.getSession();
-
-
-    if (
-        data &&
-        data.session &&
-        data.session.user
-    ) {
-
-        currentUser =
-            data.session.user;
-
-
-        await loadProfile();
-
-
-        if (currentProfile) {
-
-            if (
-                currentProfile.is_banned
-            ) {
-
-                await supabaseClient
-                    .auth
-                    .signOut();
-
-                return;
-            }
-
-
-            enterApp();
-
-        }
-
-    }
-
-}
-
-
-/* =========================================================
-   AUTH STATE LISTENER
-========================================================= */
-
-supabaseClient.auth.onAuthStateChange(
-    async (event, session) => {
-
-        if (
-            event === "SIGNED_OUT"
-        ) {
-
-            return;
-        }
-
-
-        if (
-            session &&
-            session.user &&
-            !currentProfile
-        ) {
-
-            currentUser =
-                session.user;
-
-            await loadProfile();
-
-        }
-
-    }
+const regions=Array.from(
+ {length:99},
+ (_,i)=>String(i+1).padStart(2,"0")
 );
 
 
-/* =========================================================
-   START
-========================================================= */
+/* AUTH */
 
-window.addEventListener(
-    "DOMContentLoaded",
-    async () => {
+function authMode(m){
 
-        updatePlate();
+ mode=m;
 
-        await checkSession();
+ loginTab.classList.toggle("active",m==="login");
+ regTab.classList.toggle("active",m==="register");
 
-    }
-);
+ nickBlock.classList.toggle("hidden",m!=="register");
+
+ authText.textContent=
+ m==="login" ? "Войти" : "Создать аккаунт";
+
+ authError.textContent="";
+}
+
+
+async function submitAuth(){
+
+ authError.textContent="";
+
+ const email=
+ document.getElementById("email").value.trim();
+
+ const password=
+ document.getElementById("password").value;
+
+ const nickname=
+ document.getElementById("nickname").value.trim();
+
+ if(!email||!password){
+  authError.textContent="Заполни email и пароль.";
+  return;
+ }
+
+ if(mode==="register"){
+
+  if(!nickname){
+   authError.textContent="Введите никнейм.";
+   return;
+  }
+
+  const check=await db
+   .from("license_users")
+   .select("id")
+   .eq("nickname",nickname)
+   .maybeSingle();
+
+  if(check.data){
+   authError.textContent="Этот никнейм уже занят.";
+   return;
+  }
+
+  const result=await db.auth.signUp({
+   email,
+   password
+  });
+
+  if(result.error){
+   authError.textContent=result.error.message;
+   return;
+  }
+
+  if(!result.data.user){
+   authError.textContent="Ошибка создания аккаунта.";
+   return;
+  }
+
+  const insert=await db
+   .from("license_users")
+   .insert({
+    id:result.data.user.id,
+    nickname,
+    email,
+    balance:100000
+   });
+
+  if(insert.error){
+   authError.textContent=insert.error.message;
+   return;
+  }
+
+  if(!result.data.session){
+   authError.textContent=
+   "Подтверди email, затем войди.";
+   return;
+  }
+
+ }else{
+
+  const result=await db.auth.signInWithPassword({
+   email,
+   password
+  });
+
+  if(result.error){
+   authError.textContent=result.error.message;
+   return;
+  }
+
+ }
+
+ await loadUser();
+}
+
+
+async function loadUser(){
+
+ const session=await db.auth.getSession();
+
+ user=session.data.session?.user;
+
+ if(!user){
+  showAuth();
+  return;
+ }
+
+ const result=await db
+  .from("license_users")
+  .select("*")
+  .eq("id",user.id)
+  .maybeSingle();
+
+ if(!result.data){
+  showAuth();
+  return;
+ }
+
+ profile=result.data;
+
+ if(profile.is_banned){
+  alert("Аккаунт заблокирован.");
+  await db.auth.signOut();
+  showAuth();
+  return;
+ }
+
+ document.getElementById("auth").classList.add("hidden");
+ document.getElementById("app").classList.remove("hidden");
+
+ updateBalance();
+
+ if(profile.nickname==="d0ntyyy"){
+  adminNav.classList.remove("hidden");
+ }
+
+ renderPlate();
+
+ await loadShop();
+ await loadInventory();
+ await loadTop();
+}
+
+
+function showAuth(){
+
+ document.getElementById("auth").classList.remove("hidden");
+ document.getElementById("app").classList.add("hidden");
+}
+
+
+async function logout(){
+
+ await db.auth.signOut();
+ user=null;
+ profile=null;
+ showAuth();
+}
+
+
+/* NAV */
+
+document.querySelectorAll(".nav").forEach(btn=>{
+
+ btn.onclick=async()=>{
+
+  const page=btn.dataset.page;
+
+  document.querySelectorAll(".nav")
+   .forEach(x=>x.classList.remove("active"));
+
+  btn.classList.add("active");
+
+  document.querySelectorAll(".page")
+   .forEach(x=>x.classList.remove("active"));
+
+  document.getElementById(page)
+   .classList.add("active");
+
+  if(page==="shop")await loadShop();
+  if(page==="inventory")await loadInventory();
+  if(page==="top")await loadTop();
+  if(page==="admin")await loadAdminUsers();
+
+ };
+
+});
+
+
+/* SPINNER */
+
+function randomLetter(){
+ return letters[
+  Math.floor(Math.random()*letters.length)
+ ];
+}
+
+function randomNumber(){
+ return String(
+  Math.floor(Math.random()*1000)
+ ).padStart(3,"0");
+}
+
+function randomRegion(){
+ return regions[
+  Math.floor(Math.random()*regions.length)
+ ];
+}
+
+function spinLetters(){
+
+ current.l1=randomLetter();
+ current.l2=
+ randomLetter()+randomLetter();
+
+ animate();
+}
+
+function spinNumbers(){
+
+ current.num=randomNumber();
+ animate();
+
+}
+
+function spinRegion(){
+
+ current.region=randomRegion();
+ animate();
+
+}
+
+
+function animate(){
+
+ plate.style.transform="scale(.94)";
+
+ setTimeout(()=>{
+  renderPlate();
+  plate.style.transform="scale(1)";
+ },100);
+
+}
+
+
+function renderPlate(){
+
+ const name=
+ current.l1+
+ current.num+
+ current.l2;
+
+ plate.innerHTML=`
+ ${name}
+ <span class="rus">RUS</span>
+ <span class="region">${current.region}</span>
+ `;
+
+ const rarityName=getRarity(current.num);
+ const p=getPrice(rarityName);
+
+ rarity.textContent=rarityName;
+
+ rarity.className=
+ "rarity "+rarityClass(rarityName);
+
+ price.textContent=
+ money(p)+" ₽";
+}
+
+
+function getRarity(n){
+
+ if(["777","666","555","111","999"].includes(n))
+  return "Легендарный";
+
+ if(n[0]===n[1]&&n[1]===n[2])
+  return "Редкий";
+
+ if(["123","321","007"].includes(n))
+  return "Эпический";
+
+ return "Обычный";
+}
+
+
+function rarityClass(x){
+
+ if(x==="Легендарный")return"legendary";
+ if(x==="Эпический")return"epic";
+ if(x==="Редкий")return"rare";
+ return"common";
+}
+
+
+function getPrice(x){
+
+ if(x==="Легендарный")return 100000;
+ if(x==="Эпический")return 25000;
+ if(x==="Редкий")return 5000;
+
+ return 1000;
+}
+
+
+/* BUY */
+
+async function buyCurrent(){
+
+ const name=
+ current.l1+
+ current.num+
+ current.l2+
+ " | "+
+ current.region;
+
+ const r=getRarity(current.num);
+ const p=getPrice(r);
+
+ if(profile.balance<p){
+  toast("Недостаточно средств.");
+  return;
+ }
+
+ const exists=await db
+  .from("license_plates")
+  .select("id")
+  .eq("plate",name)
+  .maybeSingle();
+
+ if(exists.data){
+  toast("Такой номер уже существует.");
+  return;
+ }
+
+ const created=await db
+  .from("license_plates")
+  .insert({
+   plate:name,
+   owner_id:user.id,
+   price:p,
+   rarity:r,
+   status:"owned"
+  })
+  .select()
+  .single();
+
+ if(created.error){
+  toast(created.error.message);
+  return;
+ }
+
+ const newBalance=
+ profile.balance-p;
+
+ await db
+  .from("license_users")
+  .update({
+   balance:newBalance
+  })
+  .eq("id",user.id);
+
+ await db
+  .from("license_inventory")
+  .insert({
+   user_id:user.id,
+   plate_id:created.data.id
+  });
+
+ await db
+  .from("license_transactions")
+  .insert({
+   user_id:user.id,
+   type:"purchase",
+   amount:-p,
+   description:"Покупка "+name
+  });
+
+ profile.balance=newBalance;
+
+ updateBalance();
+ await loadInventory();
+
+ toast("Номер куплен!");
+}
+
+
+/* SHOP */
+
+async function loadShop(){
+
+ shopList.innerHTML=
+ "<div class='card'>Загрузка...</div>";
+
+ const result=await db
+  .from("license_plates")
+  .select("*")
+  .eq("status","available")
+  .is("owner_id",null)
+  .order("created_at",{ascending:false});
+
+ if(result.error){
+  shopList.innerHTML=
+  `<div class="card">${result.error.message}</div>`;
+  return;
+ }
+
+ if(!result.data.length){
+  shopList.innerHTML=`
+  <div class="card">
+   <div class="card-title">Магазин пуст</div>
+   <div class="muted">Номеров пока нет.</div>
+  </div>`;
+  return;
+ }
+
+ shopList.innerHTML=result.data.map(x=>`
+
+ <div class="card">
+
+  <div class="shop-plate">
+   ${safe(x.plate)}
+  </div>
+
+  <div class="muted">
+   ${safe(x.rarity)}
+  </div>
+
+  <div style="margin-top:10px;font-weight:900">
+   ${money(x.price)} ₽
+  </div>
+
+  <button class="card-btn"
+   onclick="buyShop('${x.id}')">
+   Купить
+  </button>
+
+ </div>
+
+ `).join("");
+}
+
+
+async function buyShop(id){
+
+ const result=await db
+  .from("license_plates")
+  .select("*")
+  .eq("id",id)
+  .maybeSingle();
+
+ if(!result.data){
+  toast("Номер уже купили.");
+  return;
+ }
+
+ const x=result.data;
+
+ if(profile.balance<x.price){
+  toast("Недостаточно средств.");
+  return;
+ }
+
+ const update=await db
+  .from("license_plates")
+  .update({
+   owner_id:user.id,
+   status:"owned"
+  })
+  .eq("id",id)
+  .is("owner_id",null);
+
+ if(update.error){
+  toast(update.error.message);
+  return;
+ }
+
+ const newBalance=
+ profile.balance-x.price;
+
+ await db
+  .from("license_users")
+  .update({
+   balance:newBalance
+  })
+  .eq("id",user.id);
+
+ await db
+  .from("license_inventory")
+  .insert({
+   user_id:user.id,
+   plate_id:id
+  });
+
+ profile.balance=newBalance;
+
+ updateBalance();
+
+ await loadShop();
+ await loadInventory();
+
+ toast("Номер куплен!");
+}
+
+
+/* INVENTORY */
+
+async function loadInventory(){
+
+ inventoryList.innerHTML=
+ "<div class='card'>Загрузка...</div>";
+
+ const result=await db
+  .from("license_inventory")
+  .select(`
+   id,
+   bought_at,
+   license_plates(
+    plate,
+    price,
+    rarity
+   )
+  `)
+  .eq("user_id",user.id)
+  .order("bought_at",{ascending:false});
+
+ if(result.error){
+  inventoryList.innerHTML=
+  `<div class="card">${result.error.message}</div>`;
+  return;
+ }
+
+ if(!result.data.length){
+  inventoryList.innerHTML=`
+  <div class="card">
+   <div class="card-title">У тебя пока нет номеров</div>
+   <div class="muted">Купи первый номер в крутилке.</div>
+  </div>`;
+  return;
+ }
+
+ inventoryList.innerHTML=result.data.map(x=>`
+
+ <div class="card">
+
+  <div class="shop-plate">
+   ${safe(x.license_plates.plate)}
+  </div>
+
+  <div class="muted">
+   ${safe(x.license_plates.rarity)}
+  </div>
+
+  <div style="margin-top:8px">
+   Куплен за ${money(x.license_plates.price)} ₽
+  </div>
+
+ </div>
+
+ `).join("");
+}
+
+
+/* TOP */
+
+async function loadTop(){
+
+ topList.innerHTML=
+ "<div class='card'>Загрузка...</div>";
+
+ const result=await db
+  .from("license_users")
+  .select("nickname,balance")
+  .order("balance",{ascending:false})
+  .limit(15);
+
+ if(result.error){
+  topList.innerHTML=
+  `<div class="card">${result.error.message}</div>`;
+  return;
+ }
+
+ topList.innerHTML=result.data.map((x,i)=>`
+
+ <div class="top-row">
+
+  <div class="place">
+   #${i+1}
+  </div>
+
+  <div>
+   <b>${safe(x.nickname)}</b>
+  </div>
+
+  <div class="top-money">
+   ${money(x.balance)} ₽
+  </div>
+
+ </div>
+
+ `).join("");
+}
+
+
+/* ADMIN */
+
+async function loadAdminUsers(){
+
+ adminContent.innerHTML=
+ "<h3>Пользователи</h3>Загрузка...";
+
+ const result=await db
+  .from("license_users")
+  .select("nickname,email,balance,is_banned")
+  .order("created_at",{ascending:false});
+
+ if(result.error){
+  adminContent.innerHTML=result.error.message;
+  return;
+ }
+
+ adminContent.innerHTML=`
+
+ <h3>Пользователи</h3>
+
+ ${result.data.map(x=>`
+
+ <div class="card" style="margin-bottom:8px">
+
+  <b>${safe(x.nickname)}</b>
+
+  <div class="muted">
+   ${safe(x.email)}
+  </div>
+
+  <div style="margin-top:7px">
+   ${money(x.balance)} ₽
+  </div>
+
+ </div>
+
+ `).join("")}
+
+ `;
+}
+
+
+function adminPage(type,btn){
+
+ document.querySelectorAll(".admin-tab")
+  .forEach(x=>x.classList.remove("active"));
+
+ btn.classList.add("active");
+
+ if(type==="users"){
+  loadAdminUsers();
+  return;
+ }
+
+ if(type==="balance"){
+
+  adminContent.innerHTML=`
+
+  <h3>Выдать баланс</h3>
+
+  <div class="admin-row">
+   <input id="bnick" placeholder="Никнейм">
+   <input id="bamount" type="number" placeholder="Количество">
+   <button class="small" onclick="giveBalance()">Выдать</button>
+  </div>
+
+  `;
+
+ }
+
+ if(type==="plate"){
+
+  adminContent.innerHTML=`
+
+  <h3>Выдать номер</h3>
+
+  <div class="admin-row">
+   <input id="pnick" placeholder="Никнейм">
+  </div>
+
+  <div class="admin-row">
+   <input id="pvalue" placeholder="А777АА | 777">
+   <input id="pprice" type="number" placeholder="Цена">
+   <button class="small" onclick="givePlate()">Выдать</button>
+  </div>
+
+  `;
+
+ }
+
+ if(type==="tag"){
+
+  adminContent.innerHTML=`
+
+  <h3>Выдать тег</h3>
+
+  <div class="admin-row">
+   <input id="tnick" placeholder="Никнейм">
+   <input id="tname" placeholder="Название тега">
+   <input id="tcolor" type="color" value="#258cff">
+   <button class="small" onclick="giveTag()">Выдать</button>
+  </div>
+
+  `;
+
+ }
+
+ if(type==="shop"){
+
+  adminContent.innerHTML=`
+
+  <h3>Добавить номер в магазин</h3>
+
+  <div class="admin-row">
+   <input id="splate" placeholder="А777АА | 777">
+   <input id="sprice" type="number" placeholder="Цена">
+
+   <select id="srarity">
+    <option>Обычный</option>
+    <option>Редкий</option>
+    <option>Эпический</option>
+    <option>Легендарный</option>
+   </select>
+
+   <button class="small" onclick="addShopPlate()">
+    Добавить
+   </button>
+  </div>
+
+  `;
+
+ }
+}
+
+
+async function giveBalance(){
+
+ const nick=bnick.value.trim();
+ const amount=Number(bamount.value);
+
+ const result=await db
+  .from("license_users")
+  .select("*")
+  .eq("nickname",nick)
+  .maybeSingle();
+
+ if(!result.data){
+  toast("Пользователь не найден.");
+  return;
+ }
+
+ await db
+  .from("license_users")
+  .update({
+   balance:result.data.balance+amount
+  })
+  .eq("id",result.data.id);
+
+ toast("Баланс выдан.");
+ loadAdminUsers();
+}
+
+
+async function givePlate(){
+
+ const nick=pnick.value.trim();
+ const value=pvalue.value.trim();
+ const p=Number(pprice.value)||1000;
+
+ const u=await db
+  .from("license_users")
+  .select("id")
+  .eq("nickname",nick)
+  .maybeSingle();
+
+ if(!u.data){
+  toast("Пользователь не найден.");
+  return;
+ }
+
+ const plateResult=await db
+  .from("license_plates")
+  .insert({
+   plate:value,
+   owner_id:u.data.id,
+   price:p,
+   rarity:getRarityFromPlate(value),
+   status:"owned"
+  })
+  .select()
+  .single();
+
+ if(plateResult.error){
+  toast(plateResult.error.message);
+  return;
+ }
+
+ await db
+  .from("license_inventory")
+  .insert({
+   user_id:u.data.id,
+   plate_id:plateResult.data.id
+  });
+
+ toast("Номер выдан.");
+}
+
+
+async function giveTag(){
+
+ const nick=tnick.value.trim();
+ const tag=tname.value.trim();
+ const color=tcolor.value;
+
+ const u=await db
+  .from("license_users")
+  .select("id")
+  .eq("nickname",nick)
+  .maybeSingle();
+
+ if(!u.data){
+  toast("Пользователь не найден.");
+  return;
+ }
+
+ const result=await db
+  .from("license_tags")
+  .insert({
+   user_id:u.data.id,
+   tag,
+   color
+  });
+
+ if(result.error){
+  toast(result.error.message);
+  return;
+ }
+
+ toast("Тег выдан.");
+}
+
+
+async function addShopPlate(){
+
+ const result=await db
+  .from("license_plates")
+  .insert({
+   plate:splate.value.trim(),
+   owner_id:null,
+   price:Number(sprice.value)||1000,
+   rarity:srarity.value,
+   status:"available"
+  });
+
+ if(result.error){
+  toast(result.error.message);
+  return;
+ }
+
+ toast("Номер добавлен.");
+}
+
+
+/* HELPERS */
+
+function updateBalance(){
+ balance.textContent=money(profile.balance);
+}
+
+function money(n){
+ return Number(n||0).toLocaleString("ru-RU");
+}
+
+function safe(s){
+ return String(s)
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+}
+
+function getRarityFromPlate(value){
+
+ const m=value.match(/[АВЕКМНОРСТУХ](\d{3})/);
+
+ return m ? getRarity(m[1]) : "Обычный";
+}
+
+function toast(text){
+
+ const t=document.getElementById("toast");
+
+ t.textContent=text;
+ t.classList.add("show");
+
+ setTimeout(()=>{
+  t.classList.remove("show");
+ },2500);
+}
+
+
+/* START */
+
+renderPlate();
+
+(async()=>{
+
+ const session=await db.auth.getSession();
+
+ if(session.data.session){
+  await loadUser();
+ }else{
+  showAuth();
+ }
+
+})();
 
 </script>
 
