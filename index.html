@@ -62,18 +62,41 @@ const LATIN_MAP={A:'А',B:'В',E:'Е',K:'К',M:'М',H:'Н',O:'О',P:'Р',C:'С',
 const MARKET_EASTER=['1488'];
 let authMode='login', currentUser=null, currentPage='home', spinBusy=false, adminSection='punishments';
 
-const SUPABASE_URL='https://fytsvzwyjhwdcaaogexv.supabase.co';
-const SUPABASE_KEY='sb_publishable_dWv_AWctiMp7RgJ2AvNROA_cP2yGJy-';
-const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:false}});
-const CLOUD_KEYS={users:'users',market:'market',messages:'messages',punishments:'punishments',tags:'tags',plates:'plates',reports:'reports',promocodes:'promocodes'};
+const SUPABASE_URL='https://wehiexatkhqbfcelvjnr.supabase.co';
+const SUPABASE_KEY='sb_publishable_JR5bFKt15zPnzAzeripx8w___vtFpW1';
+const CLOUD_MAP={users:'users',market:'market',messages:'messages',punishments:'punishments',tags:'tags',plates:'plates',reports:'reports',promocodes:'promocodes'};
 let cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[]};
 let cloudReady=false,cloudDirty=false,cloudTimer=null,cloudWriting=false,cloudError='';
-function load(k,f){const ck=CLOUD_KEYS[k];return ck?(cloudState[ck]??f):f}
-function save(k,v){const ck=CLOUD_KEYS[k];if(!ck)return;cloudState[ck]=v;cloudDirty=true;clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),250)}
-async function cloudLoad(){const {data,error}=await sb.from('license_state').select('state,updated_at').eq('id',1).maybeSingle();if(error){cloudError=error.message||String(error);throw error}if(!data)throw new Error('Запись license_state с id=1 не найдена.');if(data.state&&typeof data.state==='object')cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[],...data.state};cloudReady=true;cloudDirty=false;return true}
-async function cloudSave(){if(!cloudReady||!cloudDirty||cloudWriting)return;cloudWriting=true;try{const snapshot=JSON.parse(JSON.stringify(cloudState));const {error}=await sb.from('license_state').upsert({id:1,state:snapshot,updated_at:new Date().toISOString()},{onConflict:'id'});if(error){cloudError=error.message||String(error);console.error('Supabase save:',error);showToast?.('Ошибка сохранения базы данных.');return}if(JSON.stringify(cloudState)===JSON.stringify(snapshot))cloudDirty=false}finally{cloudWriting=false;if(cloudDirty){clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),250)}}}
-async function refreshCloud(){if(!cloudReady||cloudDirty||cloudWriting)return;try{const {data,error}=await sb.from('license_state').select('state,updated_at').eq('id',1).maybeSingle();if(error)throw error;if(data?.state&&typeof data.state==='object')cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[],...data.state};if(currentUser){syncCurrent();buildNav();renderBanOverlay();renderMessagesBadge();if(typeof renderPage==='function')renderPage()}}catch(e){console.error('Supabase refresh:',e)}}
-function showConnectionError(e){const box=document.getElementById('authForm');if(box)box.insertAdjacentHTML('afterbegin',`<div class="error">Ошибка подключения к базе данных: ${esc(e?.message||cloudError||'Неизвестная ошибка')}</div>`)}
+function load(k,f){const key=CLOUD_MAP[k];return key?(cloudState[key]??f):f}
+function save(k,v){const key=CLOUD_MAP[k];if(!key)return;cloudState[key]=v;cloudDirty=true;if(cloudReady){clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),350)}}
+async function cloudRequest(method,body){
+  const opt={method,headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Accept':'application/json','Prefer':'return=minimal'}};
+  if(body!==undefined)opt.body=JSON.stringify(body);
+  const r=await fetch(SUPABASE_URL+'/rest/v1/license_state?id=eq.1',opt);
+  const txt=await r.text();
+  if(!r.ok)throw new Error(txt||('HTTP '+r.status));
+  return txt;
+}
+async function cloudLoad(){
+  const r=await fetch(SUPABASE_URL+'/rest/v1/license_state?id=eq.1&select=state,updated_at',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Accept':'application/json'}});
+  const txt=await r.text();
+  if(!r.ok)throw new Error(txt||('HTTP '+r.status));
+  const rows=JSON.parse(txt);
+  if(!rows.length)throw new Error('Запись license_state с id=1 не найдена.');
+  cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[],...(rows[0].state||{})};
+  cloudReady=true;cloudDirty=false;
+  ensureData();
+  await cloudSave();
+}
+async function cloudSave(){
+  if(!cloudReady||cloudWriting||!cloudDirty)return;
+  cloudWriting=true;
+  const snapshot=JSON.parse(JSON.stringify(cloudState));
+  try{await cloudRequest('PATCH',{state:snapshot,updated_at:new Date().toISOString()});cloudDirty=false;cloudError='';}
+  catch(e){cloudError=e.message||String(e);console.error('Supabase save:',e);showToast?.('Ошибка сохранения в базе данных.',false)}
+  finally{cloudWriting=false;if(cloudDirty){clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),500)}}
+}
+async function refreshCloud(){if(!cloudReady||cloudDirty||cloudWriting)return;try{await cloudLoad();if(currentUser){const u=findUserById(currentUser.id);if(u){currentUser=u;buildNav();renderBanOverlay();renderMessagesBadge();renderPage?.()}}}catch(e){console.error('Supabase refresh:',e)}}
 function uid(){let users=load(KEYS.users,[]);let id;do{id=String(Math.floor(100000+Math.random()*900000))}while(users.some(u=>u.accountId===id));return id}
 function punId(){let p=load(KEYS.punishments,[]);let id;do{id=String(Math.floor(100000+Math.random()*900000))}while(p.some(x=>x.id===id));return id}
 function esc(s){return String(s??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[m]))}
@@ -122,6 +145,8 @@ function ensureData(){
   save(KEYS.reports,load(KEYS.reports,[]));
   save(KEYS.promocodes,load(KEYS.promocodes,[]));
 }
+ensureData();
+
 function roleName(role){return ADMIN_ROLES[role]||'Игрок'}
 function roleLevel(user=currentUser){return ROLE_LEVEL[user?.adminRole]||0}
 function isOwnerUser(user=currentUser){return !!user&&(user.nickname?.toLowerCase()===OWNER||user.adminRole==='owner')}
@@ -236,8 +261,23 @@ function deletePromoCode(id){if(!canManageProject())return;save(KEYS.promocodes,
 document.getElementById('loginTab').onclick=()=>{authMode='login';renderAuth()};document.getElementById('registerTab').onclick=()=>{authMode='register';renderAuth()};document.getElementById('logoutBtn').onclick=()=>{if(currentUser){currentUser.online=false;currentUser.lastSeen=Date.now();updateUser(currentUser)};sessionStorage.removeItem(KEYS.session);currentUser=null;closeAdmin();document.getElementById('appView').classList.add('hidden');document.getElementById('authView').classList.remove('hidden');renderAuth()};document.getElementById('closeAdmin').onclick=closeAdmin;
 window.addEventListener('storage',()=>{if(currentUser){syncCurrent();buildNav();renderBanOverlay();renderMessagesBadge()}});
 setInterval(()=>{if(currentUser){renderBanOverlay();}},1000);
-(async function boot(){renderAuth();try{await cloudLoad();ensureData();await cloudSave();const id=sessionStorage.getItem(KEYS.session);if(id){const u=findUserById(id);if(u){currentUser=u;await openApp();return}}renderAuth()}catch(e){console.error('Supabase boot error:',e);renderAuth();showConnectionError(e)}})();
-setInterval(()=>{if(currentUser)refreshCloud()},8000);
+async function boot(){
+  renderAuth();
+  try{
+    await cloudLoad();
+    const id=sessionStorage.getItem(KEYS.session);
+    if(id){const u=findUserById(id);if(u){currentUser=u;await openApp();return}}
+    renderAuth();
+  }catch(e){
+    cloudError=e.message||String(e);
+    console.error('Supabase boot error:',e);
+    renderAuth();
+    const box=document.getElementById('authForm');
+    if(box)box.insertAdjacentHTML('afterbegin',`<div class="error">Ошибка подключения к базе данных: ${esc(cloudError)}</div>`);
+  }
+}
+boot();
+setInterval(()=>{if(currentUser){refreshCloud()}},8000);
 </script>
 </body>
 </html>
