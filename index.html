@@ -66,10 +66,11 @@ const SUPABASE_URL='https://wehiexatkhqbfcelvjnr.supabase.co';
 const SUPABASE_KEY='sb_publishable_JR5bFKt15zPnzAzeripx8w___vtFpW1';
 const CLOUD_MAP={users:'users',market:'market',messages:'messages',punishments:'punishments',tags:'tags',plates:'plates',reports:'reports',promocodes:'promocodes'};
 let cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[]};
-let cloudReady=false,cloudDirty=false,cloudTimer=null,cloudWriting=false,cloudError='';
+let cloudReady=false,cloudDirty=false,cloudTimer=null,cloudWriting=false,cloudError='',cloudRevision=0;
 function load(k,f){const key=CLOUD_MAP[k];return key?(cloudState[key]??f):f}
-function save(k,v){const key=CLOUD_MAP[k];if(!key)return;cloudState[key]=v;cloudDirty=true;if(cloudReady){clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),350)}}
-async function cloudRequest(method,body){
+function save(k,v){const key=CLOUD_MAP[k];if(!key)return;cloudState[key]=v;cloudDirty=true;cloudRevision++;scheduleCloudSave()}
+function scheduleCloudSave(){if(!cloudReady)return;clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),250)}
+async function cloudFetch(method,body){
   const opt={method,headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Accept':'application/json','Prefer':'return=minimal'}};
   if(body!==undefined)opt.body=JSON.stringify(body);
   const r=await fetch(SUPABASE_URL+'/rest/v1/license_state?id=eq.1',opt);
@@ -78,25 +79,54 @@ async function cloudRequest(method,body){
   return txt;
 }
 async function cloudLoad(){
-  const r=await fetch(SUPABASE_URL+'/rest/v1/license_state?id=eq.1&select=state,updated_at',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Accept':'application/json'}});
+  const r=await fetch(SUPABASE_URL+'/rest/v1/license_state?id=eq.1&select=state,updated_at',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Accept':'application/json','Cache-Control':'no-cache'}});
   const txt=await r.text();
   if(!r.ok)throw new Error(txt||('HTTP '+r.status));
   const rows=JSON.parse(txt);
   if(!rows.length)throw new Error('Запись license_state с id=1 не найдена.');
-  cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[],...(rows[0].state||{})};
-  cloudReady=true;cloudDirty=false;
+  const incoming={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[],...(rows[0].state||{})};
+  cloudState=incoming;
+  cloudReady=true;
+  cloudDirty=false;
   ensureData();
-  await cloudSave();
+  return true;
 }
 async function cloudSave(){
   if(!cloudReady||cloudWriting||!cloudDirty)return;
   cloudWriting=true;
+  const revision=cloudRevision;
   const snapshot=JSON.parse(JSON.stringify(cloudState));
-  try{await cloudRequest('PATCH',{state:snapshot,updated_at:new Date().toISOString()});cloudDirty=false;cloudError='';}
-  catch(e){cloudError=e.message||String(e);console.error('Supabase save:',e);showToast?.('Ошибка сохранения в базе данных.',false)}
-  finally{cloudWriting=false;if(cloudDirty){clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),500)}}
+  try{
+    await cloudFetch('PATCH',{state:snapshot,updated_at:new Date().toISOString()});
+    if(cloudRevision===revision)cloudDirty=false;
+    cloudError='';
+  }catch(e){
+    cloudError=e.message||String(e);
+    console.error('Supabase save:',e);
+    if(typeof showToast==='function')showToast('Ошибка сохранения в базе данных: '+cloudError,false);
+  }finally{
+    cloudWriting=false;
+    if(cloudDirty)scheduleCloudSave();
+  }
 }
-async function refreshCloud(){if(!cloudReady||cloudDirty||cloudWriting)return;try{await cloudLoad();if(currentUser){const u=findUserById(currentUser.id);if(u){currentUser=u;buildNav();renderBanOverlay();renderMessagesBadge();renderPage?.()}}}catch(e){console.error('Supabase refresh:',e)}}
+async function refreshCloud(){
+  if(!cloudReady||cloudDirty||cloudWriting)return;
+  try{
+    const beforeRevision=cloudRevision;
+    const r=await fetch(SUPABASE_URL+'/rest/v1/license_state?id=eq.1&select=state,updated_at',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Accept':'application/json','Cache-Control':'no-cache'}});
+    const txt=await r.text();
+    if(!r.ok)throw new Error(txt||('HTTP '+r.status));
+    const rows=JSON.parse(txt);
+    if(!rows.length)return;
+    if(cloudRevision!==beforeRevision||cloudDirty)return;
+    cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[],...(rows[0].state||{})};
+    if(currentUser){
+      const fresh=findUserById(currentUser.id);
+      if(fresh){currentUser=fresh;buildNav();renderBanOverlay();renderMessagesBadge();renderPage?.()}
+      else{sessionStorage.removeItem(KEYS.session);currentUser=null;document.getElementById('appView').classList.add('hidden');document.getElementById('authView').classList.remove('hidden');renderAuth()}
+    }
+  }catch(e){console.error('Supabase refresh:',e)}
+}
 function uid(){let users=load(KEYS.users,[]);let id;do{id=String(Math.floor(100000+Math.random()*900000))}while(users.some(u=>u.accountId===id));return id}
 function punId(){let p=load(KEYS.punishments,[]);let id;do{id=String(Math.floor(100000+Math.random()*900000))}while(p.some(x=>x.id===id));return id}
 function esc(s){return String(s??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[m]))}
@@ -277,7 +307,7 @@ async function boot(){
   }
 }
 boot();
-setInterval(()=>{if(currentUser){refreshCloud()}},8000);
+setInterval(()=>{if(currentUser){refreshCloud()}},2500);
 </script>
 </body>
 </html>
