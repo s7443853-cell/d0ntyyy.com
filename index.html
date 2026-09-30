@@ -3,2066 +3,2686 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>D0NTYYY — License Plates</title>
+<title>d0ntyyy License Plates</title>
 
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#090a0c;color:#eee}
-body{overflow-x:hidden}
-button,input,textarea,select{font:inherit}
-
-:root{
-  --bg:#090a0c;
-  --panel:rgba(20,22,26,.88);
-  --panel2:rgba(28,30,35,.92);
-  --border:rgba(255,255,255,.08);
-  --muted:#8d929b;
-  --text:#f1f1f1;
-  --accent:#657181;
-  --green:#4caf75;
-  --red:#d95c5c;
-  --gold:#d8ad46;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif
 }
 
-.app{min-height:100vh;display:flex}
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at top,#252525 0,#111 45%,#080808 100%);
+    color:#fff;
+}
 
-.sidebar{
-  width:245px;
-  min-height:100vh;
-  position:fixed;
-  left:0;
-  top:0;
-  padding:22px 14px;
-  background:rgba(10,11,13,.94);
-  border-right:1px solid var(--border);
-  backdrop-filter:blur(18px);
-  z-index:20;
+button,input,textarea{
+    font:inherit
+}
+
+button{
+    cursor:pointer
+}
+
+.hidden{
+    display:none!important
+}
+
+#auth{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.auth-box{
+    width:100%;
+    max-width:420px;
+    padding:32px;
+    border:1px solid #333;
+    border-radius:20px;
+    background:rgba(20,20,20,.88);
+    box-shadow:0 20px 70px #000;
 }
 
 .logo{
-  font-size:21px;
-  font-weight:800;
-  letter-spacing:1px;
-  padding:8px 12px 25px;
+    text-align:center;
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:8px;
 }
 
-.nav{
-  display:flex;
-  flex-direction:column;
-  gap:5px;
+.subtitle{
+    text-align:center;
+    color:#888;
+    margin-bottom:25px;
 }
 
-.nav button{
-  width:100%;
-  border:1px solid transparent;
-  background:transparent;
-  color:#aeb2b9;
-  text-align:left;
-  padding:12px 13px;
-  border-radius:10px;
-  cursor:pointer;
-  transition:.18s;
+.field{
+    width:100%;
+    padding:14px;
+    margin-bottom:12px;
+    border-radius:12px;
+    border:1px solid #333;
+    background:#0c0c0c;
+    color:white;
+    outline:none;
 }
 
-.nav button:hover,
-.nav button.active{
-  background:rgba(255,255,255,.055);
-  color:#fff;
-  border-color:var(--border);
-}
-
-.nav-count{
-  float:right;
-  min-width:20px;
-  padding:2px 6px;
-  border-radius:8px;
-  background:#a94444;
-  color:#fff;
-  font-size:11px;
-  text-align:center;
-}
-
-.main{
-  width:100%;
-  margin-left:245px;
-  min-height:100vh;
-  padding:30px;
-}
-
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:24px;
-}
-
-.page-title{
-  font-size:27px;
-  font-weight:800;
-}
-
-.user-mini{
-  color:#aaa;
-  font-size:14px;
-}
-
-.card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:20px;
-  backdrop-filter:blur(18px);
-  box-shadow:0 15px 50px rgba(0,0,0,.2);
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:16px;
+.field:focus{
+    border-color:#777
 }
 
 .btn{
-  border:1px solid var(--border);
-  background:#17191d;
-  color:#fff;
-  padding:11px 15px;
-  border-radius:10px;
-  cursor:pointer;
-  transition:.18s;
+    width:100%;
+    border:0;
+    border-radius:12px;
+    padding:14px;
+    margin-top:8px;
+    color:#fff;
+    background:#222;
+    transition:.2s;
 }
 
-.btn:hover{background:#202329}
-.btn.primary{background:#586373}
-.btn.green{background:#28633f}
-.btn.red{background:#743535}
-.btn.gold{background:#735c25}
-
-input,textarea,select{
-  width:100%;
-  background:#0f1114;
-  border:1px solid var(--border);
-  color:#fff;
-  outline:none;
-  border-radius:10px;
-  padding:12px;
+.btn:hover{
+    background:#333;
+    transform:translateY(-1px)
 }
 
-textarea{
-  min-height:130px;
-  resize:vertical;
+.btn-main{
+    background:#fff;
+    color:#000;
+    font-weight:800
 }
 
-label{
-  display:block;
-  margin-bottom:7px;
-  color:#aeb2b9;
-  font-size:13px;
+.btn-main:hover{
+    background:#ddd
 }
 
-.form-row{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  margin-bottom:12px;
+.auth-switch{
+    text-align:center;
+    margin-top:18px;
+    color:#888;
+    cursor:pointer;
 }
 
-.auth-wrap{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+#app{
+    min-height:100vh;
 }
 
-.auth{
-  width:min(430px,100%);
+.topbar{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    border-bottom:1px solid #292929;
+    background:rgba(10,10,10,.88);
+    position:sticky;
+    top:0;
+    z-index:20;
+    backdrop-filter:blur(15px);
 }
 
-.auth h1{
-  margin-top:0;
+.brand{
+    font-size:22px;
+    font-weight:900;
 }
 
-.auth-tabs{
-  display:flex;
-  gap:6px;
-  margin-bottom:15px;
+.user-info{
+    color:#aaa;
+    font-size:14px;
 }
 
-.auth-tabs button{flex:1}
+.layout{
+    display:flex;
+    min-height:calc(100vh - 70px);
+}
 
-.plate-wrap{
-  display:flex;
-  align-items:stretch;
-  justify-content:center;
-  margin:30px 0;
+.sidebar{
+    width:230px;
+    border-right:1px solid #292929;
+    padding:18px;
+    background:#0b0b0b;
+}
+
+.nav{
+    width:100%;
+    padding:13px;
+    margin-bottom:8px;
+    border:0;
+    border-radius:11px;
+    background:transparent;
+    color:#aaa;
+    text-align:left;
+}
+
+.nav:hover,
+.nav.active{
+    background:#1b1b1b;
+    color:#fff;
+}
+
+.main{
+    flex:1;
+    padding:30px;
+    overflow:hidden;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.page-desc{
+    color:#777;
+    margin-bottom:25px;
+}
+
+.card{
+    background:rgba(20,20,20,.8);
+    border:1px solid #292929;
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:20px;
+}
+
+.wheel-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
 }
 
 .plate{
-  min-width:330px;
-  height:105px;
-  background:#eee;
-  color:#111;
-  border-radius:8px 0 0 8px;
-  border:4px solid #c9c9c9;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:55px;
-  font-weight:900;
-  letter-spacing:5px;
-  box-shadow:0 8px 30px rgba(0,0,0,.3);
+    min-width:310px;
+    padding:20px 30px;
+    border-radius:10px;
+    background:#f4f4f4;
+    color:#111;
+    border:5px solid #111;
+    box-shadow:0 10px 40px #000;
+    text-align:center;
 }
 
-.region-box{
-  width:92px;
-  height:105px;
-  background:#eee;
-  color:#111;
-  border:4px solid #c9c9c9;
-  border-left:0;
-  border-radius:0 8px 8px 0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+.plate-number{
+    font-size:45px;
+    font-weight:900;
+    letter-spacing:3px;
 }
 
-.region{
-  font-size:32px;
-  font-weight:900;
+.plate-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:8px;
+    font-size:13px;
+    font-weight:bold;
 }
 
 .rus{
-  font-size:11px;
-  margin-top:1px;
+    font-size:20px;
 }
 
 .flag{
-  font-size:18px;
-  line-height:18px;
+    font-size:20px;
 }
 
-.plate.gold{
-  border-color:#d7b044;
-  box-shadow:0 0 35px rgba(216,173,70,.25);
+.region{
+    font-size:22px;
+    font-weight:900;
 }
 
-.plate.rare{
-  border-color:#aaa;
+.wheel-buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:25px;
 }
 
-.spinner-buttons{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
+.wheel-buttons button{
+    border:0;
+    padding:14px 22px;
+    border-radius:12px;
+    background:#222;
+    color:#fff;
 }
 
-.spinner-buttons button{
-  padding:16px 8px;
-  font-weight:800;
+.wheel-buttons button:hover{
+    background:#444;
 }
 
-.placeholder{
-  opacity:.68;
+.rare{
+    box-shadow:
+        0 0 25px rgba(255,200,0,.5),
+        0 10px 40px #000;
 }
 
-.status{
-  text-align:center;
-  color:var(--muted);
-  margin:12px 0;
+.rare-text{
+    margin-top:15px;
+    text-align:center;
+    color:#e5c35c;
+    font-weight:bold;
 }
 
-.item{
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.025);
-  border-radius:13px;
-  padding:15px;
-  margin-bottom:10px;
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
 }
 
-.item-head{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  align-items:center;
+.stat{
+    padding:20px;
+    border:1px solid #292929;
+    border-radius:15px;
+    background:#111;
 }
 
-.small{
-  font-size:12px;
-  color:var(--muted);
+.stat-name{
+    color:#777;
+    font-size:13px;
 }
 
-.money{
-  font-weight:800;
+.stat-value{
+    margin-top:8px;
+    font-size:25px;
+    font-weight:bold;
 }
 
-.table{
-  width:100%;
-  border-collapse:collapse;
+.plates-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    gap:15px;
 }
 
-.table th,.table td{
-  padding:11px;
-  border-bottom:1px solid var(--border);
-  text-align:left;
+.inventory-plate{
+    background:#151515;
+    border:1px solid #292929;
+    padding:15px;
+    border-radius:15px;
 }
 
-.badge{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:7px;
-  font-size:11px;
-  background:#24272c;
-  color:#ccc;
+.inventory-number{
+    background:#eee;
+    color:#111;
+    border-radius:7px;
+    padding:10px;
+    text-align:center;
+    font-size:24px;
+    font-weight:900;
 }
 
-.badge.red{background:#642e2e}
-.badge.green{background:#24563a}
-.badge.gold{background:#624f21}
+.inventory-region{
+    color:#888;
+    text-align:center;
+    margin-top:8px;
+}
 
-.hidden{display:none!important}
+.market-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:15px;
+}
 
-.toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:#181a1e;
-  border:1px solid var(--border);
-  padding:13px 17px;
-  border-radius:10px;
-  box-shadow:0 10px 40px rgba(0,0,0,.4);
-  z-index:100;
+.market-item{
+    padding:18px;
+    border-radius:15px;
+    border:1px solid #292929;
+    background:#111;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.row>*{
+    flex:1;
+}
+
+textarea.field{
+    min-height:130px;
+    resize:vertical;
+}
+
+.message{
+    padding:15px;
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:13px;
+    margin-bottom:10px;
+}
+
+.message b{
+    display:block;
+    margin-bottom:6px;
+}
+
+.message span{
+    color:#888;
+}
+
+.admin-tabs{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.admin-tabs button{
+    padding:10px 15px;
+    border:0;
+    border-radius:10px;
+    background:#222;
+    color:#aaa;
+}
+
+.admin-tabs button.active{
+    background:#fff;
+    color:#000;
+}
+
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.admin-table th,
+.admin-table td{
+    padding:13px;
+    border-bottom:1px solid #292929;
+    text-align:left;
+}
+
+.tag{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:7px;
+    background:#222;
+    color:#fff;
+    margin:2px;
+    font-size:12px;
+}
+
+.error{
+    color:#ff5555;
+    text-align:center;
+    margin-top:10px;
+}
+
+.success{
+    color:#58d68d;
+    text-align:center;
+    margin-top:10px;
+}
+
+.empty{
+    padding:30px;
+    text-align:center;
+    color:#666;
 }
 
 @media(max-width:800px){
-  .sidebar{
-    width:100%;
-    height:auto;
-    min-height:0;
-    position:relative;
-    border-right:0;
-    border-bottom:1px solid var(--border);
-  }
+    .layout{
+        display:block
+    }
 
-  .app{display:block}
+    .sidebar{
+        width:100%;
+        display:flex;
+        overflow:auto;
+        gap:7px;
+        border-right:0;
+        border-bottom:1px solid #292929;
+    }
 
-  .main{
-    margin-left:0;
-    padding:18px;
-  }
+    .nav{
+        min-width:max-content;
+        margin:0;
+    }
 
-  .nav{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-  }
+    .main{
+        padding:18px;
+    }
 
-  .form-row{
-    grid-template-columns:1fr;
-  }
+    .topbar{
+        padding:0 15px;
+    }
 
-  .plate{
-    min-width:0;
-    width:calc(100% - 80px);
-    font-size:35px;
-    height:80px;
-  }
+    .plate{
+        min-width:280px;
+    }
 
-  .region-box{
-    width:80px;
-    height:80px;
-  }
+    .plate-number{
+        font-size:35px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="authScreen" class="auth-wrap">
-  <div class="auth card">
-    <h1>D0NTYYY</h1>
-    <p class="small">License Plates</p>
+<!-- AUTH -->
+<section id="auth">
 
-    <div class="auth-tabs">
-      <button class="btn primary" id="loginTab" onclick="setAuthMode('login')">Войти</button>
-      <button class="btn" id="registerTab" onclick="setAuthMode('register')">Регистрация</button>
-    </div>
+<div class="auth-box">
 
-    <div id="authForm"></div>
-  </div>
+<div class="logo">d0ntyyy</div>
+<div class="subtitle">License Plates</div>
+
+<div id="loginForm">
+
+<input id="loginNick"
+       class="field"
+       placeholder="Никнейм"
+       autocomplete="username">
+
+<input id="loginPassword"
+       class="field"
+       type="password"
+       placeholder="Пароль"
+       autocomplete="current-password">
+
+<button class="btn btn-main" onclick="login()">
+Войти
+</button>
+
+<div class="auth-switch" onclick="showRegister()">
+Нет аккаунта? Регистрация
 </div>
 
-<div id="app" class="app hidden">
+<div id="loginError" class="error"></div>
 
-  <aside class="sidebar">
-    <div class="logo">D0NTYYY</div>
-
-    <div class="nav" id="nav"></div>
-  </aside>
-
-  <main class="main">
-    <div class="topbar">
-      <div id="pageTitle" class="page-title">Главная</div>
-      <div id="userMini" class="user-mini"></div>
-    </div>
-
-    <div id="content"></div>
-  </main>
 </div>
 
-<div id="toast" class="toast hidden"></div>
+<div id="registerForm" class="hidden">
+
+<input id="regNick"
+       class="field"
+       placeholder="Никнейм"
+       autocomplete="username">
+
+<input id="regPassword"
+       class="field"
+       type="password"
+       placeholder="Пароль"
+       autocomplete="new-password">
+
+<button class="btn btn-main" onclick="register()">
+Создать аккаунт
+</button>
+
+<div class="auth-switch" onclick="showLogin()">
+Уже есть аккаунт? Войти
+</div>
+
+<div id="registerError" class="error"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- APP -->
+<section id="app" class="hidden">
+
+<header class="topbar">
+
+<div class="brand">
+d0ntyyy License Plates
+</div>
+
+<div class="user-info">
+<span id="topNick"></span>
+&nbsp;•&nbsp;
+<span id="topBalance">0 ₽</span>
+</div>
+
+</header>
+
+
+<div class="layout">
+
+<aside class="sidebar">
+
+<button class="nav active" onclick="openPage('home',this)">
+Главная
+</button>
+
+<button class="nav" onclick="openPage('spinner',this)">
+Крутилка
+</button>
+
+<button class="nav" onclick="openPage('inventory',this)">
+Инвентарь
+</button>
+
+<button class="nav" onclick="openPage('market',this)">
+Магазин
+</button>
+
+<button class="nav" onclick="openPage('top',this)">
+ТОП
+</button>
+
+<button class="nav" onclick="openPage('promocodes',this)">
+Промокоды
+</button>
+
+<button class="nav" onclick="openPage('reports',this)">
+Репорты
+</button>
+
+<button class="nav" id="adminButton"
+        onclick="openPage('admin',this)">
+Админка
+</button>
+
+<button class="nav" onclick="logout()">
+Выйти
+</button>
+
+</aside>
+
+
+<main class="main">
+
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+
+<div class="page-title">
+Главная
+</div>
+
+<div class="page-desc">
+Добро пожаловать в d0ntyyy License Plates
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<div class="stat-name">Баланс</div>
+<div class="stat-value" id="homeBalance">0 ₽</div>
+</div>
+
+<div class="stat">
+<div class="stat-name">Номеров</div>
+<div class="stat-value" id="homePlates">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-name">Роль</div>
+<div class="stat-value" id="homeRole">Игрок</div>
+</div>
+
+</div>
+
+<div class="card">
+<h2>Последнее сообщение</h2>
+<br>
+<div id="latestMessage" class="message">
+<b>Система</b>
+<span>Добро пожаловать!</span>
+</div>
+</div>
+
+</div>
+
+
+<!-- SPINNER -->
+<div id="page-spinner" class="page">
+
+<div class="page-title">
+Крутилка
+</div>
+
+<div class="page-desc">
+Прокрути буквы, цифры и регион
+</div>
+
+<div class="card">
+
+<div class="wheel-wrap">
+
+<div class="plate" id="currentPlate">
+
+<div class="plate-number" id="plateNumber">
+О00ОО
+</div>
+
+<div class="plate-bottom">
+
+<div>
+<span class="rus">RUS</span>
+<span class="flag">🇷🇺</span>
+</div>
+
+<div class="region" id="plateRegion">
+000
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="rare-text" id="rareText">
+Готово к прокрутке
+</div>
+
+<div class="wheel-buttons">
+
+<button onclick="spinLetters()">
+Крутить буквы
+</button>
+
+<button onclick="spinDigits()">
+Крутить цифры
+</button>
+
+<button onclick="spinRegion()">
+Крутить регион
+</button>
+
+<button class="btn-main" onclick="spinAll()">
+ПОЛУЧИТЬ НОМЕР
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- INVENTORY -->
+<div id="page-inventory" class="page">
+
+<div class="page-title">
+Инвентарь
+</div>
+
+<div class="page-desc">
+Ваши номерные знаки
+</div>
+
+<div id="inventoryList" class="plates-grid"></div>
+
+</div>
+
+
+<!-- MARKET -->
+<div id="page-market" class="page">
+
+<div class="page-title">
+Магазин
+</div>
+
+<div class="page-desc">
+Покупка и продажа номерных знаков
+</div>
+
+<div class="card">
+
+<div class="row">
+
+<input id="marketNumber"
+       class="field"
+       placeholder="Е777КХ">
+
+<input id="marketRegion"
+       class="field"
+       placeholder="777">
+
+<input id="marketPrice"
+       class="field"
+       type="number"
+       placeholder="Цена">
+
+</div>
+
+<button class="btn btn-main" onclick="createMarketListing()">
+Выставить номер
+</button>
+
+</div>
+
+<div id="marketList" class="market-grid"></div>
+
+</div>
+
+
+<!-- TOP -->
+<div id="page-top" class="page">
+
+<div class="page-title">
+ТОП игроков
+</div>
+
+<div class="page-desc">
+Таблица игроков
+</div>
+
+<div class="card">
+
+<table class="admin-table">
+
+<thead>
+<tr>
+<th>#</th>
+<th>Игрок</th>
+<th>Номеров</th>
+<th>Баланс</th>
+</tr>
+</thead>
+
+<tbody id="topList"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- PROMOCODES -->
+<div id="page-promocodes" class="page">
+
+<div class="page-title">
+Промокоды
+</div>
+
+<div class="page-desc">
+Введите промокод
+</div>
+
+<div class="card">
+
+<input id="promoInput"
+       class="field"
+       placeholder="Промокод">
+
+<button class="btn btn-main"
+        onclick="activatePromo()">
+Активировать
+</button>
+
+<div id="promoResult"></div>
+
+</div>
+
+</div>
+
+
+<!-- REPORTS -->
+<div id="page-reports" class="page">
+
+<div class="page-title">
+Репорт
+</div>
+
+<div class="page-desc">
+Сообщение для администрации игры
+</div>
+
+<div class="card">
+
+<textarea id="reportText"
+          class="field"
+          placeholder="Введите текст репорта..."></textarea>
+
+<button class="btn btn-main"
+        onclick="sendReport()">
+Отправить репорт
+</button>
+
+<div id="reportResult"></div>
+
+</div>
+
+</div>
+
+
+<!-- ADMIN -->
+<div id="page-admin" class="page">
+
+<div class="page-title">
+Админ-панель
+</div>
+
+<div class="page-desc">
+Управление проектом
+</div>
+
+<div class="admin-tabs">
+
+<button onclick="adminPage('users',this)">
+Пользователи
+</button>
+
+<button onclick="adminPage('bans',this)">
+Баны
+</button>
+
+<button onclick="adminPage('promos',this)">
+Промокоды
+</button>
+
+<button onclick="adminPage('messages',this)">
+Сообщения
+</button>
+
+<button onclick="adminPage('reports',this)">
+Репорты
+</button>
+
+<button onclick="adminPage('tags',this)">
+Теги
+</button>
+
+</div>
+
+
+<div id="admin-users" class="admin-section">
+
+<div class="card">
+
+<h2>Выдача админки</h2>
+<br>
+
+<div id="adminUsersList"></div>
+
+</div>
+
+</div>
+
+
+<div id="admin-bans" class="admin-section hidden">
+
+<div class="card">
+
+<h2>Баны</h2>
+<br>
+
+<input id="banNick"
+       class="field"
+       placeholder="Ник игрока">
+
+<input id="banReason"
+       class="field"
+       placeholder="Причина">
+
+<button class="btn btn-main"
+        onclick="banUser()">
+Забанить
+</button>
+
+<br><br>
+
+<div id="banList"></div>
+
+</div>
+
+</div>
+
+
+<div id="admin-promos" class="admin-section hidden">
+
+<div class="card">
+
+<h2>Создание промокода</h2>
+<br>
+
+<input id="newPromo"
+       class="field"
+       placeholder="Любой промокод">
+
+<input id="promoAmount"
+       class="field"
+       type="number"
+       placeholder="Сумма">
+
+<button class="btn btn-main"
+        onclick="createPromo()">
+Создать промокод
+</button>
+
+<br><br>
+
+<div id="adminPromoList"></div>
+
+</div>
+
+</div>
+
+
+<div id="admin-messages" class="admin-section hidden">
+
+<div class="card">
+
+<h2>Сообщение игроку</h2>
+<br>
+
+<input id="messageNick"
+       class="field"
+       placeholder="Ник игрока">
+
+<input id="messageTitle"
+       class="field"
+       placeholder="Заголовок">
+
+<textarea id="messageText"
+          class="field"
+          placeholder="Текст сообщения"></textarea>
+
+<button class="btn btn-main"
+        onclick="sendSystemMessage()">
+Отправить
+</button>
+
+</div>
+
+</div>
+
+
+<div id="admin-reports" class="admin-section hidden">
+
+<div class="card">
+
+<h2>Репорты игроков</h2>
+<br>
+
+<div id="adminReports"></div>
+
+</div>
+
+</div>
+
+
+<div id="admin-tags" class="admin-section hidden">
+
+<div class="card">
+
+<h2>Теги</h2>
+<br>
+
+<input id="tagNick"
+       class="field"
+       placeholder="Ник игрока">
+
+<input id="tagName"
+       class="field"
+       placeholder="Название тега">
+
+<input id="tagColor"
+       class="field"
+       type="color"
+       value="#ff3030">
+
+<button class="btn btn-main"
+        onclick="giveTag()">
+Выдать тег
+</button>
+
+<br><br>
+
+<div id="tagList"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</main>
+</div>
+</section>
+
 
 <script>
-const SUPABASE_URL = 'https://wehiexatkhqbfcelvjnr.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_JR5bFKt15zPnzAzeripx8w___vtFpW1';
 
-let state = {
-  users:[],
-  plates:[],
-  market:[],
-  tags:[],
-  reports:[],
-  messages:[],
-  promocodes:[],
-  punishments:[]
-};
+/* =========================================================
+   CONFIG
+========================================================= */
 
-let currentUser = null;
-let currentPage = 'home';
-let authMode = 'login';
+const SUPABASE_URL =
+"https://wehiexatkhqbfcelvjnr.supabase.co";
 
-const roles = {
-  helper:'Хелпер',
-  moderator:'Модератор',
-  senior_moderator:'Старший модератор',
-  administrator:'Администратор',
-  chief_administrator:'Главный администратор',
-  deputy_founder:'Заместитель основателя',
-  owner:'Владелец'
-};
+const SUPABASE_KEY =
+"sb_publishable_JR5bFKt15zPnzAzeripx8w___vtFpW1";
 
-const spinState = {
-  first:'О',
-  numbers:'000',
-  last:'ОО',
-  region:'000',
-  placeholder:true,
-  created:false,
-  rarity:'common'
-};
 
-function uid(){
-  return Math.random().toString(36).slice(2)+Date.now().toString(36);
-}
+/*
+   ВАЖНО:
+   Этот вариант НЕ обращается к license_state.
+   Данные проекта хранятся локально в браузере,
+   поэтому ошибка schema cache для license_state
+   больше не появляется.
+*/
 
-function esc(v){
-  return String(v ?? '')
-    .replaceAll('&','&amp;')
-    .replaceAll('<','&lt;')
-    .replaceAll('>','&gt;')
-    .replaceAll('"','&quot;')
-    .replaceAll("'","&#039;");
-}
 
-function toast(text){
-  const el=document.getElementById('toast');
-  el.textContent=text;
-  el.classList.remove('hidden');
-  clearTimeout(window.toastTimer);
-  window.toastTimer=setTimeout(()=>el.classList.add('hidden'),2800);
-}
+const OWNER_NICK = "d0ntyyy";
 
-function normalize(){
-  if(!Array.isArray(state.users)) state.users=[];
-  if(!Array.isArray(state.plates)) state.plates=[];
-  if(!Array.isArray(state.market)) state.market=[];
-  if(!Array.isArray(state.tags)) state.tags=[];
-  if(!Array.isArray(state.reports)) state.reports=[];
-  if(!Array.isArray(state.messages)) state.messages=[];
-  if(!Array.isArray(state.promocodes)) state.promocodes=[];
-  if(!Array.isArray(state.punishments)) state.punishments=[];
 
-  state.users.forEach(u=>{
-    if(!Array.isArray(u.inventory)) u.inventory=[];
-    if(!Array.isArray(u.usedPromocodes)) u.usedPromocodes=[];
-    if(!u.role) u.role=null;
-    if(!('banned' in u)) u.banned=false;
-    if(typeof u.balance!=='number') u.balance=100000;
-  });
-}
+/* =========================================================
+   LOCAL DATABASE
+========================================================= */
 
-async function cloudLoad(){
-  const r=await fetch(
-    SUPABASE_URL+'/rest/v1/license_state?id=eq.1&select=id,state,updated_at',
-    {
-      headers:{
-        apikey:SUPABASE_KEY,
-        Authorization:'Bearer '+SUPABASE_KEY
-      }
-    }
-  );
+let DB = JSON.parse(
+    localStorage.getItem("DONTYYY_LICENSE_DB") || "null"
+);
 
-  if(!r.ok) throw new Error(await r.text());
+if(!DB){
 
-  const rows=await r.json();
-
-  if(rows.length && rows[0].state){
-    state=typeof rows[0].state==='string'
-      ? JSON.parse(rows[0].state)
-      : rows[0].state;
-  }
-
-  normalize();
-}
-
-async function cloudSave(){
-  normalize();
-
-  const r=await fetch(
-    SUPABASE_URL+'/rest/v1/license_state?id=eq.1',
-    {
-      method:'PATCH',
-      headers:{
-        apikey:SUPABASE_KEY,
-        Authorization:'Bearer '+SUPABASE_KEY,
-        'Content-Type':'application/json',
-        Prefer:'return=minimal'
-      },
-      body:JSON.stringify({
-        state,
-        updated_at:new Date().toISOString()
-      })
-    }
-  );
-
-  if(!r.ok) throw new Error(await r.text());
-}
-
-function findUserByNick(nick){
-  return state.users.find(
-    u=>u.nickname.toLowerCase()===nick.toLowerCase()
-  );
-}
-
-function findUser(id){
-  return state.users.find(u=>u.id===id);
-}
-
-function addMessage(userId,title,text,type='system'){
-  state.messages.push({
-    id:uid(),
-    userId,
-    title,
-    text,
-    type,
-    read:false,
-    createdAt:new Date().toISOString()
-  });
-}
-
-function unreadCount(){
-  if(!currentUser) return 0;
-  return state.messages.filter(
-    m=>m.userId===currentUser.id && !m.read
-  ).length;
-}
-
-function resetSpin(){
-  spinState.first='О';
-  spinState.numbers='000';
-  spinState.last='ОО';
-  spinState.region='000';
-  spinState.placeholder=true;
-  spinState.created=false;
-  spinState.rarity='common';
-}
-
-function randomRegion(){
-  const regions=[
-    '77','97','99','177','197','199','777','799','50','90','150',
-    '190','750','790','116','716','23','93','123','193','196'
-  ];
-
-  return regions[Math.floor(Math.random()*regions.length)];
-}
-
-const letters=['А','В','Е','К','М','Н','О','Р','С','Т','У','Х'];
-
-function randomLetters(){
-  const rareRoll=Math.random();
-
-  if(rareRoll<0.003){
-    const l=letters[Math.floor(Math.random()*letters.length)];
-    return {first:l,last:l+l,rarity:'gold'};
-  }
-
-  if(rareRoll<0.03){
-    const a=letters[Math.floor(Math.random()*letters.length)];
-    let b=letters[Math.floor(Math.random()*letters.length)];
-    if(b===a) b=letters[(letters.indexOf(a)+1)%letters.length];
-
-    return {
-      first:a,
-      last:b+a,
-      rarity:'rare'
+    DB = {
+        users: [],
+        plates: [],
+        market: [],
+        reports: [],
+        messages: [],
+        promocodes: [],
+        punishments: [],
+        tags: [],
+        session: null
     };
-  }
 
-  let a=letters[Math.floor(Math.random()*letters.length)];
-  let b=letters[Math.floor(Math.random()*letters.length)];
-  let c=letters[Math.floor(Math.random()*letters.length)];
-
-  while(b===a) b=letters[Math.floor(Math.random()*letters.length)];
-  while(c===a || c===b) c=letters[Math.floor(Math.random()*letters.length)];
-
-  return {
-    first:a,
-    last:b+c,
-    rarity:'common'
-  };
-}
-
-function randomNumbers(){
-  const roll=Math.random();
-
-  if(roll<0.003){
-    const n=Math.floor(Math.random()*10);
-    return {
-      value:String(n).repeat(3),
-      rarity:'gold'
-    };
-  }
-
-  if(roll<0.03){
-    const a=Math.floor(Math.random()*10);
-    let b=Math.floor(Math.random()*10);
-
-    while(b===a) b=Math.floor(Math.random()*10);
-
-    return {
-      value:`${a}${a}${b}`,
-      rarity:'rare'
-    };
-  }
-
-  let a=Math.floor(Math.random()*10);
-  let b=Math.floor(Math.random()*10);
-  let c=Math.floor(Math.random()*10);
-
-  while(b===a) b=Math.floor(Math.random()*10);
-  while(c===a || c===b) c=Math.floor(Math.random()*10);
-
-  return {
-    value:`${a}${b}${c}`,
-    rarity:'common'
-  };
-}
-
-function spinLetters(){
-  const x=randomLetters();
-
-  spinState.first=x.first;
-  spinState.last=x.last;
-  spinState.placeholder=false;
-  spinState.created=true;
-
-  if(x.rarity==='gold' || spinState.rarity==='gold')
-    spinState.rarity='gold';
-  else if(x.rarity==='rare' || spinState.rarity==='rare')
-    spinState.rarity='rare';
-  else
-    spinState.rarity='common';
-
-  renderCurrentPage();
-}
-
-function spinNumbers(){
-  const x=randomNumbers();
-
-  spinState.numbers=x.value;
-  spinState.placeholder=false;
-  spinState.created=true;
-
-  if(x.rarity==='gold' || spinState.rarity==='gold')
-    spinState.rarity='gold';
-  else if(x.rarity==='rare' || spinState.rarity==='rare')
-    spinState.rarity='rare';
-  else
-    spinState.rarity='common';
-
-  renderCurrentPage();
-}
-
-function spinRegion(){
-  spinState.region=randomRegion();
-  spinState.placeholder=false;
-  spinState.created=true;
-  renderCurrentPage();
-}
-
-function currentPlate(){
-  return `${spinState.first}${spinState.numbers}${spinState.last}`;
-}
-
-function isPlaceholder(){
-  return spinState.placeholder ||
-    (
-      spinState.first==='О' &&
-      spinState.numbers==='000' &&
-      spinState.last==='ОО' &&
-      spinState.region==='000'
+    localStorage.setItem(
+        "DONTYYY_LICENSE_DB",
+        JSON.stringify(DB)
     );
 }
 
-function rarityLabel(r){
-  if(r==='gold') return 'Золотой';
-  if(r==='rare') return 'Редкий';
-  return 'Обычный';
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function saveDB(){
+
+    localStorage.setItem(
+        "DONTYYY_LICENSE_DB",
+        JSON.stringify(DB)
+    );
 }
 
-function homePage(){
-  const plate=currentPlate();
 
-  return `
-    <div class="grid">
+function id(){
 
-      <div class="card">
-        <div class="small">Ваш баланс</div>
-        <div style="font-size:30px;font-weight:900;margin-top:7px">
-          ${currentUser.balance.toLocaleString('ru-RU')} ₽
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="small">Ваш номер</div>
-        <div style="font-size:22px;font-weight:800;margin-top:7px">
-          ${currentUser.inventory.length}
-        </div>
-      </div>
-
-    </div>
-
-    <div class="card" style="margin-top:16px">
-      <h2>Крутилка номерных знаков</h2>
-
-      <div class="plate-wrap">
-        <div class="plate ${spinState.rarity} ${isPlaceholder()?'placeholder':''}">
-          ${esc(plate)}
-        </div>
-
-        <div class="region-box">
-          <div class="region">${esc(spinState.region)}</div>
-          <div class="rus">RUS</div>
-          <div class="flag">🇷🇺</div>
-        </div>
-      </div>
-
-      <div class="status">
-        ${isPlaceholder()
-          ? 'О00ОО / 000 — заглушка. Купить её нельзя.'
-          : rarityLabel(spinState.rarity)}
-      </div>
-
-      <div class="spinner-buttons">
-        <button class="btn" onclick="spinLetters()">БУКВЫ</button>
-        <button class="btn" onclick="spinNumbers()">ЦИФРЫ</button>
-        <button class="btn" onclick="spinRegion()">РЕГИОН</button>
-      </div>
-
-      <div style="display:flex;gap:10px;margin-top:12px">
-        <button
-          class="btn primary"
-          style="flex:1"
-          onclick="buyCurrent()"
-          ${isPlaceholder()?'disabled':''}
-        >
-          КУПИТЬ
-        </button>
-
-        <button
-          class="btn"
-          onclick="resetSpin()"
-        >
-          СБРОСИТЬ
-        </button>
-      </div>
-    </div>
-  `;
+    return Date.now().toString(36) +
+           Math.random().toString(36).slice(2);
 }
 
-function inventoryPage(){
-  const items=currentUser.inventory || [];
 
-  return `
-    <div class="card">
-      <h2>Инвентарь</h2>
+function getUser(){
 
-      ${
-        !items.length
-        ? `<div class="small">У вас пока нет номерных знаков.</div>`
-        : items.map(p=>`
-          <div class="item">
-            <div class="item-head">
-              <div>
-                <b>${esc(p.plate)}</b>
-                <span class="badge">${esc(p.region)}</span>
-              </div>
-              <span class="badge ${p.rarity==='gold'?'gold':''}">
-                ${rarityLabel(p.rarity)}
-              </span>
-            </div>
+    if(!DB.session) return null;
 
-            <div class="small" style="margin-top:8px">
-              Куплен за ${Number(p.price||0).toLocaleString('ru-RU')} ₽
-            </div>
-
-            <div style="display:flex;gap:8px;margin-top:10px">
-              <button class="btn" onclick="sellToMarket('${p.id}')">
-                Выставить на рынок
-              </button>
-            </div>
-          </div>
-        `).join('')
-      }
-    </div>
-  `;
+    return DB.users.find(
+        u => u.id === DB.session
+    ) || null;
 }
 
-function marketPage(){
-  return `
-    <div class="card">
-      <h2>Магазин</h2>
 
-      ${
-        !state.market.length
-        ? `<div class="small">На рынке пока ничего нет.</div>`
-        : state.market.map(p=>`
-          <div class="item">
-            <div class="item-head">
-              <div>
-                <b>${esc(p.plate)}</b>
-                <span class="badge">${esc(p.region)}</span>
-              </div>
+function isOwner(){
 
-              <b>${Number(p.price).toLocaleString('ru-RU')} ₽</b>
+    const user = getUser();
+
+    return user &&
+           user.nick.toLowerCase() === OWNER_NICK;
+}
+
+
+function money(n){
+
+    return Number(n || 0).toLocaleString("ru-RU") + " ₽";
+}
+
+
+/* =========================================================
+   AUTH UI
+========================================================= */
+
+function showRegister(){
+
+    document.getElementById("loginForm")
+        .classList.add("hidden");
+
+    document.getElementById("registerForm")
+        .classList.remove("hidden");
+}
+
+
+function showLogin(){
+
+    document.getElementById("registerForm")
+        .classList.add("hidden");
+
+    document.getElementById("loginForm")
+        .classList.remove("hidden");
+}
+
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+function register(){
+
+    const nick =
+        document.getElementById("regNick")
+        .value.trim();
+
+    const password =
+        document.getElementById("regPassword")
+        .value;
+
+    const error =
+        document.getElementById("registerError");
+
+    error.textContent = "";
+
+    if(nick.length < 3){
+
+        error.textContent =
+            "Никнейм должен содержать минимум 3 символа";
+
+        return;
+    }
+
+    if(password.length < 4){
+
+        error.textContent =
+            "Пароль должен содержать минимум 4 символа";
+
+        return;
+    }
+
+    if(DB.users.some(
+        u => u.nick.toLowerCase() === nick.toLowerCase()
+    )){
+
+        error.textContent =
+            "Такой никнейм уже зарегистрирован";
+
+        return;
+    }
+
+
+    const user = {
+
+        id:id(),
+
+        nick:nick,
+
+        password:password,
+
+        balance:100000,
+
+        role:
+            nick.toLowerCase() === OWNER_NICK
+            ? "owner"
+            : "player",
+
+        banned:false,
+
+        banReason:"",
+
+        tags:[],
+
+        createdAt:new Date().toISOString()
+
+    };
+
+
+    DB.users.push(user);
+
+    /*
+       Стартовый номер.
+       Его нельзя купить в магазине.
+    */
+
+    DB.plates.push({
+
+        id:id(),
+
+        userId:user.id,
+
+        number:"О00ОО",
+
+        region:"000",
+
+        rare:true,
+
+        starter:true,
+
+        createdAt:new Date().toISOString()
+
+    });
+
+
+    DB.session = user.id;
+
+    saveDB();
+
+    openApp();
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+function login(){
+
+    const nick =
+        document.getElementById("loginNick")
+        .value.trim();
+
+    const password =
+        document.getElementById("loginPassword")
+        .value;
+
+    const error =
+        document.getElementById("loginError");
+
+    error.textContent = "";
+
+
+    const user = DB.users.find(
+        u =>
+            u.nick.toLowerCase() === nick.toLowerCase() &&
+            u.password === password
+    );
+
+
+    if(!user){
+
+        error.textContent =
+            "Неверный никнейм или пароль.";
+
+        return;
+    }
+
+
+    if(user.banned){
+
+        error.textContent =
+            "Вы заблокированы: " +
+            (user.banReason || "без причины");
+
+        return;
+    }
+
+
+    DB.session = user.id;
+
+    saveDB();
+
+    openApp();
+
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+function openApp(){
+
+    const user = getUser();
+
+    if(!user) return;
+
+
+    document.getElementById("auth")
+        .classList.add("hidden");
+
+    document.getElementById("app")
+        .classList.remove("hidden");
+
+
+    document.getElementById("topNick")
+        .textContent = user.nick;
+
+
+    document.getElementById("adminButton")
+        .style.display =
+            isOwner() ? "block" : "none";
+
+
+    refreshAll();
+
+}
+
+
+function logout(){
+
+    DB.session = null;
+
+    saveDB();
+
+    location.reload();
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function openPage(page,button){
+
+    document.querySelectorAll(".page")
+        .forEach(p =>
+            p.classList.remove("active")
+        );
+
+    document.getElementById(
+        "page-" + page
+    ).classList.add("active");
+
+
+    document.querySelectorAll(".nav")
+        .forEach(n =>
+            n.classList.remove("active")
+        );
+
+    if(button)
+        button.classList.add("active");
+
+
+    if(page === "inventory")
+        renderInventory();
+
+    if(page === "market")
+        renderMarket();
+
+    if(page === "top")
+        renderTop();
+
+    if(page === "admin")
+        renderAdmin();
+
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+const LETTERS =
+"ЕКАТМОРСУВНХ".split("");
+
+const DIGITS =
+"0123456789".split("");
+
+const REGIONS = [
+
+"001","002","003","004","005",
+"050","051","052","054","055",
+"056","057","058","059","063",
+"064","065","066","069","071",
+"072","073","074","075","077",
+"078","079","080","082","084",
+"086","087","089","090","092",
+"093","094","095","096","097",
+"098","099","102","116","117",
+"121","122","123","124","125",
+"126","127","134","136","138",
+"142","147","150","152","154",
+"155","156","159","161","163",
+"164","173","174","177","178",
+"180","181","186","190","193",
+"196","197","198","199","716",
+"750","752","754","761","763",
+"774","777","790","797","799"
+
+];
+
+
+function random(arr){
+
+    return arr[
+        Math.floor(Math.random()*arr.length)
+    ];
+}
+
+
+function spinLetters(){
+
+    const a=random(LETTERS);
+    const b=random(LETTERS);
+    const c=random(LETTERS);
+
+    document.getElementById("plateNumber")
+        .textContent =
+        a + random(DIGITS) + random(DIGITS) +
+        b + c;
+
+    document.getElementById("rareText")
+        .textContent =
+        "Буквы прокручены";
+
+}
+
+
+function spinDigits(){
+
+    const current =
+        document.getElementById("plateNumber")
+        .textContent;
+
+    const letters =
+        current.replace(/[0-9]/g,"");
+
+    document.getElementById("plateNumber")
+        .textContent =
+        random(LETTERS) +
+        random(DIGITS) +
+        random(DIGITS) +
+        random(LETTERS) +
+        random(LETTERS);
+
+    document.getElementById("rareText")
+        .textContent =
+        "Цифры прокручены";
+
+}
+
+
+function spinRegion(){
+
+    document.getElementById("plateRegion")
+        .textContent = random(REGIONS);
+
+    document.getElementById("rareText")
+        .textContent =
+        "Регион прокручен";
+
+}
+
+
+function spinAll(){
+
+    /*
+       Маленький шанс на редкий номер.
+       Обычный номер выпадает чаще.
+    */
+
+    const rare =
+        Math.random() < 0.025;
+
+
+    let number;
+
+    if(rare){
+
+        const rareNumbers = [
+
+            "Е777КХ",
+            "А001АА",
+            "М777ММ",
+            "К888КК",
+            "О777ОО",
+            "Х999ХХ"
+
+        ];
+
+        number = random(rareNumbers);
+
+    }else{
+
+        number =
+            random(LETTERS) +
+            random(DIGITS) +
+            random(DIGITS) +
+            random(LETTERS) +
+            random(LETTERS);
+
+    }
+
+
+    const region =
+        random(REGIONS);
+
+
+    document.getElementById("plateNumber")
+        .textContent = number;
+
+    document.getElementById("plateRegion")
+        .textContent = region;
+
+
+    const plate =
+        document.getElementById("currentPlate");
+
+    plate.classList.toggle("rare",rare);
+
+
+    document.getElementById("rareText")
+        .textContent =
+        rare
+        ? "★ РЕДКИЙ НОМЕР ★"
+        : "Номер получен";
+
+
+    /*
+       Важно:
+       номер сохраняется только после прокрутки.
+       Стартовый О00ОО 000 не покупается.
+    */
+
+    const user = getUser();
+
+    if(!user) return;
+
+
+    DB.plates.push({
+
+        id:id(),
+
+        userId:user.id,
+
+        number:number,
+
+        region:region,
+
+        rare:rare,
+
+        starter:false,
+
+        createdAt:new Date().toISOString()
+
+    });
+
+
+    saveDB();
+
+    refreshAll();
+
+}
+
+
+/* =========================================================
+   INVENTORY
+========================================================= */
+
+function renderInventory(){
+
+    const user = getUser();
+
+    const list =
+        document.getElementById("inventoryList");
+
+
+    const plates =
+        DB.plates.filter(
+            p => p.userId === user.id
+        );
+
+
+    if(!plates.length){
+
+        list.innerHTML =
+            '<div class="empty">Инвентарь пуст</div>';
+
+        return;
+    }
+
+
+    list.innerHTML =
+        plates.map(p => `
+
+        <div class="inventory-plate">
+
+            <div class="inventory-number">
+                ${p.number}
             </div>
 
-            <div class="small" style="margin-top:6px">
-              ${rarityLabel(p.rarity)} · продавец ${esc(p.sellerNickname)}
+            <div class="inventory-region">
+                🇷🇺 RUS · ${p.region}
+            </div>
+
+            ${
+                p.rare
+                ? '<div class="rare-text">★ РЕДКИЙ ★</div>'
+                : ''
+            }
+
+            ${
+                p.starter
+                ? '<div class="rare-text">СТАРТОВЫЙ</div>'
+                : ''
+            }
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   MARKET
+========================================================= */
+
+function createMarketListing(){
+
+    const user = getUser();
+
+    const number =
+        document.getElementById("marketNumber")
+        .value.trim().toUpperCase();
+
+    const region =
+        document.getElementById("marketRegion")
+        .value.trim();
+
+    const price =
+        Number(
+            document.getElementById("marketPrice")
+            .value
+        );
+
+
+    if(!number || !region || !price){
+
+        alert("Заполни все поля");
+
+        return;
+    }
+
+
+    if(number === "О00ОО" && region === "000"){
+
+        alert("Стартовый номер нельзя продавать.");
+
+        return;
+    }
+
+
+    DB.market.push({
+
+        id:id(),
+
+        sellerId:user.id,
+
+        seller:user.nick,
+
+        number:number,
+
+        region:region,
+
+        price:price
+
+    });
+
+
+    saveDB();
+
+    renderMarket();
+
+}
+
+
+function renderMarket(){
+
+    const list =
+        document.getElementById("marketList");
+
+
+    if(!DB.market.length){
+
+        list.innerHTML =
+            '<div class="empty">В магазине пока ничего нет</div>';
+
+        return;
+    }
+
+
+    list.innerHTML =
+        DB.market.map(item => `
+
+        <div class="market-item">
+
+            <div class="inventory-number">
+                ${item.number}
+            </div>
+
+            <div class="inventory-region">
+                🇷🇺 RUS · ${item.region}
+            </div>
+
+            <div class="price">
+                ${money(item.price)}
             </div>
 
             <button
-              class="btn primary"
-              style="margin-top:10px"
-              onclick="buyMarket('${p.id}')"
-            >
-              КУПИТЬ
+                class="btn btn-main"
+                onclick="buyMarket('${item.id}')">
+
+                Купить
+
             </button>
-          </div>
-        `).join('')
-      }
-    </div>
-  `;
-}
 
-function topPage(){
-  const users=[...state.users]
-    .sort((a,b)=>Number(b.balance||0)-Number(a.balance||0))
-    .slice(0,15);
-
-  return `
-    <div class="card">
-      <h2>ТОП 15</h2>
-
-      ${users.map((u,i)=>`
-        <div
-          class="item"
-          style="${
-            i===0?'border-color:#d8ad46':
-            i===1?'border-color:#aaa':
-            i===2?'border-color:#9b673e':''
-          }"
-        >
-          <div class="item-head">
-            <b>#${i+1} ${esc(u.nickname)}</b>
-            <span>${Number(u.balance||0).toLocaleString('ru-RU')} ₽</span>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-function messagesPage(){
-  const messages=state.messages
-    .filter(m=>m.userId===currentUser.id)
-    .sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-
-  return `
-    <div class="card">
-      <h2>Сообщения</h2>
-
-      ${
-        !messages.length
-        ? `<div class="small">Сообщений пока нет.</div>`
-        : messages.map(m=>`
-          <div
-            class="item"
-            style="${!m.read?'border-color:#667180':''}"
-          >
-            <div class="item-head">
-              <b>${esc(m.title)}</b>
-              ${
-                !m.read
-                ? `<span class="badge">Новое</span>`
-                : ''
-              }
-            </div>
-
-            <div style="margin-top:8px">
-              ${esc(m.text)}
-            </div>
-
-            <div class="small" style="margin-top:8px">
-              ${new Date(m.createdAt).toLocaleString('ru-RU')}
-            </div>
-
-            ${
-              !m.read
-              ? `<button
-                  class="btn"
-                  style="margin-top:10px"
-                  onclick="readMessage('${m.id}')"
-                >
-                  Прочитано
-                </button>`
-              : ''
-            }
-          </div>
-        `).join('')
-      }
-    </div>
-  `;
-}
-
-function accountPage(){
-  return `
-    <div class="grid">
-
-      <div class="card">
-        <h2>Аккаунт</h2>
-
-        <div class="item">
-          <div class="small">Никнейм</div>
-          <b>${esc(currentUser.nickname)}</b>
         </div>
 
-        <div class="item">
-          <div class="small">Баланс</div>
-          <b>${Number(currentUser.balance).toLocaleString('ru-RU')} ₽</b>
-        </div>
+    `).join("");
 
-        <div class="item">
-          <div class="small">Должность</div>
-          <b>${currentUser.role ? roles[currentUser.role] : 'Игрок'}</b>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Промокод</h2>
-
-        <input
-          id="promoInput"
-          placeholder="Введите промокод"
-        >
-
-        <button
-          class="btn primary"
-          style="margin-top:10px;width:100%"
-          onclick="activatePromo()"
-        >
-          АКТИВИРОВАТЬ
-        </button>
-      </div>
-
-    </div>
-  `;
 }
 
-function reportPage(){
-  return `
-    <div class="card">
-      <h2>Репорт</h2>
 
-      <label>Опишите вашу проблему</label>
+function buyMarket(listingId){
 
-      <textarea
-        id="reportText"
-        placeholder="Напишите сюда..."
-      ></textarea>
+    const user = getUser();
 
-      <button
-        class="btn primary"
-        style="margin-top:12px"
-        onclick="sendReport()"
-      >
-        ОТПРАВИТЬ
-      </button>
-    </div>
-  `;
-}
+    const listing =
+        DB.market.find(
+            x => x.id === listingId
+        );
 
-function adminPage(){
-  return `
-    <div class="grid">
 
-      <div class="card">
-        <h3>Пользователи</h3>
-        <p class="small">Всего: ${state.users.length}</p>
-        <button class="btn" onclick="adminUsers()">Открыть</button>
-      </div>
+    if(!listing) return;
 
-      <div class="card">
-        <h3>Выдача Админ</h3>
-        <button class="btn" onclick="adminRoles()">Открыть</button>
-      </div>
 
-      <div class="card">
-        <h3>Теги</h3>
-        <button class="btn" onclick="adminTags()">Открыть</button>
-      </div>
+    if(listing.sellerId === user.id){
 
-      <div class="card">
-        <h3>Номера</h3>
-        <button class="btn" onclick="adminNumbers()">Открыть</button>
-      </div>
+        alert("Нельзя купить собственный номер.");
 
-      <div class="card">
-        <h3>Промокоды</h3>
-        <button class="btn" onclick="adminPromocodes()">Открыть</button>
-      </div>
-
-      <div class="card">
-        <h3>Наказания</h3>
-        <button class="btn red" onclick="adminPunishments()">Открыть</button>
-      </div>
-
-      <div class="card">
-        <h3>Репорты</h3>
-        <button class="btn" onclick="adminReports()">Открыть</button>
-      </div>
-
-      <div class="card">
-        <h3>Статистика</h3>
-        <button class="btn" onclick="adminStats()">Открыть</button>
-      </div>
-
-    </div>
-  `;
-}
-
-function adminUsers(){
-  currentPage='admin-users';
-
-  document.getElementById('pageTitle').textContent='Пользователи';
-
-  document.getElementById('content').innerHTML=`
-    <div class="card">
-      <h2>Пользователи</h2>
-
-      ${state.users.map(u=>`
-        <div class="item">
-          <div class="item-head">
-            <b>${esc(u.nickname)}</b>
-            <span class="badge ${u.banned?'red':'green'}">
-              ${u.banned?'Заблокирован':'Активен'}
-            </span>
-          </div>
-
-          <div class="small" style="margin-top:7px">
-            ${u.role ? roles[u.role] : 'Игрок'}
-            · ${Number(u.balance||0).toLocaleString('ru-RU')} ₽
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-function adminRoles(){
-  currentPage='admin-roles';
-  document.getElementById('pageTitle').textContent='Выдача Админ';
-
-  document.getElementById('content').innerHTML=`
-    <div class="card">
-      <h2>Выдача должности</h2>
-
-      <label>Игрок</label>
-      <select id="roleUser">
-        ${state.users.map(u=>`
-          <option value="${u.id}">
-            ${esc(u.nickname)}
-          </option>
-        `).join('')}
-      </select>
-
-      <label style="margin-top:12px">Должность</label>
-      <select id="roleSelect">
-        <option value="">Снять должность</option>
-        ${Object.entries(roles).map(([k,v])=>`
-          <option value="${k}">${v}</option>
-        `).join('')}
-      </select>
-
-      <button
-        class="btn primary"
-        style="margin-top:12px"
-        onclick="giveRole()"
-      >
-        ПРИМЕНИТЬ
-      </button>
-    </div>
-  `;
-}
-
-async function giveRole(){
-  const user=findUser(document.getElementById('roleUser').value);
-  const role=document.getElementById('roleSelect').value;
-
-  if(!user) return;
-
-  const oldRole=user.role;
-
-  user.role=role || null;
-
-  if(role){
-    addMessage(
-      user.id,
-      'Назначение',
-      `Вас назначили на должность «${roles[role]}».`,
-      'role'
-    );
-  }else if(oldRole){
-    addMessage(
-      user.id,
-      'Должность снята',
-      `С вас снята должность «${roles[oldRole]}».`,
-      'role'
-    );
-  }
-
-  await cloudSave();
-  toast('Изменения сохранены');
-}
-
-function adminTags(){
-  currentPage='admin-tags';
-  document.getElementById('pageTitle').textContent='Теги';
-
-  document.getElementById('content').innerHTML=`
-    <div class="card">
-      <h2>Выдать тег</h2>
-
-      <select id="tagUser">
-        ${state.users.map(u=>`
-          <option value="${u.id}">${esc(u.nickname)}</option>
-        `).join('')}
-      </select>
-
-      <input
-        id="tagName"
-        style="margin-top:10px"
-        placeholder="Название тега"
-      >
-
-      <button
-        class="btn primary"
-        style="margin-top:10px"
-        onclick="giveTag()"
-      >
-        ВЫДАТЬ ТЕГ
-      </button>
-    </div>
-
-    <div class="card" style="margin-top:15px">
-      <h2>Все теги</h2>
-
-      ${
-        state.tags.length
-        ? state.tags.map(t=>`
-          <div class="item">
-            <b>${esc(t.tag)}</b>
-            <div class="small">
-              ${esc(findUser(t.userId)?.nickname || 'Неизвестно')}
-            </div>
-          </div>
-        `).join('')
-        : `<div class="small">Тегов пока нет.</div>`
-      }
-    </div>
-  `;
-}
-
-async function giveTag(){
-  const user=findUser(document.getElementById('tagUser').value);
-  const tag=document.getElementById('tagName').value.trim();
-
-  if(!user || !tag) return toast('Заполните поля');
-
-  state.tags.push({
-    id:uid(),
-    userId:user.id,
-    tag,
-    createdAt:new Date().toISOString()
-  });
-
-  addMessage(
-    user.id,
-    'Выдан тег',
-    `Вам выдан тег «${tag}».`,
-    'tag'
-  );
-
-  await cloudSave();
-  adminTags();
-  toast('Тег выдан');
-}
-
-function adminNumbers(){
-  currentPage='admin-numbers';
-  document.getElementById('pageTitle').textContent='Номера';
-
-  document.getElementById('content').innerHTML=`
-    <div class="card">
-      <h2>Выдать номер</h2>
-
-      <select id="numberUser">
-        ${state.users.map(u=>`
-          <option value="${u.id}">${esc(u.nickname)}</option>
-        `).join('')}
-      </select>
-
-      <div class="form-row" style="margin-top:10px">
-        <input id="numberPlate" placeholder="Е777КХ">
-        <input id="numberRegion" placeholder="777">
-      </div>
-
-      <button
-        class="btn primary"
-        onclick="giveNumber()"
-      >
-        ВЫДАТЬ
-      </button>
-    </div>
-  `;
-}
-
-async function giveNumber(){
-  const user=findUser(document.getElementById('numberUser').value);
-  const plate=document.getElementById('numberPlate').value.trim();
-  const region=document.getElementById('numberRegion').value.trim();
-
-  if(!user || !plate || !region)
-    return toast('Заполните поля');
-
-  const item={
-    id:uid(),
-    plate,
-    region,
-    rarity:'rare',
-    price:0,
-    issued:true,
-    createdAt:new Date().toISOString()
-  };
-
-  user.inventory.push(item);
-
-  addMessage(
-    user.id,
-    'Вам выдали номер',
-    `Вам выдали номерной знак ${plate} / ${region}.`,
-    'number'
-  );
-
-  await cloudSave();
-  toast('Номер выдан');
-}
-
-function adminPromocodes(){
-  currentPage='admin-promocodes';
-  document.getElementById('pageTitle').textContent='Промокоды';
-
-  document.getElementById('content').innerHTML=`
-    <div class="card">
-      <h2>Создать промокод</h2>
-
-      <input
-        id="promoCode"
-        maxlength="255"
-        placeholder="Например: 01398192083901283982183912839218391283912839"
-      >
-
-      <input
-        id="promoAmount"
-        type="number"
-        min="0"
-        step="1"
-        style="margin-top:10px"
-        placeholder="Сумма награды"
-      >
-
-      <button
-        class="btn primary"
-        style="margin-top:10px"
-        onclick="createPromo()"
-      >
-        СОЗДАТЬ
-      </button>
-    </div>
-
-    <div class="card" style="margin-top:15px">
-      <h2>Промокоды</h2>
-
-      ${
-        state.promocodes.length
-        ? state.promocodes.map(p=>`
-          <div class="item">
-            <div class="item-head">
-              <b>${esc(p.code)}</b>
-              <span>${Number(p.amount||0).toLocaleString('ru-RU')} ₽</span>
-            </div>
-
-            <div class="small">
-              Использований: ${p.used?.length||0}
-              · ${p.active===false?'Отключён':'Активен'}
-            </div>
-          </div>
-        `).join('')
-        : `<div class="small">Промокодов пока нет.</div>`
-      }
-    </div>
-  `;
-}
-
-async function createPromo(){
-  const code=document.getElementById('promoCode').value.trim();
-  const amount=Number(document.getElementById('promoAmount').value);
-
-  if(!code || !Number.isFinite(amount) || amount<0)
-    return toast('Заполните данные');
-
-  if(state.promocodes.some(p=>p.code===code))
-    return toast('Такой промокод уже существует');
-
-  state.promocodes.push({
-    id:uid(),
-    code,
-    amount,
-    active:true,
-    used:[],
-    createdAt:new Date().toISOString()
-  });
-
-  await cloudSave();
-  adminPromocodes();
-  toast('Промокод создан');
-}
-
-async function activatePromo(){
-  const code=document.getElementById('promoInput').value.trim();
-
-  if(!code) return toast('Введите промокод');
-
-  const promo=state.promocodes.find(
-    p=>p.code===code && p.active!==false
-  );
-
-  if(!promo) return toast('Промокод не найден');
-
-  if(promo.used.includes(currentUser.id))
-    return toast('Вы уже использовали этот промокод');
-
-  promo.used.push(currentUser.id);
-  currentUser.balance+=Number(promo.amount||0);
-
-  addMessage(
-    currentUser.id,
-    'Промокод активирован',
-    `Промокод ${promo.code} активирован. Начислено ${Number(promo.amount||0).toLocaleString('ru-RU')} ₽.`,
-    'promo'
-  );
-
-  await cloudSave();
-  syncCurrentUser();
-  accountPage();
-  toast('Промокод активирован');
-}
-
-function adminPunishments(){
-  currentPage='admin-punishments';
-  document.getElementById('pageTitle').textContent='Наказания';
-
-  document.getElementById('content').innerHTML=`
-    <div class="card">
-      <h2>Выдать наказание</h2>
-
-      <label>Игрок</label>
-      <select id="punishUser">
-        ${state.users.map(u=>`
-          <option value="${u.id}">${esc(u.nickname)}</option>
-        `).join('')}
-      </select>
-
-      <label style="margin-top:12px">Шаблон</label>
-      <select id="punishType">
-        <option value="ban">Бан</option>
-        <option value="mute">Мут</option>
-        <option value="warn">Предупреждение</option>
-        <option value="unban">Разбан</option>
-      </select>
-
-      <input
-        id="punishDuration"
-        style="margin-top:10px"
-        placeholder="Срок, например: 7 дней"
-      >
-
-      <textarea
-        id="punishReason"
-        style="margin-top:10px"
-        placeholder="Причина наказания"
-      ></textarea>
-
-      <button
-        class="btn red"
-        style="margin-top:10px"
-        onclick="applyPunishment()"
-      >
-        ПРИМЕНИТЬ
-      </button>
-    </div>
-
-    <div class="card" style="margin-top:15px">
-      <h2>История наказаний</h2>
-
-      ${
-        state.punishments.length
-        ? [...state.punishments].reverse().map(p=>`
-          <div class="item">
-            <div class="item-head">
-              <b>${esc(p.nickname)}</b>
-              <span class="badge ${p.status==='active'?'red':'green'}">
-                ${p.status==='active'?'Активно':'Снято'}
-              </span>
-            </div>
-
-            <div style="margin-top:7px">
-              ${esc(p.title)}
-            </div>
-
-            <div class="small" style="margin-top:5px">
-              ${esc(p.reason || 'Без причины')}
-              ${p.duration ? ' · '+esc(p.duration):''}
-            </div>
-          </div>
-        `).join('')
-        : `<div class="small">Наказаний пока нет.</div>`
-      }
-    </div>
-  `;
-}
-
-async function applyPunishment(){
-  const user=findUser(document.getElementById('punishUser').value);
-  const type=document.getElementById('punishType').value;
-  const duration=document.getElementById('punishDuration').value.trim();
-  const reason=document.getElementById('punishReason').value.trim();
-
-  if(!user) return;
-
-  if(type==='unban'){
-    user.banned=false;
-
-    state.punishments
-      .filter(p=>p.userId===user.id && p.type==='ban' && p.status==='active')
-      .forEach(p=>{
-        p.status='removed';
-        p.removedAt=new Date().toISOString();
-      });
-
-    addMessage(
-      user.id,
-      'Вас разбанили',
-      'С вас снято блокирование аккаунта.',
-      'unban'
-    );
-  }
-
-  if(type==='ban'){
-    user.banned=true;
-
-    state.punishments.push({
-      id:uid(),
-      userId:user.id,
-      nickname:user.nickname,
-      type:'ban',
-      title:'Бан',
-      reason,
-      duration,
-      status:'active',
-      issuedBy:currentUser.nickname,
-      createdAt:new Date().toISOString()
-    });
-
-    addMessage(
-      user.id,
-      'Вам выдан бан',
-      `Вам выдан бан.${duration?' Срок: '+duration+'.':''}${reason?' Причина: '+reason+'.':''}`,
-      'ban'
-    );
-  }
-
-  if(type==='mute'){
-    state.punishments.push({
-      id:uid(),
-      userId:user.id,
-      nickname:user.nickname,
-      type:'mute',
-      title:'Мут',
-      reason,
-      duration,
-      status:'active',
-      issuedBy:currentUser.nickname,
-      createdAt:new Date().toISOString()
-    });
-
-    addMessage(
-      user.id,
-      'Вам выдан мут',
-      `Вам выдан мут.${duration?' Срок: '+duration+'.':''}${reason?' Причина: '+reason+'.':''}`,
-      'mute'
-    );
-  }
-
-  if(type==='warn'){
-    state.punishments.push({
-      id:uid(),
-      userId:user.id,
-      nickname:user.nickname,
-      type:'warn',
-      title:'Предупреждение',
-      reason,
-      duration:'',
-      status:'active',
-      issuedBy:currentUser.nickname,
-      createdAt:new Date().toISOString()
-    });
-
-    addMessage(
-      user.id,
-      'Вам выдано предупреждение',
-      `Вам выдано предупреждение.${reason?' Причина: '+reason+'.':''}`,
-      'warn'
-    );
-  }
-
-  await cloudSave();
-  adminPunishments();
-  toast('Наказание применено');
-}
-
-function adminReports(){
-  currentPage='admin-reports';
-  document.getElementById('pageTitle').textContent='Репорты';
-
-  document.getElementById('content').innerHTML=`
-    <div class="card">
-      <h2>Репорты игроков</h2>
-
-      ${
-        state.reports.length
-        ? [...state.reports].reverse().map(r=>`
-          <div class="item">
-            <div class="item-head">
-              <b>${esc(r.nickname)}</b>
-              <span class="badge ${r.status==='closed'?'green':'gold'}">
-                ${r.status==='closed'?'Закрыт':'Открыт'}
-              </span>
-            </div>
-
-            <div style="margin-top:10px">
-              ${esc(r.text)}
-            </div>
-
-            <div class="small" style="margin-top:8px">
-              ${new Date(r.createdAt).toLocaleString('ru-RU')}
-            </div>
-
-            ${
-              r.status!=='closed'
-              ? `<button
-                  class="btn"
-                  style="margin-top:10px"
-                  onclick="closeReport('${r.id}')"
-                >
-                  ЗАКРЫТЬ
-                </button>`
-              : ''
-            }
-          </div>
-        `).join('')
-        : `<div class="small">Репортов пока нет.</div>`
-      }
-    </div>
-  `;
-}
-
-async function sendReport(){
-  const text=document.getElementById('reportText').value.trim();
-
-  if(!text)
-    return toast('Напишите текст репорта');
-
-  state.reports.push({
-    id:uid(),
-    userId:currentUser.id,
-    nickname:currentUser.nickname,
-    text,
-    status:'open',
-    createdAt:new Date().toISOString()
-  });
-
-  await cloudSave();
-
-  document.getElementById('reportText').value='';
-  toast('Репорт отправлен');
-}
-
-async function closeReport(id){
-  const report=state.reports.find(r=>r.id===id);
-  if(!report) return;
-
-  report.status='closed';
-  report.closedAt=new Date().toISOString();
-
-  await cloudSave();
-  adminReports();
-}
-
-function adminStats(){
-  currentPage='admin-stats';
-  document.getElementById('pageTitle').textContent='Статистика';
-
-  document.getElementById('content').innerHTML=`
-    <div class="grid">
-
-      <div class="card">
-        <div class="small">Пользователей</div>
-        <h2>${state.users.length}</h2>
-      </div>
-
-      <div class="card">
-        <div class="small">Номеров у игроков</div>
-        <h2>${state.users.reduce((n,u)=>n+(u.inventory?.length||0),0)}</h2>
-      </div>
-
-      <div class="card">
-        <div class="small">Номеров на рынке</div>
-        <h2>${state.market.length}</h2>
-      </div>
-
-      <div class="card">
-        <div class="small">Репортов</div>
-        <h2>${state.reports.length}</h2>
-      </div>
-
-      <div class="card">
-        <div class="small">Наказаний</div>
-        <h2>${state.punishments.length}</h2>
-      </div>
-
-    </div>
-  `;
-}
-
-async function readMessage(id){
-  const m=state.messages.find(x=>x.id===id);
-  if(!m) return;
-
-  m.read=true;
-
-  await cloudSave();
-  renderCurrentPage();
-}
-
-async function buyCurrent(){
-  if(isPlaceholder())
-    return toast('Заглушку О00ОО / 000 нельзя купить');
-
-  const plate=currentPlate();
-  const region=spinState.region;
-
-  const duplicate =
-    state.plates.some(p=>p.plate===plate && p.region===region) ||
-    state.market.some(p=>p.plate===plate && p.region===region) ||
-    state.users.some(u=>
-      u.inventory?.some(p=>p.plate===plate && p.region===region)
-    );
-
-  if(duplicate)
-    return toast('Такой номер уже существует');
-
-  const price =
-    spinState.rarity==='gold'
-      ? Math.max(100000,Math.floor(Math.random()*1000000000))
-      : spinState.rarity==='rare'
-        ? Math.max(10000,Math.floor(Math.random()*50000000))
-        : Math.max(1000,Math.floor(Math.random()*1000000));
-
-  if(currentUser.balance<price)
-    return toast('Недостаточно денег');
-
-  currentUser.balance-=price;
-
-  const item={
-    id:uid(),
-    plate,
-    region,
-    rarity:spinState.rarity,
-    price,
-    ownerId:currentUser.id,
-    createdAt:new Date().toISOString()
-  };
-
-  currentUser.inventory.push(item);
-  state.plates.push(item);
-
-  await cloudSave();
-
-  resetSpin();
-  currentPage='inventory';
-  renderCurrentPage();
-
-  toast('Номер куплен');
-}
-
-async function sellToMarket(id){
-  const item=currentUser.inventory.find(p=>p.id===id);
-  if(!item) return;
-
-  const price=prompt('Цена продажи');
-
-  if(price===null) return;
-
-  const num=Number(price);
-
-  if(!Number.isFinite(num) || num<0)
-    return toast('Некорректная цена');
-
-  currentUser.inventory=
-    currentUser.inventory.filter(p=>p.id!==id);
-
-  state.market.push({
-    ...item,
-    sellerId:currentUser.id,
-    sellerNickname:currentUser.nickname,
-    price:num,
-    listedAt:new Date().toISOString()
-  });
-
-  await cloudSave();
-  renderCurrentPage();
-}
-
-async function buyMarket(id){
-  const item=state.market.find(p=>p.id===id);
-  if(!item) return;
-
-  const price=Number(item.price)||0;
-
-  if(currentUser.balance<price)
-    return toast('Недостаточно денег');
-
-  if(item.sellerId===currentUser.id)
-    return toast('Нельзя купить свой номер');
-
-  const seller=findUser(item.sellerId);
-
-  currentUser.balance-=price;
-
-  if(seller)
-    seller.balance+=price;
-
-  currentUser.inventory.push({
-    ...item,
-    id:uid(),
-    ownerId:currentUser.id
-  });
-
-  state.market=state.market.filter(p=>p.id!==id);
-
-  await cloudSave();
-  syncCurrentUser();
-  renderCurrentPage();
-
-  toast('Номер куплен');
-}
-
-function syncCurrentUser(){
-  if(!currentUser) return;
-
-  const fresh=findUser(currentUser.id);
-
-  if(fresh)
-    currentUser=fresh;
-}
-
-function navHtml(){
-  const unread=unreadCount();
-
-  let html=`
-    <button data-page="home" onclick="showPage('home')">Главная</button>
-    <button data-page="inventory" onclick="showPage('inventory')">Инвентарь</button>
-    <button data-page="market" onclick="showPage('market')">Магазин</button>
-    <button data-page="top" onclick="showPage('top')">ТОП</button>
-    <button data-page="messages" onclick="showPage('messages')">
-      Сообщения
-      ${unread?`<span class="nav-count">${unread}</span>`:''}
-    </button>
-    <button data-page="report" onclick="showPage('report')">Репорт</button>
-    <button data-page="account" onclick="showPage('account')">Аккаунт</button>
-  `;
-
-  if(currentUser?.nickname?.toLowerCase()==='d0ntyyy'){
-    html+=`
-      <button data-page="admin" onclick="showPage('admin')">
-        Админка
-      </button>
-    `;
-  }
-
-  html+=`
-    <button onclick="logout()">Выйти</button>
-  `;
-
-  return html;
-}
-
-function showPage(page){
-  currentPage=page;
-
-  const titles={
-    home:'Главная',
-    inventory:'Инвентарь',
-    market:'Магазин',
-    top:'ТОП',
-    messages:'Сообщения',
-    report:'Репорт',
-    account:'Аккаунт',
-    admin:'Админка'
-  };
-
-  document.getElementById('pageTitle').textContent=titles[page] || 'Админка';
-
-  renderCurrentPage();
-}
-
-function renderCurrentPage(){
-  if(!currentUser) return;
-
-  document.getElementById('nav').innerHTML=navHtml();
-
-  document.querySelectorAll('.nav button[data-page]')
-    .forEach(btn=>{
-      if(btn.dataset.page===currentPage)
-        btn.classList.add('active');
-    });
-
-  document.getElementById('userMini').textContent=
-    `${currentUser.nickname} · ${Number(currentUser.balance).toLocaleString('ru-RU')} ₽`;
-
-  let html='';
-
-  switch(currentPage){
-    case 'home': html=homePage(); break;
-    case 'inventory': html=inventoryPage(); break;
-    case 'market': html=marketPage(); break;
-    case 'top': html=topPage(); break;
-    case 'messages': html=messagesPage(); break;
-    case 'report': html=reportPage(); break;
-    case 'account': html=accountPage(); break;
-    case 'admin': html=adminPage(); break;
-    case 'admin-users': adminUsers(); return;
-    case 'admin-roles': adminRoles(); return;
-    case 'admin-tags': adminTags(); return;
-    case 'admin-numbers': adminNumbers(); return;
-    case 'admin-promocodes': adminPromocodes(); return;
-    case 'admin-punishments': adminPunishments(); return;
-    case 'admin-reports': adminReports(); return;
-    case 'admin-stats': adminStats(); return;
-    default: html=homePage();
-  }
-
-  document.getElementById('content').innerHTML=html;
-}
-
-function setAuthMode(mode){
-  authMode=mode;
-
-  document.getElementById('loginTab')
-    .classList.toggle('primary',mode==='login');
-
-  document.getElementById('registerTab')
-    .classList.toggle('primary',mode==='register');
-
-  renderAuth();
-}
-
-function renderAuth(){
-  document.getElementById('authForm').innerHTML=`
-    <input
-      id="authNick"
-      placeholder="Никнейм"
-      autocomplete="off"
-    >
-
-    <input
-      id="authPassword"
-      type="password"
-      placeholder="Пароль"
-      style="margin-top:10px"
-    >
-
-    <button
-      class="btn primary"
-      style="width:100%;margin-top:12px"
-      onclick="authSubmit()"
-    >
-      ${authMode==='login'?'ВОЙТИ':'ЗАРЕГИСТРИРОВАТЬСЯ'}
-    </button>
-  `;
-}
-
-async function authSubmit(){
-  const nickname=document.getElementById('authNick').value.trim();
-  const password=document.getElementById('authPassword').value;
-
-  if(!nickname || !password)
-    return toast('Заполните все поля');
-
-  if(authMode==='register'){
-    if(findUserByNick(nickname))
-      return toast('Такой никнейм уже существует');
-
-    const user={
-      id:uid(),
-      nickname,
-      password,
-      balance:100000,
-      inventory:[],
-      usedPromocodes:[],
-      role:null,
-      banned:false,
-      createdAt:new Date().toISOString()
-    };
-
-    state.users.push(user);
-
-    await cloudSave();
-
-    currentUser=user;
-
-    resetSpin();
-
-    document.getElementById('authScreen').classList.add('hidden');
-    document.getElementById('app').classList.remove('hidden');
-
-    currentPage='home';
-    renderCurrentPage();
-
-    return;
-  }
-
-  const user=findUserByNick(nickname);
-
-  if(!user || user.password!==password)
-    return toast('Неверный никнейм или пароль');
-
-  if(user.banned)
-    return toast('Ваш аккаунт заблокирован');
-
-  currentUser=user;
-
-  if(currentUser.nickname.toLowerCase()==='d0ntyyy'){
-    currentUser.role='owner';
-    currentUser.balance=Math.max(
-      Number(currentUser.balance)||0,
-      10000000
-    );
-    await cloudSave();
-  }
-
-  resetSpin();
-
-  document.getElementById('authScreen').classList.add('hidden');
-  document.getElementById('app').classList.remove('hidden');
-
-  currentPage='home';
-  renderCurrentPage();
-}
-
-function logout(){
-  currentUser=null;
-  resetSpin();
-
-  document.getElementById('app').classList.add('hidden');
-  document.getElementById('authScreen').classList.remove('hidden');
-
-  currentPage='home';
-  renderAuth();
-}
-
-async function syncCloud(){
-  try{
-    await cloudLoad();
-
-    if(currentUser){
-      syncCurrentUser();
-
-      if(currentUser.banned){
-        logout();
-        toast('Ваш аккаунт заблокирован');
         return;
-      }
-
-      renderCurrentPage();
     }
-  }catch(e){
-    console.error(e);
-  }
+
+
+    if(user.balance < listing.price){
+
+        alert("Недостаточно средств.");
+
+        return;
+    }
+
+
+    user.balance -= listing.price;
+
+
+    const seller =
+        DB.users.find(
+            x => x.id === listing.sellerId
+        );
+
+
+    if(seller)
+        seller.balance += listing.price;
+
+
+    DB.plates.push({
+
+        id:id(),
+
+        userId:user.id,
+
+        number:listing.number,
+
+        region:listing.region,
+
+        rare:false,
+
+        starter:false,
+
+        createdAt:new Date().toISOString()
+
+    });
+
+
+    DB.market =
+        DB.market.filter(
+            x => x.id !== listingId
+        );
+
+
+    saveDB();
+
+    refreshAll();
+
 }
 
-async function boot(){
-  renderAuth();
 
-  try{
-    await cloudLoad();
+/* =========================================================
+   PROMOCODES
+========================================================= */
 
-    const owner=state.users.find(
-      u=>u.nickname.toLowerCase()==='d0ntyyy'
-    );
+function activatePromo(){
 
-    if(owner){
-      owner.role='owner';
+    const user = getUser();
+
+    const input =
+        document.getElementById("promoInput")
+        .value.trim();
+
+
+    const result =
+        document.getElementById("promoResult");
+
+
+    const promo =
+        DB.promocodes.find(
+            p =>
+                p.code.toLowerCase() ===
+                input.toLowerCase()
+        );
+
+
+    if(!promo){
+
+        result.innerHTML =
+            '<div class="error">Промокод не найден</div>';
+
+        return;
     }
-  }catch(e){
-    console.error(e);
-    toast('Ошибка подключения к базе данных');
-  }
+
+
+    if(promo.usedBy.includes(user.id)){
+
+        result.innerHTML =
+            '<div class="error">Вы уже использовали этот промокод</div>';
+
+        return;
+    }
+
+
+    user.balance += promo.amount;
+
+    promo.usedBy.push(user.id);
+
+
+    saveDB();
+
+    result.innerHTML =
+        `<div class="success">
+            Промокод активирован: +${money(promo.amount)}
+        </div>`;
+
+
+    refreshAll();
+
 }
 
-setInterval(syncCloud,5000);
 
-boot();
+/* =========================================================
+   REPORTS
+========================================================= */
+
+function sendReport(){
+
+    const user = getUser();
+
+    const text =
+        document.getElementById("reportText")
+        .value.trim();
+
+
+    if(!text){
+
+        alert("Введите текст репорта");
+
+        return;
+    }
+
+
+    DB.reports.push({
+
+        id:id(),
+
+        userId:user.id,
+
+        nick:user.nick,
+
+        text:text,
+
+        status:"Новый",
+
+        createdAt:new Date().toISOString()
+
+    });
+
+
+    document.getElementById("reportText")
+        .value = "";
+
+
+    document.getElementById("reportResult")
+        .innerHTML =
+        '<div class="success">Репорт отправлен.</div>';
+
+
+    saveDB();
+
+}
+
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+function renderAdmin(){
+
+    if(!isOwner()){
+
+        document.getElementById("page-admin")
+            .innerHTML =
+            '<div class="empty">Доступ запрещён</div>';
+
+        return;
+    }
+
+
+    renderAdminUsers();
+    renderBans();
+    renderAdminPromos();
+    renderAdminReports();
+    renderTags();
+
+}
+
+
+function adminPage(name,button){
+
+    document.querySelectorAll(".admin-section")
+        .forEach(x =>
+            x.classList.add("hidden")
+        );
+
+    document.getElementById(
+        "admin-" + name
+    ).classList.remove("hidden");
+
+
+    document.querySelectorAll(".admin-tabs button")
+        .forEach(x =>
+            x.classList.remove("active")
+        );
+
+
+    if(button)
+        button.classList.add("active");
+
+}
+
+
+/* USERS */
+
+function renderAdminUsers(){
+
+    const box =
+        document.getElementById("adminUsersList");
+
+
+    box.innerHTML =
+        DB.users.map(u => `
+
+        <div class="message">
+
+            <b>${u.nick}</b>
+
+            <span>
+                Роль: ${u.role}
+                <br>
+                Баланс: ${money(u.balance)}
+                <br>
+                ${u.banned ? "ЗАБАНЕН" : "Активен"}
+            </span>
+
+            <br>
+
+            ${
+                u.role !== "admin" &&
+                u.role !== "owner"
+
+                ? `
+                <button
+                    class="btn"
+                    onclick="makeAdmin('${u.id}')">
+                    Выдать администратора
+                </button>
+                `
+
+                : ""
+            }
+
+        </div>
+
+    `).join("");
+
+}
+
+
+function makeAdmin(userId){
+
+    if(!isOwner()) return;
+
+
+    const user =
+        DB.users.find(
+            x => x.id === userId
+        );
+
+
+    if(!user) return;
+
+
+    user.role = "admin";
+
+
+    DB.messages.push({
+
+        id:id(),
+
+        userId:user.id,
+
+        title:"Назначение",
+
+        text:"Вас назначили администратором.",
+
+        createdAt:new Date().toISOString()
+
+    });
+
+
+    saveDB();
+
+    renderAdminUsers();
+
+}
+
+
+/* BANS */
+
+function banUser(){
+
+    const nick =
+        document.getElementById("banNick")
+        .value.trim();
+
+    const reason =
+        document.getElementById("banReason")
+        .value.trim();
+
+
+    const user =
+        DB.users.find(
+            u =>
+                u.nick.toLowerCase() ===
+                nick.toLowerCase()
+        );
+
+
+    if(!user){
+
+        alert("Пользователь не найден");
+
+        return;
+    }
+
+
+    if(user.nick.toLowerCase() === OWNER_NICK){
+
+        alert("Владельца нельзя заблокировать.");
+
+        return;
+    }
+
+
+    user.banned = true;
+    user.banReason = reason || "Нарушение правил";
+
+
+    DB.messages.push({
+
+        id:id(),
+
+        userId:user.id,
+
+        title:"Блокировка",
+
+        text:
+            "Вас заблокировали. Причина: " +
+            user.banReason,
+
+        createdAt:new Date().toISOString()
+
+    });
+
+
+    saveDB();
+
+    renderBans();
+
+}
+
+
+function renderBans(){
+
+    const box =
+        document.getElementById("banList");
+
+
+    const banned =
+        DB.users.filter(
+            u => u.banned
+        );
+
+
+    if(!banned.length){
+
+        box.innerHTML =
+            '<div class="empty">Заблокированных нет</div>';
+
+        return;
+    }
+
+
+    box.innerHTML =
+        banned.map(u => `
+
+        <div class="message">
+
+            <b>${u.nick}</b>
+
+            <span>
+                ${u.banReason}
+            </span>
+
+            <button
+                class="btn"
+                onclick="unban('${u.id}')">
+                Разбанить
+            </button>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+function unban(userId){
+
+    const user =
+        DB.users.find(
+            x => x.id === userId
+        );
+
+
+    if(!user) return;
+
+
+    user.banned = false;
+    user.banReason = "";
+
+
+    DB.messages.push({
+
+        id:id(),
+
+        userId:user.id,
+
+        title:"Разбан",
+
+        text:"Вас разбанили.",
+
+        createdAt:new Date().toISOString()
+
+    });
+
+
+    saveDB();
+
+    renderBans();
+
+}
+
+
+/* PROMOS */
+
+function createPromo(){
+
+    const code =
+        document.getElementById("newPromo")
+        .value.trim();
+
+    const amount =
+        Number(
+            document.getElementById("promoAmount")
+            .value
+        );
+
+
+    if(!code || !amount){
+
+        alert("Заполни промокод и сумму");
+
+        return;
+    }
+
+
+    if(DB.promocodes.some(
+        p =>
+            p.code.toLowerCase() ===
+            code.toLowerCase()
+    )){
+
+        alert("Такой промокод уже существует");
+
+        return;
+    }
+
+
+    DB.promocodes.push({
+
+        id:id(),
+
+        code:code,
+
+        amount:amount,
+
+        usedBy:[]
+
+    });
+
+
+    saveDB();
+
+    renderAdminPromos();
+
+}
+
+
+function renderAdminPromos(){
+
+    const box =
+        document.getElementById("adminPromoList");
+
+
+    box.innerHTML =
+        DB.promocodes.map(p => `
+
+        <div class="message">
+
+            <b>${p.code}</b>
+
+            <span>
+                Награда: ${money(p.amount)}
+                <br>
+                Использовали: ${p.usedBy.length}
+            </span>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* MESSAGES */
+
+function sendSystemMessage(){
+
+    const nick =
+        document.getElementById("messageNick")
+        .value.trim();
+
+    const title =
+        document.getElementById("messageTitle")
+        .value.trim();
+
+    const text =
+        document.getElementById("messageText")
+        .value.trim();
+
+
+    const user =
+        DB.users.find(
+            u =>
+                u.nick.toLowerCase() ===
+                nick.toLowerCase()
+        );
+
+
+    if(!user){
+
+        alert("Пользователь не найден");
+
+        return;
+    }
+
+
+    DB.messages.push({
+
+        id:id(),
+
+        userId:user.id,
+
+        title:title || "Сообщение",
+
+        text:text,
+
+        createdAt:new Date().toISOString()
+
+    });
+
+
+    saveDB();
+
+    alert("Сообщение отправлено.");
+
+}
+
+
+/* REPORTS */
+
+function renderAdminReports(){
+
+    const box =
+        document.getElementById("adminReports");
+
+
+    if(!DB.reports.length){
+
+        box.innerHTML =
+            '<div class="empty">Репортов нет</div>';
+
+        return;
+    }
+
+
+    box.innerHTML =
+        DB.reports.map(r => `
+
+        <div class="message">
+
+            <b>${r.nick}</b>
+
+            <span>
+                ${r.text}
+                <br>
+                Статус: ${r.status}
+            </span>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* TAGS */
+
+function giveTag(){
+
+    const nick =
+        document.getElementById("tagNick")
+        .value.trim();
+
+    const tag =
+        document.getElementById("tagName")
+        .value.trim();
+
+    const color =
+        document.getElementById("tagColor")
+        .value;
+
+
+    const user =
+        DB.users.find(
+            u =>
+                u.nick.toLowerCase() ===
+                nick.toLowerCase()
+        );
+
+
+    if(!user){
+
+        alert("Пользователь не найден");
+
+        return;
+    }
+
+
+    DB.tags.push({
+
+        id:id(),
+
+        userId:user.id,
+
+        nick:user.nick,
+
+        tag:tag,
+
+        color:color
+
+    });
+
+
+    saveDB();
+
+    renderTags();
+
+}
+
+
+function renderTags(){
+
+    const box =
+        document.getElementById("tagList");
+
+
+    if(!DB.tags.length){
+
+        box.innerHTML =
+            '<div class="empty">Тегов нет</div>';
+
+        return;
+    }
+
+
+    box.innerHTML =
+        DB.tags.map(t => `
+
+        <div class="message">
+
+            <b>${t.nick}</b>
+
+            <span
+                class="tag"
+                style="background:${t.color}">
+                ${t.tag}
+            </span>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   TOP
+========================================================= */
+
+function renderTop(){
+
+    const users =
+        [...DB.users]
+        .sort(
+            (a,b) =>
+                DB.plates.filter(
+                    p => p.userId === b.id
+                ).length
+                -
+                DB.plates.filter(
+                    p => p.userId === a.id
+                ).length
+        );
+
+
+    document.getElementById("topList")
+        .innerHTML =
+        users.map((u,i) => `
+
+        <tr>
+
+            <td>${i+1}</td>
+
+            <td>
+                ${u.nick}
+            </td>
+
+            <td>
+                ${
+                    DB.plates.filter(
+                        p => p.userId === u.id
+                    ).length
+                }
+            </td>
+
+            <td>
+                ${money(u.balance)}
+            </td>
+
+        </tr>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshAll(){
+
+    const user = getUser();
+
+    if(!user) return;
+
+
+    document.getElementById("topBalance")
+        .textContent =
+        money(user.balance);
+
+
+    document.getElementById("homeBalance")
+        .textContent =
+        money(user.balance);
+
+
+    const plates =
+        DB.plates.filter(
+            p => p.userId === user.id
+        );
+
+
+    document.getElementById("homePlates")
+        .textContent =
+        plates.length;
+
+
+    document.getElementById("homeRole")
+        .textContent =
+        user.role;
+
+
+    renderInventory();
+
+    renderMarket();
+
+    renderTop();
+
+
+    const messages =
+        DB.messages.filter(
+            m => m.userId === user.id
+        );
+
+
+    if(messages.length){
+
+        const m =
+            messages[messages.length-1];
+
+        document.getElementById("latestMessage")
+            .innerHTML = `
+
+            <b>${m.title}</b>
+
+            <span>
+                ${m.text}
+            </span>
+
+        `;
+
+    }
+
+
+    if(isOwner())
+        renderAdmin();
+
+}
+
+
+/* =========================================================
+   AUTO LOGIN
+========================================================= */
+
+window.addEventListener("load",()=>{
+
+    const user = getUser();
+
+    if(user){
+
+        openApp();
+
+    }else{
+
+        document.getElementById("auth")
+            .classList.remove("hidden");
+
+        document.getElementById("app")
+            .classList.add("hidden");
+
+    }
+
+});
+
 </script>
 
 </body>
