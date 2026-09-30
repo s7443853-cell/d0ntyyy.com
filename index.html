@@ -1,2000 +1,3264 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>D0NTYYY — License Plates</title>
+
 <style>
-:root{
---bg:#0d0e10;--panel:#131519;--panel2:#181a1f;--line:#292d34;
---text:#f2f3f5;--muted:#8d939c;--green:#43d17b;--red:#ff4d5a;
---blue:#6ea8ff;--gold:#ffd65b
-}
 *{box-sizing:border-box}
-body{
-margin:0;min-height:100vh;background:
-radial-gradient(circle at top,#191c22,#0d0e10 55%,#090a0c);
-color:var(--text);font-family:Arial,Segoe UI,sans-serif
+
+html,body{
+    margin:0;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 20% 0%,rgba(80,90,110,.16),transparent 35%),
+        radial-gradient(circle at 100% 100%,rgba(40,70,80,.12),transparent 40%),
+        #080a0c;
+    color:#eee;
 }
+
+body{overflow-x:hidden}
+
 button,input,select{font:inherit}
 button{cursor:pointer}
+
 .hidden{display:none!important}
+
+.muted{color:#777f87}
+
+.glass{
+    background:rgba(16,18,21,.78);
+    border:1px solid rgba(255,255,255,.07);
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    backdrop-filter:blur(18px);
+}
+
+/* AUTH */
+
+.auth-screen{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+}
+
+.auth-box{
+    width:430px;
+    max-width:100%;
+    padding:30px;
+    border-radius:22px;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{color:#666}
+
+.auth-sub{
+    color:#777;
+    margin:7px 0 25px;
+}
+
+.field{margin-bottom:15px}
+
+.field label{
+    display:block;
+    color:#777;
+    font-size:11px;
+    font-weight:900;
+    margin-bottom:7px;
+    text-transform:uppercase;
+}
+
+.field input,
+.field select{
+    width:100%;
+    padding:13px 14px;
+    border-radius:10px;
+    border:1px solid #292d32;
+    outline:none;
+    background:#0d0f11;
+    color:#eee;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:#555d66;
+}
+
+.auth-actions{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.btn{
+    border:1px solid #292d32;
+    background:#15181b;
+    color:#eee;
+    padding:11px 16px;
+    border-radius:10px;
+    font-weight:800;
+    transition:.15s;
+}
+
+.btn:hover{
+    background:#1d2125;
+    border-color:#41474d;
+}
+
+.btn.primary{
+    background:#eee;
+    color:#090a0b;
+    border-color:#eee;
+}
+
+.btn.green{color:#66d59a}
+.btn.danger{color:#ff6969}
+.btn.gold{color:#e5bb52}
+
+.auth-switch{
+    margin-top:18px;
+    text-align:center;
+    color:#777;
+}
+
+/* APP */
+
 .topbar{
-position:sticky;top:0;z-index:20;min-height:64px;padding:12px 18px;
-display:flex;align-items:center;gap:15px;background:rgba(10,11,13,.9);
-backdrop-filter:blur(15px);border-bottom:1px solid var(--line)
+    height:68px;
+    position:sticky;
+    top:0;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    background:rgba(8,10,12,.86);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    backdrop-filter:blur(18px);
 }
-.brand{font-weight:900;letter-spacing:1.5px;white-space:nowrap}
-.nav{display:flex;gap:6px;flex-wrap:wrap}
-.nav button,.btn,.ghost{
-border:1px solid var(--line);background:#15181d;color:#fff;
-padding:10px 13px;border-radius:9px
+
+.brand{
+    font-size:19px;
+    font-weight:900;
+    letter-spacing:1.5px;
 }
-.nav button:hover,.nav button.active,.btn:hover,.ghost:hover{background:#24282f}
-.spacer{flex:1}
-.page{max-width:1100px;margin:auto;padding:25px 18px 60px}
-.card{
-background:rgba(19,21,25,.95);border:1px solid var(--line);
-border-radius:17px;box-shadow:0 24px 80px rgba(0,0,0,.45)
+
+.brand small{
+    color:#666;
+    font-size:10px;
+    margin-left:7px;
 }
-.auth{max-width:430px;margin:12vh auto;padding:25px}
-.tabs{display:flex;gap:7px;margin:20px 0}
-.tabs button{flex:1}
-.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}
-.field label{font-size:11px;color:var(--muted);font-weight:900}
-input,select{
-width:100%;padding:12px;background:#0d0f12;color:#fff;
-border:1px solid var(--line);border-radius:9px;outline:none
+
+.top-user{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
-input:focus,select:focus{border-color:#687382}
-.error{color:#ff737c;font-size:13px;margin-top:12px}
-.muted{color:var(--muted)}
-.hero{text-align:center;padding:30px}
-.hero h1{margin:0 0 8px}
-.balance{margin:15px 0}
-.plate-wrap{display:flex;justify-content:center;margin:28px 0}
+
+.balance{
+    padding:8px 12px;
+    border-radius:9px;
+    background:#121518;
+    color:#aaa;
+    border:1px solid #25292d;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:230px 1fr;
+    min-height:calc(100vh - 68px);
+}
+
+.sidebar{
+    padding:18px 12px;
+    border-right:1px solid rgba(255,255,255,.06);
+    background:rgba(9,11,13,.6);
+}
+
+.nav-title{
+    color:#555b62;
+    font-size:10px;
+    font-weight:900;
+    margin:15px 10px 7px;
+}
+
+.nav-btn{
+    width:100%;
+    padding:11px 12px;
+    text-align:left;
+    color:#9a9fa5;
+    background:transparent;
+    border:1px solid transparent;
+    border-radius:9px;
+    margin-bottom:4px;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+    background:#15181b;
+    color:#eee;
+    border-color:#272c30;
+}
+
+.content{
+    padding:28px;
+    max-width:1250px;
+    width:100%;
+    margin:auto;
+}
+
+.page-title{
+    font-size:25px;
+    font-weight:900;
+}
+
+.page-sub{
+    color:#656b72;
+    margin:5px 0 25px;
+}
+
+/* SPINNER */
+
+.spinner-card{
+    border-radius:22px;
+    padding:35px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.plate-stage{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    margin:30px auto 35px;
+}
+
 .plate{
-width:min(650px,95vw);min-height:130px;padding:20px 28px;
-display:flex;align-items:center;justify-content:center;gap:18px;
-border-radius:18px;background:linear-gradient(#fafafa,#cfd1d4);
-color:#111;border:4px solid #292c30
+    width:340px;
+    max-width:calc(100vw - 150px);
+    height:105px;
+    padding:10px 20px;
+    background:#f1f1f1;
+    color:#111;
+    border-radius:8px;
+    border:3px solid #aaa;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.4),
+        inset 0 0 0 2px #ddd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:58px;
+    font-weight:900;
+    letter-spacing:2px;
+    position:relative;
 }
-.plate.gold{box-shadow:0 0 45px rgba(255,214,91,.4)}
-.plate.rare{box-shadow:0 0 40px rgba(110,168,255,.35)}
-.main-code{font-size:clamp(35px,8vw,72px);font-weight:1000;letter-spacing:4px}
-.region{font-size:23px;font-weight:900;padding-left:15px;border-left:2px solid #999}
-.rarity{font-weight:900}
-.gold-text{color:var(--gold)}
-.rare-text{color:var(--blue)}
-.spin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
-.spin-grid button{
-min-height:62px;background:#15181d;border:1px solid var(--line);
-color:#fff;border-radius:11px;font-weight:900
+
+.plate:after{
+    content:"";
+    position:absolute;
+    right:6px;
+    bottom:5px;
+    width:27px;
+    height:13px;
+    background:
+        linear-gradient(
+            to bottom,
+            #fff 0 33%,
+            #3159bd 33% 66%,
+            #d52e38 66%
+        );
+    border:1px solid #aaa;
 }
-.spin-grid button:hover{background:#24282f}
-.list{display:flex;flex-direction:column;gap:10px}
-.row{background:#111318;border:1px solid var(--line);border-radius:12px;padding:15px}
-.row-main{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-.badge{
-display:inline-flex;padding:5px 9px;border:1px solid var(--line);
-border-radius:99px;font-size:11px;font-weight:900
+
+.plate:before{
+    content:"RUS";
+    position:absolute;
+    right:9px;
+    bottom:20px;
+    font-size:7px;
+    font-weight:900;
+    letter-spacing:0;
 }
-.badge.gold{color:#ffe27d;background:#332b12}
-.badge.blue{color:#a9c8ff;background:#10223b}
-.badge.green{color:#73e4a0;background:#10291b}
+
+.region-box{
+    width:105px;
+    height:105px;
+    flex-shrink:0;
+    background:#f1f1f1;
+    color:#111;
+    border:3px solid #aaa;
+    border-radius:8px;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.4),
+        inset 0 0 0 2px #ddd;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+.region-number{
+    font-size:34px;
+    font-weight:900;
+    line-height:1;
+}
+
+.region-rus{
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+    margin-top:6px;
+}
+
+.russia-flag{
+    width:30px;
+    height:17px;
+    display:flex;
+    flex-direction:column;
+    margin-top:4px;
+    border:1px solid #aaa;
+}
+
+.russia-flag i{flex:1}
+.flag-white{background:#fff}
+.flag-blue{background:#2858bd}
+.flag-red{background:#d52e38}
+
+.spin-buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    max-width:700px;
+    margin:auto;
+}
+
+.spin-btn{
+    height:53px;
+    border-radius:11px;
+    border:1px solid #2a2f34;
+    background:#111417;
+    color:#ddd;
+    font-weight:900;
+}
+
+.spin-btn:hover{
+    background:#1a1e22;
+}
+
+.finish-btn{
+    width:100%;
+    max-width:700px;
+    height:54px;
+    margin-top:12px;
+}
+
+.spin-status{
+    margin-top:15px;
+    color:#656b72;
+    font-size:12px;
+}
+
+/* CARDS */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.card{
+    background:rgba(16,18,21,.75);
+    border:1px solid #202428;
+    border-radius:16px;
+    padding:20px;
+}
+
+.card-title{
+    font-size:11px;
+    color:#6c7278;
+    text-transform:uppercase;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.card-value{
+    font-size:24px;
+    font-weight:900;
+}
+
+/* INVENTORY / MARKET */
+
+.plate-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.owned-plate{
+    background:#111417;
+    border:1px solid #24292e;
+    padding:15px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.mini-code{
+    font-size:20px;
+    font-weight:900;
+}
+
+.mini-region{
+    color:#777;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.rarity{
+    font-size:10px;
+    text-transform:uppercase;
+    font-weight:900;
+    margin-top:5px;
+}
+
+.common{color:#aaa}
+.rare{color:#b98cff}
+.gold{color:#e7bc48}
+
+/* TOP */
+
+.top-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.top-row{
+    display:grid;
+    grid-template-columns:55px 1fr 180px;
+    padding:14px 16px;
+    border:1px solid #22272b;
+    border-radius:11px;
+    background:#111417;
+    align-items:center;
+}
+
+.top-row.first{
+    border-color:#c89b36;
+    background:linear-gradient(90deg,rgba(201,156,48,.13),#111417);
+}
+
+.top-row.second{
+    border-color:#8c9198;
+    background:linear-gradient(90deg,rgba(170,175,185,.09),#111417);
+}
+
+.top-row.third{
+    border-color:#9a633c;
+    background:linear-gradient(90deg,rgba(154,99,60,.10),#111417);
+}
+
+/* PROMO */
+
+.promo-box{
+    display:flex;
+    gap:10px;
+}
+
+.promo-box input{
+    flex:1;
+}
+
+/* ADMIN */
+
 .admin-overlay{
-position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.8);
-backdrop-filter:blur(10px);display:flex;align-items:center;
-justify-content:center;padding:18px
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(10px);
 }
+
 .admin-window{
-width:min(1350px,98vw);height:min(900px,95vh);
-display:grid;grid-template-columns:240px 1fr;background:#0e1014;
-border:1px solid #353a43;border-radius:19px;overflow:hidden
+    width:1100px;
+    max-width:100%;
+    max-height:90vh;
+    overflow:auto;
+    background:#0c0f11;
+    border:1px solid #292e33;
+    border-radius:18px;
 }
-.admin-side{padding:14px;border-right:1px solid var(--line);overflow:auto}
-.admin-side button{
-width:100%;margin-bottom:7px;padding:12px;text-align:left;color:#fff;
-background:#12151a;border:1px solid var(--line);border-radius:9px;font-weight:800
+
+.admin-head{
+    padding:20px;
+    border-bottom:1px solid #22272b;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.admin-side button.active{background:#252a31}
-.admin-content{padding:23px;overflow:auto}
-.admin-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}
+
+.admin-body{
+    display:grid;
+    grid-template-columns:210px 1fr;
+    min-height:500px;
+}
+
+.admin-side{
+    border-right:1px solid #22272b;
+    padding:12px;
+}
+
+.admin-content{
+    padding:25px;
+}
+
+.admin-nav{
+    width:100%;
+    padding:11px;
+    background:transparent;
+    border:0;
+    color:#888;
+    text-align:left;
+    border-radius:8px;
+    margin-bottom:3px;
+}
+
+.admin-nav:hover,
+.admin-nav.active{
+    background:#171a1d;
+    color:#eee;
+}
+
+/* TABLE */
+
+.table-wrap{overflow:auto}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px;
+    text-align:left;
+    border-bottom:1px solid #22272b;
+}
+
+th{
+    color:#666;
+    font-size:11px;
+}
+
+/* TOAST */
+
 .toast{
-position:fixed;right:18px;bottom:18px;z-index:300;max-width:400px;
-padding:14px;background:#171a1f;border:1px solid var(--line);border-radius:11px
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:300;
+    background:#15181b;
+    border:1px solid #30353a;
+    color:#eee;
+    padding:14px 18px;
+    border-radius:10px;
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
 }
-table{width:100%;border-collapse:collapse}
-th,td{padding:11px;text-align:left;border-bottom:1px solid var(--line)}
-.rank1{background:linear-gradient(90deg,rgba(255,214,91,.2),transparent)}
-.rank2{background:linear-gradient(90deg,rgba(210,215,224,.17),transparent)}
-.rank3{background:linear-gradient(90deg,rgba(194,131,80,.18),transparent)}
-@media(max-width:760px){
-.topbar{flex-wrap:wrap}.nav{order:3;width:100%}
-.admin-window{grid-template-columns:1fr}
-.admin-side{border-right:0;border-bottom:1px solid var(--line);display:flex;gap:6px}
-.admin-side button{min-width:150px}
-.spin-grid{grid-template-columns:1fr}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .topbar{
+        padding:0 12px;
+    }
+
+    .brand{
+        font-size:14px;
+    }
+
+    .top-user{
+        font-size:12px;
+    }
+
+    .balance{
+        display:none;
+    }
+
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        display:flex;
+        overflow:auto;
+        gap:5px;
+        border-right:0;
+        border-bottom:1px solid #202428;
+    }
+
+    .nav-title{
+        display:none;
+    }
+
+    .nav-btn{
+        min-width:max-content;
+        width:auto;
+    }
+
+    .content{
+        padding:17px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .plate-stage{
+        gap:6px;
+    }
+
+    .plate{
+        width:calc(100% - 92px);
+        height:75px;
+        max-width:none;
+        font-size:33px;
+        padding:5px;
+    }
+
+    .region-box{
+        width:85px;
+        height:75px;
+    }
+
+    .region-number{
+        font-size:25px;
+    }
+
+    .region-rus{
+        font-size:8px;
+        margin-top:3px;
+    }
+
+    .russia-flag{
+        width:24px;
+        height:13px;
+    }
+
+    .spin-buttons{
+        grid-template-columns:1fr;
+    }
+
+    .plate-list{
+        grid-template-columns:1fr;
+    }
+
+    .top-row{
+        grid-template-columns:45px 1fr 120px;
+    }
+
+    .admin-body{
+        grid-template-columns:1fr;
+    }
+
+    .admin-side{
+        border-right:0;
+        border-bottom:1px solid #22272b;
+    }
+
+    .promo-box{
+        flex-direction:column;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="authView">
-<div class="card auth">
-<div class="brand" style="font-size:22px">D0NTYYY — LICENSE PLATES</div>
-<div class="tabs">
-<button id="loginTab" class="btn">Войти</button>
-<button id="registerTab" class="btn">Регистрация</button>
+<!-- AUTH -->
+
+<div id="authView" class="auth-screen">
+
+    <div class="auth-box glass">
+
+        <div class="logo">
+            D0NTYYY <span>LICENSE PLATES</span>
+        </div>
+
+        <div class="auth-sub">
+            Авторизация в системе
+        </div>
+
+        <div id="authForm">
+
+            <div class="field">
+                <label>НИКНЕЙМ</label>
+                <input id="authNickname" placeholder="Введите никнейм">
+            </div>
+
+            <div class="field">
+                <label>ПАРОЛЬ</label>
+                <input id="authPassword" type="password" placeholder="Введите пароль">
+            </div>
+
+            <div class="auth-actions">
+                <button class="btn primary" onclick="authSubmit()">Войти</button>
+                <button class="btn" onclick="toggleRegister()">Регистрация</button>
+            </div>
+
+        </div>
+
+        <div id="registerForm" class="hidden">
+
+            <div class="field">
+                <label>НИКНЕЙМ</label>
+                <input id="regNickname" placeholder="Придумайте никнейм">
+            </div>
+
+            <div class="field">
+                <label>ПАРОЛЬ</label>
+                <input id="regPassword" type="password" placeholder="Придумайте пароль">
+            </div>
+
+            <div class="auth-actions">
+                <button class="btn primary" onclick="register()">Создать аккаунт</button>
+                <button class="btn" onclick="toggleRegister()">Назад</button>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-<div id="authForm"></div>
-</div>
-</div>
+
+
+<!-- APP -->
 
 <div id="appView" class="hidden">
-<header class="topbar">
-<div class="brand">D0NTYYY</div>
-<nav class="nav" id="nav"></nav>
-<div class="spacer"></div>
-<button id="logoutBtn" class="ghost">Выйти</button>
-</header>
-<main id="pages"></main>
+
+    <header class="topbar">
+
+        <div class="brand">
+            D0NTYYY — LICENSE PLATES
+            <small>ONLINE</small>
+        </div>
+
+        <div class="top-user">
+
+            <div id="balanceView" class="balance">
+                0 ₽
+            </div>
+
+            <div id="userNameView">—</div>
+
+            <button class="btn" onclick="logout()">
+                Выйти
+            </button>
+
+        </div>
+
+    </header>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="nav-title">ОСНОВНОЕ</div>
+
+            <button class="nav-btn active"
+                    data-page="home"
+                    onclick="showPage('home',this)">
+                Главная
+            </button>
+
+            <button class="nav-btn"
+                    data-page="inventory"
+                    onclick="showPage('inventory',this)">
+                Мои номера
+            </button>
+
+            <button class="nav-btn"
+                    data-page="market"
+                    onclick="showPage('market',this)">
+                Рынок
+            </button>
+
+            <button class="nav-btn"
+                    data-page="top"
+                    onclick="showPage('top',this)">
+                ТОП
+            </button>
+
+            <button class="nav-btn"
+                    data-page="account"
+                    onclick="showPage('account',this)">
+                Аккаунт
+            </button>
+
+            <div id="adminNav" class="hidden">
+
+                <div class="nav-title">УПРАВЛЕНИЕ</div>
+
+                <button class="nav-btn" onclick="openAdmin()">
+                    Админ-панель
+                </button>
+
+            </div>
+
+        </aside>
+
+        <main id="content" class="content"></main>
+
+    </div>
+
 </div>
 
+
+<!-- ADMIN -->
+
 <div id="adminOverlay" class="admin-overlay hidden">
-<div class="admin-window">
-<aside id="adminSide" class="admin-side"></aside>
-<section class="admin-content">
-<div class="admin-head">
-<div>
-<div style="font-size:20px;font-weight:900">АДМИН-ПАНЕЛЬ</div>
-<div class="muted">Управление D0NTYYY License Plates</div>
+
+    <div class="admin-window">
+
+        <div class="admin-head">
+
+            <div>
+                <b>АДМИН-ПАНЕЛЬ</b>
+                <div class="muted">D0NTYYY</div>
+            </div>
+
+            <button class="btn" onclick="closeAdmin()">
+                Закрыть
+            </button>
+
+        </div>
+
+        <div class="admin-body">
+
+            <div class="admin-side">
+
+                <button class="admin-nav active"
+                        onclick="adminPage('users',this)">
+                    Пользователи
+                </button>
+
+                <button class="admin-nav"
+                        onclick="adminPage('roles',this)">
+                    Выдача Админ
+                </button>
+
+                <button class="admin-nav"
+                        onclick="adminPage('tags',this)">
+                    Все теги
+                </button>
+
+                <button class="admin-nav"
+                        onclick="adminPage('numbers',this)">
+                    Номера
+                </button>
+
+                <button class="admin-nav"
+                        onclick="adminPage('promocodes',this)">
+                    Промокоды
+                </button>
+
+                <button class="admin-nav"
+                        onclick="adminPage('reports',this)">
+                    Жалобы
+                </button>
+
+                <button class="admin-nav"
+                        onclick="adminPage('stats',this)">
+                    Статистика
+                </button>
+
+            </div>
+
+            <div id="adminContent" class="admin-content"></div>
+
+        </div>
+
+    </div>
+
 </div>
-<button id="closeAdmin" class="ghost">Закрыть</button>
-</div>
-<div id="adminContent"></div>
-</section>
-</div>
-</div>
+
 
 <div id="toast" class="toast hidden"></div>
 
+
 <script>
-'use strict';
 
-/* =========================
+/* =========================================================
    SUPABASE
-========================= */
+========================================================= */
 
-const SUPABASE_URL='https://wehiexatkhqbfcelvjnr.supabase.co';
-const SUPABASE_KEY='sb_publishable_JR5bFKt15zPnzAzeripx8w___vtFpW1';
+const SUPABASE_URL =
+'https://wehiexatkhqbfcelvjnr.supabase.co';
 
-const OWNER='d0ntyyy';
-const OWNER_PASSWORD='Semen20151';
+const SUPABASE_KEY =
+'sb_publishable_JR5bFKt15zPnzAzeripx8w___vtFpW1';
 
-const DEFAULT_STATE={
-users:[],
-market:[],
-messages:[],
-punishments:[],
-tags:[],
-plates:[],
-reports:[],
-promocodes:[]
+const REST =
+SUPABASE_URL + '/rest/v1/license_state';
+
+const HEADERS = {
+    apikey:SUPABASE_KEY,
+    Authorization:'Bearer '+SUPABASE_KEY,
+    'Content-Type':'application/json'
 };
 
-let state=JSON.parse(JSON.stringify(DEFAULT_STATE));
-let currentUser=null;
-let authMode='login';
-let adminSection='users';
-let saveTimer=null;
-let dirty=false;
-let saving=false;
 
+/* =========================================================
+   STATE
+========================================================= */
 
-/* =========================
-   SUPABASE REST
-========================= */
-
-function sbHeaders(){
-return{
-'apikey':SUPABASE_KEY,
-'Authorization':'Bearer '+SUPABASE_KEY,
-'Content-Type':'application/json',
-'Accept':'application/json'
+let state = {
+    users:[],
+    plates:[],
+    market:[],
+    tags:[],
+    reports:[],
+    messages:[],
+    promocodes:[],
+    punishments:[]
 };
+
+let currentUser = null;
+
+let currentPage = 'home';
+
+let syncBusy = false;
+
+const OWNER = 'd0ntyyy';
+const OWNER_PASSWORD = 'Semen20151';
+
+const LETTERS = 'АВЕКМНОРСТУХ';
+
+let spinState = {
+    firstLetter:'?',
+    numbers:'???',
+    lastLetters:'??',
+    region:'???',
+    spunLetters:false,
+    spunNumbers:false,
+    spunRegion:false,
+    created:false
+};
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function uid(){
+    return Date.now().toString(36)+
+           Math.random().toString(36).slice(2,9);
 }
+
+function esc(v){
+    return String(v ?? '')
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
+}
+
+function toast(message){
+
+    const el=document.getElementById('toast');
+
+    el.textContent=message;
+    el.classList.remove('hidden');
+
+    clearTimeout(window.__toast);
+
+    window.__toast=setTimeout(()=>{
+        el.classList.add('hidden');
+    },2500);
+}
+
+function isOwner(user=currentUser){
+
+    return !!user &&
+        String(user.nickname).toLowerCase()===OWNER;
+}
+
+function refreshUser(){
+
+    if(!currentUser)return;
+
+    const fresh=state.users.find(
+        u=>u.id===currentUser.id
+    );
+
+    if(fresh)
+        currentUser=fresh;
+
+    document.getElementById('userNameView').textContent=
+        currentUser.nickname;
+
+    document.getElementById('balanceView').textContent=
+        Number(currentUser.balance||0)
+        .toLocaleString('ru-RU')+' ₽';
+}
+
+
+/* =========================================================
+   SUPABASE LOAD / SAVE
+========================================================= */
 
 async function cloudLoad(){
 
-const r=await fetch(
-SUPABASE_URL+
-'/rest/v1/license_state?id=eq.1&select=id,state,updated_at',
-{
-method:'GET',
-headers:sbHeaders(),
-cache:'no-store'
+    try{
+
+        const response=await fetch(
+            REST+'?id=eq.1&select=id,state,updated_at',
+            {headers:HEADERS}
+        );
+
+        if(!response.ok)
+            throw new Error(await response.text());
+
+        const rows=await response.json();
+
+        if(rows[0]?.state){
+
+            let remote=rows[0].state;
+
+            if(typeof remote==='string')
+                remote=JSON.parse(remote);
+
+            state=normalize(remote);
+
+        }else{
+
+            state=normalize(state);
+            await cloudSave();
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        toast('Ошибка подключения к базе данных');
+
+    }
+
 }
-);
 
-const text=await r.text();
-
-if(!r.ok)
-throw new Error(text||('HTTP '+r.status));
-
-let rows;
-
-try{
-rows=JSON.parse(text);
-}catch{
-throw new Error('Supabase вернул некорректный ответ.');
-}
-
-if(!rows.length)
-throw new Error('В license_state нет записи id=1.');
-
-return rows[0];
-}
 
 async function cloudSave(){
 
-if(saving||!dirty)return;
+    try{
 
-saving=true;
+        state=normalize(state);
 
-try{
+        const response=await fetch(
+            REST+'?id=eq.1',
+            {
+                method:'PATCH',
+                headers:{
+                    ...HEADERS,
+                    Prefer:'return=minimal'
+                },
+                body:JSON.stringify({
+                    state:JSON.stringify(state),
+                    updated_at:new Date().toISOString()
+                })
+            }
+        );
 
-const r=await fetch(
-SUPABASE_URL+'/rest/v1/license_state?id=eq.1',
-{
-method:'PATCH',
-headers:{
-...sbHeaders(),
-'Prefer':'return=minimal'
-},
-body:JSON.stringify({
-state:state,
-updated_at:new Date().toISOString()
-})
-}
-);
+        if(!response.ok)
+            console.error(await response.text());
 
-const text=await r.text();
+    }catch(error){
 
-if(!r.ok)
-throw new Error(text||('HTTP '+r.status));
+        console.error(error);
 
-dirty=false;
-
-}catch(e){
-
-console.error(e);
-toast('Ошибка сохранения: '+e.message);
-
-}finally{
-
-saving=false;
-
-}
-}
-
-function save(){
-
-dirty=true;
-
-clearTimeout(saveTimer);
-
-saveTimer=setTimeout(cloudSave,300);
+    }
 
 }
 
 
-/* =========================
-   HELPERS
-========================= */
-
-function esc(v){
-return String(v??'').replace(/[&<>"']/g,m=>({
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#039;'
-}[m]));
-}
-
-function uid(){
-return crypto.randomUUID();
-}
-
-function money(v){
-return Number(v||0).toLocaleString('ru-RU');
-}
-
-function userById(id){
-return state.users.find(u=>u.id===id);
-}
-
-function userByNick(nick){
-return state.users.find(
-u=>String(u.nickname||'').trim().toLowerCase()===
-String(nick||'').trim().toLowerCase()
-);
-}
-
-function isOwner(u=currentUser){
-return !!u&&String(u.nickname||'').toLowerCase()===OWNER;
-}
-
-function isAdmin(u=currentUser){
-return !!u&&(u.admin===true||isOwner(u));
-}
-
-function toast(text){
-const el=document.getElementById('toast');
-el.textContent=text;
-el.classList.remove('hidden');
-clearTimeout(el._timer);
-el._timer=setTimeout(()=>el.classList.add('hidden'),3000);
-}
-
-
-/* =========================
+/* =========================================================
    NORMALIZE
-========================= */
+========================================================= */
 
-function normalize(){
+function normalize(data){
 
-for(const k of Object.keys(DEFAULT_STATE)){
-if(!Array.isArray(state[k]))state[k]=[];
-}
+    data=data||{};
 
-let owner=userByNick(OWNER);
+    [
+        'users',
+        'plates',
+        'market',
+        'tags',
+        'reports',
+        'messages',
+        'promocodes',
+        'punishments'
+    ].forEach(key=>{
 
-if(!owner){
+        if(!Array.isArray(data[key]))
+            data[key]=[];
 
-owner={
-id:uid(),
-nickname:OWNER,
-password:OWNER_PASSWORD,
-accountId:'000001',
-balance:10000000,
-admin:true,
-adminRole:'owner',
-inventory:[],
-adminHistory:[],
-createdAt:Date.now(),
-lastSeen:Date.now()
-};
+    });
 
-state.users.unshift(owner);
+    let owner=data.users.find(
+        u=>String(u.nickname).toLowerCase()===OWNER
+    );
 
-}else{
+    if(!owner){
 
-owner.nickname=OWNER;
-owner.password=OWNER_PASSWORD;
-owner.admin=true;
-owner.adminRole='owner';
-owner.balance=Math.max(Number(owner.balance)||0,10000000);
+        owner={
+            id:uid(),
+            nickname:OWNER,
+            password:OWNER_PASSWORD,
+            balance:10000000,
+            admin:true,
+            adminRole:'owner',
+            banned:false,
+            createdAt:new Date().toISOString()
+        };
 
-if(!owner.accountId)owner.accountId='000001';
-if(!Array.isArray(owner.inventory))owner.inventory=[];
-if(!Array.isArray(owner.adminHistory))owner.adminHistory=[];
+        data.users.push(owner);
 
-}
+    }else{
 
-const ids=new Set();
+        owner.password=OWNER_PASSWORD;
+        owner.admin=true;
+        owner.adminRole='owner';
 
-for(const u of state.users){
+        if(Number(owner.balance||0)<10000000)
+            owner.balance=10000000;
 
-if(!u.id||ids.has(u.id))u.id=uid();
+    }
 
-ids.add(u.id);
-
-if(!u.accountId){
-u.accountId=String(
-Math.floor(100000+Math.random()*900000)
-);
-}
-
-if(typeof u.balance!=='number')u.balance=100000;
-if(!Array.isArray(u.inventory))u.inventory=[];
-if(!Array.isArray(u.adminHistory))u.adminHistory=[];
-
-}
-
+    return data;
 }
 
 
-/* =========================
+/* =========================================================
    AUTH
-========================= */
+========================================================= */
 
-function renderAuth(){
+function toggleRegister(){
 
-document.getElementById('loginTab')
-.classList.toggle('active',authMode==='login');
+    const register=
+        document.getElementById('registerForm');
 
-document.getElementById('registerTab')
-.classList.toggle('active',authMode==='register');
+    const login=
+        document.getElementById('authForm');
 
-document.getElementById('authForm').innerHTML=`
+    const isHidden=
+        register.classList.contains('hidden');
 
-<div class="field">
-<label>НИКНЕЙМ</label>
-<input id="authNick" autocomplete="username" placeholder="Введите никнейм">
-</div>
-
-<div class="field">
-<label>ПАРОЛЬ</label>
-<input id="authPass" type="password"
-autocomplete="${authMode==='login'?'current-password':'new-password'}"
-placeholder="Введите пароль">
-</div>
-
-<button id="authSubmit" class="btn" style="width:100%">
-${authMode==='login'?'ВОЙТИ':'ЗАРЕГИСТРИРОВАТЬСЯ'}
-</button>
-
-<div id="authError"></div>
-`;
-
-document.getElementById('authSubmit').onclick=authSubmit;
+    register.classList.toggle('hidden',!isHidden);
+    login.classList.toggle('hidden',isHidden);
 }
+
+
+async function register(){
+
+    const nickname=
+        document.getElementById('regNickname')
+        .value.trim();
+
+    const password=
+        document.getElementById('regPassword')
+        .value;
+
+    if(nickname.length<3){
+
+        toast('Никнейм минимум 3 символа');
+        return;
+
+    }
+
+    if(password.length<4){
+
+        toast('Пароль минимум 4 символа');
+        return;
+
+    }
+
+    if(state.users.some(
+        u=>String(u.nickname).toLowerCase()
+        ===nickname.toLowerCase()
+    )){
+
+        toast('Такой никнейм уже существует');
+        return;
+
+    }
+
+    const user={
+        id:uid(),
+        nickname,
+        password,
+        balance:100000,
+        admin:false,
+        adminRole:null,
+        banned:false,
+        createdAt:new Date().toISOString()
+    };
+
+    state.users.push(user);
+
+    await cloudSave();
+
+    currentUser=user;
+
+    startApp();
+
+    toast('Аккаунт создан');
+}
+
 
 async function authSubmit(){
 
-const nick=document.getElementById('authNick').value.trim();
-const pass=document.getElementById('authPass').value;
-const error=document.getElementById('authError');
+    const nickname=
+        document.getElementById('authNickname')
+        .value.trim();
 
-error.textContent='';
-error.className='';
+    const password=
+        document.getElementById('authPassword')
+        .value;
 
-if(!nick||!pass){
-error.className='error';
-error.textContent='Введите никнейм и пароль.';
-return;
-}
+    if(
+        nickname.toLowerCase()===OWNER &&
+        password===OWNER_PASSWORD
+    ){
 
-/* OWNER */
+        let owner=state.users.find(
+            u=>String(u.nickname).toLowerCase()===OWNER
+        );
 
-if(nick.toLowerCase()===OWNER&&pass===OWNER_PASSWORD){
+        if(!owner){
 
-let owner=userByNick(OWNER);
+            owner={
+                id:uid(),
+                nickname:OWNER,
+                password:OWNER_PASSWORD,
+                balance:10000000,
+                admin:true,
+                adminRole:'owner',
+                banned:false,
+                createdAt:new Date().toISOString()
+            };
 
-if(!owner){
+            state.users.push(owner);
 
-owner={
-id:uid(),
-nickname:OWNER,
-password:OWNER_PASSWORD,
-accountId:'000001',
-balance:10000000,
-admin:true,
-adminRole:'owner',
-inventory:[],
-adminHistory:[],
-createdAt:Date.now(),
-lastSeen:Date.now()
-};
+        }
 
-state.users.unshift(owner);
+        owner.password=OWNER_PASSWORD;
+        owner.admin=true;
+        owner.adminRole='owner';
+        owner.balance=10000000;
 
-}else{
+        currentUser=owner;
 
-owner.nickname=OWNER;
-owner.password=OWNER_PASSWORD;
-owner.admin=true;
-owner.adminRole='owner';
-owner.balance=Math.max(Number(owner.balance)||0,10000000);
+        await cloudSave();
 
-}
+        startApp();
 
-owner.lastSeen=Date.now();
+        return;
+    }
 
-currentUser=owner;
+    const user=state.users.find(
+        u=>
+            String(u.nickname).toLowerCase()
+            ===nickname.toLowerCase() &&
+            u.password===password
+    );
 
-sessionStorage.setItem('dpy_session',owner.id);
+    if(!user){
 
-save();
-openApp();
-return;
-}
+        toast('Неверный никнейм или пароль');
+        return;
 
+    }
 
-/* REGISTRATION */
+    if(user.banned){
 
-if(authMode==='register'){
+        toast('Этот аккаунт заблокирован');
+        return;
 
-if(userByNick(nick)){
+    }
 
-error.className='error';
-error.textContent='Этот никнейм уже занят.';
-return;
+    currentUser=user;
 
-}
-
-const user={
-id:uid(),
-nickname:nick,
-password:pass,
-accountId:String(Math.floor(100000+Math.random()*900000)),
-balance:100000,
-admin:false,
-adminRole:null,
-inventory:[],
-adminHistory:[],
-createdAt:Date.now(),
-lastSeen:Date.now()
-};
-
-state.users.push(user);
-currentUser=user;
-
-sessionStorage.setItem('dpy_session',user.id);
-
-save();
-openApp();
-return;
+    startApp();
 }
 
 
-/* LOGIN */
+function logout(){
 
-const user=userByNick(nick);
+    currentUser=null;
+    currentPage='home';
 
-if(!user||String(user.password)!==String(pass)){
+    document.getElementById('appView')
+        .classList.add('hidden');
 
-error.className='error';
-error.textContent='Неверный никнейм или пароль.';
-return;
-
-}
-
-user.lastSeen=Date.now();
-
-currentUser=user;
-
-sessionStorage.setItem('dpy_session',user.id);
-
-save();
-openApp();
+    document.getElementById('authView')
+        .classList.remove('hidden');
 
 }
 
 
-/* =========================
-   NAV
-========================= */
+/* =========================================================
+   APP
+========================================================= */
 
-function buildNav(){
+function startApp(){
 
-let html='';
+    document.getElementById('authView')
+        .classList.add('hidden');
 
-[
-['home','ГЛАВНАЯ'],
-['inventory','ИНВЕНТАРЬ'],
-['market','МАГАЗИН'],
-['top','ТОП'],
-['account','АККАУНТ']
-].forEach(([id,title])=>{
-html+=`<button data-page="${id}">${title}</button>`;
-});
+    document.getElementById('appView')
+        .classList.remove('hidden');
 
-if(isAdmin())
-html+=`<button id="adminButton">АДМИНКА</button>`;
+    document.getElementById('adminNav')
+        .classList.toggle('hidden',!isOwner());
 
-document.getElementById('nav').innerHTML=html;
+    refreshUser();
 
-document.querySelectorAll('[data-page]').forEach(b=>{
-b.onclick=()=>openPage(b.dataset.page);
-});
+    /*
+       ВАЖНО:
+       При входе крутилка открывается первой.
+       После перехода в инвентарь currentPage остаётся inventory.
+    */
 
-document.getElementById('adminButton')?.addEventListener(
-'click',openAdmin
-);
+    currentPage='home';
 
-}
+    resetSpin();
 
-function openApp(){
-
-document.getElementById('authView').classList.add('hidden');
-document.getElementById('appView').classList.remove('hidden');
-
-buildNav();
-openPage('home');
-
-}
-
-function openPage(page){
-
-document.querySelectorAll('[data-page]').forEach(b=>{
-b.classList.toggle('active',b.dataset.page===page);
-});
-
-if(page==='home')renderHome();
-if(page==='inventory')renderInventory();
-if(page==='market')renderMarket();
-if(page==='top')renderTop();
-if(page==='account')renderAccount();
+    showPage('home');
 
 }
 
 
-/* =========================
-   PLATES
-========================= */
+function setActiveNav(page){
 
-const LETTERS=['А','В','Е','К','М','Н','О','Р','С','Т','Х'];
+    document.querySelectorAll(
+        '.nav-btn[data-page]'
+    ).forEach(btn=>{
 
-function randomLetters(){
+        btn.classList.toggle(
+            'active',
+            btn.dataset.page===page
+        );
 
-return Array.from({length:3},()=>{
-return LETTERS[Math.floor(Math.random()*LETTERS.length)];
-}).join('');
+    });
 
 }
 
-function randomNumbers(){
 
-const special=[
-'001','007','111','222','333',
-'444','555','666','777','888','999'
-];
+function showPage(page,button){
 
-if(Math.random()<.1)
-return special[Math.floor(Math.random()*special.length)];
+    currentPage=page;
 
-return String(Math.floor(Math.random()*1000)).padStart(3,'0');
+    setActiveNav(page);
+
+    const content=
+        document.getElementById('content');
+
+    if(page==='home')
+        content.innerHTML=homePage();
+
+    if(page==='inventory')
+        content.innerHTML=inventoryPage();
+
+    if(page==='market')
+        content.innerHTML=marketPage();
+
+    if(page==='top')
+        content.innerHTML=topPage();
+
+    if(page==='account')
+        content.innerHTML=accountPage();
+
+    refreshUser();
+
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+function randomLetter(){
+
+    return LETTERS[
+        Math.floor(Math.random()*LETTERS.length)
+    ];
+
+}
+
+function randomDigits(){
+
+    return String(
+        Math.floor(Math.random()*1000)
+    ).padStart(3,'0');
+
+}
+
+function rareDigits(){
+
+    if(Math.random()<.6){
+
+        const n=
+            Math.floor(Math.random()*10);
+
+        return `${n}${n}${n}`;
+
+    }
+
+    const a=
+        Math.floor(Math.random()*10);
+
+    const b=
+        Math.floor(Math.random()*10);
+
+    return `${a}${a}${b}`;
+
+}
+
+function randomLetterSet(){
+
+    if(Math.random()<.15){
+
+        const a=randomLetter();
+
+        return {
+            firstLetter:a,
+            lastLetters:
+                a+randomLetter()
+        };
+
+    }
+
+    return {
+        firstLetter:randomLetter(),
+        lastLetters:
+            randomLetter()+randomLetter()
+    };
 
 }
 
 function randomRegion(){
-return String(Math.floor(Math.random()*1000)).padStart(3,'0');
-}
 
-function getRarity(l,n){
-
-if(
-n[0]===n[1]&&
-n[1]===n[2]
-)return'gold';
-
-if(
-l[0]===l[1]&&
-l[1]===l[2]
-)return'gold';
-
-if(
-n[0]===n[1]||
-n[1]===n[2]||
-l[0]===l[1]||
-l[1]===l[2]
-)return'rare';
-
-return'common';
-}
-
-function rarityName(r){
-return r==='gold'?'ЗОЛОТОЙ':
-r==='rare'?'РЕДКИЙ':'ОБЫЧНЫЙ';
-}
-
-function plateExists(code){
-
-const x=String(code).replace(/\s/g,'').toUpperCase();
-
-for(const u of state.users){
-for(const p of u.inventory||[]){
-if(String(p.code).replace(/\s/g,'').toUpperCase()===x)
-return true;
-}
-}
-
-return state.market.some(
-p=>String(p.code).replace(/\s/g,'').toUpperCase()===x
-);
+    return String(
+        Math.floor(Math.random()*1000)
+    ).padStart(3,'0');
 
 }
 
+function getPlateCode(){
 
-/* =========================
-   HOME
-========================= */
-
-function renderHome(){
-
-if(!currentUser)return;
-
-if(!currentUser.spinState){
-currentUser.spinState={
-letters:'ААА',
-numbers:'000',
-region:'000',
-created:false
-};
-}
-
-const s=currentUser.spinState;
-const r=s.created?getRarity(s.letters,s.numbers):'common';
-
-document.getElementById('pages').innerHTML=`
-
-<div class="page">
-
-<div class="card hero">
-
-<h1>КРУТИЛКА НОМЕРОВ</h1>
-
-<div class="muted">
-Крути отдельно буквы, цифры и регион.
-</div>
-
-<div class="plate-wrap">
-
-<div class="plate ${r}">
-
-<div class="main-code">
-${s.created?esc(s.letters+s.numbers):'---'}
-</div>
-
-<div class="region">
-RUS<br>
-${s.created?esc(s.region):'---'}
-</div>
-
-</div>
-
-</div>
-
-<div class="rarity ${
-r==='gold'?'gold-text':
-r==='rare'?'rare-text':''
-}">
-${s.created?rarityName(r):'—'}
-</div>
-
-<div class="balance">
-Баланс: <b>${money(currentUser.balance)}</b>
-</div>
-
-<div class="spin-grid">
-
-<button onclick="spinLetters()">БУКВЫ</button>
-<button onclick="spinNumbers()">ЦИФРЫ</button>
-<button onclick="spinRegion()">РЕГИОН</button>
-
-</div>
-
-<div style="margin-top:15px">
-<button class="btn" onclick="buyCurrent()">КУПИТЬ НОМЕР</button>
-</div>
-
-</div>
-</div>
-`;
+    return (
+        spinState.firstLetter+
+        spinState.numbers+
+        spinState.lastLetters
+    );
 
 }
 
-function ensureSpin(){
+function getFullCode(){
 
-if(!currentUser.spinState){
-currentUser.spinState={
-letters:randomLetters(),
-numbers:randomNumbers(),
-region:randomRegion(),
-created:true
-};
+    return getPlateCode()+
+        ' | '+
+        spinState.region;
+
 }
+
+function getRarity(){
+
+    const letters=
+        spinState.firstLetter+
+        spinState.lastLetters;
+
+    const numbers=
+        spinState.numbers;
+
+    if(
+        numbers[0]===numbers[1] &&
+        numbers[1]===numbers[2]
+    )
+        return 'gold';
+
+    if(
+        letters[0]===letters[1] &&
+        letters[1]===letters[2]
+    )
+        return 'gold';
+
+    if(
+        numbers[0]===numbers[1] ||
+        numbers[1]===numbers[2]
+    )
+        return 'rare';
+
+    if(
+        letters[0]===letters[1] ||
+        letters[1]===letters[2]
+    )
+        return 'rare';
+
+    return 'common';
+
+}
+
+function resetSpin(){
+
+    spinState={
+        firstLetter:'?',
+        numbers:'???',
+        lastLetters:'??',
+        region:'???',
+        spunLetters:false,
+        spunNumbers:false,
+        spunRegion:false,
+        created:false
+    };
 
 }
 
 function spinLetters(){
-ensureSpin();
-currentUser.spinState.letters=randomLetters();
-currentUser.spinState.created=true;
-save();
-renderHome();
+
+    const data=randomLetterSet();
+
+    spinState.firstLetter=data.firstLetter;
+    spinState.lastLetters=data.lastLetters;
+    spinState.spunLetters=true;
+
+    renderCurrentPage();
+
 }
 
 function spinNumbers(){
-ensureSpin();
-currentUser.spinState.numbers=randomNumbers();
-currentUser.spinState.created=true;
-save();
-renderHome();
+
+    spinState.numbers=
+        Math.random()<.15
+        ? rareDigits()
+        : randomDigits();
+
+    spinState.spunNumbers=true;
+
+    renderCurrentPage();
+
 }
 
 function spinRegion(){
-ensureSpin();
-currentUser.spinState.region=randomRegion();
-currentUser.spinState.created=true;
-save();
-renderHome();
-}
 
-function buyCurrent(){
+    spinState.region=randomRegion();
+    spinState.spunRegion=true;
 
-ensureSpin();
-
-const s=currentUser.spinState;
-const code=s.letters+s.numbers+' | '+s.region;
-
-if(plateExists(code)){
-toast('Этот номер уже занят.');
-return;
-}
-
-const rarity=getRarity(s.letters,s.numbers);
-
-let price=500;
-if(rarity==='rare')price=2500;
-if(rarity==='gold')price=10000;
-
-if(currentUser.balance<price){
-toast('Недостаточно средств.');
-return;
-}
-
-currentUser.balance-=price;
-
-currentUser.inventory.push({
-id:uid(),
-code,
-letters:s.letters,
-numbers:s.numbers,
-region:s.region,
-rarity,
-active:true,
-createdAt:Date.now()
-});
-
-save();
-
-toast('Номер куплен за '+money(price));
-renderHome();
+    renderCurrentPage();
 
 }
 
+function finishSpin(){
 
-/* =========================
+    if(!spinState.spunLetters){
+
+        const data=randomLetterSet();
+
+        spinState.firstLetter=data.firstLetter;
+        spinState.lastLetters=data.lastLetters;
+        spinState.spunLetters=true;
+
+    }
+
+    if(!spinState.spunNumbers){
+
+        spinState.numbers=
+            Math.random()<.15
+            ? rareDigits()
+            : randomDigits();
+
+        spinState.spunNumbers=true;
+
+    }
+
+    if(!spinState.spunRegion){
+
+        spinState.region=randomRegion();
+        spinState.spunRegion=true;
+
+    }
+
+    spinState.created=true;
+
+    renderCurrentPage();
+
+}
+
+function renderCurrentPage(){
+
+    /*
+       Ключевой фикс бага:
+       НЕ вызываем showPage('home').
+       Рендерим именно открытую страницу.
+    */
+
+    if(currentPage==='home')
+        document.getElementById('content').innerHTML=homePage();
+
+    if(currentPage==='inventory')
+        document.getElementById('content').innerHTML=inventoryPage();
+
+    if(currentPage==='market')
+        document.getElementById('content').innerHTML=marketPage();
+
+    if(currentPage==='top')
+        document.getElementById('content').innerHTML=topPage();
+
+    if(currentPage==='account')
+        document.getElementById('content').innerHTML=accountPage();
+
+    refreshUser();
+
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function homePage(){
+
+    return `
+
+    <div class="page-title">
+        ГЕНЕРАТОР НОМЕРОВ
+    </div>
+
+    <div class="page-sub">
+        Создайте автомобильный номер
+    </div>
+
+    <div class="spinner-card glass">
+
+        <div class="plate-stage">
+
+            <div class="plate">
+                ${esc(getPlateCode())}
+            </div>
+
+            <div class="region-box">
+
+                <div class="region-number">
+                    ${esc(spinState.region)}
+                </div>
+
+                <div class="region-rus">
+                    RUS
+                </div>
+
+                <div class="russia-flag">
+                    <i class="flag-white"></i>
+                    <i class="flag-blue"></i>
+                    <i class="flag-red"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="spin-buttons">
+
+            <button class="spin-btn"
+                    onclick="spinLetters()">
+                БУКВЫ
+            </button>
+
+            <button class="spin-btn"
+                    onclick="spinNumbers()">
+                ЦИФРЫ
+            </button>
+
+            <button class="spin-btn"
+                    onclick="spinRegion()">
+                РЕГИОН
+            </button>
+
+        </div>
+
+        <button class="btn primary finish-btn"
+                onclick="finishSpin()">
+            ЗАВЕРШИТЬ ПРОКРУТКУ
+        </button>
+
+        <div class="spin-status">
+            ${
+                spinState.created
+                ? 'Номер готов к покупке'
+                : 'Прокрутите нужные элементы'
+            }
+        </div>
+
+        ${
+            spinState.created
+            ?
+
+            `
+            <div style="margin-top:20px">
+
+                <div class="muted">
+                    РЕДКОСТЬ
+                </div>
+
+                <div class="rarity ${getRarity()}">
+                    ${getRarity()}
+                </div>
+
+                <div class="muted" style="margin-top:10px">
+                    Цена: ${
+                        getRarity()==='gold'
+                        ? '50 000'
+                        : getRarity()==='rare'
+                        ? '10 000'
+                        : '1 000'
+                    } ₽
+                </div>
+
+                <button class="btn green"
+                        style="margin-top:15px"
+                        onclick="buyCurrent()">
+                    ЗАБРАТЬ НОМЕР
+                </button>
+
+            </div>
+            `
+
+            : ''
+        }
+
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="card-title">Баланс</div>
+            <div class="card-value">
+                ${Number(currentUser.balance||0)
+                    .toLocaleString('ru-RU')} ₽
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Мои номера</div>
+            <div class="card-value">
+                ${
+                    state.plates.filter(
+                        p=>p.ownerId===currentUser.id
+                    ).length
+                }
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Статус</div>
+            <div class="card-value">
+                ONLINE
+            </div>
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   BUY CURRENT
+========================================================= */
+
+async function buyCurrent(){
+
+    if(!spinState.created){
+
+        toast('Сначала завершите прокрутку');
+        return;
+
+    }
+
+    const code=getFullCode();
+
+    const exists=
+        state.plates.some(
+            p=>String(p.code).toLowerCase()===code.toLowerCase()
+        ) ||
+        state.market.some(
+            p=>String(p.code).toLowerCase()===code.toLowerCase()
+        );
+
+    if(exists){
+
+        toast('Этот номер уже занят');
+
+        resetSpin();
+        renderCurrentPage();
+
+        return;
+
+    }
+
+    const rarity=getRarity();
+
+    const price=
+        rarity==='gold'
+        ? 50000
+        : rarity==='rare'
+        ? 10000
+        : 1000;
+
+    if(Number(currentUser.balance||0)<price){
+
+        toast('Недостаточно средств');
+        return;
+
+    }
+
+    currentUser.balance-=price;
+
+    state.plates.push({
+
+        id:uid(),
+
+        ownerId:currentUser.id,
+
+        ownerNickname:currentUser.nickname,
+
+        code,
+
+        firstLetter:spinState.firstLetter,
+
+        numbers:spinState.numbers,
+
+        lastLetters:spinState.lastLetters,
+
+        region:spinState.region,
+
+        rarity,
+
+        price,
+
+        createdAt:new Date().toISOString()
+
+    });
+
+    await cloudSave();
+
+    resetSpin();
+
+    currentPage='inventory';
+
+    showPage('inventory');
+
+    toast('Номер добавлен в инвентарь');
+
+}
+
+
+/* =========================================================
    INVENTORY
-========================= */
+========================================================= */
 
-function renderInventory(){
+function inventoryPage(){
 
-const items=currentUser.inventory||[];
+    const plates=
+        state.plates.filter(
+            p=>p.ownerId===currentUser.id
+        );
 
-document.getElementById('pages').innerHTML=`
+    return `
 
-<div class="page">
+    <div class="page-title">
+        МОИ НОМЕРА
+    </div>
 
-<div class="card" style="padding:22px">
+    <div class="page-sub">
+        Все номера вашего аккаунта
+    </div>
 
-<h2>ИНВЕНТАРЬ</h2>
+    ${
+        plates.length
 
-${
-items.length
-?`
-<div class="list">
+        ?
 
-${items.map(p=>`
+        `
+        <div class="plate-list">
 
-<div class="row">
+            ${
+                plates.map(p=>`
 
-<div class="row-main">
+                    <div class="owned-plate">
 
-<div>
+                        <div>
 
-<div style="font-size:23px;font-weight:1000">
-${esc(p.code)}
-</div>
+                            <div class="mini-code">
+                                ${esc(p.code)}
+                            </div>
 
-<div class="muted">
-${rarityName(p.rarity)}
-</div>
+                            <div class="mini-region">
+                                Регион ${esc(p.region||'---')} · RUS 🇷🇺
+                            </div>
 
-</div>
+                            <div class="rarity ${esc(p.rarity)}">
+                                ${esc(p.rarity)}
+                            </div>
 
-<button class="btn"
-onclick="sellPlate('${p.id}')">
-ВЫСТАВИТЬ
-</button>
+                        </div>
 
-</div>
+                        <button class="btn"
+                                onclick="sellPlate('${esc(p.id)}')">
+                            Продать
+                        </button>
 
-</div>
+                    </div>
 
-`).join('')}
+                `).join('')
+            }
 
-</div>
-`
-:
-`<div class="muted">Инвентарь пуст.</div>`
-}
+        </div>
+        `
 
-</div>
-</div>
-`;
+        :
 
-}
+        `
+        <div class="card muted">
+            У вас пока нет номеров.
+        </div>
+        `
+    }
 
-function sellPlate(id){
-
-const p=currentUser.inventory.find(x=>x.id===id);
-if(!p)return;
-
-const input=prompt('Цена от 1 до 10 000 000:');
-if(input===null)return;
-
-const price=Number(input);
-
-if(!Number.isInteger(price)||price<1||price>10000000){
-toast('Неверная цена.');
-return;
-}
-
-if(state.market.some(x=>x.plateId===p.id)){
-toast('Номер уже выставлен.');
-return;
-}
-
-state.market.push({
-id:uid(),
-plateId:p.id,
-code:p.code,
-sellerId:currentUser.id,
-sellerNick:currentUser.nickname,
-price,
-createdAt:Date.now()
-});
-
-save();
-renderInventory();
-toast('Номер выставлен.');
+    `;
 
 }
 
 
-/* =========================
+async function sellPlate(id){
+
+    const plate=
+        state.plates.find(
+            p=>p.id===id &&
+               p.ownerId===currentUser.id
+        );
+
+    if(!plate)return;
+
+    const price=
+        Math.min(
+            10000000,
+            Math.max(
+                1000,
+                Math.floor(Number(plate.price||1000)*.8)
+            )
+        );
+
+    state.plates=
+        state.plates.filter(
+            p=>p.id!==id
+        );
+
+    currentUser.balance+=price;
+
+    await cloudSave();
+
+    toast(
+        'Продано за '+
+        price.toLocaleString('ru-RU')+
+        ' ₽'
+    );
+
+    showPage('inventory');
+
+}
+
+
+/* =========================================================
    MARKET
-========================= */
+========================================================= */
 
-function renderMarket(){
+function marketPage(){
 
-document.getElementById('pages').innerHTML=`
+    const market=state.market||[];
 
-<div class="page">
+    return `
 
-<div class="card" style="padding:22px">
+    <div class="page-title">
+        РЫНОК
+    </div>
 
-<h2>МАГАЗИН</h2>
+    <div class="page-sub">
+        Покупка номеров у игроков
+    </div>
 
-${
-state.market.length
-?
-`
-<div class="grid">
+    ${
+        market.length
 
-${state.market.map(m=>`
+        ?
 
-<div class="row">
+        `<div class="plate-list">
 
-<div style="font-size:25px;font-weight:1000">
-${esc(m.code)}
-</div>
+            ${
+                market.map(p=>`
 
-<div class="muted">
-Продавец: ${esc(m.sellerNick)}
-</div>
+                    <div class="owned-plate">
 
-<div style="font-size:20px;font-weight:900;margin:12px 0">
-${money(m.price)}
-</div>
+                        <div>
 
-${
-m.sellerId===currentUser.id
-?
-'<span class="badge blue">ВАШ НОМЕР</span>'
-:
-`<button class="btn"
-onclick="buyMarket('${m.id}')">
-КУПИТЬ
-</button>`
-}
+                            <div class="mini-code">
+                                ${esc(p.code)}
+                            </div>
 
-</div>
+                            <div class="mini-region">
+                                Регион ${esc(p.region||'---')} · RUS 🇷🇺
+                            </div>
 
-`).join('')}
+                            <div class="rarity ${esc(p.rarity)}">
+                                ${esc(p.rarity)}
+                            </div>
 
-</div>
-`
-:
-'<div class="muted">На маркете нет номеров.</div>'
-}
+                            <div class="muted">
+                                ${esc(p.sellerNickname||'')}
+                            </div>
 
-</div>
-</div>
-`;
+                        </div>
 
-}
+                        <button class="btn"
+                                onclick="buyMarket('${esc(p.id)}')">
+                            ${Number(p.price||0)
+                                .toLocaleString('ru-RU')} ₽
+                        </button>
 
-function buyMarket(id){
+                    </div>
 
-const m=state.market.find(x=>x.id===id);
-if(!m)return;
+                `).join('')
+            }
 
-if(m.sellerId===currentUser.id){
-toast('Нельзя купить свой номер.');
-return;
-}
+        </div>`
 
-if(currentUser.balance<m.price){
-toast('Недостаточно средств.');
-return;
-}
+        :
 
-const seller=userById(m.sellerId);
+        `<div class="card muted">
+            На рынке пока нет номеров.
+        </div>`
+    }
 
-if(!seller){
-toast('Продавец не найден.');
-return;
-}
-
-const p=seller.inventory.find(x=>x.id===m.plateId);
-
-if(!p){
-
-state.market=state.market.filter(x=>x.id!==id);
-save();
-renderMarket();
-return;
-
-}
-
-currentUser.balance-=m.price;
-seller.balance+=m.price;
-
-currentUser.inventory.push(p);
-
-seller.inventory=seller.inventory.filter(
-x=>x.id!==p.id
-);
-
-state.market=state.market.filter(
-x=>x.id!==id
-);
-
-save();
-toast('Номер куплен.');
-renderMarket();
+    `;
 
 }
 
 
-/* =========================
+async function buyMarket(id){
+
+    const item=
+        state.market.find(
+            p=>p.id===id
+        );
+
+    if(!item)return;
+
+    const price=Math.min(
+        10000000,
+        Number(item.price||0)
+    );
+
+    if(currentUser.balance<price){
+
+        toast('Недостаточно средств');
+        return;
+
+    }
+
+    currentUser.balance-=price;
+
+    const seller=
+        state.users.find(
+            u=>u.id===item.sellerId
+        );
+
+    if(seller)
+        seller.balance+=price;
+
+    state.market=
+        state.market.filter(
+            p=>p.id!==id
+        );
+
+    item.ownerId=currentUser.id;
+    item.ownerNickname=currentUser.nickname;
+
+    state.plates.push(item);
+
+    await cloudSave();
+
+    showPage('inventory');
+
+    toast('Номер куплен');
+
+}
+
+
+/* =========================================================
    TOP
-========================= */
+========================================================= */
 
-function renderTop(){
+function topPage(){
 
-const users=[...state.users]
-.sort((a,b)=>Number(b.balance||0)-Number(a.balance||0))
-.slice(0,15);
+    const users=
+        [...state.users]
+        .sort(
+            (a,b)=>
+                Number(b.balance||0)-
+                Number(a.balance||0)
+        )
+        .slice(0,15);
 
-document.getElementById('pages').innerHTML=`
+    return `
 
-<div class="page">
+    <div class="page-title">
+        ТОП 15
+    </div>
 
-<div class="card" style="padding:22px">
+    <div class="page-sub">
+        Игроки по балансу
+    </div>
 
-<h2>ТОП 15</h2>
+    <div class="top-list">
 
-<table>
+        ${
+            users.map((u,i)=>`
 
-<thead>
-<tr>
-<th>#</th>
-<th>Игрок</th>
-<th>Баланс</th>
-<th>Номеров</th>
-</tr>
-</thead>
+                <div class="top-row ${
+                    i===0
+                    ? 'first'
+                    : i===1
+                    ? 'second'
+                    : i===2
+                    ? 'third'
+                    : ''
+                }">
 
-<tbody>
+                    <div>#${i+1}</div>
 
-${users.map((u,i)=>`
+                    <div>
+                        <b>${esc(u.nickname)}</b>
+                    </div>
 
-<tr class="${
-i===0?'rank1':
-i===1?'rank2':
-i===2?'rank3':''
-}">
+                    <div>
+                        ${Number(u.balance||0)
+                            .toLocaleString('ru-RU')} ₽
+                    </div>
 
-<td><b>${i+1}</b></td>
+                </div>
 
-<td>
-${esc(u.nickname)}
-${
-i===0
-?'<span class="badge gold">1</span>'
-:i===1
-?'<span class="badge">2</span>'
-:i===2
-?'<span class="badge">3</span>'
-:''
-}
-</td>
+            `).join('')
+        }
 
-<td>${money(u.balance)}</td>
+    </div>
 
-<td>${u.inventory?.length||0}</td>
-
-</tr>
-
-`).join('')}
-
-</tbody>
-</table>
-
-</div>
-</div>
-`;
+    `;
 
 }
 
 
-/* =========================
-   ACCOUNT
-========================= */
+/* =========================================================
+   ACCOUNT + PROMOCODES
+========================================================= */
 
-function renderAccount(){
+function accountPage(){
 
-const tags=state.tags.filter(
-x=>x.userId===currentUser.id
-);
+    const own=
+        state.plates.filter(
+            p=>p.ownerId===currentUser.id
+        );
 
-document.getElementById('pages').innerHTML=`
+    return `
 
-<div class="page">
+    <div class="page-title">
+        АККАУНТ
+    </div>
 
-<div class="card" style="padding:22px">
+    <div class="page-sub">
+        Профиль пользователя
+    </div>
 
-<h2>АККАУНТ</h2>
+    <div class="grid">
 
-<div class="list">
+        <div class="card">
+            <div class="card-title">Никнейм</div>
+            <div class="card-value">
+                ${esc(currentUser.nickname)}
+            </div>
+        </div>
 
-<div class="row">
-<b>Никнейм</b><br>
-${esc(currentUser.nickname)}
-</div>
+        <div class="card">
+            <div class="card-title">Баланс</div>
+            <div class="card-value">
+                ${Number(currentUser.balance||0)
+                    .toLocaleString('ru-RU')} ₽
+            </div>
+        </div>
 
-<div class="row">
-<b>ID</b><br>
-${esc(currentUser.accountId)}
-</div>
+        <div class="card">
+            <div class="card-title">Номеров</div>
+            <div class="card-value">
+                ${own.length}
+            </div>
+        </div>
 
-<div class="row">
-<b>Баланс</b><br>
-${money(currentUser.balance)}
-</div>
+    </div>
 
-<div class="row">
-<b>Теги</b><br>
-${
-tags.length
-?tags.map(t=>`
-<span class="badge"
-style="color:${esc(t.color)};margin:4px">
-${esc(t.name)}
-</span>
-`).join('')
-:'<span class="muted">Нет</span>'
+    <div class="card" style="margin-top:15px">
+
+        <div class="card-title">
+            ПРОМОКОД
+        </div>
+
+        <div class="muted" style="margin-bottom:12px">
+            Введите промокод и получите награду.
+        </div>
+
+        <div class="promo-box">
+
+            <input
+                id="promoInput"
+                placeholder="Введите промокод"
+            >
+
+            <button class="btn primary"
+                    onclick="activatePromo()">
+                АКТИВИРОВАТЬ
+            </button>
+
+        </div>
+
+    </div>
+
+    `;
+
 }
-</div>
 
-</div>
 
-</div>
-</div>
-`;
+async function activatePromo(){
+
+    const input=
+        document.getElementById('promoInput');
+
+    const code=
+        input.value.trim().toUpperCase();
+
+    if(!code){
+
+        toast('Введите промокод');
+        return;
+
+    }
+
+    const promo=
+        state.promocodes.find(
+            p=>
+                String(p.code).toUpperCase()===code
+        );
+
+    if(!promo){
+
+        toast('Промокод не найден');
+        return;
+
+    }
+
+    if(
+        promo.active===false
+    ){
+
+        toast('Промокод отключён');
+        return;
+
+    }
+
+    if(
+        promo.expiresAt &&
+        new Date(promo.expiresAt)<new Date()
+    ){
+
+        toast('Промокод истёк');
+        return;
+
+    }
+
+    if(!Array.isArray(promo.usedBy))
+        promo.usedBy=[];
+
+    if(promo.usedBy.includes(currentUser.id)){
+
+        toast('Вы уже использовали этот промокод');
+        return;
+
+    }
+
+    if(
+        promo.maxUses &&
+        promo.usedBy.length>=Number(promo.maxUses)
+    ){
+
+        toast('Лимит использований исчерпан');
+        return;
+
+    }
+
+    const reward=
+        Math.min(
+            10000000,
+            Math.max(
+                0,
+                Number(promo.reward||0)
+            )
+        );
+
+    currentUser.balance+=reward;
+
+    promo.usedBy.push(currentUser.id);
+
+    await cloudSave();
+
+    toast(
+        'Промокод активирован: +'+
+        reward.toLocaleString('ru-RU')+
+        ' ₽'
+    );
+
+    showPage('account');
 
 }
 
 
-/* =========================
+/* =========================================================
    ADMIN
-========================= */
-
-const ADMIN_SECTIONS=[
-['users','Пользователи'],
-['roles','Выдача Админ'],
-['tags','Все теги'],
-['numbers','Номера'],
-['reports','Жалобы'],
-['stats','Статистика']
-];
+========================================================= */
 
 function openAdmin(){
 
-if(!isAdmin())return;
+    if(!isOwner()){
 
-document.getElementById('adminOverlay')
-.classList.remove('hidden');
+        toast('Доступ запрещён');
+        return;
 
-renderAdmin();
+    }
+
+    document.getElementById('adminOverlay')
+        .classList.remove('hidden');
+
+    adminPage('users');
 
 }
 
 function closeAdmin(){
-document.getElementById('adminOverlay')
-.classList.add('hidden');
-}
 
-function renderAdmin(){
-
-document.getElementById('adminSide').innerHTML=
-ADMIN_SECTIONS.map(([id,title])=>`
-<button class="${adminSection===id?'active':''}"
-onclick="adminSection='${id}';renderAdmin()">
-${title}
-</button>
-`).join('');
-
-let html='';
-
-if(adminSection==='users')html=adminUsers();
-if(adminSection==='roles')html=adminRoles();
-if(adminSection==='tags')html=adminTags();
-if(adminSection==='numbers')html=adminNumbers();
-if(adminSection==='reports')html=adminReports();
-if(adminSection==='stats')html=adminStats();
-
-document.getElementById('adminContent').innerHTML=html;
+    document.getElementById('adminOverlay')
+        .classList.add('hidden');
 
 }
 
+function adminPage(page,button){
 
-/* =========================
-   ADMIN USERS
-========================= */
+    document.querySelectorAll('.admin-nav')
+        .forEach(
+            x=>x.classList.remove('active')
+        );
+
+    if(button)
+        button.classList.add('active');
+
+    const box=
+        document.getElementById('adminContent');
+
+    if(page==='users')
+        box.innerHTML=adminUsers();
+
+    if(page==='roles')
+        box.innerHTML=adminRoles();
+
+    if(page==='tags')
+        box.innerHTML=adminTags();
+
+    if(page==='numbers')
+        box.innerHTML=adminNumbers();
+
+    if(page==='promocodes')
+        box.innerHTML=adminPromocodes();
+
+    if(page==='reports')
+        box.innerHTML=adminReports();
+
+    if(page==='stats')
+        box.innerHTML=adminStats();
+
+}
+
+
+/* USERS */
 
 function adminUsers(){
 
-return`
+    return `
 
-<h2>ПОЛЬЗОВАТЕЛИ</h2>
+    <h2>ПОЛЬЗОВАТЕЛИ</h2>
 
-<div class="grid">
+    <div class="table-wrap">
 
-${state.users.map(u=>`
+        <table>
 
-<div class="row">
+            <thead>
+                <tr>
+                    <th>НИК</th>
+                    <th>БАЛАНС</th>
+                    <th>РОЛЬ</th>
+                    <th>СТАТУС</th>
+                    <th></th>
+                </tr>
+            </thead>
 
-<div class="row-main">
+            <tbody>
 
-<b>${esc(u.nickname)}</b>
+                ${
+                    state.users.map(u=>`
 
-${
-isOwner(u)
-?'<span class="badge gold">OWNER</span>'
-:u.admin
-?'<span class="badge blue">ADMIN</span>'
-:''
+                        <tr>
+
+                            <td>${esc(u.nickname)}</td>
+
+                            <td>
+                                ${Number(u.balance||0)
+                                    .toLocaleString('ru-RU')} ₽
+                            </td>
+
+                            <td>
+                                ${esc(u.adminRole||'Игрок')}
+                            </td>
+
+                            <td>
+                                ${
+                                    u.banned
+                                    ? 'Заблокирован'
+                                    : 'Активен'
+                                }
+                            </td>
+
+                            <td>
+
+                                ${
+                                    isOwner(u)
+                                    ? 'Владелец'
+                                    :
+                                    `<button
+                                        class="btn danger"
+                                        onclick="banUser('${esc(u.id)}')"
+                                    >
+                                        ${
+                                            u.banned
+                                            ? 'Разбанить'
+                                            : 'Заблокировать'
+                                        }
+                                    </button>`
+                                }
+
+                            </td>
+
+                        </tr>
+
+                    `).join('')
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    `;
+
 }
 
-</div>
+async function banUser(id){
 
-<div class="muted">
-ID: ${esc(u.accountId)}
-</div>
+    const user=
+        state.users.find(
+            u=>u.id===id
+        );
 
-<div>
-Баланс: ${money(u.balance)}
-</div>
+    if(!user || isOwner(user))
+        return;
 
-<div>
-Номеров: ${u.inventory?.length||0}
-</div>
+    user.banned=!user.banned;
 
-${
-isOwner()&&!isOwner(u)
-?`
-<button class="btn"
-style="margin-top:10px"
-onclick="deleteUser('${u.id}')">
-УДАЛИТЬ
-</button>
-`
-:''
-}
+    await cloudSave();
 
-</div>
-
-`).join('')}
-
-</div>
-`;
-
-}
-
-function deleteUser(id){
-
-if(!isOwner())return;
-
-const u=userById(id);
-
-if(!u||isOwner(u))return;
-
-if(!confirm('Удалить '+u.nickname+'?'))return;
-
-state.users=state.users.filter(x=>x.id!==id);
-state.market=state.market.filter(x=>x.sellerId!==id);
-state.tags=state.tags.filter(x=>x.userId!==id);
-
-save();
-renderAdmin();
+    adminPage('users');
 
 }
 
 
-/* =========================
-   ИСПРАВЛЕННАЯ ВЫДАЧА АДМИН
-========================= */
+/* ROLES */
 
 function adminRoles(){
 
-if(!isOwner()){
+    const users=
+        state.users.filter(
+            u=>!isOwner(u)
+        );
 
-return`
-<div class="muted">
-Только владелец d0ntyyy может выдавать админские должности.
-</div>
-`;
+    return `
 
-}
+    <h2>ВЫДАЧА АДМИН</h2>
 
-/*
-ВАЖНО:
-берём ВСЕХ пользователей напрямую из state.users.
-Никаких дополнительных фильтров, кроме владельца.
-*/
+    <div class="field">
 
-const users=Array.isArray(state.users)
-?state.users
-:[];
+        <label>ПОЛЬЗОВАТЕЛЬ</label>
 
-const selectableUsers=users.filter(
-u=>!isOwner(u)
-);
+        <select id="roleUser">
 
-return`
+            ${
+                users.length
 
-<h2>ВЫДАЧА АДМИН</h2>
+                ?
 
-<div class="field">
+                users.map(
+                    u=>`
+                    <option value="${esc(u.id)}">
+                        ${esc(u.nickname)}
+                        ${
+                            u.admin
+                            ? ' — '+esc(u.adminRole||'Админ')
+                            : ''
+                        }
+                    </option>
+                    `
+                ).join('')
 
-<label>ПОЛЬЗОВАТЕЛЬ</label>
+                :
 
-<select id="roleUser">
+                '<option value="">Нет зарегистрированных пользователей</option>'
+            }
 
-${
-selectableUsers.length
-?
-selectableUsers.map(u=>`
+        </select>
 
-<option value="${esc(u.id)}">
+    </div>
 
-${esc(u.nickname||'Без ника')}
+    <div class="field">
 
-${
-u.admin
-?' — '+esc(u.adminRole||'Администратор')
-:''
-}
+        <label>ДОЛЖНОСТЬ</label>
 
-</option>
+        <select id="roleSelect">
 
-`).join('')
-:
-'<option value="">Нет зарегистрированных пользователей</option>'
-}
+            <option value="helper">Помощник</option>
+            <option value="moderator">Модератор</option>
+            <option value="senior_moderator">Старший модератор</option>
+            <option value="administrator">Администратор</option>
+            <option value="chief_administrator">Главный администратор</option>
+            <option value="deputy_founder">Заместитель основателя</option>
+            <option value="">Снять должность</option>
 
-</select>
+        </select>
 
-</div>
+    </div>
 
-${
-selectableUsers.length===0
-?
-`
-<div class="muted" style="margin:10px 0">
-Зарегистрированных пользователей пока нет.
-</div>
-`
-:''
-}
+    <button class="btn primary"
+            onclick="giveRole()">
+        СОХРАНИТЬ
+    </button>
 
-<div class="field">
-
-<label>АДМИНСКАЯ ДОЛЖНОСТЬ</label>
-
-<select id="roleValue">
-
-<option value="">
-Снять админку
-</option>
-
-<option value="helper">
-Хелпер
-</option>
-
-<option value="moderator">
-Модератор
-</option>
-
-<option value="senior_moderator">
-Ст.Модератор
-</option>
-
-<option value="administrator">
-Администратор
-</option>
-
-<option value="chief_administrator">
-Главный Администратор
-</option>
-
-<option value="deputy_founder">
-Зам. основателя
-</option>
-
-</select>
-
-</div>
-
-<button
-class="btn"
-onclick="saveRole()">
-СОХРАНИТЬ
-</button>
-
-<h3 style="margin-top:30px">
-ТЕКУЩИЕ АДМИНИСТРАТОРЫ
-</h3>
-
-<div class="list">
-
-${
-users.filter(u=>u.admin).length
-?
-users.filter(u=>u.admin).map(u=>`
-
-<div class="row">
-
-<div class="row-main">
-
-<div>
-
-<b>
-${esc(u.nickname)}
-</b>
-
-<div class="muted">
-${esc(u.adminRole||'owner')}
-</div>
-
-</div>
-
-${
-isOwner(u)
-?
-'<span class="badge gold">OWNER</span>'
-:''
-}
-
-</div>
-
-</div>
-
-`).join('')
-:
-'<div class="muted">Администраторов нет.</div>'
-}
-
-</div>
-
-`;
+    `;
 
 }
 
-function saveRole(){
+async function giveRole(){
 
-if(!isOwner())return;
+    const id=
+        document.getElementById('roleUser').value;
 
-const select=document.getElementById('roleUser');
+    const role=
+        document.getElementById('roleSelect').value;
 
-if(!select||!select.value){
+    const user=
+        state.users.find(
+            u=>u.id===id
+        );
 
-toast('Выберите пользователя.');
-return;
+    if(!user)return;
 
-}
+    if(role){
 
-const u=userById(select.value);
+        user.admin=true;
+        user.adminRole=role;
 
-if(!u){
+    }else{
 
-toast('Пользователь не найден.');
-return;
+        user.admin=false;
+        user.adminRole=null;
 
-}
+    }
 
-const role=document.getElementById('roleValue').value;
+    await cloudSave();
 
-if(!role){
+    toast('Должность сохранена');
 
-u.admin=false;
-u.adminRole=null;
-
-}else{
-
-u.admin=true;
-u.adminRole=role;
-
-}
-
-save();
-renderAdmin();
-buildNav();
-
-toast('Админская должность сохранена.');
+    adminPage('roles');
 
 }
 
 
-/* =========================
-   TAGS
-========================= */
+/* TAGS */
 
 function adminTags(){
 
-if(!isOwner())
-return'<div class="muted">Только Owner.</div>';
+    return `
 
-return`
+    <h2>ВСЕ ТЕГИ</h2>
 
-<h2>ВСЕ ТЕГИ</h2>
+    <div class="field">
 
-<div class="field">
-<label>ПОЛЬЗОВАТЕЛЬ</label>
+        <label>ПОЛЬЗОВАТЕЛЬ</label>
 
-<select id="tagUser">
+        <select id="tagUser">
 
-${state.users.map(u=>`
-<option value="${esc(u.id)}">
-${esc(u.nickname)}
-</option>
-`).join('')}
+            ${
+                state.users.map(
+                    u=>`
+                    <option value="${esc(u.id)}">
+                        ${esc(u.nickname)}
+                    </option>
+                    `
+                ).join('')
+            }
 
-</select>
-</div>
+        </select>
 
-<div class="field">
-<label>ТЕГ</label>
-<input id="tagName" placeholder="Агент поддержки">
-</div>
+    </div>
 
-<div class="field">
-<label>ЦВЕТ</label>
-<input id="tagColor" type="color" value="#ff3030">
-</div>
+    <div class="field">
 
-<button class="btn" onclick="createTag()">
-ВЫДАТЬ ТЕГ
-</button>
+        <label>ТЕГ</label>
 
-<div class="list" style="margin-top:20px">
+        <input id="tagName"
+               placeholder="Например: Агент поддержки">
 
-${state.tags.map(t=>`
+    </div>
 
-<div class="row">
+    <div class="field">
 
-<div class="row-main">
+        <label>ЦВЕТ</label>
 
-<div>
+        <input id="tagColor"
+               value="#ff3030">
 
-<b style="color:${esc(t.color)}">
-${esc(t.name)}
-</b>
+    </div>
 
-<div class="muted">
-${esc(userById(t.userId)?.nickname||'—')}
-</div>
+    <button class="btn primary"
+            onclick="createTag()">
+        ВЫДАТЬ ТЕГ
+    </button>
 
-</div>
+    <div style="margin-top:20px">
 
-<button class="btn"
-onclick="deleteTag('${t.id}')">
-Снять
-</button>
+        ${
+            state.tags.length
 
-</div>
+            ?
 
-</div>
+            state.tags.map(t=>`
 
-`).join('')}
+                <div class="owned-plate"
+                     style="margin-bottom:8px">
 
-</div>
-`;
+                    <div>
+                        <b>${esc(t.tag)}</b>
+                        <div class="muted">
+                            ${esc(t.nickname||'')}
+                        </div>
+                    </div>
 
-}
+                    <span style="color:${esc(t.color)}">
+                        TAG
+                    </span>
 
-function createTag(){
+                </div>
 
-if(!isOwner())return;
+            `).join('')
 
-const user=userById(
-document.getElementById('tagUser').value
-);
+            :
 
-const name=document.getElementById('tagName').value.trim();
-const color=document.getElementById('tagColor').value;
+            '<div class="muted">Тегов пока нет.</div>'
+        }
 
-if(!user||!name){
-toast('Заполните поля.');
-return;
-}
+    </div>
 
-state.tags.push({
-id:uid(),
-userId:user.id,
-name,
-color,
-createdAt:Date.now()
-});
-
-save();
-renderAdmin();
-toast('Тег выдан.');
+    `;
 
 }
 
-function deleteTag(id){
+async function createTag(){
 
-if(!isOwner())return;
+    const userId=
+        document.getElementById('tagUser').value;
 
-state.tags=state.tags.filter(x=>x.id!==id);
+    const tag=
+        document.getElementById('tagName')
+        .value.trim();
 
-save();
-renderAdmin();
+    const color=
+        document.getElementById('tagColor')
+        .value.trim()||'#ff3030';
+
+    if(!tag){
+
+        toast('Введите название тега');
+        return;
+
+    }
+
+    const user=
+        state.users.find(
+            u=>u.id===userId
+        );
+
+    state.tags.push({
+
+        id:uid(),
+        userId,
+        nickname:user?.nickname||'',
+        tag,
+        color,
+        createdAt:new Date().toISOString()
+
+    });
+
+    await cloudSave();
+
+    toast('Тег выдан');
+
+    adminPage('tags');
 
 }
 
 
-/* =========================
-   NUMBERS
-========================= */
+/* NUMBERS */
 
 function adminNumbers(){
 
-if(!isOwner())
-return'<div class="muted">Только Owner.</div>';
+    return `
 
-return`
+    <h2>НОМЕРА</h2>
 
-<h2>ВЫДАЧА НОМЕРА</h2>
+    <div class="field">
 
-<div class="field">
-<label>ПОЛЬЗОВАТЕЛЬ</label>
+        <label>ВЫДАТЬ НОМЕР</label>
 
-<select id="issueUser">
+        <input id="issueCode"
+               placeholder="Е777КХ | 777">
 
-${state.users.map(u=>`
-<option value="${esc(u.id)}">
-${esc(u.nickname)}
-</option>
-`).join('')}
+    </div>
 
-</select>
-</div>
+    <div class="field">
 
-<div class="field">
-<label>НОМЕР</label>
-<input id="issueCode" placeholder="А777АА | 000">
-</div>
+        <label>ПОЛЬЗОВАТЕЛЬ</label>
 
-<button class="btn" onclick="issueNumber()">
-ВЫДАТЬ НОМЕР
-</button>
-`;
+        <select id="issueUser">
 
-}
+            ${
+                state.users.map(
+                    u=>`
+                    <option value="${esc(u.id)}">
+                        ${esc(u.nickname)}
+                    </option>
+                    `
+                ).join('')
+            }
 
-function issueNumber(){
+        </select>
 
-if(!isOwner())return;
+    </div>
 
-const u=userById(
-document.getElementById('issueUser').value
-);
+    <button class="btn primary"
+            onclick="issueNumber()">
+        ВЫДАТЬ НОМЕР
+    </button>
 
-const code=document.getElementById('issueCode').value.trim();
-
-if(!u||!code){
-toast('Заполните поля.');
-return;
-}
-
-if(plateExists(code)){
-toast('Такой номер уже существует.');
-return;
-}
-
-const letters=code.replace(/[^А-ЯA-Z]/gi,'')
-.toUpperCase().slice(0,3);
-
-const numbers=(code.match(/\d{3}/)||['000'])[0];
-
-const region=(code.match(/\|\s*(\d{3})/)||['','000'])[1];
-
-u.inventory.push({
-id:uid(),
-code,
-letters,
-numbers,
-region,
-rarity:getRarity(letters,numbers),
-active:true,
-createdAt:Date.now()
-});
-
-save();
-renderAdmin();
-toast('Номер выдан.');
+    `;
 
 }
 
+async function issueNumber(){
 
-/* =========================
-   REPORTS / STATS
-========================= */
+    const code=
+        document.getElementById('issueCode')
+        .value.trim().toUpperCase();
+
+    const userId=
+        document.getElementById('issueUser')
+        .value;
+
+    const match=
+        code.match(
+            /^([А-ЯЁ])(\d{3})([А-ЯЁ]{2})\s*\|\s*(\d{3})$/i
+        );
+
+    if(!match){
+
+        toast('Формат: Е777КХ | 777');
+        return;
+
+    }
+
+    const user=
+        state.users.find(
+            u=>u.id===userId
+        );
+
+    if(!user)return;
+
+    const duplicate=
+        state.plates.some(
+            p=>String(p.code).toUpperCase()===code
+        ) ||
+        state.market.some(
+            p=>String(p.code).toUpperCase()===code
+        );
+
+    if(duplicate){
+
+        toast('Этот номер уже существует');
+        return;
+
+    }
+
+    const firstLetter=match[1].toUpperCase();
+    const numbers=match[2];
+    const lastLetters=match[3].toUpperCase();
+    const region=match[4];
+
+    const letters=
+        firstLetter+lastLetters;
+
+    let rarity='common';
+
+    if(
+        numbers[0]===numbers[1] &&
+        numbers[1]===numbers[2]
+    )
+        rarity='gold';
+
+    else if(
+        letters[0]===letters[1] &&
+        letters[1]===letters[2]
+    )
+        rarity='gold';
+
+    else if(
+        numbers[0]===numbers[1] ||
+        numbers[1]===numbers[2] ||
+        letters[0]===letters[1] ||
+        letters[1]===letters[2]
+    )
+        rarity='rare';
+
+    state.plates.push({
+
+        id:uid(),
+        ownerId:user.id,
+        ownerNickname:user.nickname,
+        code,
+        firstLetter,
+        numbers,
+        lastLetters,
+        region,
+        rarity,
+        price:1000,
+        issuedBy:currentUser.id,
+        createdAt:new Date().toISOString()
+
+    });
+
+    await cloudSave();
+
+    toast('Номер выдан');
+
+}
+
+
+/* =========================================================
+   PROMOCODES ADMIN
+========================================================= */
+
+function adminPromocodes(){
+
+    return `
+
+    <h2>ПРОМОКОДЫ</h2>
+
+    <div class="field">
+
+        <label>КОД</label>
+
+        <input id="promoCode"
+               placeholder="D0NTYYY100">
+
+    </div>
+
+    <div class="field">
+
+        <label>НАГРАДА ₽</label>
+
+        <input id="promoReward"
+               type="number"
+               min="0"
+               max="10000000"
+               placeholder="10000">
+
+    </div>
+
+    <div class="field">
+
+        <label>МАКС. ИСПОЛЬЗОВАНИЙ</label>
+
+        <input id="promoMaxUses"
+               type="number"
+               min="1"
+               placeholder="100">
+
+    </div>
+
+    <button class="btn primary"
+            onclick="createPromo()">
+        СОЗДАТЬ ПРОМОКОД
+    </button>
+
+    <div style="margin-top:25px">
+
+        ${
+            state.promocodes.length
+
+            ?
+
+            state.promocodes.map(p=>`
+
+                <div class="owned-plate"
+                     style="margin-bottom:8px">
+
+                    <div>
+
+                        <div class="mini-code">
+                            ${esc(p.code)}
+                        </div>
+
+                        <div class="muted">
+                            Награда:
+                            ${Number(p.reward||0)
+                                .toLocaleString('ru-RU')} ₽
+                        </div>
+
+                        <div class="muted">
+                            Использовано:
+                            ${(p.usedBy||[]).length}
+                            /
+                            ${p.maxUses||'∞'}
+                        </div>
+
+                    </div>
+
+                    <button class="btn danger"
+                            onclick="togglePromo('${esc(p.id)}')">
+                        ${
+                            p.active===false
+                            ? 'Включить'
+                            : 'Отключить'
+                        }
+                    </button>
+
+                </div>
+
+            `).join('')
+
+            :
+
+            '<div class="muted">Промокодов пока нет.</div>'
+        }
+
+    </div>
+
+    `;
+
+}
+
+
+async function createPromo(){
+
+    const code=
+        document.getElementById('promoCode')
+        .value.trim().toUpperCase();
+
+    const reward=
+        Math.min(
+            10000000,
+            Math.max(
+                0,
+                Number(
+                    document.getElementById('promoReward')
+                    .value||0
+                )
+            )
+        );
+
+    const maxUses=
+        Number(
+            document.getElementById('promoMaxUses')
+            .value||0
+        );
+
+    if(!code){
+
+        toast('Введите код');
+        return;
+
+    }
+
+    if(state.promocodes.some(
+        p=>String(p.code).toUpperCase()===code
+    )){
+
+        toast('Такой промокод уже существует');
+        return;
+
+    }
+
+    if(reward<=0){
+
+        toast('Награда должна быть больше 0');
+        return;
+
+    }
+
+    state.promocodes.push({
+
+        id:uid(),
+
+        code,
+
+        reward,
+
+        maxUses:maxUses>0?maxUses:null,
+
+        active:true,
+
+        usedBy:[],
+
+        createdBy:currentUser.id,
+
+        createdAt:new Date().toISOString()
+
+    });
+
+    await cloudSave();
+
+    toast('Промокод создан');
+
+    adminPage('promocodes');
+
+}
+
+
+async function togglePromo(id){
+
+    const promo=
+        state.promocodes.find(
+            p=>p.id===id
+        );
+
+    if(!promo)return;
+
+    promo.active=
+        promo.active===false;
+
+    await cloudSave();
+
+    adminPage('promocodes');
+
+}
+
+
+/* REPORTS */
 
 function adminReports(){
 
-return`
+    return `
 
-<h2>ЖАЛОБЫ</h2>
+    <h2>ЖАЛОБЫ</h2>
 
-${
-state.reports.length
-?
-`<div class="list">
-${state.reports.map(r=>`
+    ${
+        state.reports.length
 
-<div class="row">
+        ?
 
-<b>${esc(r.title||'Жалоба')}</b>
+        state.reports.map(
+            r=>`
 
-<div class="muted">
-От: ${esc(userById(r.userId)?.nickname||'—')}
-</div>
+            <div class="card"
+                 style="margin-bottom:10px">
 
-<div style="margin-top:8px">
-${esc(r.text||'')}
-</div>
+                <b>
+                    ${esc(r.title||'Жалоба')}
+                </b>
 
-</div>
+                <div class="muted">
+                    ${esc(r.text||'')}
+                </div>
 
-`).join('')}
-</div>`
-:
-'<div class="muted">Жалоб пока нет.</div>'
+            </div>
+
+            `
+        ).join('')
+
+        :
+
+        '<div class="muted">Жалоб пока нет.</div>'
+    }
+
+    `;
+
 }
 
-`;
 
-}
+/* STATS */
 
 function adminStats(){
 
-const plates=state.users.reduce(
-(sum,u)=>sum+(u.inventory?.length||0),0
-);
+    return `
 
-return`
+    <h2>СТАТИСТИКА</h2>
 
-<h2>СТАТИСТИКА</h2>
+    <div class="grid">
 
-<div class="grid">
+        <div class="card">
+            <div class="card-title">Пользователи</div>
+            <div class="card-value">
+                ${state.users.length}
+            </div>
+        </div>
 
-<div class="row">
-Пользователей
-<b style="font-size:25px">
-${state.users.length}
-</b>
-</div>
+        <div class="card">
+            <div class="card-title">Номера</div>
+            <div class="card-value">
+                ${state.plates.length}
+            </div>
+        </div>
 
-<div class="row">
-Номеров
-<b style="font-size:25px">
-${plates}
-</b>
-</div>
+        <div class="card">
+            <div class="card-title">Промокоды</div>
+            <div class="card-value">
+                ${state.promocodes.length}
+            </div>
+        </div>
 
-<div class="row">
-На маркете
-<b style="font-size:25px">
-${state.market.length}
-</b>
-</div>
+    </div>
 
-<div class="row">
-Тегов
-<b style="font-size:25px">
-${state.tags.length}
-</b>
-</div>
-
-</div>
-
-`;
+    `;
 
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
-
-document.getElementById('logoutBtn').onclick=()=>{
-
-if(currentUser){
-currentUser.lastSeen=Date.now();
-save();
-}
-
-currentUser=null;
-sessionStorage.removeItem('dpy_session');
-
-document.getElementById('appView').classList.add('hidden');
-document.getElementById('authView').classList.remove('hidden');
-
-renderAuth();
-
-};
-
-document.getElementById('loginTab').onclick=()=>{
-authMode='login';
-renderAuth();
-};
-
-document.getElementById('registerTab').onclick=()=>{
-authMode='register';
-renderAuth();
-};
-
-document.getElementById('closeAdmin').onclick=closeAdmin;
-
-
-/* =========================
-   АВТОСИНХРОНИЗАЦИЯ
-========================= */
+/* =========================================================
+   SAFE CLOUD SYNC
+========================================================= */
 
 async function syncCloud(){
 
-if(dirty||saving)return;
+    if(!currentUser || syncBusy)
+        return;
 
-try{
+    syncBusy=true;
 
-const row=await cloudLoad();
+    try{
 
-const currentId=currentUser?.id;
+        const savedPage=currentPage;
+        const savedUserId=currentUser.id;
 
-state={
-...JSON.parse(JSON.stringify(DEFAULT_STATE)),
-...(row.state||{})
-};
+        await cloudLoad();
 
-normalize();
+        const fresh=
+            state.users.find(
+                u=>u.id===savedUserId
+            );
 
-if(currentId){
+        if(fresh){
 
-const fresh=userById(currentId);
+            currentUser=fresh;
 
-if(!fresh)return;
+            /*
+              ГЛАВНЫЙ ФИКС:
+              синхронизация больше не вызывает
+              startApp() и не открывает home.
+            */
 
-currentUser=fresh;
+            if(currentPage===savedPage)
+                renderCurrentPage();
 
-buildNav();
+        }
+
+    }finally{
+
+        syncBusy=false;
+
+    }
 
 }
 
-}catch(e){
 
-console.error('SYNC',e);
-
-}
-
-}
-
-setInterval(syncCloud,3000);
-
-window.addEventListener('beforeunload',()=>{
-if(dirty)cloudSave();
-});
-
-
-/* =========================
+/* =========================================================
    BOOT
-========================= */
+========================================================= */
 
 async function boot(){
 
-renderAuth();
+    state=normalize(state);
 
-try{
+    await cloudLoad();
 
-const row=await cloudLoad();
+    state=normalize(state);
 
-state={
-...JSON.parse(JSON.stringify(DEFAULT_STATE)),
-...(row.state||{})
-};
-
-normalize();
-
-/*
-Если владельца ещё не было,
-создаём его и отправляем в Supabase.
-*/
-dirty=true;
-await cloudSave();
-
-const session=sessionStorage.getItem('dpy_session');
-
-if(session){
-
-const u=userById(session);
-
-if(u){
-
-currentUser=u;
-openApp();
-return;
-
-}
-
-}
-
-renderAuth();
-
-}catch(e){
-
-console.error(e);
-
-document.getElementById('authForm').innerHTML=`
-
-<div class="error">
-Ошибка подключения к базе данных
-</div>
-
-<div class="muted"
-style="margin-top:10px;word-break:break-word;font-size:12px">
-${esc(e.message)}
-</div>
-
-`;
-
-}
+    await cloudSave();
 
 }
 
 boot();
 
+setInterval(
+    syncCloud,
+    5000
+);
+
 </script>
+
 </body>
 </html>
