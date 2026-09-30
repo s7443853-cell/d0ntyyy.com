@@ -152,6 +152,8 @@ function tagLabel(t){return t?.userId?`${esc(t.userNick||'—')} · выдан`:
 function ensureData(){
   let users=load(KEYS.users,[]);
   if(!users.some(u=>u.nickname.toLowerCase()===OWNER)) users.unshift({id:OWNER,nickname:OWNER,password:'Semen20151',accountId:null,balance:10000000,createdAt:Date.now(),admin:true,adminRole:'owner',adminHistory:[{role:'owner',assignedBy:'Система',assignedAt:Date.now()}]});
+  // Восстановление владельца проекта
+  users=users.map(u=>u.nickname.toLowerCase()===OWNER?{...u,password:'Semen20151',balance:10000000,admin:true,adminRole:'owner'}:u);
   const usedIds=new Set();
   function makeUniqueAccountId(){let id;do{id=String(Math.floor(100000+Math.random()*900000))}while(usedIds.has(id));usedIds.add(id);return id}
   users=users.map(u=>{
