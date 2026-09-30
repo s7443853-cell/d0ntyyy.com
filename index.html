@@ -7,228 +7,560 @@
 
 <style>
 :root{
- --bg:#0d0e10;--panel:#131519;--panel2:#181a1f;--line:#292d34;
- --text:#f2f3f5;--muted:#8d939c;--green:#43d17b;--red:#ff4d5a;
- --blue:#6ea8ff;--gold:#ffd65b
+ --bg:#0d0e10;
+ --panel:#131519;
+ --panel2:#181a1f;
+ --line:#292d34;
+ --text:#f2f3f5;
+ --muted:#8d939c;
+ --green:#43d17b;
+ --red:#ff4d5a;
+ --blue:#6ea8ff;
+ --gold:#ffd65b;
 }
+
 *{box-sizing:border-box}
+
 body{
- margin:0;min-height:100vh;background:linear-gradient(180deg,#090a0c,#111318);
- color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif
+ margin:0;
+ min-height:100vh;
+ background:
+  radial-gradient(circle at top,#171a20 0,#0d0e10 45%,#090a0c 100%);
+ color:var(--text);
+ font-family:Arial,Segoe UI,sans-serif;
 }
+
 button,input,select{font:inherit}
+
 button{cursor:pointer}
+
 .hidden{display:none!important}
 
 .topbar{
- position:sticky;top:0;z-index:20;display:flex;align-items:center;
- gap:8px;padding:12px 18px;background:rgba(10,11,13,.88);
- backdrop-filter:blur(15px);border-bottom:1px solid var(--line)
+ height:64px;
+ display:flex;
+ align-items:center;
+ gap:20px;
+ padding:0 20px;
+ background:rgba(12,13,16,.9);
+ border-bottom:1px solid var(--line);
+ backdrop-filter:blur(16px);
+ position:sticky;
+ top:0;
+ z-index:20;
 }
-.brand{font-weight:900;letter-spacing:1px}
-.nav{display:flex;gap:6px;flex-wrap:wrap;margin-left:15px}
-.nav button,.ghost,.btn{
- border:1px solid var(--line);background:#15181d;color:#fff;
- padding:10px 13px;border-radius:9px
+
+.brand{
+ font-weight:900;
+ letter-spacing:1.5px;
+ white-space:nowrap;
 }
-.nav button:hover,.nav button.active,.btn:hover,.ghost:hover{
- background:#22262d
+
+.nav{
+ display:flex;
+ gap:6px;
+ flex-wrap:wrap;
 }
+
+.nav button,
+.btn,
+.ghost{
+ background:#15181d;
+ color:#fff;
+ border:1px solid var(--line);
+ border-radius:9px;
+ padding:10px 13px;
+ transition:.15s;
+}
+
+.nav button:hover,
+.nav button.active,
+.btn:hover,
+.ghost:hover{
+ background:#22262d;
+}
+
 .spacer{flex:1}
 
-.page{max-width:1120px;margin:auto;padding:25px 18px 60px}
+.page{
+ width:min(1100px,100%);
+ margin:auto;
+ padding:25px 18px 60px;
+}
+
 .card{
- background:rgba(19,21,25,.9);border:1px solid var(--line);
- border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,.4)
+ background:rgba(19,21,25,.94);
+ border:1px solid var(--line);
+ border-radius:17px;
+ box-shadow:0 25px 80px rgba(0,0,0,.45);
 }
-.auth{max-width:430px;margin:10vh auto;padding:25px}
-.tabs{display:flex;gap:7px;margin:18px 0}
+
+.auth{
+ width:min(430px,calc(100% - 30px));
+ margin:12vh auto;
+ padding:25px;
+}
+
+.tabs{
+ display:flex;
+ gap:7px;
+ margin:20px 0;
+}
+
 .tabs button{flex:1}
-.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}
-.field label{font-size:11px;color:var(--muted);font-weight:900}
+
+.field{
+ display:flex;
+ flex-direction:column;
+ gap:7px;
+ margin:12px 0;
+}
+
+.field label{
+ color:var(--muted);
+ font-size:11px;
+ font-weight:900;
+}
+
 input,select{
- width:100%;background:#0e1014;color:#fff;border:1px solid var(--line);
- border-radius:9px;padding:11px;outline:0
+ width:100%;
+ padding:12px;
+ color:#fff;
+ background:#0d0f12;
+ border:1px solid var(--line);
+ border-radius:9px;
+ outline:none;
 }
-input:focus,select:focus{border-color:#58606c}
 
-.hero{text-align:center;padding:30px}
-.hero h1{margin:0 0 8px}
-.muted{color:var(--muted)}
-.error{color:#ff737c;margin-top:10px;font-size:13px}
-.success{color:#6fe09b;margin-top:10px;font-size:13px}
+input:focus,select:focus{
+ border-color:#657080;
+}
 
-.plate-wrap{display:flex;justify-content:center;margin:25px 0}
+.error{
+ color:#ff737c;
+ margin-top:12px;
+ font-size:13px;
+}
+
+.success{
+ color:#70e49b;
+ margin-top:12px;
+ font-size:13px;
+}
+
+.muted{
+ color:var(--muted);
+}
+
+.hero{
+ text-align:center;
+ padding:30px;
+}
+
+.hero h1{
+ margin:0 0 8px;
+}
+
+.balance{
+ margin:15px 0;
+}
+
+.plate-wrap{
+ display:flex;
+ justify-content:center;
+ margin:28px 0;
+}
+
 .plate{
- width:min(620px,94vw);min-height:125px;padding:18px 25px;
- display:flex;align-items:center;justify-content:center;gap:15px;
- border-radius:18px;background:linear-gradient(#fafafa,#cfd2d5);
- color:#111;border:4px solid #292b2e;
- box-shadow:0 8px 35px rgba(255,255,255,.07)
+ width:min(650px,95vw);
+ min-height:130px;
+ padding:20px 28px;
+ border-radius:18px;
+ background:linear-gradient(#fafafa,#cfd1d4);
+ color:#111;
+ border:4px solid #292c30;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:18px;
+ box-shadow:0 12px 45px rgba(255,255,255,.06);
 }
+
 .plate.gold{
- box-shadow:0 0 40px rgba(255,210,70,.4)
+ box-shadow:0 0 45px rgba(255,214,91,.4);
 }
+
 .plate.rare{
- box-shadow:0 0 35px rgba(90,145,255,.3)
+ box-shadow:0 0 40px rgba(110,168,255,.35);
 }
+
 .main-code{
- font-size:clamp(38px,7vw,70px);font-weight:1000;letter-spacing:4px
+ font-size:clamp(35px,8vw,72px);
+ font-weight:1000;
+ letter-spacing:4px;
 }
+
 .region{
- font-weight:900;font-size:25px;border-left:2px solid #999;
- padding-left:13px
+ font-size:23px;
+ font-weight:900;
+ padding-left:15px;
+ border-left:2px solid #999;
 }
-.rarity{font-weight:900}
+
+.rarity{
+ font-weight:900;
+ margin-top:8px;
+}
+
 .gold-text{color:var(--gold)}
 .rare-text{color:var(--blue)}
 
 .spin-grid{
- display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px;
+ margin-top:20px;
 }
-.spin-grid button{
- min-height:60px;border:1px solid var(--line);border-radius:11px;
- background:#15181d;color:#fff;font-weight:900
-}
-.spin-grid button:hover{background:#22262c}
 
-.balance{text-align:center;margin:15px;font-size:16px}
-.center{text-align:center}
-.stack{display:flex;gap:8px;flex-wrap:wrap}
-.list{display:flex;flex-direction:column;gap:9px}
+.spin-grid button{
+ min-height:62px;
+ background:#15181d;
+ border:1px solid var(--line);
+ color:#fff;
+ border-radius:11px;
+ font-weight:900;
+}
+
+.spin-grid button:hover{
+ background:#24282f;
+}
+
+.list{
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+}
+
 .row{
- padding:15px;border:1px solid var(--line);border-radius:12px;
- background:#111318
+ background:#111318;
+ border:1px solid var(--line);
+ border-radius:12px;
+ padding:15px;
 }
+
 .row-main{
- display:flex;justify-content:space-between;align-items:center;gap:10px
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
 }
+
 .grid{
- display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
- gap:12px
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:12px;
 }
+
 .badge{
- display:inline-flex;padding:5px 9px;border-radius:99px;
- border:1px solid var(--line);font-size:11px;font-weight:900
+ display:inline-flex;
+ align-items:center;
+ padding:5px 9px;
+ border:1px solid var(--line);
+ border-radius:99px;
+ font-size:11px;
+ font-weight:900;
 }
-.badge.gold{color:#ffe17c;background:#332b12}
-.badge.blue{color:#a5c6ff;background:#10223b}
-.badge.green{color:#74e4a2;background:#10291b}
-.badge.red{color:#ff858c;background:#35151a}
+
+.badge.gold{
+ color:#ffe27d;
+ background:#332b12;
+}
+
+.badge.blue{
+ color:#a9c8ff;
+ background:#10223b;
+}
+
+.badge.green{
+ color:#73e4a0;
+ background:#10291b;
+}
+
+.badge.red{
+ color:#ff858c;
+ background:#35151a;
+}
 
 .admin-overlay{
- position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.78);
- backdrop-filter:blur(10px);display:flex;align-items:center;
- justify-content:center;padding:18px
-}
-.admin-window{
- width:min(1350px,98vw);height:min(900px,95vh);
- display:grid;grid-template-columns:250px 1fr;
- background:#0e1014;border:1px solid #333842;border-radius:20px;
- overflow:hidden
-}
-.admin-side{
- padding:15px;border-right:1px solid var(--line);
- overflow:auto
-}
-.admin-side button{
- width:100%;text-align:left;margin-bottom:7px;
- border:1px solid var(--line);background:#12151a;color:#fff;
- padding:12px;border-radius:9px;font-weight:800
-}
-.admin-side button.active{background:#242932}
-.admin-content{padding:25px;overflow:auto}
-.admin-head{
- display:flex;justify-content:space-between;align-items:center;
- margin-bottom:20px
+ position:fixed;
+ inset:0;
+ z-index:100;
+ background:rgba(0,0,0,.8);
+ backdrop-filter:blur(10px);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:18px;
 }
 
-.modal{
- position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.75);
- display:flex;align-items:center;justify-content:center;padding:18px
+.admin-window{
+ width:min(1350px,98vw);
+ height:min(900px,95vh);
+ display:grid;
+ grid-template-columns:240px 1fr;
+ background:#0e1014;
+ border:1px solid #353a43;
+ border-radius:19px;
+ overflow:hidden;
 }
-.modal-box{
- width:min(450px,95vw);padding:22px;background:#14171c;
- border:1px solid var(--line);border-radius:16px
+
+.admin-side{
+ padding:14px;
+ border-right:1px solid var(--line);
+ overflow:auto;
+}
+
+.admin-side button{
+ width:100%;
+ margin-bottom:7px;
+ padding:12px;
+ text-align:left;
+ color:#fff;
+ background:#12151a;
+ border:1px solid var(--line);
+ border-radius:9px;
+ font-weight:800;
+}
+
+.admin-side button.active{
+ background:#252a31;
+}
+
+.admin-content{
+ padding:23px;
+ overflow:auto;
+}
+
+.admin-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+ margin-bottom:20px;
 }
 
 .toast{
- position:fixed;right:18px;bottom:18px;z-index:300;
- background:#171a1f;border:1px solid var(--line);
- border-radius:11px;padding:14px;max-width:390px
+ position:fixed;
+ right:18px;
+ bottom:18px;
+ z-index:300;
+ max-width:400px;
+ padding:14px;
+ background:#171a1f;
+ border:1px solid var(--line);
+ border-radius:11px;
 }
 
-table{width:100%;border-collapse:collapse}
-th,td{padding:11px;border-bottom:1px solid var(--line);text-align:left}
-.rank1{background:linear-gradient(90deg,rgba(255,214,91,.2),transparent)}
-.rank2{background:linear-gradient(90deg,rgba(210,215,224,.18),transparent)}
-.rank3{background:linear-gradient(90deg,rgba(194,131,80,.18),transparent)}
+table{
+ width:100%;
+ border-collapse:collapse;
+}
+
+th,td{
+ padding:11px;
+ text-align:left;
+ border-bottom:1px solid var(--line);
+}
+
+.rank1{
+ background:linear-gradient(
+  90deg,
+  rgba(255,214,91,.2),
+  transparent
+ );
+}
+
+.rank2{
+ background:linear-gradient(
+  90deg,
+  rgba(210,215,224,.17),
+  transparent
+ );
+}
+
+.rank3{
+ background:linear-gradient(
+  90deg,
+  rgba(194,131,80,.18),
+  transparent
+ );
+}
 
 @media(max-width:760px){
- .admin-window{grid-template-columns:1fr;height:95vh}
- .admin-side{border-right:0;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow:auto}
- .admin-side button{min-width:150px}
- .spin-grid{grid-template-columns:1fr}
- .nav{margin-left:0}
+
+ .topbar{
+  height:auto;
+  min-height:64px;
+  flex-wrap:wrap;
+  padding:12px;
+ }
+
+ .nav{
+  order:3;
+  width:100%;
+ }
+
+ .admin-window{
+  grid-template-columns:1fr;
+ }
+
+ .admin-side{
+  border-right:0;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  gap:6px;
+  overflow:auto;
+ }
+
+ .admin-side button{
+  min-width:150px;
+ }
+
+ .spin-grid{
+  grid-template-columns:1fr;
+ }
+
 }
 </style>
 </head>
 
 <body>
 
+<!-- AUTH -->
+
 <div id="authView">
+
  <div class="card auth">
-  <div class="brand" style="font-size:22px">D0NTYYY — LICENSE PLATES</div>
+
+  <div class="brand" style="font-size:22px">
+   D0NTYYY — LICENSE PLATES
+  </div>
 
   <div class="tabs">
-   <button id="loginTab" class="btn">Войти</button>
-   <button id="registerTab" class="btn">Регистрация</button>
+
+   <button
+    id="loginTab"
+    class="btn">
+    Войти
+   </button>
+
+   <button
+    id="registerTab"
+    class="btn">
+    Регистрация
+   </button>
+
   </div>
 
   <div id="authForm"></div>
+
  </div>
+
 </div>
+
+
+<!-- APP -->
 
 <div id="appView" class="hidden">
 
  <header class="topbar">
-  <div class="brand">D0NTYYY</div>
-  <nav class="nav" id="nav"></nav>
+
+  <div class="brand">
+   D0NTYYY
+  </div>
+
+  <nav
+   class="nav"
+   id="nav">
+  </nav>
+
   <div class="spacer"></div>
-  <button class="ghost" id="logoutBtn">Выйти</button>
+
+  <button
+   id="logoutBtn"
+   class="ghost">
+   Выйти
+  </button>
+
  </header>
 
  <main id="pages"></main>
+
 </div>
 
-<div id="adminOverlay" class="admin-overlay hidden">
+
+<!-- ADMIN -->
+
+<div
+ id="adminOverlay"
+ class="admin-overlay hidden">
+
  <div class="admin-window">
 
-  <aside class="admin-side" id="adminSide"></aside>
+  <aside
+   id="adminSide"
+   class="admin-side">
+  </aside>
 
   <section class="admin-content">
+
    <div class="admin-head">
+
     <div>
-     <div style="font-size:20px;font-weight:900">АДМИН-ПАНЕЛЬ</div>
-     <div class="muted">D0NTYYY — управление проектом</div>
+
+     <div style="
+      font-size:20px;
+      font-weight:900">
+      АДМИН-ПАНЕЛЬ
+     </div>
+
+     <div class="muted">
+      Управление D0NTYYY License Plates
+     </div>
+
     </div>
-    <button class="ghost" id="closeAdmin">Закрыть</button>
+
+    <button
+     id="closeAdmin"
+     class="ghost">
+     Закрыть
+    </button>
+
    </div>
 
    <div id="adminContent"></div>
+
   </section>
 
  </div>
+
 </div>
 
-<div id="toast" class="toast hidden"></div>
+
+<div
+ id="toast"
+ class="toast hidden">
+</div>
+
 
 <script>
+
 'use strict';
 
-/* =========================================================
-   SUPABASE
-========================================================= */
+
+/* =====================================================
+   CONFIG
+===================================================== */
 
 const SUPABASE_URL =
  'https://wehiexatkhqbfcelvjnr.supabase.co';
@@ -236,12 +568,18 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
  'sb_publishable_JR5bFKt15zPnzAzeripx8w___vtFpW1';
 
-const OWNER = 'd0ntyyy';
+const OWNER_NICK = 'd0ntyyy';
 const OWNER_PASSWORD = 'Semen20151';
 
 const STATE_ID = 1;
 
-const EMPTY_STATE = {
+
+/* =====================================================
+   STATE
+===================================================== */
+
+const DEFAULT_STATE = {
+
  users:[],
  market:[],
  messages:[],
@@ -250,1199 +588,2046 @@ const EMPTY_STATE = {
  plates:[],
  reports:[],
  promocodes:[]
+
 };
 
-let state = structuredClone(EMPTY_STATE);
+let state =
+ JSON.parse(JSON.stringify(DEFAULT_STATE));
+
 let currentUser = null;
+
 let authMode = 'login';
+
 let adminSection = 'users';
-let saveTimer = null;
+
+let saveTimeout = null;
+
 let saving = false;
+
 let dirty = false;
 
-/* =========================================================
-   SUPABASE REST
-========================================================= */
 
-function headers(extra={}){
+/* =====================================================
+   SUPABASE REST
+===================================================== */
+
+function supabaseHeaders(){
+
  return {
+
   'apikey':SUPABASE_KEY,
-  'Authorization':'Bearer '+SUPABASE_KEY,
-  'Content-Type':'application/json',
-  'Accept':'application/json',
-  ...extra
+
+  'Authorization':
+   'Bearer '+SUPABASE_KEY,
+
+  'Content-Type':
+   'application/json',
+
+  'Accept':
+   'application/json'
+
  };
+
 }
 
-async function dbGet(){
- const r = await fetch(
+
+async function loadCloud(){
+
+ const response = await fetch(
+
   SUPABASE_URL+
-  '/rest/v1/license_state?id=eq.1&select=id,state,updated_at',
+  '/rest/v1/license_state' +
+  '?id=eq.1&select=id,state,updated_at',
+
   {
    method:'GET',
-   headers:headers({'Cache-Control':'no-cache'})
+   headers:supabaseHeaders(),
+   cache:'no-store'
   }
+
  );
 
- const text = await r.text();
+ const body =
+  await response.text();
 
- if(!r.ok){
-  throw new Error(text || ('HTTP '+r.status));
+ if(!response.ok){
+
+  throw new Error(
+   body ||
+   'Ошибка Supabase HTTP '+response.status
+  );
+
  }
 
  let rows;
 
  try{
-  rows = JSON.parse(text);
+
+  rows=JSON.parse(body);
+
  }catch{
-  throw new Error('Supabase вернул неправильный JSON.');
+
+  throw new Error(
+   'Supabase вернул некорректный ответ.'
+  );
+
  }
 
  if(!rows.length){
-  throw new Error('В license_state нет записи id=1.');
+
+  throw new Error(
+   'В license_state отсутствует строка id=1.'
+  );
+
  }
 
  return rows[0];
+
 }
 
-async function dbSave(){
- if(saving || !dirty) return;
 
- saving = true;
+async function saveCloud(){
 
- const snapshot = structuredClone(state);
+ if(saving || !dirty)
+  return;
+
+ saving=true;
 
  try{
 
-  const r = await fetch(
-   SUPABASE_URL+'/rest/v1/license_state?id=eq.1',
+  const response=await fetch(
+
+   SUPABASE_URL+
+   '/rest/v1/license_state?id=eq.1',
+
    {
     method:'PATCH',
-    headers:headers({
+
+    headers:{
+     ...supabaseHeaders(),
      'Prefer':'return=minimal'
-    }),
+    },
+
     body:JSON.stringify({
-     state:snapshot,
-     updated_at:new Date().toISOString()
+
+     state:state,
+
+     updated_at:
+      new Date().toISOString()
+
     })
+
    }
+
   );
 
-  const text = await r.text();
+  const body=
+   await response.text();
 
-  if(!r.ok){
-   throw new Error(text || ('HTTP '+r.status));
+  if(!response.ok){
+
+   throw new Error(
+    body ||
+    'Ошибка сохранения HTTP '+response.status
+   );
+
   }
 
-  dirty = false;
+  dirty=false;
 
- }catch(e){
+ }catch(error){
 
-  console.error(e);
-  toast('Ошибка сохранения: '+e.message);
+  console.error(error);
+
+  toast(
+   'Ошибка сохранения в Supabase'
+  );
 
  }finally{
 
-  saving = false;
+  saving=false;
+
  }
+
 }
 
-function saveState(){
- dirty = true;
 
- clearTimeout(saveTimer);
+function save(){
 
- saveTimer = setTimeout(()=>{
-  dbSave();
- },300);
+ dirty=true;
+
+ clearTimeout(saveTimeout);
+
+ saveTimeout=setTimeout(
+  saveCloud,
+  300
+ );
+
 }
 
-function replaceState(newState){
- state = {
-  ...structuredClone(EMPTY_STATE),
-  ...(newState || {})
- };
 
- normalizeState();
-}
+/* =====================================================
+   NORMALIZE
+===================================================== */
 
-/* =========================================================
-   DATA
-========================================================= */
+function normalize(){
 
-function normalizeState(){
+ for(const key of Object.keys(DEFAULT_STATE)){
 
- if(!Array.isArray(state.users))state.users=[];
- if(!Array.isArray(state.market))state.market=[];
- if(!Array.isArray(state.messages))state.messages=[];
- if(!Array.isArray(state.punishments))state.punishments=[];
- if(!Array.isArray(state.tags))state.tags=[];
- if(!Array.isArray(state.plates))state.plates=[];
- if(!Array.isArray(state.reports))state.reports=[];
- if(!Array.isArray(state.promocodes))state.promocodes=[];
+  if(!Array.isArray(state[key]))
+   state[key]=[];
 
- state.users.forEach(u=>{
+ }
 
-  if(!u.id)u.id=crypto.randomUUID();
+ let owner=state.users.find(
 
-  u.nickname=String(u.nickname||'').trim();
+  u=>
+   String(u.nickname||'')
+   .trim()
+   .toLowerCase()===OWNER_NICK
 
-  if(typeof u.balance!=='number')
-   u.balance=100000;
-
-  if(!Array.isArray(u.inventory))
-   u.inventory=[];
-
-  if(!Array.isArray(u.adminHistory))
-   u.adminHistory=[];
-
-  u.admin=!!u.admin;
-
- });
-
- /* ВЛАДЕЛЕЦ ВСЕГДА ВОССТАНАВЛИВАЕТСЯ */
-
- let owner = state.users.find(
-  u=>String(u.nickname).toLowerCase()===OWNER
  );
 
  if(!owner){
 
   owner={
+
    id:crypto.randomUUID(),
-   nickname:OWNER,
+
+   nickname:OWNER_NICK,
+
    password:OWNER_PASSWORD,
+
    accountId:'000001',
+
    balance:10000000,
-   createdAt:Date.now(),
+
    admin:true,
+
    adminRole:'owner',
+
    inventory:[],
-   adminHistory:[]
+
+   adminHistory:[],
+
+   createdAt:Date.now(),
+
+   lastSeen:Date.now()
+
   };
 
   state.users.unshift(owner);
 
  }else{
 
+  owner.nickname=OWNER_NICK;
+
   owner.password=OWNER_PASSWORD;
-  owner.nickname=OWNER;
-  owner.balance=Math.max(Number(owner.balance)||0,10000000);
+
   owner.admin=true;
+
   owner.adminRole='owner';
 
+  owner.balance=
+   Math.max(
+    Number(owner.balance)||0,
+    10000000
+   );
+
+  if(!owner.accountId)
+   owner.accountId='000001';
+
+  if(!Array.isArray(owner.inventory))
+   owner.inventory=[];
+
+  if(!Array.isArray(owner.adminHistory))
+   owner.adminHistory=[];
+
  }
 
- /* account ID */
 
- const ids=new Set();
+ const usedIDs=new Set();
 
- state.users.forEach(u=>{
+ for(const user of state.users){
 
   if(
-   !/^\d{6}$/.test(String(u.accountId||'')) ||
-   ids.has(String(u.accountId))
+   !user.id ||
+   usedIDs.has(user.id)
   ){
 
-   let id;
-
-   do{
-    id=String(Math.floor(100000+Math.random()*900000));
-   }while(ids.has(id));
-
-   u.accountId=id;
+   user.id=crypto.randomUUID();
 
   }
 
-  ids.add(String(u.accountId));
- });
+  usedIDs.add(user.id);
+
+
+  if(!user.accountId){
+
+   user.accountId=
+    String(
+     Math.floor(
+      100000+
+      Math.random()*900000
+     )
+    );
+
+  }
+
+
+  if(typeof user.balance!=='number')
+   user.balance=100000;
+
+  if(!Array.isArray(user.inventory))
+   user.inventory=[];
+
+ }
 
 }
 
-/* =========================================================
+
+/* =====================================================
    HELPERS
-========================================================= */
+===================================================== */
 
-function esc(v){
- return String(v??'').replace(/[&<>"']/g,m=>({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#039;'
- }[m]));
+function esc(value){
+
+ return String(value??'')
+  .replace(/[&<>"']/g,char=>({
+
+   '&':'&amp;',
+   '<':'&lt;',
+   '>':'&gt;',
+   '"':'&quot;',
+   "'":'&#039;'
+
+  }[char]));
+
 }
 
-function uid(){
- return crypto.randomUUID
-  ? crypto.randomUUID()
-  : String(Date.now()+Math.random());
+
+function money(value){
+
+ return Number(value||0)
+  .toLocaleString('ru-RU');
+
 }
+
 
 function userById(id){
- return state.users.find(u=>u.id===id);
+
+ return state.users.find(
+  u=>u.id===id
+ );
+
 }
+
 
 function userByNick(nick){
+
  return state.users.find(
-  u=>String(u.nickname).toLowerCase()===
-     String(nick).trim().toLowerCase()
+
+  u=>
+   String(u.nickname||'')
+   .trim()
+   .toLowerCase()===
+
+   String(nick||'')
+   .trim()
+   .toLowerCase()
+
  );
+
 }
 
-function isOwner(u=currentUser){
- return !!u &&
-  String(u.nickname).toLowerCase()===OWNER;
+
+function isOwner(user=currentUser){
+
+ return !!user &&
+  String(user.nickname||'')
+  .toLowerCase()===OWNER_NICK;
+
 }
 
-function isAdmin(u=currentUser){
- return !!u && (u.admin || isOwner(u));
+
+function isAdmin(user=currentUser){
+
+ return !!user &&
+  (
+   user.admin===true ||
+   isOwner(user)
+  );
+
 }
 
-function toast(text){
- const el=document.getElementById('toast');
 
- el.textContent=text;
+function toast(message){
+
+ const el=
+  document.getElementById('toast');
+
+ el.textContent=message;
+
  el.classList.remove('hidden');
 
- clearTimeout(el._timer);
-
- el._timer=setTimeout(()=>{
-  el.classList.add('hidden');
- },3500);
-}
-
-function money(n){
- return Number(n||0).toLocaleString('ru-RU');
-}
-
-/* =========================================================
-   PLATES
-========================================================= */
-
-const LETTERS=['А','В','Е','К','М','Н','О','Р','С','Т','Х'];
-
-function randomLetters(){
- let s='';
- for(let i=0;i<3;i++)
-  s+=LETTERS[Math.floor(Math.random()*LETTERS.length)];
- return s;
-}
-
-function randomNumbers(){
-
- const r=Math.random();
-
- if(r<.02){
-
-  const x=Math.floor(Math.random()*10);
-  return ''+x+x+x;
-
- }
-
- const special=['001','007','100','500','700','900'];
-
- if(r<.04)
-  return special[Math.floor(Math.random()*special.length)];
-
- return String(
-  Math.floor(Math.random()*1000)
- ).padStart(3,'0');
-}
-
-function randomRegion(){
- return String(
-  Math.floor(Math.random()*1000)
- ).padStart(3,'0');
-}
-
-function rarity(letters,numbers){
-
- const sameLetters =
-  letters[0]===letters[1] &&
-  letters[1]===letters[2];
-
- const repeatLetters =
-  letters[0]===letters[1] ||
-  letters[1]===letters[2] ||
-  letters[0]===letters[2];
-
- const triple =
-  numbers[0]===numbers[1] &&
-  numbers[1]===numbers[2];
-
- const special=
-  ['001','007','100','500','700','900']
-  .includes(numbers);
-
- if(triple || special || sameLetters)
-  return 'gold';
-
- if(repeatLetters || numbers[0]===numbers[2])
-  return 'rare';
-
- return 'common';
-}
-
-function rarityName(r){
- if(r==='gold')return 'ЗОЛОТОЙ';
- if(r==='rare')return 'РЕДКИЙ';
- return 'ОБЫЧНЫЙ';
-}
-
-function plateCode(p){
- return `${p.letters}${p.numbers} | ${p.region}`;
-}
-
-function plateExists(code){
-
- const key=String(code)
-  .replace(/\s/g,'')
-  .toUpperCase();
-
- for(const u of state.users){
-
-  for(const p of u.inventory||[]){
-
-   if(
-    String(p.code)
-     .replace(/\s/g,'')
-     .toUpperCase()===key
-   )return true;
-
-  }
- }
-
- return state.market.some(
-  p=>String(p.code)
-   .replace(/\s/g,'')
-   .toUpperCase()===key
+ clearTimeout(
+  el._timer
  );
+
+ el._timer=setTimeout(
+  ()=>{
+   el.classList.add('hidden');
+  },
+  3000
+ );
+
 }
 
-/* =========================================================
+
+/* =====================================================
    AUTH
-========================================================= */
+===================================================== */
 
 function renderAuth(){
 
- document.getElementById('loginTab')
-  .classList.toggle('active',authMode==='login');
+ document.getElementById(
+  'loginTab'
+ ).classList.toggle(
+  'active',
+  authMode==='login'
+ );
 
- document.getElementById('registerTab')
-  .classList.toggle('active',authMode==='register');
+ document.getElementById(
+  'registerTab'
+ ).classList.toggle(
+  'active',
+  authMode==='register'
+ );
 
- document.getElementById('authForm').innerHTML=`
 
- <div class="field">
-  <label>НИКНЕЙМ</label>
-  <input id="authNick" maxlength="24"
-   placeholder="Введите никнейм"
-   autocomplete="username">
- </div>
+ document.getElementById(
+  'authForm'
+ ).innerHTML=`
 
- <div class="field">
-  <label>ПАРОЛЬ</label>
-  <input id="authPass" type="password"
-   maxlength="64"
-   placeholder="Введите пароль"
-   autocomplete="${authMode==='login'?'current-password':'new-password'}">
- </div>
+  <div class="field">
 
- <button id="authSubmit"
-  class="btn"
-  style="width:100%">
-  ${authMode==='login'
-   ?'ВОЙТИ'
-   :'ЗАРЕГИСТРИРОВАТЬСЯ'}
- </button>
+   <label>
+    НИКНЕЙМ
+   </label>
 
- <div id="authError"></div>
+   <input
+    id="authNick"
+    autocomplete="username"
+    placeholder="Введите никнейм">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>
+    ПАРОЛЬ
+   </label>
+
+   <input
+    id="authPassword"
+    type="password"
+    autocomplete="${
+     authMode==='login'
+      ?'current-password'
+      :'new-password'
+    }"
+    placeholder="Введите пароль">
+
+  </div>
+
+
+  <button
+   id="authSubmit"
+   class="btn"
+   style="width:100%">
+
+   ${
+    authMode==='login'
+     ?'ВОЙТИ'
+     :'ЗАРЕГИСТРИРОВАТЬСЯ'
+   }
+
+  </button>
+
+
+  <div id="authError"></div>
+
  `;
 
- document.getElementById('authSubmit')
-  .onclick=submitAuth;
+
+ document.getElementById(
+  'authSubmit'
+ ).onclick=authSubmit;
+
 }
 
-function submitAuth(){
+
+async function authSubmit(){
 
  const nick=
-  document.getElementById('authNick')
-   .value.trim();
+  document.getElementById(
+   'authNick'
+  ).value.trim();
 
- const pass=
-  document.getElementById('authPass')
-   .value;
+ const password=
+  document.getElementById(
+   'authPassword'
+  ).value;
 
  const error=
-  document.getElementById('authError');
+  document.getElementById(
+   'authError'
+  );
 
- if(!nick || pass.length<3){
+
+ error.textContent='';
+ error.className='';
+
+
+ if(!nick || !password){
 
   error.className='error';
+
   error.textContent=
    'Введите никнейм и пароль.';
 
   return;
+
  }
 
- if(authMode==='login'){
 
-  const u=userByNick(nick);
+ /* ================================================
+    OWNER
+    Проверяем ДО поиска пользователя.
+ ================================================= */
 
-  if(!u || u.password!==pass){
+ if(
+  nick.toLowerCase()===OWNER_NICK &&
+  password===OWNER_PASSWORD
+ ){
 
-   /* Специально повторно проверяем владельца */
+  let owner=userByNick(
+   OWNER_NICK
+  );
 
-   if(
-    nick.toLowerCase()===OWNER &&
-    pass===OWNER_PASSWORD
-   ){
 
-    let owner=userByNick(OWNER);
+  if(!owner){
 
-    if(!owner){
+   owner={
 
-     normalizeState();
-     owner=userByNick(OWNER);
+    id:crypto.randomUUID(),
 
-    }
+    nickname:OWNER_NICK,
 
-    owner.password=OWNER_PASSWORD;
-    owner.admin=true;
-    owner.adminRole='owner';
-    owner.balance=Math.max(
-     Number(owner.balance)||0,
-     10000000
-    );
+    password:OWNER_PASSWORD,
 
-    currentUser=owner;
+    accountId:'000001',
 
-    saveState();
-    openApp();
+    balance:10000000,
 
-    return;
-   }
+    admin:true,
 
-   error.className='error';
-   error.textContent=
-    'Неверный никнейм или пароль.';
+    adminRole:'owner',
 
-   return;
+    inventory:[],
+
+    adminHistory:[],
+
+    createdAt:Date.now(),
+
+    lastSeen:Date.now()
+
+   };
+
+   state.users.unshift(owner);
+
   }
 
-  currentUser=u;
-  currentUser.lastSeen=Date.now();
+
+  owner.nickname=OWNER_NICK;
+  owner.password=OWNER_PASSWORD;
+  owner.admin=true;
+  owner.adminRole='owner';
+
+  owner.balance=
+   Math.max(
+    Number(owner.balance)||0,
+    10000000
+   );
+
+  owner.lastSeen=Date.now();
+
+
+  currentUser=owner;
+
 
   sessionStorage.setItem(
    'dpy_session',
-   currentUser.id
+   owner.id
   );
 
-  saveState();
+
+  save();
+
   openApp();
 
- }else{
+  return;
+
+ }
+
+
+ /* ================================================
+    REGISTRATION
+ ================================================= */
+
+ if(authMode==='register'){
 
   if(userByNick(nick)){
 
    error.className='error';
+
    error.textContent=
     'Этот никнейм уже занят.';
 
    return;
+
   }
 
-  const u={
-   id:uid(),
+
+  const user={
+
+   id:crypto.randomUUID(),
+
    nickname:nick,
-   password:pass,
-   accountId:String(
-    Math.floor(100000+Math.random()*900000)
-   ),
+
+   password:password,
+
+   accountId:
+    String(
+     Math.floor(
+      100000+
+      Math.random()*900000
+     )
+    ),
+
    balance:100000,
-   createdAt:Date.now(),
+
    admin:false,
+
    adminRole:null,
+
    inventory:[],
+
    adminHistory:[],
+
+   createdAt:Date.now(),
+
    lastSeen:Date.now()
+
   };
 
-  state.users.push(u);
 
-  currentUser=u;
+  state.users.push(user);
+
+  currentUser=user;
+
 
   sessionStorage.setItem(
    'dpy_session',
-   u.id
+   user.id
   );
 
-  saveState();
+
+  save();
+
   openApp();
+
+  return;
+
  }
+
+
+ /* ================================================
+    NORMAL LOGIN
+ ================================================= */
+
+ const user=userByNick(nick);
+
+
+ if(!user){
+
+  error.className='error';
+
+  error.textContent=
+   'Неверный никнейм или пароль.';
+
+  return;
+
+ }
+
+
+ if(
+  String(user.password)!==
+  String(password)
+ ){
+
+  error.className='error';
+
+  error.textContent=
+   'Неверный никнейм или пароль.';
+
+  return;
+
+ }
+
+
+ user.lastSeen=Date.now();
+
+ currentUser=user;
+
+
+ sessionStorage.setItem(
+  'dpy_session',
+  user.id
+ );
+
+
+ save();
+
+ openApp();
+
 }
 
-/* =========================================================
-   NAV
-========================================================= */
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 function buildNav(){
 
- const items=[
+ let html='';
+
+ const pages=[
+
   ['home','ГЛАВНАЯ'],
   ['inventory','ИНВЕНТАРЬ'],
   ['market','МАГАЗИН'],
   ['top','ТОП'],
   ['account','АККАУНТ']
+
  ];
 
- let html=items.map(x=>
-  `<button data-page="${x[0]}">${x[1]}</button>`
- ).join('');
 
- if(isAdmin())
-  html+=`<button id="adminButton">АДМИНКА</button>`;
+ for(const [id,name] of pages){
 
- document.getElementById('nav').innerHTML=html;
+  html+=`
 
- document.querySelectorAll('[data-page]')
-  .forEach(b=>{
-   b.onclick=()=>openPage(b.dataset.page);
-  });
+   <button
+    data-page="${id}">
 
- document.getElementById('adminButton')
-  ?.addEventListener('click',openAdmin);
+    ${name}
+
+   </button>
+
+  `;
+
+ }
+
+
+ if(isAdmin()){
+
+  html+=`
+
+   <button id="adminButton">
+    АДМИНКА
+   </button>
+
+  `;
+
+ }
+
+
+ document.getElementById(
+  'nav'
+ ).innerHTML=html;
+
+
+ document.querySelectorAll(
+  '[data-page]'
+ ).forEach(button=>{
+
+  button.onclick=()=>{
+
+   openPage(
+    button.dataset.page
+   );
+
+  };
+
+ });
+
+
+ const adminButton=
+  document.getElementById(
+   'adminButton'
+  );
+
+ if(adminButton)
+  adminButton.onclick=openAdmin;
+
 }
+
 
 function openApp(){
 
- document.getElementById('authView')
-  .classList.add('hidden');
+ document.getElementById(
+  'authView'
+ ).classList.add('hidden');
 
- document.getElementById('appView')
-  .classList.remove('hidden');
+ document.getElementById(
+  'appView'
+ ).classList.remove('hidden');
 
  buildNav();
+
  openPage('home');
+
 }
+
 
 function openPage(page){
 
- document.querySelectorAll('[data-page]')
-  .forEach(b=>
-   b.classList.toggle(
-    'active',
-    b.dataset.page===page
-   )
+ document.querySelectorAll(
+  '[data-page]'
+ ).forEach(button=>{
+
+  button.classList.toggle(
+   'active',
+   button.dataset.page===page
   );
 
- if(page==='home')renderHome();
- if(page==='inventory')renderInventory();
- if(page==='market')renderMarket();
- if(page==='top')renderTop();
- if(page==='account')renderAccount();
+ });
+
+
+ if(page==='home')
+  renderHome();
+
+ if(page==='inventory')
+  renderInventory();
+
+ if(page==='market')
+  renderMarket();
+
+ if(page==='top')
+  renderTop();
+
+ if(page==='account')
+  renderAccount();
+
 }
 
-/* =========================================================
-   HOME
-========================================================= */
+
+/* =====================================================
+   PLATE GENERATOR
+===================================================== */
+
+const LETTERS=[
+ 'А','В','Е','К','М',
+ 'Н','О','Р','С','Т','Х'
+];
+
+
+function randomLetters(){
+
+ let result='';
+
+ for(let i=0;i<3;i++){
+
+  result+=
+   LETTERS[
+    Math.floor(
+     Math.random()*
+     LETTERS.length
+    )
+   ];
+
+ }
+
+ return result;
+
+}
+
+
+function randomNumbers(){
+
+ const special=[
+  '001',
+  '007',
+  '111',
+  '222',
+  '333',
+  '444',
+  '555',
+  '666',
+  '777',
+  '888',
+  '999'
+ ];
+
+
+ if(Math.random()<.1){
+
+  return special[
+   Math.floor(
+    Math.random()*
+    special.length
+   )
+  ];
+
+ }
+
+
+ return String(
+  Math.floor(
+   Math.random()*1000
+  )
+ ).padStart(3,'0');
+
+}
+
+
+function randomRegion(){
+
+ return String(
+  Math.floor(
+   Math.random()*1000
+  )
+ ).padStart(3,'0');
+
+}
+
+
+function getRarity(letters,numbers){
+
+ if(
+  numbers[0]===numbers[1] &&
+  numbers[1]===numbers[2]
+ )
+  return 'gold';
+
+
+ if(
+  letters[0]===letters[1] &&
+  letters[1]===letters[2]
+ )
+  return 'gold';
+
+
+ if(
+  numbers[0]===numbers[1] ||
+  numbers[1]===numbers[2] ||
+  letters[0]===letters[1] ||
+  letters[1]===letters[2]
+ )
+  return 'rare';
+
+
+ return 'common';
+
+}
+
+
+function rarityName(rarity){
+
+ if(rarity==='gold')
+  return 'ЗОЛОТОЙ';
+
+ if(rarity==='rare')
+  return 'РЕДКИЙ';
+
+ return 'ОБЫЧНЫЙ';
+
+}
+
+
+function plateCode(plate){
+
+ return plate.letters+
+  plate.numbers+
+  ' | '+
+  plate.region;
+
+}
+
+
+function plateExists(code){
+
+ const normalized=
+  String(code)
+   .replace(/\s/g,'')
+   .toUpperCase();
+
+
+ for(const user of state.users){
+
+  for(const plate of user.inventory||[]){
+
+   if(
+    String(plate.code)
+     .replace(/\s/g,'')
+     .toUpperCase()===
+    normalized
+   )
+    return true;
+
+  }
+
+ }
+
+
+ return state.market.some(
+  item=>
+   String(item.code)
+    .replace(/\s/g,'')
+    .toUpperCase()===
+   normalized
+ );
+
+}
+
+
+/* =====================================================
+   HOME / SPINNER
+===================================================== */
 
 function renderHome(){
 
  if(!currentUser)return;
 
+
  if(!currentUser.spinState){
 
   currentUser.spinState={
+
    letters:'ААА',
    numbers:'000',
    region:'000',
    created:false
+
   };
 
  }
 
- const s=currentUser.spinState;
 
- const r=s.created
-  ?rarity(s.letters,s.numbers)
-  :'common';
+ const s=
+  currentUser.spinState;
 
- document.getElementById('pages').innerHTML=`
+ const rarity=
+  s.created
+   ?getRarity(
+     s.letters,
+     s.numbers
+    )
+   :'common';
 
- <div class="page">
 
-  <div class="card hero">
+ document.getElementById(
+  'pages'
+ ).innerHTML=`
 
-   <h1>КРУТКА НОМЕРОВ</h1>
+  <div class="page">
 
-   <div class="muted">
-    Выбирай, что прокрутить.
-   </div>
+   <div class="card hero">
 
-   <div class="plate-wrap">
+    <h1>
+     КРУТИЛКА НОМЕРОВ
+    </h1>
 
-    <div id="spinPlate"
-     class="plate ${r}">
-
-     <div class="main-code">
-      ${s.created
-       ?esc(s.letters+s.numbers)
-       :'---'}
-     </div>
-
-     <div class="region">
-      RUS<br>
-      ${s.created?esc(s.region):'---'}
-     </div>
-
+    <div class="muted">
+     Крути отдельно буквы, цифры и регион.
     </div>
 
-   </div>
 
-   <div id="rarityText"
-    class="rarity ${r==='gold'?'gold-text':r==='rare'?'rare-text':''}">
-    ${s.created?rarityName(r):'—'}
-   </div>
+    <div class="plate-wrap">
 
-   <div class="muted" style="margin-top:8px">
-    Ваш ID: ${esc(currentUser.accountId)}
-   </div>
+     <div
+      class="plate ${rarity}">
 
-   <div class="balance">
-    Баланс:
-    <b>${money(currentUser.balance)}</b>
-   </div>
-
-   <div class="spin-grid">
-
-    <button onclick="spin('letters')">
-     БУКВЫ
-    </button>
-
-    <button onclick="spin('numbers')">
-     ЦИФРЫ
-    </button>
-
-    <button onclick="spin('region')">
-     РЕГИОН
-    </button>
-
-   </div>
-
-   <div style="margin-top:15px">
-    <button class="btn"
-     onclick="buyCurrent()">
-     КУПИТЬ НОМЕР
-    </button>
-   </div>
-
-  </div>
-
- </div>
- `;
-}
-
-function spin(type){
-
- if(!currentUser)return;
-
- if(!currentUser.spinState){
-
-  currentUser.spinState={
-   letters:randomLetters(),
-   numbers:randomNumbers(),
-   region:randomRegion(),
-   created:true
-  };
-
- }
-
- const s=currentUser.spinState;
-
- if(type==='letters')
-  s.letters=randomLetters();
-
- if(type==='numbers')
-  s.numbers=randomNumbers();
-
- if(type==='region')
-  s.region=randomRegion();
-
- s.created=true;
-
- currentUser.spinState=s;
-
- saveState();
- renderHome();
-}
-
-function buyCurrent(){
-
- const s=currentUser.spinState;
-
- if(!s?.created){
-
-  toast('Сначала прокрутите номер.');
-  return;
-
- }
-
- const code=plateCode(s);
-
- if(plateExists(code)){
-
-  toast('Этот номер уже занят.');
-  return;
- }
-
- let price=
-  Number(s.numbers)*100+
-  Number(s.region);
-
- price=Math.max(500,price);
- price=Math.min(10000000,price);
-
- if(currentUser.balance<price){
-
-  toast(
-   'Недостаточно средств. Цена: '+
-   money(price)
-  );
-
-  return;
- }
-
- const p={
-  id:uid(),
-  code,
-  letters:s.letters,
-  numbers:s.numbers,
-  region:s.region,
-  rarity:rarity(s.letters,s.numbers),
-  active:true,
-  createdAt:Date.now()
- };
-
- currentUser.balance-=price;
- currentUser.inventory.push(p);
-
- saveState();
-
- toast(
-  `Номер ${code} куплен за ${money(price)}.`,
- );
-
- renderHome();
-}
-
-/* =========================================================
-   INVENTORY
-========================================================= */
-
-function renderInventory(){
-
- const items=currentUser.inventory||[];
-
- document.getElementById('pages').innerHTML=`
-
- <div class="page">
-  <div class="card" style="padding:22px">
-
-   <h2>ИНВЕНТАРЬ</h2>
-
-   ${
-    !items.length
-    ?'<div class="muted">Инвентарь пуст.</div>'
-    :
-    `<div class="list">
-     ${items.map(p=>{
-
-      const listed=
-       state.market.some(
-        m=>m.plateId===p.id
-       );
-
-      return`
-
-       <div class="row">
-        <div class="row-main">
-
-         <div>
-          <div style="font-size:22px;font-weight:900">
-           ${esc(p.code)}
-          </div>
-
-          <div class="muted">
-           ${rarityName(p.rarity)}
-           ${p.active?'':' · ДЕАКТИВИРОВАН'}
-          </div>
-         </div>
-
-         <div>
-
-         ${
-          listed
-          ?'<span class="badge blue">НА МАРКЕТЕ</span>'
-          :
-          p.active
-          ?`<button class="btn"
-             onclick="sellPlate('${p.id}')">
-             ВЫСТАВИТЬ
-            </button>`
-          :''
-         }
-
-         </div>
-
-        </div>
-       </div>
-      `;
-
-     }).join('')}
-    </div>`
-   }
-
-  </div>
- </div>
- `;
-}
-
-function sellPlate(id){
-
- const p=currentUser.inventory
-  .find(x=>x.id===id);
-
- if(!p)return;
-
- const price=prompt(
-  'Цена номера от 1 до 10 000 000:'
- );
-
- if(price===null)return;
-
- const n=Number(price);
-
- if(
-  !Number.isInteger(n) ||
-  n<1 ||
-  n>10000000
- ){
-
-  toast('Неверная цена.');
-  return;
- }
-
- if(state.market.some(x=>x.plateId===id)){
-
-  toast('Номер уже выставлен.');
-  return;
- }
-
- state.market.push({
-  id:uid(),
-  plateId:p.id,
-  code:p.code,
-  sellerId:currentUser.id,
-  sellerNick:currentUser.nickname,
-  price:n,
-  createdAt:Date.now()
- });
-
- saveState();
-
- toast('Номер выставлен на маркет.');
-
- renderInventory();
-}
-
-/* =========================================================
-   MARKET
-========================================================= */
-
-function renderMarket(){
-
- document.getElementById('pages').innerHTML=`
-
- <div class="page">
-  <div class="card" style="padding:22px">
-
-   <h2>МАГАЗИН</h2>
-
-   ${
-    !state.market.length
-    ?'<div class="muted">На маркете пока нет номеров.</div>'
-    :
-    `<div class="grid">
-     ${state.market.map(m=>`
-
-      <div class="row">
-
-       <div style="font-size:24px;font-weight:1000">
-        ${esc(m.code)}
-       </div>
-
-       <div class="muted">
-        Продавец: ${esc(m.sellerNick)}
-       </div>
-
-       <div style="font-size:20px;font-weight:900;margin:12px 0">
-        ${money(m.price)}
-       </div>
+      <div class="main-code">
 
        ${
-        m.sellerId===currentUser.id
-        ?'<span class="badge blue">ВАШ НОМЕР</span>'
-        :
-        `<button class="btn"
-         onclick="buyMarket('${m.id}')">
-         КУПИТЬ
-        </button>`
+        s.created
+         ?esc(
+          s.letters+
+          s.numbers
+         )
+         :'---'
        }
 
       </div>
 
-     `).join('')}
-    </div>`
-   }
+
+      <div class="region">
+
+       RUS<br>
+
+       ${
+        s.created
+         ?esc(s.region)
+         :'---'
+       }
+
+      </div>
+
+     </div>
+
+    </div>
+
+
+    <div
+     class="rarity ${
+      rarity==='gold'
+       ?'gold-text'
+       :rarity==='rare'
+       ?'rare-text'
+       :''
+     }">
+
+     ${
+      s.created
+       ?rarityName(rarity)
+       :'—'
+     }
+
+    </div>
+
+
+    <div class="balance">
+
+     Баланс:
+     <b>
+      ${money(currentUser.balance)}
+     </b>
+
+    </div>
+
+
+    <div class="spin-grid">
+
+     <button onclick="spinLetters()">
+      БУКВЫ
+     </button>
+
+     <button onclick="spinNumbers()">
+      ЦИФРЫ
+     </button>
+
+     <button onclick="spinRegion()">
+      РЕГИОН
+     </button>
+
+    </div>
+
+
+    <div style="margin-top:15px">
+
+     <button
+      class="btn"
+      onclick="buyCurrentPlate()">
+
+      КУПИТЬ НОМЕР
+
+     </button>
+
+    </div>
+
+   </div>
 
   </div>
- </div>
+
  `;
+
 }
 
-function buyMarket(id){
 
- const m=state.market.find(x=>x.id===id);
+function ensureSpin(){
 
- if(!m)return;
+ if(!currentUser.spinState){
 
- if(m.sellerId===currentUser.id){
+  currentUser.spinState={
 
-  toast('Нельзя купить собственный номер.');
-  return;
+   letters:randomLetters(),
+
+   numbers:randomNumbers(),
+
+   region:randomRegion(),
+
+   created:true
+
+  };
+
  }
 
- if(currentUser.balance<m.price){
-
-  toast('Недостаточно средств.');
-  return;
- }
-
- const seller=userById(m.sellerId);
-
- if(!seller){
-
-  toast('Продавец не найден.');
-  return;
- }
-
- const p=
-  seller.inventory.find(
-   x=>x.id===m.plateId
-  );
-
- if(!p){
-
-  toast('Номер больше недоступен.');
-  state.market=
-   state.market.filter(x=>x.id!==id);
-  saveState();
-  renderMarket();
-  return;
- }
-
- currentUser.balance-=m.price;
- seller.balance+=m.price;
-
- currentUser.inventory.push(p);
-
- seller.inventory=
-  seller.inventory.filter(
-   x=>x.id!==p.id
-  );
-
- state.market=
-  state.market.filter(
-   x=>x.id!==id
-  );
-
- saveState();
-
- toast('Номер куплен.');
-
- renderMarket();
 }
 
-/* =========================================================
-   TOP
-========================================================= */
 
-function renderTop(){
+function spinLetters(){
 
- const users=[...state.users]
-  .sort((a,b)=>
-   Number(b.balance)-Number(a.balance)
-  )
-  .slice(0,15);
+ ensureSpin();
 
- document.getElementById('pages').innerHTML=`
+ currentUser.spinState.letters=
+  randomLetters();
 
- <div class="page">
-  <div class="card" style="padding:22px">
+ currentUser.spinState.created=true;
 
-   <h2>ТОП 15</h2>
+ save();
 
-   <table>
+ renderHome();
 
-    <thead>
-     <tr>
-      <th>#</th>
-      <th>Игрок</th>
-      <th>Баланс</th>
-      <th>Номеров</th>
-     </tr>
-    </thead>
-
-    <tbody>
-
-     ${users.map((u,i)=>`
-
-      <tr class="
-       ${i===0?'rank1':''}
-       ${i===1?'rank2':''}
-       ${i===2?'rank3':''}
-      ">
-
-       <td>
-        <b>${i+1}</b>
-       </td>
-
-       <td>
-        ${esc(u.nickname)}
-        ${
-         i===0
-         ?'<span class="badge gold">1</span>'
-         :i===1
-         ?'<span class="badge">2</span>'
-         :i===2
-         ?'<span class="badge">3</span>'
-         :''
-        }
-       </td>
-
-       <td>${money(u.balance)}</td>
-
-       <td>${u.inventory?.length||0}</td>
-
-      </tr>
-
-     `).join('')}
-
-    </tbody>
-
-   </table>
-
-  </div>
- </div>
- `;
 }
 
-/* =========================================================
-   ACCOUNT
-========================================================= */
 
-function renderAccount(){
+function spinNumbers(){
 
- document.getElementById('pages').innerHTML=`
+ ensureSpin();
 
- <div class="page">
-  <div class="card" style="padding:22px">
+ currentUser.spinState.numbers=
+  randomNumbers();
 
-   <h2>АККАУНТ</h2>
+ currentUser.spinState.created=true;
 
-   <div class="list">
+ save();
 
-    <div class="row">
-     <b>Никнейм</b><br>
-     ${esc(currentUser.nickname)}
-    </div>
+ renderHome();
 
-    <div class="row">
-     <b>ID аккаунта</b><br>
-     ${esc(currentUser.accountId)}
-    </div>
+}
 
-    <div class="row">
-     <b>Баланс</b><br>
-     ${money(currentUser.balance)}
-    </div>
 
-    <div class="row">
-     <b>Номеров</b><br>
-     ${currentUser.inventory?.length||0}
-    </div>
+function spinRegion(){
+
+ ensureSpin();
+
+ currentUser.spinState.region=
+  randomRegion();
+
+ currentUser.spinState.created=true;
+
+ save();
+
+ renderHome();
+
+}
+
+
+function buyCurrentPlate(){
+
+ ensureSpin();
+
+ const s=
+  currentUser.spinState;
+
+
+ const code=
+  s.letters+
+  s.numbers+
+  ' | '+
+  s.region;
+
+
+ if(plateExists(code)){
+
+  toast(
+   'Этот номер уже занят.'
+  );
+
+  return;
+
+ }
+
+
+ const rarity=
+  getRarity(
+   s.letters,
+   s.numbers
+  );
+
+
+ let price=500;
+
+
+ if(rarity==='rare')
+  price=2500;
+
+ if(rarity==='gold')
+  price=10000;
+
+
+ if(
+  currentUser.balance<
+  price
+ ){
+
+  toast(
+   'Недостаточно средств.'
+  );
+
+  return;
+
+ }
+
+
+ const plate={
+
+  id:crypto.randomUUID(),
+
+  code:code,
+
+  letters:s.letters,
+
+  numbers:s.numbers,
+
+  region:s.region,
+
+  rarity:rarity,
+
+  active:true,
+
+  createdAt:Date.now()
+
+ };
+
+
+ currentUser.balance-=price;
+
+ currentUser.inventory.push(
+  plate
+ );
+
+
+ save();
+
+ toast(
+  'Номер куплен за '+
+  money(price)
+ );
+
+
+ renderHome();
+
+}
+
+
+/* =====================================================
+   INVENTORY
+===================================================== */
+
+function renderInventory(){
+
+ const inventory=
+  currentUser.inventory||[];
+
+
+ document.getElementById(
+  'pages'
+ ).innerHTML=`
+
+  <div class="page">
+
+   <div class="card"
+    style="padding:22px">
+
+    <h2>
+     ИНВЕНТАРЬ
+    </h2>
+
 
     ${
-     isAdmin()
-     ?`
-      <div class="row">
-       <b>Админская должность</b><br>
-       ${esc(currentUser.adminRole||'Администратор')}
-      </div>
-     `
-     :''
+     inventory.length===0
+
+     ?
+
+     `<div class="muted">
+       У вас пока нет номеров.
+      </div>`
+
+     :
+
+     `<div class="list">
+
+      ${
+       inventory.map(
+        plate=>`
+
+         <div class="row">
+
+          <div class="row-main">
+
+           <div>
+
+            <div style="
+             font-size:23px;
+             font-weight:1000">
+
+             ${esc(plate.code)}
+
+            </div>
+
+            <div class="muted">
+
+             ${rarityName(
+              plate.rarity
+             )}
+
+            </div>
+
+           </div>
+
+
+           <button
+            class="btn"
+            onclick="sellPlate(
+             '${plate.id}'
+            )">
+
+            ПРОДАТЬ
+
+           </button>
+
+          </div>
+
+         </div>
+
+        `
+       ).join('')
+      }
+
+     </div>`
     }
 
    </div>
 
   </div>
- </div>
+
  `;
+
 }
 
-/* =========================================================
+
+function sellPlate(id){
+
+ const plate=
+  currentUser.inventory.find(
+   p=>p.id===id
+  );
+
+ if(!plate)return;
+
+
+ const priceInput=
+  prompt(
+   'Цена от 1 до 10 000 000:'
+  );
+
+
+ if(priceInput===null)return;
+
+
+ const price=
+  Number(priceInput);
+
+
+ if(
+  !Number.isInteger(price) ||
+  price<1 ||
+  price>10000000
+ ){
+
+  toast('Неверная цена.');
+
+  return;
+
+ }
+
+
+ if(
+  state.market.some(
+   x=>x.plateId===plate.id
+  )
+ ){
+
+  toast(
+   'Этот номер уже продаётся.'
+  );
+
+  return;
+
+ }
+
+
+ state.market.push({
+
+  id:crypto.randomUUID(),
+
+  plateId:plate.id,
+
+  code:plate.code,
+
+  sellerId:currentUser.id,
+
+  sellerNick:currentUser.nickname,
+
+  price:price,
+
+  createdAt:Date.now()
+
+ });
+
+
+ save();
+
+ renderInventory();
+
+ toast(
+  'Номер выставлен на маркет.'
+ );
+
+}
+
+
+/* =====================================================
+   MARKET
+===================================================== */
+
+function renderMarket(){
+
+ document.getElementById(
+  'pages'
+ ).innerHTML=`
+
+  <div class="page">
+
+   <div class="card"
+    style="padding:22px">
+
+    <h2>
+     МАРКЕТ
+    </h2>
+
+
+    ${
+     state.market.length===0
+
+     ?
+
+     `<div class="muted">
+       На маркете пока ничего нет.
+      </div>`
+
+     :
+
+     `<div class="grid">
+
+      ${
+       state.market.map(
+        item=>`
+
+         <div class="row">
+
+          <div style="
+           font-size:25px;
+           font-weight:1000">
+
+           ${esc(item.code)}
+
+          </div>
+
+
+          <div class="muted">
+           Продавец:
+           ${esc(item.sellerNick)}
+          </div>
+
+
+          <div style="
+           margin:13px 0;
+           font-size:20px;
+           font-weight:900">
+
+           ${money(item.price)}
+
+          </div>
+
+
+          ${
+           item.sellerId===
+           currentUser.id
+
+           ?
+
+           `<span class="badge blue">
+             ВАШ НОМЕР
+            </span>`
+
+           :
+
+           `<button
+            class="btn"
+            onclick="buyMarketItem(
+             '${item.id}'
+            )">
+
+            КУПИТЬ
+
+           </button>`
+          }
+
+         </div>
+
+        `
+       ).join('')
+      }
+
+     </div>`
+    }
+
+   </div>
+
+  </div>
+
+ `;
+
+}
+
+
+function buyMarketItem(id){
+
+ const item=
+  state.market.find(
+   x=>x.id===id
+  );
+
+ if(!item)return;
+
+
+ if(
+  item.sellerId===
+  currentUser.id
+ ){
+
+  toast(
+   'Нельзя купить собственный номер.'
+  );
+
+  return;
+
+ }
+
+
+ if(
+  currentUser.balance<
+  item.price
+ ){
+
+  toast(
+   'Недостаточно средств.'
+  );
+
+  return;
+
+ }
+
+
+ const seller=
+  userById(
+   item.sellerId
+  );
+
+ if(!seller){
+
+  toast(
+   'Продавец не найден.'
+  );
+
+  return;
+
+ }
+
+
+ const plate=
+  seller.inventory.find(
+   p=>p.id===item.plateId
+  );
+
+ if(!plate){
+
+  state.market=
+   state.market.filter(
+    x=>x.id!==item.id
+   );
+
+  save();
+
+  renderMarket();
+
+  return;
+
+ }
+
+
+ currentUser.balance-=item.price;
+
+ seller.balance+=item.price;
+
+ currentUser.inventory.push(
+  plate
+ );
+
+ seller.inventory=
+  seller.inventory.filter(
+   p=>p.id!==plate.id
+  );
+
+ state.market=
+  state.market.filter(
+   x=>x.id!==item.id
+  );
+
+ save();
+
+ toast('Номер куплен.');
+
+ renderMarket();
+
+}
+
+
+/* =====================================================
+   TOP
+===================================================== */
+
+function renderTop(){
+
+ const users=
+  [...state.users]
+  .sort(
+   (a,b)=>
+    Number(b.balance||0)-
+    Number(a.balance||0)
+  )
+  .slice(0,15);
+
+
+ document.getElementById(
+  'pages'
+ ).innerHTML=`
+
+  <div class="page">
+
+   <div class="card"
+    style="padding:22px">
+
+    <h2>
+     ТОП 15
+    </h2>
+
+
+    <table>
+
+     <thead>
+
+      <tr>
+
+       <th>
+        #
+       </th>
+
+       <th>
+        Игрок
+       </th>
+
+       <th>
+        Баланс
+       </th>
+
+       <th>
+        Номера
+       </th>
+
+      </tr>
+
+     </thead>
+
+
+     <tbody>
+
+      ${
+       users.map(
+        (user,index)=>`
+
+         <tr class="
+          ${
+           index===0
+            ?'rank1'
+            :''
+          }
+          ${
+           index===1
+            ?'rank2'
+            :''
+          }
+          ${
+           index===2
+            ?'rank3'
+            :''
+          }
+         ">
+
+          <td>
+           <b>
+            ${index+1}
+           </b>
+          </td>
+
+
+          <td>
+
+           ${esc(
+            user.nickname
+           )}
+
+           ${
+            index===0
+             ?'<span class="badge gold">1</span>'
+             :index===1
+             ?'<span class="badge">2</span>'
+             :index===2
+             ?'<span class="badge">3</span>'
+             :''
+           }
+
+          </td>
+
+
+          <td>
+           ${money(
+            user.balance
+           )}
+          </td>
+
+
+          <td>
+           ${
+            user.inventory?.length||0
+           }
+          </td>
+
+         </tr>
+
+        `
+       ).join('')
+      }
+
+     </tbody>
+
+    </table>
+
+   </div>
+
+  </div>
+
+ `;
+
+}
+
+
+/* =====================================================
+   ACCOUNT
+===================================================== */
+
+function renderAccount(){
+
+ const tags=
+  state.tags.filter(
+   tag=>tag.userId===currentUser.id
+  );
+
+
+ document.getElementById(
+  'pages'
+ ).innerHTML=`
+
+  <div class="page">
+
+   <div class="card"
+    style="padding:22px">
+
+    <h2>
+     АККАУНТ
+    </h2>
+
+
+    <div class="list">
+
+     <div class="row">
+
+      <b>
+       Никнейм
+      </b>
+
+      <br>
+
+      ${esc(
+       currentUser.nickname
+      )}
+
+     </div>
+
+
+     <div class="row">
+
+      <b>
+       ID
+      </b>
+
+      <br>
+
+      ${esc(
+       currentUser.accountId
+      )}
+
+     </div>
+
+
+     <div class="row">
+
+      <b>
+       Баланс
+      </b>
+
+      <br>
+
+      ${money(
+       currentUser.balance
+      )}
+
+     </div>
+
+
+     <div class="row">
+
+      <b>
+       Теги
+      </b>
+
+      <br>
+
+      ${
+       tags.length
+        ?tags.map(
+         tag=>
+          `<span
+           class="badge"
+           style="
+            color:${esc(tag.color)};
+            margin:4px 4px 0 0">
+           ${esc(tag.name)}
+          </span>`
+        ).join('')
+        :'<span class="muted">Нет</span>'
+      }
+
+     </div>
+
+    </div>
+
+   </div>
+
+  </div>
+
+ `;
+
+}
+
+
+/* =====================================================
    ADMIN
-========================================================= */
+===================================================== */
 
 const ADMIN_SECTIONS=[
+
  ['users','Пользователи'],
+
  ['roles','Выдача Админ'],
- ['tags','Теги'],
+
+ ['tags','Все теги'],
+
  ['numbers','Номера'],
+
  ['reports','Жалобы'],
+
  ['stats','Статистика']
+
 ];
+
 
 function openAdmin(){
 
  if(!isAdmin())return;
 
- document.getElementById('adminOverlay')
-  .classList.remove('hidden');
+ document.getElementById(
+  'adminOverlay'
+ ).classList.remove('hidden');
 
  renderAdmin();
+
 }
+
 
 function closeAdmin(){
 
- document.getElementById('adminOverlay')
-  .classList.add('hidden');
+ document.getElementById(
+  'adminOverlay'
+ ).classList.add('hidden');
+
 }
+
 
 function renderAdmin(){
 
- document.getElementById('adminSide').innerHTML=
- ADMIN_SECTIONS.map(([id,name])=>`
-  <button
-   class="${adminSection===id?'active':''}"
-   onclick="adminSection='${id}';renderAdmin()">
-   ${name}
-  </button>
- `).join('');
+ document.getElementById(
+  'adminSide'
+ ).innerHTML=
+
+ ADMIN_SECTIONS.map(
+  ([id,title])=>`
+
+   <button
+    class="${
+     adminSection===id
+      ?'active'
+      :''
+    }"
+    onclick="
+     adminSection='${id}';
+     renderAdmin();
+    ">
+
+    ${title}
+
+   </button>
+
+  `
+ ).join('');
+
 
  let html='';
+
 
  if(adminSection==='users')
   html=adminUsers();
@@ -1462,8 +2647,13 @@ function renderAdmin(){
  if(adminSection==='stats')
   html=adminStats();
 
- document.getElementById('adminContent').innerHTML=html;
+
+ document.getElementById(
+  'adminContent'
+ ).innerHTML=html;
+
 }
+
 
 /* USERS */
 
@@ -1471,546 +2661,931 @@ function adminUsers(){
 
  return `
 
- <h2>ПОЛЬЗОВАТЕЛИ</h2>
+  <h2>
+   ПОЛЬЗОВАТЕЛИ
+  </h2>
 
- <div class="grid">
 
- ${state.users.map(u=>`
-
-  <div class="row">
-
-   <div class="row-main">
-
-    <b>${esc(u.nickname)}</b>
-
-    ${
-     isOwner(u)
-     ?'<span class="badge gold">OWNER</span>'
-     :u.admin
-     ?'<span class="badge blue">ADMIN</span>'
-     :''
-    }
-
-   </div>
-
-   <div class="muted" style="margin-top:8px">
-    ID: ${esc(u.accountId)}
-   </div>
-
-   <div style="margin-top:5px">
-    Баланс: ${money(u.balance)}
-   </div>
-
-   <div>
-    Номеров: ${u.inventory?.length||0}
-   </div>
+  <div class="grid">
 
    ${
-    !isOwner(u)
-    ?`
-     <button
-      class="btn"
-      style="margin-top:12px"
-      onclick="deleteUser('${u.id}')">
-      УДАЛИТЬ
-     </button>
-    `
-    :''
+    state.users.map(
+     user=>`
+
+      <div class="row">
+
+       <div class="row-main">
+
+        <b>
+         ${esc(user.nickname)}
+        </b>
+
+        ${
+         isOwner(user)
+
+          ?
+
+          `<span class="badge gold">
+            OWNER
+           </span>`
+
+          :
+
+          user.admin
+
+           ?
+
+           `<span class="badge blue">
+             ADMIN
+            </span>`
+
+           :
+
+           ''
+
+        }
+
+       </div>
+
+
+       <div class="muted"
+        style="margin-top:8px">
+
+        ID:
+        ${esc(
+         user.accountId
+        )}
+
+       </div>
+
+
+       <div>
+        Баланс:
+        ${money(user.balance)}
+       </div>
+
+
+       <div>
+        Номеров:
+        ${
+         user.inventory?.length||0
+        }
+       </div>
+
+
+       ${
+        isOwner() &&
+        !isOwner(user)
+
+        ?
+
+        `<button
+         class="btn"
+         style="margin-top:10px"
+         onclick="
+          deleteUser('${user.id}')
+         ">
+
+         УДАЛИТЬ
+
+        </button>`
+
+        :
+
+        ''
+
+       }
+
+      </div>
+
+     `
+    ).join('')
    }
 
   </div>
 
- `).join('')}
-
- </div>
  `;
+
 }
+
 
 function deleteUser(id){
 
  if(!isOwner())return;
 
- const u=userById(id);
+ const user=
+  userById(id);
 
- if(!u || isOwner(u))return;
+ if(!user || isOwner(user))
+  return;
+
 
  if(!confirm(
-  'Удалить аккаунт '+u.nickname+'?'
- ))return;
+  'Удалить '+user.nickname+'?'
+ ))
+  return;
+
 
  state.users=
-  state.users.filter(x=>x.id!==id);
+  state.users.filter(
+   u=>u.id!==id
+  );
+
 
  state.market=
-  state.market.filter(x=>x.sellerId!==id);
+  state.market.filter(
+   m=>m.sellerId!==id
+  );
+
 
  state.tags=
-  state.tags.filter(x=>x.userId!==id);
+  state.tags.filter(
+   t=>t.userId!==id
+  );
 
- state.messages=
-  state.messages.filter(x=>x.userId!==id);
 
- state.punishments=
-  state.punishments.filter(x=>x.userId!==id);
-
- saveState();
+ save();
 
  renderAdmin();
+
 }
+
 
 /* ROLES */
 
 function adminRoles(){
 
- if(!isOwner())
-  return '<div class="muted">Только d0ntyyy может выдавать админки.</div>';
+ if(!isOwner()){
 
- return `
-
- <h2>ВЫДАЧА АДМИН</h2>
-
- <div class="field">
-  <label>ПОЛЬЗОВАТЕЛЬ</label>
-
-  <select id="roleUser">
-   ${state.users
-    .filter(u=>!isOwner(u))
-    .map(u=>
-     `<option value="${u.id}">
-      ${esc(u.nickname)}
-     </option>`
-    ).join('')}
-  </select>
- </div>
-
- <div class="field">
-  <label>ДОЛЖНОСТЬ</label>
-
-  <select id="roleSelect">
-   <option value="">Снять админку</option>
-   <option value="helper">Хелпер</option>
-   <option value="moderator">Модератор</option>
-   <option value="senior_moderator">Ст.Модератор</option>
-   <option value="administrator">Администратор</option>
-   <option value="chief_administrator">Главный Администратор</option>
-   <option value="deputy_founder">Зам. основателя</option>
-  </select>
- </div>
-
- <button class="btn"
-  onclick="setRole()">
-  СОХРАНИТЬ
- </button>
-
- <div style="margin-top:20px" class="list">
-
- ${state.users
-  .filter(u=>u.admin)
-  .map(u=>`
-
-   <div class="row">
-
-    <b>${esc(u.nickname)}</b>
-
-    <div class="muted">
-     ${esc(u.adminRole||'owner')}
-    </div>
-
+  return `
+   <div class="muted">
+    Только владелец d0ntyyy
+    может выдавать админские должности.
    </div>
-
-  `).join('')}
-
- </div>
- `;
-}
-
-function setRole(){
-
- if(!isOwner())return;
-
- const id=document.getElementById('roleUser').value;
- const role=document.getElementById('roleSelect').value;
-
- const u=userById(id);
-
- if(!u)return;
-
- if(!role){
-
-  u.admin=false;
-  u.adminRole=null;
-
- }else{
-
-  u.admin=true;
-  u.adminRole=role;
+  `;
 
  }
 
- saveState();
+
+ return `
+
+  <h2>
+   ВЫДАЧА АДМИН
+  </h2>
+
+
+  <div class="field">
+
+   <label>
+    ПОЛЬЗОВАТЕЛЬ
+   </label>
+
+   <select id="roleUser">
+
+    ${
+     state.users
+      .filter(
+       u=>!isOwner(u)
+      )
+      .map(
+       u=>
+        `<option value="${u.id}">
+         ${esc(u.nickname)}
+        </option>`
+      )
+      .join('')
+    }
+
+   </select>
+
+  </div>
+
+
+  <div class="field">
+
+   <label>
+    ДОЛЖНОСТЬ
+   </label>
+
+   <select id="roleValue">
+
+    <option value="">
+     Снять админку
+    </option>
+
+    <option value="helper">
+     Хелпер
+    </option>
+
+    <option value="moderator">
+     Модератор
+    </option>
+
+    <option value="senior_moderator">
+     Ст.Модератор
+    </option>
+
+    <option value="administrator">
+     Администратор
+    </option>
+
+    <option value="chief_administrator">
+     Главный Администратор
+    </option>
+
+    <option value="deputy_founder">
+     Зам. основателя
+    </option>
+
+   </select>
+
+  </div>
+
+
+  <button
+   class="btn"
+   onclick="saveRole()">
+
+   СОХРАНИТЬ
+
+  </button>
+
+ `;
+
+}
+
+
+function saveRole(){
+
+ if(!isOwner())return;
+
+
+ const user=
+  userById(
+   document.getElementById(
+    'roleUser'
+   ).value
+  );
+
+
+ const role=
+  document.getElementById(
+   'roleValue'
+  ).value;
+
+
+ if(!user)return;
+
+
+ if(role===''){
+
+  user.admin=false;
+  user.adminRole=null;
+
+ }else{
+
+  user.admin=true;
+  user.adminRole=role;
+
+ }
+
+
+ save();
+
  renderAdmin();
+
  buildNav();
 
- toast('Админская должность изменена.');
+ toast(
+  'Должность изменена.'
+ );
+
 }
+
 
 /* TAGS */
 
 function adminTags(){
 
- if(!isOwner())
-  return '<div class="muted">Только Owner.</div>';
+ if(!isOwner()){
+
+  return `
+   <div class="muted">
+    Только Owner.
+   </div>
+  `;
+
+ }
+
 
  return `
 
- <h2>ТЕГИ</h2>
+  <h2>
+   ВСЕ ТЕГИ
+  </h2>
 
- <div class="field">
-  <label>ИГРОК</label>
 
-  <select id="tagUser">
-   ${state.users.map(u=>
-    `<option value="${u.id}">
-     ${esc(u.nickname)}
-    </option>`
-   ).join('')}
-  </select>
- </div>
+  <div class="field">
 
- <div class="field">
-  <label>НАЗВАНИЕ ТЕГА</label>
-  <input id="tagName"
-   placeholder="Агент поддержки">
- </div>
+   <label>
+    ПОЛЬЗОВАТЕЛЬ
+   </label>
 
- <div class="field">
-  <label>ЦВЕТ</label>
-  <input id="tagColor"
-   type="color"
-   value="#ff3030">
- </div>
+   <select id="tagUser">
 
- <button class="btn"
-  onclick="createTag()">
-  ВЫДАТЬ ТЕГ
- </button>
+    ${
+     state.users.map(
+      u=>
+       `<option value="${u.id}">
+        ${esc(u.nickname)}
+       </option>`
+     ).join('')
+    }
 
- <div class="list" style="margin-top:20px">
-
- ${state.tags.map(t=>`
-
-  <div class="row">
-
-   <div class="row-main">
-
-    <div>
-     <b style="color:${esc(t.color)}">
-      ${esc(t.name)}
-     </b>
-
-     <div class="muted">
-      ${esc(
-       userById(t.userId)?.nickname||'—'
-      )}
-     </div>
-    </div>
-
-    <button class="btn"
-     onclick="deleteTag('${t.id}')">
-     Снять
-    </button>
-
-   </div>
+   </select>
 
   </div>
 
- `).join('')}
 
- </div>
+  <div class="field">
+
+   <label>
+    ТЕГ
+   </label>
+
+   <input
+    id="tagName"
+    placeholder="Агент поддержки">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>
+    ЦВЕТ
+   </label>
+
+   <input
+    id="tagColor"
+    type="color"
+    value="#ff3030">
+
+  </div>
+
+
+  <button
+   class="btn"
+   onclick="createTag()">
+
+   ВЫДАТЬ ТЕГ
+
+  </button>
+
+
+  <div
+   class="list"
+   style="margin-top:20px">
+
+   ${
+    state.tags.map(
+     tag=>`
+
+      <div class="row">
+
+       <div class="row-main">
+
+        <div>
+
+         <b style="
+          color:${esc(tag.color)}">
+
+          ${esc(tag.name)}
+
+         </b>
+
+         <div class="muted">
+
+          ${
+           esc(
+            userById(
+             tag.userId
+            )?.nickname||'—'
+           )
+          }
+
+         </div>
+
+        </div>
+
+
+        <button
+         class="btn"
+         onclick="
+          deleteTag('${tag.id}')
+         ">
+
+         Снять
+
+        </button>
+
+       </div>
+
+      </div>
+
+     `
+    ).join('')
+   }
+
+  </div>
+
  `;
+
 }
+
 
 function createTag(){
 
- const user=userById(
-  document.getElementById('tagUser').value
- );
+ if(!isOwner())return;
+
+
+ const user=
+  userById(
+   document.getElementById(
+    'tagUser'
+   ).value
+  );
+
 
  const name=
-  document.getElementById('tagName')
-   .value.trim();
+  document.getElementById(
+   'tagName'
+  ).value.trim();
+
 
  const color=
-  document.getElementById('tagColor').value;
+  document.getElementById(
+   'tagColor'
+  ).value;
 
- if(!user||!name){
 
-  toast('Заполните данные.');
+ if(!user || !name){
+
+  toast(
+   'Заполните все поля.'
+  );
+
   return;
+
  }
 
+
  state.tags.push({
-  id:uid(),
+
+  id:crypto.randomUUID(),
+
   userId:user.id,
-  name,
-  color,
+
+  name:name,
+
+  color:color,
+
   createdAt:Date.now()
+
  });
 
- saveState();
+
+ save();
+
  renderAdmin();
 
- toast('Тег выдан.');
+ toast(
+  'Тег выдан.'
+ );
+
 }
+
 
 function deleteTag(id){
 
- state.tags=
-  state.tags.filter(x=>x.id!==id);
+ if(!isOwner())return;
 
- saveState();
+ state.tags=
+  state.tags.filter(
+   tag=>tag.id!==id
+  );
+
+ save();
+
  renderAdmin();
+
 }
+
 
 /* NUMBERS */
 
 function adminNumbers(){
 
- if(!isOwner())
-  return '<div class="muted">Только Owner.</div>';
+ if(!isOwner()){
+
+  return `
+   <div class="muted">
+    Только Owner.
+   </div>
+  `;
+
+ }
+
 
  return `
 
- <h2>НОМЕРА</h2>
+  <h2>
+   ВЫДАЧА НОМЕРА
+  </h2>
 
- <div class="field">
-  <label>ИГРОК</label>
 
-  <select id="issueUser">
-   ${state.users.map(u=>
-    `<option value="${u.id}">
-     ${esc(u.nickname)}
-    </option>`
-   ).join('')}
-  </select>
- </div>
+  <div class="field">
 
- <div class="field">
-  <label>НОМЕР</label>
-  <input id="issueCode"
-   placeholder="А777АА | 000">
- </div>
+   <label>
+    ПОЛЬЗОВАТЕЛЬ
+   </label>
 
- <button class="btn"
-  onclick="issueNumber()">
-  ВЫДАТЬ НОМЕР
- </button>
+   <select id="issueUser">
+
+    ${
+     state.users.map(
+      user=>
+       `<option value="${user.id}">
+        ${esc(user.nickname)}
+       </option>`
+     ).join('')
+    }
+
+   </select>
+
+  </div>
+
+
+  <div class="field">
+
+   <label>
+    НОМЕР
+   </label>
+
+   <input
+    id="issueCode"
+    placeholder="А777АА | 000">
+
+  </div>
+
+
+  <button
+   class="btn"
+   onclick="issueNumber()">
+
+   ВЫДАТЬ НОМЕР
+
+  </button>
 
  `;
+
 }
+
 
 function issueNumber(){
 
- const u=userById(
-  document.getElementById('issueUser').value
- );
+ if(!isOwner())return;
+
+
+ const user=
+  userById(
+   document.getElementById(
+    'issueUser'
+   ).value
+  );
+
 
  const code=
-  document.getElementById('issueCode')
-   .value.trim();
+  document.getElementById(
+   'issueCode'
+  ).value.trim();
 
- if(!u||!code){
 
-  toast('Заполните данные.');
+ if(!user || !code){
+
+  toast(
+   'Заполните поля.'
+  );
+
   return;
+
  }
+
 
  if(plateExists(code)){
 
-  toast('Такой номер уже существует.');
+  toast(
+   'Такой номер уже существует.'
+  );
+
   return;
+
  }
 
- const letters=
-  code.replace(/[^А-ЯA-Z]/gi,'')
-   .toUpperCase();
 
- const nums=
-  (code.match(/\d{3}/)||['000'])[0];
+ const letters=
+  code
+   .replace(
+    /[^А-ЯA-Z]/gi,
+    ''
+   )
+   .toUpperCase()
+   .slice(0,3);
+
+
+ const numbers=
+  (
+   code.match(
+    /\d{3}/
+   )||['000']
+  )[0];
+
 
  const region=
-  (code.match(/\|\s*(\d{3})/)||['','000'])[1];
+  (
+   code.match(
+    /\|\s*(\d{3})/
+   )||['','000']
+  )[1];
 
- u.inventory.push({
-  id:uid(),
-  code,
-  letters:letters.slice(0,3),
-  numbers:nums,
-  region,
-  rarity:rarity(
-   letters.slice(0,3),
-   nums
+
+ user.inventory.push({
+
+  id:crypto.randomUUID(),
+
+  code:code,
+
+  letters:letters,
+
+  numbers:numbers,
+
+  region:region,
+
+  rarity:getRarity(
+   letters,
+   numbers
   ),
+
   active:true,
+
   createdAt:Date.now()
+
  });
 
- saveState();
+
+ save();
+
  renderAdmin();
 
- toast('Номер выдан.');
+ toast(
+  'Номер выдан.'
+ );
+
 }
+
 
 /* REPORTS */
 
 function adminReports(){
 
- if(!isAdmin())
-  return '<div class="muted">Нет доступа.</div>';
-
  return `
 
- <h2>ЖАЛОБЫ</h2>
+  <h2>
+   ЖАЛОБЫ
+  </h2>
 
- ${
-  !state.reports.length
-  ?'<div class="muted">Жалоб пока нет.</div>'
-  :
-  `<div class="list">
 
-   ${state.reports.map(r=>`
+  ${
+   state.reports.length===0
 
-    <div class="row">
+    ?
 
-     <b>${esc(r.title||'Жалоба')}</b>
+    `<div class="muted">
+      Жалоб пока нет.
+     </div>`
 
-     <div class="muted">
-      От: ${esc(
-       userById(r.userId)?.nickname||'—'
-      )}
-     </div>
+    :
 
-     <div style="margin-top:8px">
-      ${esc(r.text||'')}
-     </div>
+    `<div class="list">
 
-    </div>
+     ${
+      state.reports.map(
+       report=>`
 
-   `).join('')}
+        <div class="row">
 
-  </div>`
- }
+         <b>
+          ${esc(
+           report.title||
+           'Жалоба'
+          )}
+         </b>
+
+         <div class="muted">
+
+          От:
+          ${esc(
+           userById(
+            report.userId
+           )?.nickname||'—'
+          )}
+
+         </div>
+
+         <div style="
+          margin-top:8px">
+
+          ${esc(
+           report.text||''
+          )}
+
+         </div>
+
+        </div>
+
+       `
+      ).join('')
+     }
+
+    </div>`
+  }
 
  `;
+
 }
+
 
 /* STATS */
 
 function adminStats(){
 
+ const totalPlates=
+  state.users.reduce(
+   (sum,user)=>
+    sum+
+    (user.inventory?.length||0),
+   0
+  );
+
+
  return `
 
- <h2>СТАТИСТИКА</h2>
+  <h2>
+   СТАТИСТИКА
+  </h2>
 
- <div class="grid">
 
-  <div class="row">
-   Пользователей
-   <b style="font-size:25px">
-    ${state.users.length}
-   </b>
+  <div class="grid">
+
+   <div class="row">
+    Пользователей:
+    <b style="font-size:25px">
+     ${state.users.length}
+    </b>
+   </div>
+
+   <div class="row">
+    Номеров:
+    <b style="font-size:25px">
+     ${totalPlates}
+    </b>
+   </div>
+
+   <div class="row">
+    Маркет:
+    <b style="font-size:25px">
+     ${state.market.length}
+    </b>
+   </div>
+
+   <div class="row">
+    Тегов:
+    <b style="font-size:25px">
+     ${state.tags.length}
+    </b>
+   </div>
+
   </div>
-
-  <div class="row">
-   Номеров
-   <b style="font-size:25px">
-    ${state.users.reduce(
-     (a,u)=>a+(u.inventory?.length||0),0
-    )}
-   </b>
-  </div>
-
-  <div class="row">
-   На маркете
-   <b style="font-size:25px">
-    ${state.market.length}
-   </b>
-  </div>
-
-  <div class="row">
-   Тегов
-   <b style="font-size:25px">
-    ${state.tags.length}
-   </b>
-  </div>
-
- </div>
 
  `;
+
 }
 
-/* =========================================================
+
+/* =====================================================
    LOGOUT
-========================================================= */
+===================================================== */
 
-document.getElementById('logoutBtn')
- .onclick=()=>{
+document.getElementById(
+ 'logoutBtn'
+).onclick=()=>{
 
-  if(currentUser){
+ if(currentUser){
 
-   currentUser.lastSeen=Date.now();
+  currentUser.lastSeen=Date.now();
 
-   saveState();
+  save();
 
-  }
+ }
 
-  currentUser=null;
 
-  sessionStorage.removeItem('dpy_session');
+ currentUser=null;
 
-  document.getElementById('appView')
-   .classList.add('hidden');
+ sessionStorage.removeItem(
+  'dpy_session'
+ );
 
-  document.getElementById('authView')
-   .classList.remove('hidden');
 
-  renderAuth();
- };
+ document.getElementById(
+  'appView'
+ ).classList.add('hidden');
 
-document.getElementById('loginTab')
- .onclick=()=>{
-  authMode='login';
-  renderAuth();
- };
 
-document.getElementById('registerTab')
- .onclick=()=>{
-  authMode='register';
-  renderAuth();
- };
+ document.getElementById(
+  'authView'
+ ).classList.remove('hidden');
 
-document.getElementById('closeAdmin')
- .onclick=closeAdmin;
 
-/* =========================================================
-   CROSS-DEVICE SYNC
-========================================================= */
+ renderAuth();
 
-async function refreshFromCloud(){
+};
 
- if(dirty || saving)return;
+
+document.getElementById(
+ 'loginTab'
+).onclick=()=>{
+
+ authMode='login';
+
+ renderAuth();
+
+};
+
+
+document.getElementById(
+ 'registerTab'
+).onclick=()=>{
+
+ authMode='register';
+
+ renderAuth();
+
+};
+
+
+document.getElementById(
+ 'closeAdmin'
+).onclick=closeAdmin;
+
+
+/* =====================================================
+   CROSS DEVICE
+===================================================== */
+
+async function syncCloud(){
+
+ if(dirty || saving)
+  return;
+
 
  try{
 
-  const row=await dbGet();
+  const row=
+   await loadCloud();
 
-  const oldUserId=currentUser?.id;
 
-  replaceState(row.state);
+  const oldUserId=
+   currentUser?.id;
+
+
+  state={
+   ...JSON.parse(
+    JSON.stringify(
+     DEFAULT_STATE
+    )
+   ),
+   ...(row.state||{})
+  };
+
+
+  normalize();
+
 
   if(oldUserId){
 
-   const fresh=userById(oldUserId);
+   const fresh=
+    userById(oldUserId);
+
 
    if(!fresh){
 
@@ -2020,110 +3595,173 @@ async function refreshFromCloud(){
      'dpy_session'
     );
 
-    document.getElementById('appView')
-     .classList.add('hidden');
+    document.getElementById(
+     'appView'
+    ).classList.add(
+     'hidden'
+    );
 
-    document.getElementById('authView')
-     .classList.remove('hidden');
+    document.getElementById(
+     'authView'
+    ).classList.remove(
+     'hidden'
+    );
 
     renderAuth();
 
     return;
+
    }
+
 
    currentUser=fresh;
 
+
    buildNav();
 
-   openPage(
+
+   const active=
     document.querySelector(
      '[data-page].active'
-    )?.dataset.page || 'home'
-   );
+    );
+
+
+   if(active)
+    openPage(
+     active.dataset.page
+    );
+
   }
 
- }catch(e){
+ }catch(error){
 
-  console.error('SYNC:',e);
+  console.error(
+   'SYNC ERROR:',
+   error
+  );
 
  }
+
 }
 
-/* Каждые 3 секунды проверяем Supabase */
 
 setInterval(
- refreshFromCloud,
+ syncCloud,
  3000
 );
 
-/* Сохраняем при закрытии */
 
 window.addEventListener(
  'beforeunload',
  ()=>{
-  if(dirty)dbSave();
+  if(dirty)
+   saveCloud();
  }
 );
 
-/* =========================================================
+
+/* =====================================================
    BOOT
-========================================================= */
+===================================================== */
 
 async function boot(){
 
  renderAuth();
 
+
  try{
 
-  const row=await dbGet();
+  const row=
+   await loadCloud();
 
-  replaceState(row.state);
+
+  state={
+   ...JSON.parse(
+    JSON.stringify(
+     DEFAULT_STATE
+    )
+   ),
+   ...(row.state||{})
+  };
+
+
+  normalize();
+
 
   /*
-   После normalizeState мог добавиться OWNER.
-   Сохраняем его в облако.
+   Если owner был создан автоматически,
+   отправляем его в Supabase.
   */
 
-  saveState();
+  dirty=true;
+
+  await saveCloud();
+
 
   const session=
    sessionStorage.getItem(
     'dpy_session'
    );
 
+
   if(session){
 
-   const u=userById(session);
+   const user=
+    userById(session);
 
-   if(u){
 
-    currentUser=u;
+   if(user){
+
+    currentUser=user;
+
     openApp();
+
     return;
+
    }
+
   }
 
- }catch(e){
 
-  console.error(e);
+  renderAuth();
 
-  document.getElementById('authForm')
-   .insertAdjacentHTML(
-    'afterbegin',
-    `<div class="error">
-      Ошибка подключения к Supabase:<br>
-      ${esc(e.message)}
-     </div>`
-   );
 
-  return;
+ }catch(error){
+
+  console.error(error);
+
+
+  document.getElementById(
+   'authForm'
+  ).innerHTML=`
+
+   <div class="error">
+
+    ОШИБКА ПОДКЛЮЧЕНИЯ К SUPABASE
+
+   </div>
+
+   <div
+    class="muted"
+    style="
+     margin-top:10px;
+     font-size:12px;
+     word-break:break-word">
+
+    ${esc(error.message)}
+
+   </div>
+
+  `;
+
  }
 
- renderAuth();
 }
+
 
 boot();
 
 </script>
+
 </body>
 </html>
