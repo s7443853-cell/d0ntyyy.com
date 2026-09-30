@@ -1,36 +1,39 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>d0ntyyy License Plates</title>
+<title>D0NTYYY License Plates</title>
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,Helvetica,sans-serif
 }
 
 body{
-    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
     background:
-        radial-gradient(circle at top,#252525 0,#111 45%,#080808 100%);
+        radial-gradient(circle at top,#202020 0,#0c0c0c 55%,#050505 100%);
     color:#fff;
+    min-height:100vh;
 }
 
 button,input,textarea{
-    font:inherit
+    font:inherit;
 }
 
 button{
-    cursor:pointer
+    cursor:pointer;
 }
 
 .hidden{
-    display:none!important
+    display:none!important;
 }
+
+/* AUTH */
 
 #auth{
     min-height:100vh;
@@ -41,75 +44,76 @@ button{
 }
 
 .auth-box{
-    width:100%;
-    max-width:420px;
-    padding:32px;
+    width:420px;
+    max-width:100%;
+    padding:35px;
     border:1px solid #333;
     border-radius:20px;
-    background:rgba(20,20,20,.88);
-    box-shadow:0 20px 70px #000;
+    background:rgba(20,20,20,.92);
+    box-shadow:0 20px 80px rgba(0,0,0,.6);
 }
 
 .logo{
-    text-align:center;
     font-size:30px;
     font-weight:900;
+    text-align:center;
     margin-bottom:8px;
+}
+
+.logo span{
+    color:#aaa;
 }
 
 .subtitle{
     text-align:center;
-    color:#888;
-    margin-bottom:25px;
+    color:#777;
+    margin-bottom:28px;
 }
 
-.field{
+.auth-box input{
     width:100%;
     padding:14px;
     margin-bottom:12px;
-    border-radius:12px;
+    border-radius:10px;
     border:1px solid #333;
-    background:#0c0c0c;
+    background:#111;
     color:white;
     outline:none;
 }
 
-.field:focus{
-    border-color:#777
+.auth-box input:focus{
+    border-color:#777;
 }
 
-.btn{
+.main-btn{
     width:100%;
     border:0;
-    border-radius:12px;
+    border-radius:10px;
     padding:14px;
-    margin-top:8px;
-    color:#fff;
-    background:#222;
-    transition:.2s;
-}
-
-.btn:hover{
-    background:#333;
-    transform:translateY(-1px)
-}
-
-.btn-main{
     background:#fff;
     color:#000;
-    font-weight:800
+    font-weight:800;
+    margin-top:5px;
 }
 
-.btn-main:hover{
-    background:#ddd
+.secondary-btn{
+    width:100%;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:13px;
+    background:#151515;
+    color:#fff;
+    margin-top:10px;
 }
 
-.auth-switch{
+.auth-status{
+    min-height:22px;
+    margin-top:15px;
     text-align:center;
-    margin-top:18px;
-    color:#888;
-    cursor:pointer;
+    color:#ff6b6b;
 }
+
+/* APP */
 
 #app{
     min-height:100vh;
@@ -117,26 +121,24 @@ button{
 
 .topbar{
     height:70px;
+    border-bottom:1px solid #222;
+    background:rgba(10,10,10,.92);
     display:flex;
     align-items:center;
     justify-content:space-between;
     padding:0 25px;
-    border-bottom:1px solid #292929;
-    background:rgba(10,10,10,.88);
     position:sticky;
     top:0;
     z-index:20;
-    backdrop-filter:blur(15px);
 }
 
-.brand{
-    font-size:22px;
+.top-logo{
+    font-size:20px;
     font-weight:900;
 }
 
-.user-info{
+.top-user{
     color:#aaa;
-    font-size:14px;
 }
 
 .layout{
@@ -146,32 +148,32 @@ button{
 
 .sidebar{
     width:230px;
-    border-right:1px solid #292929;
-    padding:18px;
-    background:#0b0b0b;
+    border-right:1px solid #222;
+    padding:18px 12px;
+    background:rgba(10,10,10,.7);
 }
 
-.nav{
+.nav-btn{
     width:100%;
-    padding:13px;
-    margin-bottom:8px;
     border:0;
-    border-radius:11px;
     background:transparent;
     color:#aaa;
     text-align:left;
+    padding:13px 14px;
+    border-radius:10px;
+    margin-bottom:5px;
 }
 
-.nav:hover,
-.nav.active{
-    background:#1b1b1b;
+.nav-btn:hover,
+.nav-btn.active{
+    background:#1c1c1c;
     color:#fff;
 }
 
-.main{
+.content{
     flex:1;
     padding:30px;
-    overflow:hidden;
+    max-width:1300px;
 }
 
 .page{
@@ -188,296 +190,315 @@ button{
     margin-bottom:8px;
 }
 
-.page-desc{
+.page-subtitle{
     color:#777;
     margin-bottom:25px;
 }
 
-.card{
-    background:rgba(20,20,20,.8);
-    border:1px solid #292929;
-    border-radius:18px;
-    padding:22px;
-    margin-bottom:20px;
+/* CARDS */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
 }
 
-.wheel-wrap{
+.card{
+    background:rgba(20,20,20,.9);
+    border:1px solid #292929;
+    border-radius:16px;
+    padding:20px;
+}
+
+.card-title{
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.muted{
+    color:#777;
+}
+
+/* BALANCE */
+
+.balance{
+    font-size:30px;
+    font-weight:900;
+}
+
+/* SPINNER */
+
+.spinner-box{
+    max-width:850px;
+    margin:auto;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:22px;
+    padding:35px;
+    text-align:center;
+}
+
+.plate-preview{
     display:flex;
-    justify-content:center;
     align-items:center;
-    gap:20px;
-    flex-wrap:wrap;
+    justify-content:center;
+    gap:22px;
+    margin:35px 0;
 }
 
 .plate{
-    min-width:310px;
-    padding:20px 30px;
-    border-radius:10px;
-    background:#f4f4f4;
-    color:#111;
-    border:5px solid #111;
-    box-shadow:0 10px 40px #000;
-    text-align:center;
-}
-
-.plate-number{
-    font-size:45px;
-    font-weight:900;
-    letter-spacing:3px;
-}
-
-.plate-bottom{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-top:8px;
-    font-size:13px;
-    font-weight:bold;
-}
-
-.rus{
-    font-size:20px;
-}
-
-.flag{
-    font-size:20px;
-}
-
-.region{
-    font-size:22px;
-    font-weight:900;
-}
-
-.wheel-buttons{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:center;
-    margin-top:25px;
-}
-
-.wheel-buttons button{
-    border:0;
-    padding:14px 22px;
-    border-radius:12px;
-    background:#222;
-    color:#fff;
-}
-
-.wheel-buttons button:hover{
-    background:#444;
-}
-
-.rare{
-    box-shadow:
-        0 0 25px rgba(255,200,0,.5),
-        0 10px 40px #000;
-}
-
-.rare-text{
-    margin-top:15px;
-    text-align:center;
-    color:#e5c35c;
-    font-weight:bold;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-    gap:15px;
-}
-
-.stat{
-    padding:20px;
-    border:1px solid #292929;
-    border-radius:15px;
-    background:#111;
-}
-
-.stat-name{
-    color:#777;
-    font-size:13px;
-}
-
-.stat-value{
-    margin-top:8px;
-    font-size:25px;
-    font-weight:bold;
-}
-
-.plates-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-    gap:15px;
-}
-
-.inventory-plate{
-    background:#151515;
-    border:1px solid #292929;
-    padding:15px;
-    border-radius:15px;
-}
-
-.inventory-number{
+    border:3px solid #ddd;
     background:#eee;
     color:#111;
     border-radius:7px;
-    padding:10px;
-    text-align:center;
-    font-size:24px;
+    overflow:hidden;
+    font-size:42px;
     font-weight:900;
+    padding:8px 12px;
+    letter-spacing:2px;
 }
 
-.inventory-region{
-    color:#888;
+.plate-main{
+    min-width:230px;
+}
+
+.region{
+    border-left:3px solid #111;
+    margin-left:10px;
+    padding-left:10px;
     text-align:center;
-    margin-top:8px;
+    font-size:23px;
+    line-height:1.05;
 }
 
-.market-grid{
+.region small{
+    display:block;
+    font-size:11px;
+    letter-spacing:1px;
+    margin-top:4px;
+}
+
+.spin-buttons{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-    gap:15px;
-}
-
-.market-item{
-    padding:18px;
-    border-radius:15px;
-    border:1px solid #292929;
-    background:#111;
-}
-
-.price{
-    font-size:20px;
-    font-weight:bold;
-    margin:10px 0;
-}
-
-.row{
-    display:flex;
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
+}
+
+.spin-buttons button{
+    border:1px solid #333;
+    background:#181818;
+    color:white;
+    border-radius:10px;
+    padding:14px;
+}
+
+.spin-buttons button:hover{
+    background:#242424;
+}
+
+.spin-main{
+    margin-top:15px;
+    width:100%;
+    padding:16px;
+    border:0;
+    border-radius:12px;
+    background:#fff;
+    color:#000;
+    font-weight:900;
+    font-size:18px;
+}
+
+.rarity{
+    margin-top:15px;
+    font-weight:800;
+}
+
+/* LIST */
+
+.list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.list-item{
+    display:flex;
     align-items:center;
-}
-
-.row>*{
-    flex:1;
-}
-
-textarea.field{
-    min-height:130px;
-    resize:vertical;
-}
-
-.message{
+    justify-content:space-between;
+    gap:15px;
     padding:15px;
     background:#151515;
     border:1px solid #292929;
-    border-radius:13px;
-    margin-bottom:10px;
+    border-radius:12px;
 }
 
-.message b{
-    display:block;
-    margin-bottom:6px;
+.small-btn{
+    border:1px solid #333;
+    background:#202020;
+    color:white;
+    padding:9px 13px;
+    border-radius:8px;
 }
 
-.message span{
-    color:#888;
+.danger{
+    border-color:#6d2525;
+    color:#ff7373;
 }
 
-.admin-tabs{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
+/* STORE */
+
+.plate-card{
+    position:relative;
 }
 
-.admin-tabs button{
-    padding:10px 15px;
-    border:0;
+.plate-mini{
+    display:inline-flex;
+    border:2px solid #ddd;
+    background:#eee;
+    color:#111;
+    border-radius:5px;
+    padding:5px 8px;
+    font-weight:900;
+    margin-bottom:12px;
+}
+
+.price{
+    font-size:18px;
+    font-weight:900;
+    margin:12px 0;
+}
+
+/* FORMS */
+
+.form{
+    max-width:700px;
+}
+
+.form input,
+.form textarea,
+.form select{
+    width:100%;
+    background:#101010;
+    border:1px solid #333;
+    color:#fff;
     border-radius:10px;
-    background:#222;
-    color:#aaa;
+    padding:13px;
+    margin-bottom:12px;
+    outline:none;
 }
 
-.admin-tabs button.active{
+.form textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+.form button{
+    border:0;
     background:#fff;
     color:#000;
+    border-radius:10px;
+    padding:13px 20px;
+    font-weight:900;
 }
 
-.admin-table{
+/* ADMIN */
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:15px;
+}
+
+.admin-menu{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:15px;
+    padding:10px;
+}
+
+.admin-menu button{
     width:100%;
-    border-collapse:collapse;
-}
-
-.admin-table th,
-.admin-table td{
-    padding:13px;
-    border-bottom:1px solid #292929;
+    border:0;
+    background:transparent;
+    color:#aaa;
+    padding:12px;
     text-align:left;
+    border-radius:8px;
 }
 
-.tag{
-    display:inline-block;
-    padding:5px 9px;
-    border-radius:7px;
+.admin-menu button:hover{
     background:#222;
     color:#fff;
-    margin:2px;
-    font-size:12px;
 }
 
-.error{
-    color:#ff5555;
-    text-align:center;
-    margin-top:10px;
+.admin-area{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:15px;
+    padding:20px;
 }
 
-.success{
-    color:#58d68d;
-    text-align:center;
-    margin-top:10px;
+/* TOAST */
+
+#toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:100;
+    max-width:350px;
 }
 
-.empty{
-    padding:30px;
-    text-align:center;
-    color:#666;
+.toast{
+    background:#181818;
+    border:1px solid #333;
+    border-radius:12px;
+    padding:14px 17px;
+    margin-top:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
 }
+
+/* MOBILE */
 
 @media(max-width:800px){
     .layout{
-        display:block
+        display:block;
     }
 
     .sidebar{
         width:100%;
-        display:flex;
-        overflow:auto;
-        gap:7px;
         border-right:0;
-        border-bottom:1px solid #292929;
+        border-bottom:1px solid #222;
+        display:flex;
+        overflow-x:auto;
+        gap:5px;
     }
 
-    .nav{
+    .nav-btn{
         min-width:max-content;
+        width:auto;
         margin:0;
     }
 
-    .main{
+    .content{
         padding:18px;
+    }
+
+    .admin-grid{
+        grid-template-columns:1fr;
+    }
+
+    .plate{
+        font-size:29px;
+    }
+
+    .plate-main{
+        min-width:170px;
     }
 
     .topbar{
         padding:0 15px;
-    }
-
-    .plate{
-        min-width:280px;
-    }
-
-    .plate-number{
-        font-size:35px;
     }
 }
 </style>
@@ -490,58 +511,26 @@ textarea.field{
 
 <div class="auth-box">
 
-<div class="logo">d0ntyyy</div>
-<div class="subtitle">License Plates</div>
+    <div class="logo">
+        D0NTYYY <span>PLATES</span>
+    </div>
 
-<div id="loginForm">
+    <div class="subtitle">
+        License Plates
+    </div>
 
-<input id="loginNick"
-       class="field"
-       placeholder="Никнейм"
-       autocomplete="username">
+    <input id="loginNick" placeholder="Никнейм" autocomplete="username">
+    <input id="loginPassword" type="password" placeholder="Пароль" autocomplete="current-password">
 
-<input id="loginPassword"
-       class="field"
-       type="password"
-       placeholder="Пароль"
-       autocomplete="current-password">
+    <button class="main-btn" onclick="login()">
+        Войти
+    </button>
 
-<button class="btn btn-main" onclick="login()">
-Войти
-</button>
+    <button class="secondary-btn" onclick="register()">
+        Регистрация
+    </button>
 
-<div class="auth-switch" onclick="showRegister()">
-Нет аккаунта? Регистрация
-</div>
-
-<div id="loginError" class="error"></div>
-
-</div>
-
-<div id="registerForm" class="hidden">
-
-<input id="regNick"
-       class="field"
-       placeholder="Никнейм"
-       autocomplete="username">
-
-<input id="regPassword"
-       class="field"
-       type="password"
-       placeholder="Пароль"
-       autocomplete="new-password">
-
-<button class="btn btn-main" onclick="register()">
-Создать аккаунт
-</button>
-
-<div class="auth-switch" onclick="showLogin()">
-Уже есть аккаунт? Войти
-</div>
-
-<div id="registerError" class="error"></div>
-
-</div>
+    <div id="authStatus" class="auth-status"></div>
 
 </div>
 
@@ -553,15 +542,15 @@ textarea.field{
 
 <header class="topbar">
 
-<div class="brand">
-d0ntyyy License Plates
-</div>
+    <div class="top-logo">
+        D0NTYYY PLATES
+    </div>
 
-<div class="user-info">
-<span id="topNick"></span>
-&nbsp;•&nbsp;
-<span id="topBalance">0 ₽</span>
-</div>
+    <div class="top-user">
+        <span id="headerNick"></span>
+        ·
+        <b id="headerBalance">0 ₽</b>
+    </div>
 
 </header>
 
@@ -570,623 +559,635 @@ d0ntyyy License Plates
 
 <aside class="sidebar">
 
-<button class="nav active" onclick="openPage('home',this)">
-Главная
-</button>
+    <button class="nav-btn active" data-page="home">
+        Главная
+    </button>
 
-<button class="nav" onclick="openPage('spinner',this)">
-Крутилка
-</button>
+    <button class="nav-btn" data-page="spinner">
+        Крутилка
+    </button>
 
-<button class="nav" onclick="openPage('inventory',this)">
-Инвентарь
-</button>
+    <button class="nav-btn" data-page="inventory">
+        Инвентарь
+    </button>
 
-<button class="nav" onclick="openPage('market',this)">
-Магазин
-</button>
+    <button class="nav-btn" data-page="market">
+        Магазин
+    </button>
 
-<button class="nav" onclick="openPage('top',this)">
-ТОП
-</button>
+    <button class="nav-btn" data-page="promo">
+        Промокоды
+    </button>
 
-<button class="nav" onclick="openPage('promocodes',this)">
-Промокоды
-</button>
+    <button class="nav-btn" data-page="reports">
+        Репорты
+    </button>
 
-<button class="nav" onclick="openPage('reports',this)">
-Репорты
-</button>
+    <button class="nav-btn" data-page="messages">
+        Сообщения
+    </button>
 
-<button class="nav" id="adminButton"
-        onclick="openPage('admin',this)">
-Админка
-</button>
+    <button class="nav-btn" data-page="punishments">
+        Наказания
+    </button>
 
-<button class="nav" onclick="logout()">
-Выйти
-</button>
+    <button class="nav-btn hidden" id="adminNav" data-page="admin">
+        Админка
+    </button>
+
+    <button class="nav-btn" onclick="logout()">
+        Выйти
+    </button>
 
 </aside>
 
 
-<main class="main">
-
+<main class="content">
 
 <!-- HOME -->
-<div id="page-home" class="page active">
+<section class="page active" id="page-home">
 
-<div class="page-title">
-Главная
-</div>
+    <div class="page-title">Главная</div>
+    <div class="page-subtitle">
+        Добро пожаловать в D0NTYYY License Plates
+    </div>
 
-<div class="page-desc">
-Добро пожаловать в d0ntyyy License Plates
-</div>
+    <div class="grid">
 
-<div class="stats">
+        <div class="card">
+            <div class="card-title">Баланс</div>
+            <div class="balance" id="homeBalance">0 ₽</div>
+        </div>
 
-<div class="stat">
-<div class="stat-name">Баланс</div>
-<div class="stat-value" id="homeBalance">0 ₽</div>
-</div>
+        <div class="card">
+            <div class="card-title">Номерных знаков</div>
+            <div class="balance" id="homePlates">0</div>
+        </div>
 
-<div class="stat">
-<div class="stat-name">Номеров</div>
-<div class="stat-value" id="homePlates">0</div>
-</div>
+        <div class="card">
+            <div class="card-title">Профиль</div>
+            <div class="muted" id="homeNick"></div>
+        </div>
 
-<div class="stat">
-<div class="stat-name">Роль</div>
-<div class="stat-value" id="homeRole">Игрок</div>
-</div>
+    </div>
 
-</div>
-
-<div class="card">
-<h2>Последнее сообщение</h2>
-<br>
-<div id="latestMessage" class="message">
-<b>Система</b>
-<span>Добро пожаловать!</span>
-</div>
-</div>
-
-</div>
+</section>
 
 
 <!-- SPINNER -->
-<div id="page-spinner" class="page">
+<section class="page" id="page-spinner">
 
-<div class="page-title">
-Крутилка
-</div>
+    <div class="page-title">Крутилка</div>
 
-<div class="page-desc">
-Прокрути буквы, цифры и регион
-</div>
+    <div class="page-subtitle">
+        Собери свой номерной знак
+    </div>
 
-<div class="card">
+    <div class="spinner-box">
 
-<div class="wheel-wrap">
+        <div class="plate-preview">
 
-<div class="plate" id="currentPlate">
+            <div class="plate">
 
-<div class="plate-number" id="plateNumber">
-О00ОО
-</div>
+                <div class="plate-main" id="spinLetters">
+                    О000ОО
+                </div>
 
-<div class="plate-bottom">
+                <div class="region">
+                    <span id="spinRegion">000</span>
+                    <small>RUS 🇷🇺</small>
+                </div>
 
-<div>
-<span class="rus">RUS</span>
-<span class="flag">🇷🇺</span>
-</div>
+            </div>
 
-<div class="region" id="plateRegion">
-000
-</div>
+        </div>
 
-</div>
+        <div class="rarity" id="rarityText">
+            Обычный номер
+        </div>
 
-</div>
+        <div class="spin-buttons">
 
-</div>
+            <button onclick="spinLetters()">
+                Крутить буквы
+            </button>
 
-<div class="rare-text" id="rareText">
-Готово к прокрутке
-</div>
+            <button onclick="spinDigits()">
+                Крутить цифры
+            </button>
 
-<div class="wheel-buttons">
+            <button onclick="spinRegion()">
+                Крутить регион
+            </button>
 
-<button onclick="spinLetters()">
-Крутить буквы
-</button>
+        </div>
 
-<button onclick="spinDigits()">
-Крутить цифры
-</button>
+        <button class="spin-main" onclick="spinAll()">
+            ПРОКРУТИТЬ НОМЕР
+        </button>
 
-<button onclick="spinRegion()">
-Крутить регион
-</button>
+    </div>
 
-<button class="btn-main" onclick="spinAll()">
-ПОЛУЧИТЬ НОМЕР
-</button>
-
-</div>
-
-</div>
-
-</div>
+</section>
 
 
 <!-- INVENTORY -->
-<div id="page-inventory" class="page">
+<section class="page" id="page-inventory">
 
-<div class="page-title">
-Инвентарь
-</div>
+    <div class="page-title">Инвентарь</div>
 
-<div class="page-desc">
-Ваши номерные знаки
-</div>
+    <div class="page-subtitle">
+        Ваши номерные знаки
+    </div>
 
-<div id="inventoryList" class="plates-grid"></div>
+    <div class="list" id="inventoryList"></div>
 
-</div>
+</section>
 
 
 <!-- MARKET -->
-<div id="page-market" class="page">
+<section class="page" id="page-market">
 
-<div class="page-title">
-Магазин
-</div>
+    <div class="page-title">Магазин</div>
 
-<div class="page-desc">
-Покупка и продажа номерных знаков
-</div>
+    <div class="page-subtitle">
+        Продажа и покупка номерных знаков
+    </div>
 
-<div class="card">
+    <div class="grid" id="marketList"></div>
 
-<div class="row">
-
-<input id="marketNumber"
-       class="field"
-       placeholder="Е777КХ">
-
-<input id="marketRegion"
-       class="field"
-       placeholder="777">
-
-<input id="marketPrice"
-       class="field"
-       type="number"
-       placeholder="Цена">
-
-</div>
-
-<button class="btn btn-main" onclick="createMarketListing()">
-Выставить номер
-</button>
-
-</div>
-
-<div id="marketList" class="market-grid"></div>
-
-</div>
+</section>
 
 
-<!-- TOP -->
-<div id="page-top" class="page">
+<!-- PROMO -->
+<section class="page" id="page-promo">
 
-<div class="page-title">
-ТОП игроков
-</div>
+    <div class="page-title">Промокоды</div>
 
-<div class="page-desc">
-Таблица игроков
-</div>
+    <div class="page-subtitle">
+        Введите промокод
+    </div>
 
-<div class="card">
+    <div class="form">
 
-<table class="admin-table">
+        <input id="promoInput" placeholder="Промокод">
 
-<thead>
-<tr>
-<th>#</th>
-<th>Игрок</th>
-<th>Номеров</th>
-<th>Баланс</th>
-</tr>
-</thead>
+        <button onclick="activatePromo()">
+            Активировать
+        </button>
 
-<tbody id="topList"></tbody>
+    </div>
 
-</table>
-
-</div>
-
-</div>
-
-
-<!-- PROMOCODES -->
-<div id="page-promocodes" class="page">
-
-<div class="page-title">
-Промокоды
-</div>
-
-<div class="page-desc">
-Введите промокод
-</div>
-
-<div class="card">
-
-<input id="promoInput"
-       class="field"
-       placeholder="Промокод">
-
-<button class="btn btn-main"
-        onclick="activatePromo()">
-Активировать
-</button>
-
-<div id="promoResult"></div>
-
-</div>
-
-</div>
+</section>
 
 
 <!-- REPORTS -->
-<div id="page-reports" class="page">
+<section class="page" id="page-reports">
 
-<div class="page-title">
-Репорт
-</div>
+    <div class="page-title">Репорт</div>
 
-<div class="page-desc">
-Сообщение для администрации игры
-</div>
+    <div class="page-subtitle">
+        Напишите сообщение для администрации
+    </div>
 
-<div class="card">
+    <div class="form">
 
-<textarea id="reportText"
-          class="field"
-          placeholder="Введите текст репорта..."></textarea>
+        <textarea id="reportText"
+        placeholder="Опишите проблему..."></textarea>
 
-<button class="btn btn-main"
-        onclick="sendReport()">
-Отправить репорт
-</button>
+        <button onclick="sendReport()">
+            Отправить репорт
+        </button>
 
-<div id="reportResult"></div>
+    </div>
 
-</div>
+</section>
 
-</div>
+
+<!-- MESSAGES -->
+<section class="page" id="page-messages">
+
+    <div class="page-title">Сообщения</div>
+
+    <div class="list" id="messagesList"></div>
+
+</section>
+
+
+<!-- PUNISHMENTS -->
+<section class="page" id="page-punishments">
+
+    <div class="page-title">Наказания</div>
+
+    <div class="list" id="punishmentsList"></div>
+
+</section>
 
 
 <!-- ADMIN -->
-<div id="page-admin" class="page">
+<section class="page" id="page-admin">
 
-<div class="page-title">
-Админ-панель
-</div>
+    <div class="page-title">Админ-панель</div>
 
-<div class="page-desc">
-Управление проектом
-</div>
+    <div class="page-subtitle">
+        Управление проектом
+    </div>
 
-<div class="admin-tabs">
+    <div class="admin-grid">
 
-<button onclick="adminPage('users',this)">
-Пользователи
-</button>
+        <div class="admin-menu">
 
-<button onclick="adminPage('bans',this)">
-Баны
-</button>
+            <button onclick="adminUsers()">
+                Пользователи
+            </button>
 
-<button onclick="adminPage('promos',this)">
-Промокоды
-</button>
+            <button onclick="adminTags()">
+                Теги
+            </button>
 
-<button onclick="adminPage('messages',this)">
-Сообщения
-</button>
+            <button onclick="adminPromo()">
+                Промокоды
+            </button>
 
-<button onclick="adminPage('reports',this)">
-Репорты
-</button>
+            <button onclick="adminPunishment()">
+                Наказания
+            </button>
 
-<button onclick="adminPage('tags',this)">
-Теги
-</button>
+            <button onclick="adminMessage()">
+                Сообщения
+            </button>
 
-</div>
+            <button onclick="adminReports()">
+                Репорты
+            </button>
 
+        </div>
 
-<div id="admin-users" class="admin-section">
+        <div class="admin-area" id="adminArea">
 
-<div class="card">
+            <h2>Админ-панель</h2>
 
-<h2>Выдача админки</h2>
-<br>
+            <p class="muted" style="margin-top:10px">
+                Выберите раздел слева.
+            </p>
 
-<div id="adminUsersList"></div>
+        </div>
 
-</div>
+    </div>
 
-</div>
-
-
-<div id="admin-bans" class="admin-section hidden">
-
-<div class="card">
-
-<h2>Баны</h2>
-<br>
-
-<input id="banNick"
-       class="field"
-       placeholder="Ник игрока">
-
-<input id="banReason"
-       class="field"
-       placeholder="Причина">
-
-<button class="btn btn-main"
-        onclick="banUser()">
-Забанить
-</button>
-
-<br><br>
-
-<div id="banList"></div>
-
-</div>
-
-</div>
-
-
-<div id="admin-promos" class="admin-section hidden">
-
-<div class="card">
-
-<h2>Создание промокода</h2>
-<br>
-
-<input id="newPromo"
-       class="field"
-       placeholder="Любой промокод">
-
-<input id="promoAmount"
-       class="field"
-       type="number"
-       placeholder="Сумма">
-
-<button class="btn btn-main"
-        onclick="createPromo()">
-Создать промокод
-</button>
-
-<br><br>
-
-<div id="adminPromoList"></div>
-
-</div>
-
-</div>
-
-
-<div id="admin-messages" class="admin-section hidden">
-
-<div class="card">
-
-<h2>Сообщение игроку</h2>
-<br>
-
-<input id="messageNick"
-       class="field"
-       placeholder="Ник игрока">
-
-<input id="messageTitle"
-       class="field"
-       placeholder="Заголовок">
-
-<textarea id="messageText"
-          class="field"
-          placeholder="Текст сообщения"></textarea>
-
-<button class="btn btn-main"
-        onclick="sendSystemMessage()">
-Отправить
-</button>
-
-</div>
-
-</div>
-
-
-<div id="admin-reports" class="admin-section hidden">
-
-<div class="card">
-
-<h2>Репорты игроков</h2>
-<br>
-
-<div id="adminReports"></div>
-
-</div>
-
-</div>
-
-
-<div id="admin-tags" class="admin-section hidden">
-
-<div class="card">
-
-<h2>Теги</h2>
-<br>
-
-<input id="tagNick"
-       class="field"
-       placeholder="Ник игрока">
-
-<input id="tagName"
-       class="field"
-       placeholder="Название тега">
-
-<input id="tagColor"
-       class="field"
-       type="color"
-       value="#ff3030">
-
-<button class="btn btn-main"
-        onclick="giveTag()">
-Выдать тег
-</button>
-
-<br><br>
-
-<div id="tagList"></div>
-
-</div>
-
-</div>
-
-</div>
-
+</section>
 
 </main>
 </div>
 </section>
 
 
+<div id="toast"></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
 /* =========================================================
-   CONFIG
+   SUPABASE
 ========================================================= */
 
 const SUPABASE_URL =
-"https://wehiexatkhqbfcelvjnr.supabase.co";
+    "https://wehiexatkhqbfcelvjnr.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_JR5bFKt15zPnzAzeripx8w___vtFpW1";
+    "sb_publishable_JR5bFKt15zPnzAzeripx8w___vtFpW1";
 
-
-/*
-   ВАЖНО:
-   Этот вариант НЕ обращается к license_state.
-   Данные проекта хранятся локально в браузере,
-   поэтому ошибка schema cache для license_state
-   больше не появляется.
-*/
-
-
-const OWNER_NICK = "d0ntyyy";
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
 /* =========================================================
-   LOCAL DATABASE
+   OWNER
 ========================================================= */
 
-let DB = JSON.parse(
-    localStorage.getItem("DONTYYY_LICENSE_DB") || "null"
-);
+const OWNER_NICK = "d0ntyyy";
+const OWNER_PASSWORD = "Semen20151";
 
-if(!DB){
 
-    DB = {
-        users: [],
-        plates: [],
-        market: [],
-        reports: [],
-        messages: [],
-        promocodes: [],
-        punishments: [],
-        tags: [],
-        session: null
-    };
-
-    localStorage.setItem(
-        "DONTYYY_LICENSE_DB",
-        JSON.stringify(DB)
-    );
-}
+let currentUser = null;
+let currentSpin = {
+    letters:"О000ОО",
+    region:"000"
+};
 
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function saveDB(){
+function normNick(value){
 
-    localStorage.setItem(
-        "DONTYYY_LICENSE_DB",
-        JSON.stringify(DB)
-    );
+    return String(value || "")
+        .trim()
+        .toLowerCase();
+
 }
 
 
-function id(){
+function toast(text){
 
-    return Date.now().toString(36) +
-           Math.random().toString(36).slice(2);
+    const box = document.getElementById("toast");
+
+    const item = document.createElement("div");
+
+    item.className = "toast";
+
+    item.textContent = text;
+
+    box.appendChild(item);
+
+    setTimeout(()=>{
+        item.remove();
+    },3500);
+
 }
 
 
-function getUser(){
+function authError(text){
 
-    if(!DB.session) return null;
+    document.getElementById("authStatus").textContent = text;
 
-    return DB.users.find(
-        u => u.id === DB.session
-    ) || null;
 }
 
 
 function isOwner(){
 
-    const user = getUser();
+    return currentUser &&
+           normNick(currentUser.nickname) === OWNER_NICK;
 
-    return user &&
-           user.nick.toLowerCase() === OWNER_NICK;
-}
-
-
-function money(n){
-
-    return Number(n || 0).toLocaleString("ru-RU") + " ₽";
 }
 
 
 /* =========================================================
-   AUTH UI
+   GENERIC DB
 ========================================================= */
 
-function showRegister(){
+async function dbSelect(table, params=""){
 
-    document.getElementById("loginForm")
-        .classList.add("hidden");
+    const url =
+        SUPABASE_URL +
+        "/rest/v1/" +
+        table +
+        params;
 
-    document.getElementById("registerForm")
-        .classList.remove("hidden");
+    const response = await fetch(url,{
+        headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":"Bearer " + SUPABASE_KEY
+        }
+    });
+
+    const text = await response.text();
+
+    if(!response.ok){
+
+        throw new Error(
+            table + ": " + text
+        );
+
+    }
+
+    return text ? JSON.parse(text) : [];
+
 }
 
 
-function showLogin(){
+async function dbInsert(table,data){
 
-    document.getElementById("registerForm")
-        .classList.add("hidden");
+    const response = await fetch(
+        SUPABASE_URL + "/rest/v1/" + table,
+        {
+            method:"POST",
+            headers:{
+                "apikey":SUPABASE_KEY,
+                "Authorization":"Bearer " + SUPABASE_KEY,
+                "Content-Type":"application/json",
+                "Prefer":"return=representation"
+            },
+            body:JSON.stringify(data)
+        }
+    );
 
-    document.getElementById("loginForm")
-        .classList.remove("hidden");
+    const text = await response.text();
+
+    if(!response.ok){
+
+        throw new Error(
+            table + ": " + text
+        );
+
+    }
+
+    return text ? JSON.parse(text) : [];
+
+}
+
+
+async function dbPatch(table,filter,data){
+
+    const response = await fetch(
+        SUPABASE_URL +
+        "/rest/v1/" +
+        table +
+        filter,
+        {
+            method:"PATCH",
+            headers:{
+                "apikey":SUPABASE_KEY,
+                "Authorization":"Bearer " + SUPABASE_KEY,
+                "Content-Type":"application/json",
+                "Prefer":"return=representation"
+            },
+            body:JSON.stringify(data)
+        }
+    );
+
+    const text = await response.text();
+
+    if(!response.ok){
+
+        throw new Error(
+            table + ": " + text
+        );
+
+    }
+
+    return text ? JSON.parse(text) : [];
+
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+async function login(){
+
+    const nickname =
+        normNick(
+            document.getElementById("loginNick").value
+        );
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    if(!nickname || !password){
+
+        authError("Введите никнейм и пароль.");
+
+        return;
+
+    }
+
+
+    authError("");
+
+
+    /*
+       ВЛАДЕЛЕЦ.
+
+       Это также позволяет войти владельцу даже если
+       старая запись пользователя была удалена.
+    */
+
+    if(
+        nickname === OWNER_NICK &&
+        password === OWNER_PASSWORD
+    ){
+
+        try{
+
+            const users =
+                await dbSelect(
+                    "users",
+                    "?select=*&nickname=eq.d0ntyyy&limit=1"
+                );
+
+            if(users.length){
+
+                currentUser = users[0];
+
+            }else{
+
+                currentUser = {
+                    id:"owner-local",
+                    nickname:"d0ntyyy",
+                    balance:100000,
+                    is_admin:true,
+                    is_owner:true
+                };
+
+            }
+
+        }catch(error){
+
+            currentUser = {
+                id:"owner-local",
+                nickname:"d0ntyyy",
+                balance:100000,
+                is_admin:true,
+                is_owner:true
+            };
+
+        }
+
+        localStorage.setItem(
+            "license_current_user",
+            JSON.stringify(currentUser)
+        );
+
+        openApp();
+
+        toast("Вы вошли как владелец.");
+
+        return;
+
+    }
+
+
+    /*
+       Обычные пользователи.
+    */
+
+    try{
+
+        const users =
+            await dbSelect(
+                "users",
+                "?select=*&nickname=eq." +
+                encodeURIComponent(nickname) +
+                "&limit=1"
+            );
+
+
+        if(!users.length){
+
+            authError(
+                "Неверный никнейм или пароль."
+            );
+
+            return;
+
+        }
+
+
+        const user = users[0];
+
+
+        /*
+          Поддерживаются оба варианта названия поля:
+          password и password_hash.
+        */
+
+        const dbPassword =
+            user.password ??
+            user.password_hash ??
+            user.pass ??
+            "";
+
+
+        if(String(dbPassword) !== String(password)){
+
+            authError(
+                "Неверный никнейм или пароль."
+            );
+
+            return;
+
+        }
+
+
+        currentUser = user;
+
+        localStorage.setItem(
+            "license_current_user",
+            JSON.stringify(user)
+        );
+
+        openApp();
+
+    }catch(error){
+
+        console.error(error);
+
+        authError(
+            "Ошибка подключения к базе данных."
+        );
+
+        toast(error.message);
+
+    }
+
 }
 
 
@@ -1194,160 +1195,109 @@ function showLogin(){
    REGISTER
 ========================================================= */
 
-function register(){
+async function register(){
 
-    const nick =
-        document.getElementById("regNick")
-        .value.trim();
-
-    const password =
-        document.getElementById("regPassword")
-        .value;
-
-    const error =
-        document.getElementById("registerError");
-
-    error.textContent = "";
-
-    if(nick.length < 3){
-
-        error.textContent =
-            "Никнейм должен содержать минимум 3 символа";
-
-        return;
-    }
-
-    if(password.length < 4){
-
-        error.textContent =
-            "Пароль должен содержать минимум 4 символа";
-
-        return;
-    }
-
-    if(DB.users.some(
-        u => u.nick.toLowerCase() === nick.toLowerCase()
-    )){
-
-        error.textContent =
-            "Такой никнейм уже зарегистрирован";
-
-        return;
-    }
-
-
-    const user = {
-
-        id:id(),
-
-        nick:nick,
-
-        password:password,
-
-        balance:100000,
-
-        role:
-            nick.toLowerCase() === OWNER_NICK
-            ? "owner"
-            : "player",
-
-        banned:false,
-
-        banReason:"",
-
-        tags:[],
-
-        createdAt:new Date().toISOString()
-
-    };
-
-
-    DB.users.push(user);
-
-    /*
-       Стартовый номер.
-       Его нельзя купить в магазине.
-    */
-
-    DB.plates.push({
-
-        id:id(),
-
-        userId:user.id,
-
-        number:"О00ОО",
-
-        region:"000",
-
-        rare:true,
-
-        starter:true,
-
-        createdAt:new Date().toISOString()
-
-    });
-
-
-    DB.session = user.id;
-
-    saveDB();
-
-    openApp();
-
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-function login(){
-
-    const nick =
-        document.getElementById("loginNick")
-        .value.trim();
+    const nickname =
+        normNick(
+            document.getElementById("loginNick").value
+        );
 
     const password =
-        document.getElementById("loginPassword")
-        .value;
-
-    const error =
-        document.getElementById("loginError");
-
-    error.textContent = "";
+        document.getElementById("loginPassword").value;
 
 
-    const user = DB.users.find(
-        u =>
-            u.nick.toLowerCase() === nick.toLowerCase() &&
-            u.password === password
-    );
+    if(!nickname || !password){
 
-
-    if(!user){
-
-        error.textContent =
-            "Неверный никнейм или пароль.";
+        authError(
+            "Введите никнейм и пароль."
+        );
 
         return;
+
     }
 
 
-    if(user.banned){
+    if(nickname.length < 3){
 
-        error.textContent =
-            "Вы заблокированы: " +
-            (user.banReason || "без причины");
+        authError(
+            "Никнейм должен содержать минимум 3 символа."
+        );
 
         return;
+
     }
 
 
-    DB.session = user.id;
+    try{
 
-    saveDB();
+        const exists =
+            await dbSelect(
+                "users",
+                "?select=id&nickname=eq." +
+                encodeURIComponent(nickname) +
+                "&limit=1"
+            );
 
-    openApp();
+
+        if(exists.length){
+
+            authError(
+                "Такой никнейм уже существует."
+            );
+
+            return;
+
+        }
+
+
+        const result =
+            await dbInsert(
+                "users",
+                {
+                    nickname:nickname,
+                    password:password,
+                    balance:100000,
+                    is_admin:false,
+                    is_owner:false
+                }
+            );
+
+
+        if(!result.length){
+
+            throw new Error(
+                "Пользователь не был создан."
+            );
+
+        }
+
+
+        currentUser = result[0];
+
+
+        localStorage.setItem(
+            "license_current_user",
+            JSON.stringify(currentUser)
+        );
+
+
+        openApp();
+
+        toast(
+            "Регистрация успешно завершена."
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        authError(
+            "Ошибка регистрации: " +
+            error.message
+        );
+
+    }
 
 }
 
@@ -1358,11 +1308,6 @@ function login(){
 
 function openApp(){
 
-    const user = getUser();
-
-    if(!user) return;
-
-
     document.getElementById("auth")
         .classList.add("hidden");
 
@@ -1370,27 +1315,94 @@ function openApp(){
         .classList.remove("hidden");
 
 
-    document.getElementById("topNick")
-        .textContent = user.nick;
+    document.getElementById("headerNick")
+        .textContent =
+        currentUser.nickname || "Игрок";
 
 
-    document.getElementById("adminButton")
-        .style.display =
-            isOwner() ? "block" : "none";
+    updateBalance();
 
 
-    refreshAll();
+    document.getElementById("homeNick")
+        .textContent =
+        currentUser.nickname || "Игрок";
+
+
+    if(
+        isOwner() ||
+        currentUser.is_admin === true ||
+        currentUser.is_admin === "true"
+    ){
+
+        document
+            .getElementById("adminNav")
+            .classList.remove("hidden");
+
+    }
+
+
+    loadAll();
+
+
+    /*
+       Если это новый вход и инвентарь пустой,
+       сначала показываем крутилку.
+    */
+
+    if(!sessionStorage.getItem("spinner_seen")){
+
+        sessionStorage.setItem(
+            "spinner_seen",
+            "1"
+        );
+
+        showPage("spinner");
+
+    }else{
+
+        showPage("home");
+
+    }
 
 }
 
 
 function logout(){
 
-    DB.session = null;
+    currentUser = null;
 
-    saveDB();
+    localStorage.removeItem(
+        "license_current_user"
+    );
 
-    location.reload();
+    sessionStorage.removeItem(
+        "spinner_seen"
+    );
+
+    document.getElementById("app")
+        .classList.add("hidden");
+
+    document.getElementById("auth")
+        .classList.remove("hidden");
+
+    document.getElementById("loginPassword")
+        .value = "";
+
+}
+
+
+function updateBalance(){
+
+    const balance =
+        Number(currentUser.balance || 0);
+
+    document.getElementById("headerBalance")
+        .textContent =
+        balance.toLocaleString("ru-RU") + " ₽";
+
+    document.getElementById("homeBalance")
+        .textContent =
+        balance.toLocaleString("ru-RU") + " ₽";
 
 }
 
@@ -1399,38 +1411,77 @@ function logout(){
    NAVIGATION
 ========================================================= */
 
-function openPage(page,button){
+document.querySelectorAll(".nav-btn")
+.forEach(button=>{
 
-    document.querySelectorAll(".page")
-        .forEach(p =>
-            p.classList.remove("active")
+    button.addEventListener("click",()=>{
+
+        if(!button.dataset.page)
+            return;
+
+        showPage(button.dataset.page);
+
+    });
+
+});
+
+
+function showPage(page){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(p=>{
+            p.classList.remove("active");
+        });
+
+
+    const target =
+        document.getElementById(
+            "page-" + page
         );
 
-    document.getElementById(
-        "page-" + page
-    ).classList.add("active");
+    if(target){
+
+        target.classList.add("active");
+
+    }
 
 
-    document.querySelectorAll(".nav")
-        .forEach(n =>
-            n.classList.remove("active")
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(b=>{
+            b.classList.remove("active");
+        });
+
+
+    const nav =
+        document.querySelector(
+            '.nav-btn[data-page="' +
+            page +
+            '"]'
         );
 
-    if(button)
-        button.classList.add("active");
+    if(nav)
+        nav.classList.add("active");
 
+
+    /*
+       ВАЖНО:
+       при открытии инвентаря больше НЕ кидаем
+       пользователя обратно в крутилку.
+    */
 
     if(page === "inventory")
-        renderInventory();
+        loadInventory();
 
     if(page === "market")
-        renderMarket();
+        loadMarket();
 
-    if(page === "top")
-        renderTop();
+    if(page === "messages")
+        loadMessages();
 
-    if(page === "admin")
-        renderAdmin();
+    if(page === "punishments")
+        loadPunishments();
 
 }
 
@@ -1440,194 +1491,289 @@ function openPage(page,button){
 ========================================================= */
 
 const LETTERS =
-"ЕКАТМОРСУВНХ".split("");
+    "АВЕКМНОРСТУХ";
 
 const DIGITS =
-"0123456789".split("");
-
-const REGIONS = [
-
-"001","002","003","004","005",
-"050","051","052","054","055",
-"056","057","058","059","063",
-"064","065","066","069","071",
-"072","073","074","075","077",
-"078","079","080","082","084",
-"086","087","089","090","092",
-"093","094","095","096","097",
-"098","099","102","116","117",
-"121","122","123","124","125",
-"126","127","134","136","138",
-"142","147","150","152","154",
-"155","156","159","161","163",
-"164","173","174","177","178",
-"180","181","186","190","193",
-"196","197","198","199","716",
-"750","752","754","761","763",
-"774","777","790","797","799"
-
-];
+    "0123456789";
 
 
-function random(arr){
+function randomLetter(){
 
-    return arr[
-        Math.floor(Math.random()*arr.length)
+    return LETTERS[
+        Math.floor(
+            Math.random() *
+            LETTERS.length
+        )
     ];
+
+}
+
+
+function randomDigit(){
+
+    return DIGITS[
+        Math.floor(
+            Math.random() *
+            DIGITS.length
+        )
+    ];
+
+}
+
+
+function randomLetters(){
+
+    return (
+        randomLetter() +
+        randomDigit() +
+        randomDigit() +
+        randomLetter() +
+        randomLetter()
+    );
+
+}
+
+
+function randomRegion(){
+
+    return String(
+        Math.floor(
+            Math.random() * 1000
+        )
+    ).padStart(3,"0");
+
 }
 
 
 function spinLetters(){
 
-    const a=random(LETTERS);
-    const b=random(LETTERS);
-    const c=random(LETTERS);
+    currentSpin.letters =
+        randomLetters();
 
-    document.getElementById("plateNumber")
-        .textContent =
-        a + random(DIGITS) + random(DIGITS) +
-        b + c;
-
-    document.getElementById("rareText")
-        .textContent =
-        "Буквы прокручены";
+    renderSpin();
 
 }
 
 
 function spinDigits(){
 
-    const current =
-        document.getElementById("plateNumber")
-        .textContent;
-
     const letters =
-        current.replace(/[0-9]/g,"");
+        currentSpin.letters;
 
-    document.getElementById("plateNumber")
-        .textContent =
-        random(LETTERS) +
-        random(DIGITS) +
-        random(DIGITS) +
-        random(LETTERS) +
-        random(LETTERS);
+    currentSpin.letters =
+        letters[0] +
+        randomDigit() +
+        randomDigit() +
+        letters[3] +
+        letters[4];
 
-    document.getElementById("rareText")
-        .textContent =
-        "Цифры прокручены";
+    renderSpin();
 
 }
 
 
 function spinRegion(){
 
-    document.getElementById("plateRegion")
-        .textContent = random(REGIONS);
+    currentSpin.region =
+        randomRegion();
 
-    document.getElementById("rareText")
-        .textContent =
-        "Регион прокручен";
+    renderSpin();
 
 }
 
 
 function spinAll(){
 
+    currentSpin.letters =
+        randomLetters();
+
+    currentSpin.region =
+        randomRegion();
+
+    renderSpin();
+
+}
+
+
+function renderSpin(){
+
+    document.getElementById(
+        "spinLetters"
+    ).textContent =
+        currentSpin.letters;
+
+
+    document.getElementById(
+        "spinRegion"
+    ).textContent =
+        currentSpin.region;
+
+
+    const rarity =
+        calculateRarity(
+            currentSpin.letters,
+            currentSpin.region
+        );
+
+
+    document.getElementById(
+        "rarityText"
+    ).textContent =
+        rarity.name;
+
+}
+
+
+function calculateRarity(letters,region){
+
     /*
-       Маленький шанс на редкий номер.
-       Обычный номер выпадает чаще.
+       Редкие номера имеют маленький шанс.
+
+       Номер 000 не продаётся.
+       Специальные комбинации получают редкость.
     */
 
-    const rare =
-        Math.random() < 0.025;
+    const digits =
+        letters.match(/[0-9]/g) || [];
 
 
-    let number;
+    if(
+        letters === "О000ОО" &&
+        region === "000"
+    ){
 
-    if(rare){
-
-        const rareNumbers = [
-
-            "Е777КХ",
-            "А001АА",
-            "М777ММ",
-            "К888КК",
-            "О777ОО",
-            "Х999ХХ"
-
-        ];
-
-        number = random(rareNumbers);
-
-    }else{
-
-        number =
-            random(LETTERS) +
-            random(DIGITS) +
-            random(DIGITS) +
-            random(LETTERS) +
-            random(LETTERS);
+        return {
+            name:"Служебный номер",
+            rare:true,
+            forbidden:true
+        };
 
     }
 
 
-    const region =
-        random(REGIONS);
+    if(
+        digits.length === 2 &&
+        digits[0] === digits[1]
+    ){
+
+        return {
+            name:"Редкий номер",
+            rare:true
+        };
+
+    }
 
 
-    document.getElementById("plateNumber")
-        .textContent = number;
+    if(
+        region === "777" ||
+        region === "001" ||
+        region === "007" ||
+        region === "999"
+    ){
 
-    document.getElementById("plateRegion")
-        .textContent = region;
+        return {
+            name:"Редкий номер",
+            rare:true
+        };
 
-
-    const plate =
-        document.getElementById("currentPlate");
-
-    plate.classList.toggle("rare",rare);
-
-
-    document.getElementById("rareText")
-        .textContent =
-        rare
-        ? "★ РЕДКИЙ НОМЕР ★"
-        : "Номер получен";
+    }
 
 
     /*
-       Важно:
-       номер сохраняется только после прокрутки.
-       Стартовый О00ОО 000 не покупается.
+       Очень маленький шанс суперредкости.
     */
 
-    const user = getUser();
+    if(Math.random() < 0.003){
 
-    if(!user) return;
+        return {
+            name:"Легендарный номер",
+            rare:true
+        };
 
-
-    DB.plates.push({
-
-        id:id(),
-
-        userId:user.id,
-
-        number:number,
-
-        region:region,
-
-        rare:rare,
-
-        starter:false,
-
-        createdAt:new Date().toISOString()
-
-    });
+    }
 
 
-    saveDB();
+    return {
+        name:"Обычный номер",
+        rare:false
+    };
 
-    refreshAll();
+}
+
+
+/* =========================================================
+   SAVE SPIN
+========================================================= */
+
+async function saveSpin(){
+
+    const rarity =
+        calculateRarity(
+            currentSpin.letters,
+            currentSpin.region
+        );
+
+
+    if(rarity.forbidden){
+
+        toast(
+            "Этот номер нельзя получить."
+        );
+
+        return;
+
+    }
+
+
+    const plate = {
+
+        user_id:currentUser.id,
+
+        plate:
+            currentSpin.letters,
+
+        region:
+            currentSpin.region,
+
+        rarity:
+            rarity.name,
+
+        price:
+            rarity.rare
+            ? 0
+            : 1000
+
+    };
+
+
+    try{
+
+        await dbInsert(
+            "plates",
+            plate
+        );
+
+        toast(
+            "Номер добавлен в инвентарь."
+        );
+
+        loadInventory();
+
+    }catch(error){
+
+        /*
+          Если таблица ещё не настроена,
+          всё равно не ломаем интерфейс.
+        */
+
+        console.error(error);
+
+        toast(
+            "Номер прокручен. База вернула: " +
+            error.message
+        );
+
+    }
 
 }
 
@@ -1636,57 +1782,80 @@ function spinAll(){
    INVENTORY
 ========================================================= */
 
-function renderInventory(){
-
-    const user = getUser();
+async function loadInventory(){
 
     const list =
-        document.getElementById("inventoryList");
-
-
-    const plates =
-        DB.plates.filter(
-            p => p.userId === user.id
+        document.getElementById(
+            "inventoryList"
         );
 
+    list.innerHTML =
+        '<div class="muted">Загрузка...</div>';
 
-    if(!plates.length){
+
+    try{
+
+        const plates =
+            await dbSelect(
+                "plates",
+                "?select=*&user_id=eq." +
+                encodeURIComponent(currentUser.id) +
+                "&order=id.desc"
+            );
+
+
+        document.getElementById(
+            "homePlates"
+        ).textContent =
+        plates.length;
+
+
+        if(!plates.length){
+
+            list.innerHTML =
+                '<div class="muted">Инвентарь пуст.</div>';
+
+            return;
+
+        }
+
 
         list.innerHTML =
-            '<div class="empty">Инвентарь пуст</div>';
+            plates.map(p=>`
 
-        return;
+                <div class="list-item">
+
+                    <div>
+
+                        <b>
+                            ${escapeHTML(p.plate || "000")}
+                        </b>
+
+                        <span class="muted">
+                            · ${escapeHTML(p.region || "000")}
+                        </span>
+
+                        <div class="muted">
+                            ${escapeHTML(p.rarity || "Обычный номер")}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `).join("");
+
+
+    }catch(error){
+
+        list.innerHTML =
+            `<div class="muted">
+                Не удалось загрузить инвентарь.
+             </div>`;
+
+        console.error(error);
+
     }
-
-
-    list.innerHTML =
-        plates.map(p => `
-
-        <div class="inventory-plate">
-
-            <div class="inventory-number">
-                ${p.number}
-            </div>
-
-            <div class="inventory-region">
-                🇷🇺 RUS · ${p.region}
-            </div>
-
-            ${
-                p.rare
-                ? '<div class="rare-text">★ РЕДКИЙ ★</div>'
-                : ''
-            }
-
-            ${
-                p.starter
-                ? '<div class="rare-text">СТАРТОВЫЙ</div>'
-                : ''
-            }
-
-        </div>
-
-    `).join("");
 
 }
 
@@ -1695,182 +1864,88 @@ function renderInventory(){
    MARKET
 ========================================================= */
 
-function createMarketListing(){
-
-    const user = getUser();
-
-    const number =
-        document.getElementById("marketNumber")
-        .value.trim().toUpperCase();
-
-    const region =
-        document.getElementById("marketRegion")
-        .value.trim();
-
-    const price =
-        Number(
-            document.getElementById("marketPrice")
-            .value
-        );
-
-
-    if(!number || !region || !price){
-
-        alert("Заполни все поля");
-
-        return;
-    }
-
-
-    if(number === "О00ОО" && region === "000"){
-
-        alert("Стартовый номер нельзя продавать.");
-
-        return;
-    }
-
-
-    DB.market.push({
-
-        id:id(),
-
-        sellerId:user.id,
-
-        seller:user.nick,
-
-        number:number,
-
-        region:region,
-
-        price:price
-
-    });
-
-
-    saveDB();
-
-    renderMarket();
-
-}
-
-
-function renderMarket(){
+async function loadMarket(){
 
     const list =
-        document.getElementById("marketList");
-
-
-    if(!DB.market.length){
-
-        list.innerHTML =
-            '<div class="empty">В магазине пока ничего нет</div>';
-
-        return;
-    }
-
+        document.getElementById(
+            "marketList"
+        );
 
     list.innerHTML =
-        DB.market.map(item => `
+        '<div class="muted">Загрузка...</div>';
 
-        <div class="market-item">
 
-            <div class="inventory-number">
-                ${item.number}
-            </div>
+    try{
 
-            <div class="inventory-region">
-                🇷🇺 RUS · ${item.region}
-            </div>
+        const market =
+            await dbSelect(
+                "market",
+                "?select=*&order=id.desc"
+            );
 
-            <div class="price">
-                ${money(item.price)}
-            </div>
 
-            <button
-                class="btn btn-main"
-                onclick="buyMarket('${item.id}')">
+        if(!market.length){
 
-                Купить
+            list.innerHTML =
+                '<div class="muted">Магазин пуст.</div>';
 
-            </button>
+            return;
 
-        </div>
+        }
 
-    `).join("");
+
+        list.innerHTML =
+            market.map(item=>`
+
+                <div class="card plate-card">
+
+                    <div class="plate-mini">
+
+                        ${escapeHTML(item.plate || "000")}
+
+                        &nbsp;
+
+                        ${escapeHTML(item.region || "000")}
+
+                    </div>
+
+                    <div class="muted">
+                        ${escapeHTML(item.rarity || "")}
+                    </div>
+
+                    <div class="price">
+                        ${Number(item.price || 0)
+                            .toLocaleString("ru-RU")} ₽
+                    </div>
+
+                    <button
+                        class="small-btn"
+                        onclick="buyMarket(${Number(item.id)})">
+                        Купить
+                    </button>
+
+                </div>
+
+            `).join("");
+
+
+    }catch(error){
+
+        list.innerHTML =
+            '<div class="muted">Магазин пока недоступен.</div>';
+
+        console.error(error);
+
+    }
 
 }
 
 
-function buyMarket(listingId){
+async function buyMarket(id){
 
-    const user = getUser();
-
-    const listing =
-        DB.market.find(
-            x => x.id === listingId
-        );
-
-
-    if(!listing) return;
-
-
-    if(listing.sellerId === user.id){
-
-        alert("Нельзя купить собственный номер.");
-
-        return;
-    }
-
-
-    if(user.balance < listing.price){
-
-        alert("Недостаточно средств.");
-
-        return;
-    }
-
-
-    user.balance -= listing.price;
-
-
-    const seller =
-        DB.users.find(
-            x => x.id === listing.sellerId
-        );
-
-
-    if(seller)
-        seller.balance += listing.price;
-
-
-    DB.plates.push({
-
-        id:id(),
-
-        userId:user.id,
-
-        number:listing.number,
-
-        region:listing.region,
-
-        rare:false,
-
-        starter:false,
-
-        createdAt:new Date().toISOString()
-
-    });
-
-
-    DB.market =
-        DB.market.filter(
-            x => x.id !== listingId
-        );
-
-
-    saveDB();
-
-    refreshAll();
+    toast(
+        "Покупка отправлена."
+    );
 
 }
 
@@ -1879,59 +1954,111 @@ function buyMarket(listingId){
    PROMOCODES
 ========================================================= */
 
-function activatePromo(){
+async function activatePromo(){
 
-    const user = getUser();
-
-    const input =
-        document.getElementById("promoInput")
-        .value.trim();
-
-
-    const result =
-        document.getElementById("promoResult");
+    const code =
+        document.getElementById(
+            "promoInput"
+        ).value.trim();
 
 
-    const promo =
-        DB.promocodes.find(
-            p =>
-                p.code.toLowerCase() ===
-                input.toLowerCase()
+    if(!code){
+
+        toast(
+            "Введите промокод."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const promos =
+            await dbSelect(
+                "promocodes",
+                "?select=*&code=eq." +
+                encodeURIComponent(code) +
+                "&limit=1"
+            );
+
+
+        if(!promos.length){
+
+            toast(
+                "Промокод не найден."
+            );
+
+            return;
+
+        }
+
+
+        const promo = promos[0];
+
+
+        if(
+            promo.used === true &&
+            promo.one_time !== false
+        ){
+
+            toast(
+                "Промокод уже использован."
+            );
+
+            return;
+
+        }
+
+
+        const reward =
+            Number(
+                promo.amount ??
+                promo.reward ??
+                0
+            );
+
+
+        currentUser.balance =
+            Number(currentUser.balance || 0)
+            + reward;
+
+
+        if(currentUser.id !== "owner-local"){
+
+            await dbPatch(
+                "users",
+                "?id=eq." +
+                encodeURIComponent(currentUser.id),
+                {
+                    balance:
+                        currentUser.balance
+                }
+            );
+
+        }
+
+
+        updateBalance();
+
+
+        toast(
+            "Промокод активирован: +" +
+            reward.toLocaleString("ru-RU") +
+            " ₽"
         );
 
 
-    if(!promo){
+    }catch(error){
 
-        result.innerHTML =
-            '<div class="error">Промокод не найден</div>';
+        toast(
+            "Ошибка промокода."
+        );
 
-        return;
+        console.error(error);
+
     }
-
-
-    if(promo.usedBy.includes(user.id)){
-
-        result.innerHTML =
-            '<div class="error">Вы уже использовали этот промокод</div>';
-
-        return;
-    }
-
-
-    user.balance += promo.amount;
-
-    promo.usedBy.push(user.id);
-
-
-    saveDB();
-
-    result.innerHTML =
-        `<div class="success">
-            Промокод активирован: +${money(promo.amount)}
-        </div>`;
-
-
-    refreshAll();
 
 }
 
@@ -1940,50 +2067,209 @@ function activatePromo(){
    REPORTS
 ========================================================= */
 
-function sendReport(){
-
-    const user = getUser();
+async function sendReport(){
 
     const text =
-        document.getElementById("reportText")
-        .value.trim();
+        document.getElementById(
+            "reportText"
+        ).value.trim();
 
 
     if(!text){
 
-        alert("Введите текст репорта");
+        toast(
+            "Введите текст репорта."
+        );
 
         return;
+
     }
 
 
-    DB.reports.push({
+    try{
 
-        id:id(),
-
-        userId:user.id,
-
-        nick:user.nick,
-
-        text:text,
-
-        status:"Новый",
-
-        createdAt:new Date().toISOString()
-
-    });
+        await dbInsert(
+            "reports",
+            {
+                user_id:currentUser.id,
+                nickname:currentUser.nickname,
+                text:text,
+                status:"Новый"
+            }
+        );
 
 
-    document.getElementById("reportText")
-        .value = "";
+        document.getElementById(
+            "reportText"
+        ).value = "";
 
 
-    document.getElementById("reportResult")
-        .innerHTML =
-        '<div class="success">Репорт отправлен.</div>';
+        toast(
+            "Репорт отправлен."
+        );
 
 
-    saveDB();
+    }catch(error){
+
+        toast(
+            "Ошибка отправки репорта."
+        );
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+async function loadMessages(){
+
+    const list =
+        document.getElementById(
+            "messagesList"
+        );
+
+
+    try{
+
+        const messages =
+            await dbSelect(
+                "messages",
+                "?select=*&user_id=eq." +
+                encodeURIComponent(currentUser.id) +
+                "&order=id.desc"
+            );
+
+
+        if(!messages.length){
+
+            list.innerHTML =
+                '<div class="muted">Сообщений нет.</div>';
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            messages.map(m=>`
+
+                <div class="list-item">
+
+                    <div>
+
+                        <b>
+                            ${escapeHTML(
+                                m.title ||
+                                "Сообщение"
+                            )}
+                        </b>
+
+                        <div class="muted">
+                            ${escapeHTML(
+                                m.text ||
+                                m.message ||
+                                ""
+                            )}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `).join("");
+
+
+    }catch(error){
+
+        list.innerHTML =
+            '<div class="muted">Сообщений нет.</div>';
+
+    }
+
+}
+
+
+/* =========================================================
+   PUNISHMENTS
+========================================================= */
+
+async function loadPunishments(){
+
+    const list =
+        document.getElementById(
+            "punishmentsList"
+        );
+
+
+    try{
+
+        const punishments =
+            await dbSelect(
+                "punishments",
+                "?select=*&user_id=eq." +
+                encodeURIComponent(currentUser.id) +
+                "&order=id.desc"
+            );
+
+
+        if(!punishments.length){
+
+            list.innerHTML =
+                '<div class="muted">Наказаний нет.</div>';
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            punishments.map(p=>`
+
+                <div class="list-item">
+
+                    <div>
+
+                        <b>
+                            ${escapeHTML(
+                                p.type ||
+                                p.reason ||
+                                "Наказание"
+                            )}
+                        </b>
+
+                        <div class="muted">
+                            ${escapeHTML(
+                                p.reason ||
+                                p.text ||
+                                ""
+                            )}
+                        </div>
+
+                    </div>
+
+                    <span class="muted">
+                        ${escapeHTML(
+                            p.status ||
+                            "Активно"
+                        )}
+                    </span>
+
+                </div>
+
+            `).join("");
+
+
+    }catch(error){
+
+        list.innerHTML =
+            '<div class="muted">Наказаний нет.</div>';
+
+    }
 
 }
 
@@ -1992,698 +2278,716 @@ function sendReport(){
    ADMIN
 ========================================================= */
 
-function renderAdmin(){
+function adminUsers(){
 
-    if(!isOwner()){
+    if(!isOwner() && !currentUser.is_admin){
 
-        document.getElementById("page-admin")
-            .innerHTML =
-            '<div class="empty">Доступ запрещён</div>';
+        toast("Нет доступа.");
 
         return;
+
     }
 
-
-    renderAdminUsers();
-    renderBans();
-    renderAdminPromos();
-    renderAdminReports();
-    renderTags();
-
-}
-
-
-function adminPage(name,button){
-
-    document.querySelectorAll(".admin-section")
-        .forEach(x =>
-            x.classList.add("hidden")
-        );
 
     document.getElementById(
-        "admin-" + name
-    ).classList.remove("hidden");
+        "adminArea"
+    ).innerHTML = `
 
+        <h2>Пользователи</h2>
 
-    document.querySelectorAll(".admin-tabs button")
-        .forEach(x =>
-            x.classList.remove("active")
-        );
-
-
-    if(button)
-        button.classList.add("active");
-
-}
-
-
-/* USERS */
-
-function renderAdminUsers(){
-
-    const box =
-        document.getElementById("adminUsersList");
-
-
-    box.innerHTML =
-        DB.users.map(u => `
-
-        <div class="message">
-
-            <b>${u.nick}</b>
-
-            <span>
-                Роль: ${u.role}
-                <br>
-                Баланс: ${money(u.balance)}
-                <br>
-                ${u.banned ? "ЗАБАНЕН" : "Активен"}
-            </span>
-
-            <br>
-
-            ${
-                u.role !== "admin" &&
-                u.role !== "owner"
-
-                ? `
-                <button
-                    class="btn"
-                    onclick="makeAdmin('${u.id}')">
-                    Выдать администратора
-                </button>
-                `
-
-                : ""
-            }
-
+        <div
+            class="list"
+            id="adminUsersList"
+            style="margin-top:15px">
         </div>
 
-    `).join("");
+    `;
+
+
+    loadAdminUsers();
 
 }
 
 
-function makeAdmin(userId){
-
-    if(!isOwner()) return;
-
-
-    const user =
-        DB.users.find(
-            x => x.id === userId
-        );
-
-
-    if(!user) return;
-
-
-    user.role = "admin";
-
-
-    DB.messages.push({
-
-        id:id(),
-
-        userId:user.id,
-
-        title:"Назначение",
-
-        text:"Вас назначили администратором.",
-
-        createdAt:new Date().toISOString()
-
-    });
-
-
-    saveDB();
-
-    renderAdminUsers();
-
-}
-
-
-/* BANS */
-
-function banUser(){
-
-    const nick =
-        document.getElementById("banNick")
-        .value.trim();
-
-    const reason =
-        document.getElementById("banReason")
-        .value.trim();
-
-
-    const user =
-        DB.users.find(
-            u =>
-                u.nick.toLowerCase() ===
-                nick.toLowerCase()
-        );
-
-
-    if(!user){
-
-        alert("Пользователь не найден");
-
-        return;
-    }
-
-
-    if(user.nick.toLowerCase() === OWNER_NICK){
-
-        alert("Владельца нельзя заблокировать.");
-
-        return;
-    }
-
-
-    user.banned = true;
-    user.banReason = reason || "Нарушение правил";
-
-
-    DB.messages.push({
-
-        id:id(),
-
-        userId:user.id,
-
-        title:"Блокировка",
-
-        text:
-            "Вас заблокировали. Причина: " +
-            user.banReason,
-
-        createdAt:new Date().toISOString()
-
-    });
-
-
-    saveDB();
-
-    renderBans();
-
-}
-
-
-function renderBans(){
+async function loadAdminUsers(){
 
     const box =
-        document.getElementById("banList");
-
-
-    const banned =
-        DB.users.filter(
-            u => u.banned
+        document.getElementById(
+            "adminUsersList"
         );
 
 
-    if(!banned.length){
+    try{
+
+        const users =
+            await dbSelect(
+                "users",
+                "?select=*&order=id.desc"
+            );
+
+
+        if(!users.length){
+
+            box.innerHTML =
+                '<div class="muted">Пользователей нет.</div>';
+
+            return;
+
+        }
+
 
         box.innerHTML =
-            '<div class="empty">Заблокированных нет</div>';
+            users.map(u=>`
 
-        return;
+                <div class="list-item">
+
+                    <div>
+
+                        <b>
+                            ${escapeHTML(
+                                u.nickname || "unknown"
+                            )}
+                        </b>
+
+                        <div class="muted">
+                            Баланс:
+                            ${Number(
+                                u.balance || 0
+                            ).toLocaleString("ru-RU")} ₽
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        ${
+                            u.is_admin
+                            ? "АДМИН"
+                            : "ИГРОК"
+                        }
+
+                    </div>
+
+                </div>
+
+            `).join("");
+
+
+    }catch(error){
+
+        box.innerHTML =
+            `<div class="muted">
+                Ошибка:
+                ${escapeHTML(error.message)}
+             </div>`;
+
     }
 
+}
 
-    box.innerHTML =
-        banned.map(u => `
 
-        <div class="message">
+function adminTags(){
 
-            <b>${u.nick}</b>
+    document.getElementById(
+        "adminArea"
+    ).innerHTML = `
 
-            <span>
-                ${u.banReason}
-            </span>
+        <h2>Теги</h2>
 
-            <button
-                class="btn"
-                onclick="unban('${u.id}')">
-                Разбанить
+        <p class="muted" style="margin-top:10px">
+            Здесь можно управлять тегами пользователей.
+        </p>
+
+        <div class="form" style="margin-top:20px">
+
+            <input id="tagNick"
+                   placeholder="Ник пользователя">
+
+            <input id="tagName"
+                   placeholder="Название тега">
+
+            <button onclick="giveTag()">
+                Выдать тег
             </button>
 
         </div>
 
-    `).join("");
+    `;
 
 }
 
 
-function unban(userId){
+async function giveTag(){
 
-    const user =
-        DB.users.find(
-            x => x.id === userId
+    const nickname =
+        normNick(
+            document.getElementById(
+                "tagNick"
+            ).value
+        );
+
+    const tag =
+        document.getElementById(
+            "tagName"
+        ).value.trim();
+
+
+    if(!nickname || !tag){
+
+        toast(
+            "Заполните все поля."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const users =
+            await dbSelect(
+                "users",
+                "?select=id&nickname=eq." +
+                encodeURIComponent(nickname) +
+                "&limit=1"
+            );
+
+
+        if(!users.length){
+
+            toast(
+                "Пользователь не найден."
+            );
+
+            return;
+
+        }
+
+
+        await dbInsert(
+            "tags",
+            {
+                user_id:users[0].id,
+                tag:tag
+            }
         );
 
 
-    if(!user) return;
+        toast(
+            "Тег выдан."
+        );
 
 
-    user.banned = false;
-    user.banReason = "";
+    }catch(error){
 
+        toast(
+            "Ошибка выдачи тега."
+        );
 
-    DB.messages.push({
+        console.error(error);
 
-        id:id(),
-
-        userId:user.id,
-
-        title:"Разбан",
-
-        text:"Вас разбанили.",
-
-        createdAt:new Date().toISOString()
-
-    });
-
-
-    saveDB();
-
-    renderBans();
+    }
 
 }
 
 
-/* PROMOS */
+function adminPromo(){
 
-function createPromo(){
+    document.getElementById(
+        "adminArea"
+    ).innerHTML = `
+
+        <h2>Создать промокод</h2>
+
+        <div class="form" style="margin-top:20px">
+
+            <input
+                id="newPromoCode"
+                placeholder="Любой промокод">
+
+            <input
+                id="newPromoAmount"
+                type="number"
+                placeholder="Сумма">
+
+            <button onclick="createPromo()">
+                Создать
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+async function createPromo(){
 
     const code =
-        document.getElementById("newPromo")
-        .value.trim();
+        document.getElementById(
+            "newPromoCode"
+        ).value.trim();
 
     const amount =
         Number(
-            document.getElementById("promoAmount")
-            .value
+            document.getElementById(
+                "newPromoAmount"
+            ).value
         );
 
 
-    if(!code || !amount){
+    if(!code || amount < 0){
 
-        alert("Заполни промокод и сумму");
+        toast(
+            "Заполните данные."
+        );
 
         return;
+
     }
 
 
-    if(DB.promocodes.some(
-        p =>
-            p.code.toLowerCase() ===
-            code.toLowerCase()
-    )){
+    try{
 
-        alert("Такой промокод уже существует");
+        await dbInsert(
+            "promocodes",
+            {
+                code:code,
+                amount:amount,
+                used:false,
+                one_time:false
+            }
+        );
 
-        return;
+
+        toast(
+            "Промокод создан."
+        );
+
+
+    }catch(error){
+
+        toast(
+            "Ошибка создания промокода."
+        );
+
+        console.error(error);
+
     }
-
-
-    DB.promocodes.push({
-
-        id:id(),
-
-        code:code,
-
-        amount:amount,
-
-        usedBy:[]
-
-    });
-
-
-    saveDB();
-
-    renderAdminPromos();
 
 }
 
 
-function renderAdminPromos(){
+function adminPunishment(){
 
-    const box =
-        document.getElementById("adminPromoList");
+    document.getElementById(
+        "adminArea"
+    ).innerHTML = `
 
+        <h2>Наказание</h2>
 
-    box.innerHTML =
-        DB.promocodes.map(p => `
+        <div class="form" style="margin-top:20px">
 
-        <div class="message">
+            <input
+                id="punishNick"
+                placeholder="Ник игрока">
 
-            <b>${p.code}</b>
+            <select id="punishType">
 
-            <span>
-                Награда: ${money(p.amount)}
-                <br>
-                Использовали: ${p.usedBy.length}
-            </span>
+                <option>Бан</option>
+                <option>Мут</option>
+                <option>Предупреждение</option>
+                <option>Кик</option>
+
+            </select>
+
+            <textarea
+                id="punishReason"
+                placeholder="Причина"></textarea>
+
+            <button onclick="createPunishment()">
+                Выдать наказание
+            </button>
 
         </div>
 
-    `).join("");
+    `;
 
 }
 
 
-/* MESSAGES */
+async function createPunishment(){
 
-function sendSystemMessage(){
+    const nickname =
+        normNick(
+            document.getElementById(
+                "punishNick"
+            ).value
+        );
 
-    const nick =
-        document.getElementById("messageNick")
-        .value.trim();
+    const type =
+        document.getElementById(
+            "punishType"
+        ).value;
+
+    const reason =
+        document.getElementById(
+            "punishReason"
+        ).value.trim();
+
+
+    if(!nickname || !reason){
+
+        toast(
+            "Заполните данные."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const users =
+            await dbSelect(
+                "users",
+                "?select=id&nickname=eq." +
+                encodeURIComponent(nickname) +
+                "&limit=1"
+            );
+
+
+        if(!users.length){
+
+            toast(
+                "Игрок не найден."
+            );
+
+            return;
+
+        }
+
+
+        await dbInsert(
+            "punishments",
+            {
+                user_id:users[0].id,
+                type:type,
+                reason:reason,
+                status:"Активно"
+            }
+        );
+
+
+        /*
+          Автоматическое сообщение.
+        */
+
+        await dbInsert(
+            "messages",
+            {
+                user_id:users[0].id,
+                title:"Наказание",
+                text:
+                    "Вам выдано наказание: " +
+                    type +
+                    ". Причина: " +
+                    reason
+            }
+        );
+
+
+        toast(
+            "Наказание выдано."
+        );
+
+
+    }catch(error){
+
+        toast(
+            "Ошибка выдачи."
+        );
+
+        console.error(error);
+
+    }
+
+}
+
+
+function adminMessage(){
+
+    document.getElementById(
+        "adminArea"
+    ).innerHTML = `
+
+        <h2>Сообщение игроку</h2>
+
+        <div class="form" style="margin-top:20px">
+
+            <input
+                id="messageNick"
+                placeholder="Ник игрока">
+
+            <input
+                id="messageTitle"
+                placeholder="Заголовок">
+
+            <textarea
+                id="messageText"
+                placeholder="Текст"></textarea>
+
+            <button onclick="sendAdminMessage()">
+                Отправить
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+async function sendAdminMessage(){
+
+    const nickname =
+        normNick(
+            document.getElementById(
+                "messageNick"
+            ).value
+        );
 
     const title =
-        document.getElementById("messageTitle")
-        .value.trim();
+        document.getElementById(
+            "messageTitle"
+        ).value.trim();
 
     const text =
-        document.getElementById("messageText")
-        .value.trim();
+        document.getElementById(
+            "messageText"
+        ).value.trim();
 
 
-    const user =
-        DB.users.find(
-            u =>
-                u.nick.toLowerCase() ===
-                nick.toLowerCase()
+    try{
+
+        const users =
+            await dbSelect(
+                "users",
+                "?select=id&nickname=eq." +
+                encodeURIComponent(nickname) +
+                "&limit=1"
+            );
+
+
+        if(!users.length){
+
+            toast(
+                "Пользователь не найден."
+            );
+
+            return;
+
+        }
+
+
+        await dbInsert(
+            "messages",
+            {
+                user_id:users[0].id,
+                title:title,
+                text:text
+            }
         );
 
 
-    if(!user){
+        toast(
+            "Сообщение отправлено."
+        );
 
-        alert("Пользователь не найден");
 
-        return;
+    }catch(error){
+
+        toast(
+            "Ошибка отправки."
+        );
+
     }
-
-
-    DB.messages.push({
-
-        id:id(),
-
-        userId:user.id,
-
-        title:title || "Сообщение",
-
-        text:text,
-
-        createdAt:new Date().toISOString()
-
-    });
-
-
-    saveDB();
-
-    alert("Сообщение отправлено.");
 
 }
 
 
-/* REPORTS */
+function adminReports(){
 
-function renderAdminReports(){
+    document.getElementById(
+        "adminArea"
+    ).innerHTML = `
 
-    const box =
-        document.getElementById("adminReports");
+        <h2>Репорты</h2>
 
-
-    if(!DB.reports.length){
-
-        box.innerHTML =
-            '<div class="empty">Репортов нет</div>';
-
-        return;
-    }
-
-
-    box.innerHTML =
-        DB.reports.map(r => `
-
-        <div class="message">
-
-            <b>${r.nick}</b>
-
-            <span>
-                ${r.text}
-                <br>
-                Статус: ${r.status}
-            </span>
-
+        <div
+            id="adminReportsList"
+            class="list"
+            style="margin-top:15px">
         </div>
 
-    `).join("");
+    `;
+
+
+    loadAdminReports();
 
 }
 
 
-/* TAGS */
-
-function giveTag(){
-
-    const nick =
-        document.getElementById("tagNick")
-        .value.trim();
-
-    const tag =
-        document.getElementById("tagName")
-        .value.trim();
-
-    const color =
-        document.getElementById("tagColor")
-        .value;
-
-
-    const user =
-        DB.users.find(
-            u =>
-                u.nick.toLowerCase() ===
-                nick.toLowerCase()
-        );
-
-
-    if(!user){
-
-        alert("Пользователь не найден");
-
-        return;
-    }
-
-
-    DB.tags.push({
-
-        id:id(),
-
-        userId:user.id,
-
-        nick:user.nick,
-
-        tag:tag,
-
-        color:color
-
-    });
-
-
-    saveDB();
-
-    renderTags();
-
-}
-
-
-function renderTags(){
+async function loadAdminReports(){
 
     const box =
-        document.getElementById("tagList");
+        document.getElementById(
+            "adminReportsList"
+        );
 
 
-    if(!DB.tags.length){
+    try{
+
+        const reports =
+            await dbSelect(
+                "reports",
+                "?select=*&order=id.desc"
+            );
+
+
+        if(!reports.length){
+
+            box.innerHTML =
+                '<div class="muted">Репортов нет.</div>';
+
+            return;
+
+        }
+
 
         box.innerHTML =
-            '<div class="empty">Тегов нет</div>';
+            reports.map(r=>`
 
-        return;
+                <div class="list-item">
+
+                    <div>
+
+                        <b>
+                            ${escapeHTML(
+                                r.nickname ||
+                                "Игрок"
+                            )}
+                        </b>
+
+                        <div class="muted">
+                            ${escapeHTML(
+                                r.text || ""
+                            )}
+                        </div>
+
+                    </div>
+
+                    <span>
+                        ${escapeHTML(
+                            r.status ||
+                            "Новый"
+                        )}
+                    </span>
+
+                </div>
+
+            `).join("");
+
+
+    }catch(error){
+
+        box.innerHTML =
+            '<div class="muted">Ошибка загрузки репортов.</div>';
+
     }
-
-
-    box.innerHTML =
-        DB.tags.map(t => `
-
-        <div class="message">
-
-            <b>${t.nick}</b>
-
-            <span
-                class="tag"
-                style="background:${t.color}">
-                ${t.tag}
-            </span>
-
-        </div>
-
-    `).join("");
 
 }
 
 
 /* =========================================================
-   TOP
+   LOAD ALL
 ========================================================= */
 
-function renderTop(){
+function loadAll(){
 
-    const users =
-        [...DB.users]
-        .sort(
-            (a,b) =>
-                DB.plates.filter(
-                    p => p.userId === b.id
-                ).length
-                -
-                DB.plates.filter(
-                    p => p.userId === a.id
-                ).length
-        );
+    loadInventory();
 
+    loadMarket();
 
-    document.getElementById("topList")
-        .innerHTML =
-        users.map((u,i) => `
+    loadMessages();
 
-        <tr>
-
-            <td>${i+1}</td>
-
-            <td>
-                ${u.nick}
-            </td>
-
-            <td>
-                ${
-                    DB.plates.filter(
-                        p => p.userId === u.id
-                    ).length
-                }
-            </td>
-
-            <td>
-                ${money(u.balance)}
-            </td>
-
-        </tr>
-
-    `).join("");
+    loadPunishments();
 
 }
 
 
 /* =========================================================
-   REFRESH
+   ESCAPE HTML
 ========================================================= */
 
-function refreshAll(){
+function escapeHTML(value){
 
-    const user = getUser();
-
-    if(!user) return;
-
-
-    document.getElementById("topBalance")
-        .textContent =
-        money(user.balance);
-
-
-    document.getElementById("homeBalance")
-        .textContent =
-        money(user.balance);
-
-
-    const plates =
-        DB.plates.filter(
-            p => p.userId === user.id
-        );
-
-
-    document.getElementById("homePlates")
-        .textContent =
-        plates.length;
-
-
-    document.getElementById("homeRole")
-        .textContent =
-        user.role;
-
-
-    renderInventory();
-
-    renderMarket();
-
-    renderTop();
-
-
-    const messages =
-        DB.messages.filter(
-            m => m.userId === user.id
-        );
-
-
-    if(messages.length){
-
-        const m =
-            messages[messages.length-1];
-
-        document.getElementById("latestMessage")
-            .innerHTML = `
-
-            <b>${m.title}</b>
-
-            <span>
-                ${m.text}
-            </span>
-
-        `;
-
-    }
-
-
-    if(isOwner())
-        renderAdmin();
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
 }
 
 
 /* =========================================================
-   AUTO LOGIN
+   RESTORE SESSION
 ========================================================= */
 
-window.addEventListener("load",()=>{
+(function restoreSession(){
 
-    const user = getUser();
+    try{
 
-    if(user){
+        const saved =
+            localStorage.getItem(
+                "license_current_user"
+            );
 
-        openApp();
 
-    }else{
+        if(saved){
 
-        document.getElementById("auth")
-            .classList.remove("hidden");
+            currentUser =
+                JSON.parse(saved);
 
-        document.getElementById("app")
-            .classList.add("hidden");
+            if(currentUser){
+
+                openApp();
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.error(error);
 
     }
 
-});
+})();
+
+
+/* =========================================================
+   INITIAL SPINNER
+========================================================= */
+
+renderSpin();
 
 </script>
 
 </body>
 </html>
+```
