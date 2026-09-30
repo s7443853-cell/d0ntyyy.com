@@ -67,29 +67,13 @@ const SUPABASE_KEY='sb_publishable_dWv_AWctiMp7RgJ2AvNROA_cP2yGJy-';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:false}});
 const CLOUD_KEYS={users:'users',market:'market',messages:'messages',punishments:'punishments',tags:'tags',plates:'plates',reports:'reports',promocodes:'promocodes'};
 let cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[]};
-let cloudReady=false,cloudTimer=null,cloudWriting=false,cloudError='';
-function cloudKey(k){return CLOUD_KEYS[k]||null}
-function load(k,f){const ck=cloudKey(k);return ck?(cloudState[ck]??f):f}
-function save(k,v){const ck=cloudKey(k);if(!ck)return;cloudState[ck]=v;clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),300)}
-async function cloudLoad(){
-  const {data,error}=await sb.from('license_state').select('state,updated_at').eq('id',1).maybeSingle();
-  if(error){cloudError=error.message||String(error);throw error}
-  if(!data){throw new Error('Таблица license_state доступна, но запись с id=1 не найдена.')}
-  if(data.state&&typeof data.state==='object') cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[],...data.state};
-  cloudReady=true;
-  ensureData();
-  return true;
-}
-async function cloudSave(force=false){
-  if(!cloudReady&&!force)return false;
-  try{
-    const {error}=await sb.from('license_state').upsert({id:1,state:cloudState,updated_at:new Date().toISOString()},{onConflict:'id'});
-    if(error){cloudError=error.message||String(error);console.error('Supabase save:',error);showToast('Ошибка сохранения в Supabase: '+cloudError);return false}
-    return true;
-  }catch(e){cloudError=e?.message||String(e);console.error('Supabase save:',e);showToast('Ошибка сохранения в Supabase: '+cloudError);return false}
-}
-async function refreshCloud(){try{await cloudLoad();if(currentUser){const fresh=findUserById(currentUser.id);if(fresh){currentUser=fresh;buildNav();renderBanOverlay();renderMessagesBadge();if(typeof renderPage==='function')renderPage()}}}catch(e){console.error('Supabase:',e)}}
-function showConnectionError(e){const msg=esc(e?.message||cloudError||'Неизвестная ошибка');const box=document.getElementById('authForm');if(box)box.insertAdjacentHTML('afterbegin',`<div class="error">Ошибка подключения к базе данных: ${msg}</div>`)}
+let cloudReady=false,cloudDirty=false,cloudTimer=null,cloudWriting=false,cloudError='';
+function load(k,f){const ck=CLOUD_KEYS[k];return ck?(cloudState[ck]??f):f}
+function save(k,v){const ck=CLOUD_KEYS[k];if(!ck)return;cloudState[ck]=v;cloudDirty=true;clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),250)}
+async function cloudLoad(){const {data,error}=await sb.from('license_state').select('state,updated_at').eq('id',1).maybeSingle();if(error){cloudError=error.message||String(error);throw error}if(!data)throw new Error('Запись license_state с id=1 не найдена.');if(data.state&&typeof data.state==='object')cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[],...data.state};cloudReady=true;cloudDirty=false;return true}
+async function cloudSave(){if(!cloudReady||!cloudDirty||cloudWriting)return;cloudWriting=true;try{const snapshot=JSON.parse(JSON.stringify(cloudState));const {error}=await sb.from('license_state').upsert({id:1,state:snapshot,updated_at:new Date().toISOString()},{onConflict:'id'});if(error){cloudError=error.message||String(error);console.error('Supabase save:',error);showToast?.('Ошибка сохранения базы данных.');return}if(JSON.stringify(cloudState)===JSON.stringify(snapshot))cloudDirty=false}finally{cloudWriting=false;if(cloudDirty){clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>cloudSave(),250)}}}
+async function refreshCloud(){if(!cloudReady||cloudDirty||cloudWriting)return;try{const {data,error}=await sb.from('license_state').select('state,updated_at').eq('id',1).maybeSingle();if(error)throw error;if(data?.state&&typeof data.state==='object')cloudState={users:[],market:[],messages:[],punishments:[],tags:[],plates:[],reports:[],promocodes:[],...data.state};if(currentUser){syncCurrent();buildNav();renderBanOverlay();renderMessagesBadge();if(typeof renderPage==='function')renderPage()}}catch(e){console.error('Supabase refresh:',e)}}
+function showConnectionError(e){const box=document.getElementById('authForm');if(box)box.insertAdjacentHTML('afterbegin',`<div class="error">Ошибка подключения к базе данных: ${esc(e?.message||cloudError||'Неизвестная ошибка')}</div>`)}
 function uid(){let users=load(KEYS.users,[]);let id;do{id=String(Math.floor(100000+Math.random()*900000))}while(users.some(u=>u.accountId===id));return id}
 function punId(){let p=load(KEYS.punishments,[]);let id;do{id=String(Math.floor(100000+Math.random()*900000))}while(p.some(x=>x.id===id));return id}
 function esc(s){return String(s??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[m]))}
@@ -252,19 +236,7 @@ function deletePromoCode(id){if(!canManageProject())return;save(KEYS.promocodes,
 document.getElementById('loginTab').onclick=()=>{authMode='login';renderAuth()};document.getElementById('registerTab').onclick=()=>{authMode='register';renderAuth()};document.getElementById('logoutBtn').onclick=()=>{if(currentUser){currentUser.online=false;currentUser.lastSeen=Date.now();updateUser(currentUser)};sessionStorage.removeItem(KEYS.session);currentUser=null;closeAdmin();document.getElementById('appView').classList.add('hidden');document.getElementById('authView').classList.remove('hidden');renderAuth()};document.getElementById('closeAdmin').onclick=closeAdmin;
 window.addEventListener('storage',()=>{if(currentUser){syncCurrent();buildNav();renderBanOverlay();renderMessagesBadge()}});
 setInterval(()=>{if(currentUser){renderBanOverlay();}},1000);
-(async function boot(){
-  renderAuth();
-  try{
-    await cloudLoad();
-    const id=sessionStorage.getItem(KEYS.session);
-    if(id){const u=findUserById(id);if(u){currentUser=u;await openApp();return}}
-    renderAuth();
-  }catch(e){
-    console.error('Supabase boot error:',e);
-    renderAuth();
-    showConnectionError(e);
-  }
-})();
+(async function boot(){renderAuth();try{await cloudLoad();ensureData();await cloudSave();const id=sessionStorage.getItem(KEYS.session);if(id){const u=findUserById(id);if(u){currentUser=u;await openApp();return}}renderAuth()}catch(e){console.error('Supabase boot error:',e);renderAuth();showConnectionError(e)}})();
 setInterval(()=>{if(currentUser)refreshCloud()},8000);
 </script>
 </body>
